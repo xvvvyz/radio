@@ -1,0 +1,205 @@
+/* these default styles were started with normalize.css v3.0.1 | MIT License | git.io/normalize */
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary{display:block}
+audio,
+canvas,
+progress,
+video{display:inline-block;vertical-align:baseline}
+audio:not([controls]){display:none;height:0}[hidden],template{display:none}
+a{background:0 0;cursor:pointer}
+a:active,
+a:hover{outline:0}
+abbr[title]{border-bottom:1px dotted}
+b,
+strong{font-weight:700}
+dfn{font-style:italic}
+h1{font-size:2em;margin:.67em 0}
+mark{background:#ff0;color:#000}
+small{font-size:80%}
+sub,
+sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}svg:not(:root){overflow:hidden}
+figure{margin:1em 40px}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+pre{overflow:auto}
+code,
+kbd,
+pre,
+samp{font-family:monospace,monospace;font-size:1em}
+button,
+input,
+optgroup,
+select,
+textarea{background-image:none;color:inherit;font:inherit;margin:0;-webkit-border-radius:0;border-radius:0}
+button{overflow:visible}
+button,
+select{text-transform:none}
+label{cursor:pointer}
+input:focus{outline:0}
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],
+html input[disabled]{cursor:default}
+button::-moz-focus-inner,
+input::-moz-focus-inner{border:0;padding:0}
+input{line-height:normal}
+input[type=checkbox],
+input[type=radio]{box-sizing:border-box;padding:0;cursor:pointer}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{height:auto}
+input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration{-webkit-appearance:none}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+textarea{overflow:auto}
+optgroup{font-weight:700}
+table{border-collapse:collapse;border-spacing:0}
+td,
+th{padding:0}
+
+/* ng-cloak */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+#init_load{max-width:250px;width:100%;font-weight:300;font-size:2em;position:fixed;top:50%;left:50%;margin-left:-125px;margin-top:-50px;z-index:100;text-align:center}
+#init_load_small{font-size:0.4em;font-weight:500}
+#init_load a{color:#3B7E9B}
+
+/* an attempt to put everything neatly in a box */
+#main{position:absolute;left:0;top:0;width:100%;height:100%}
+
+/* loading bar */
+#progress_container{background-color:#1E1E1E;width:100%;height:15px}
+#track_downloaded{transition:width 1s;height:100%;height:14px;border-bottom:solid 1px #000;width:0}
+#track_position{transition:width 1s;background-color:#3C9E94;width:0;height:100%}
+
+/* header */
+#header{position:absolute;width:100%;top:0;left:0;z-index:5;padding:0}
+#text_box_container{padding:0 5% 0 75px;height:75px;background-color:#343434;-webkit-box-shadow:inset 0px 0px 3px 0px rgba(24,24,24,0.77);-moz-box-shadow:inset 0px 0px 3px 0px rgba(24,24,24,0.77);box-shadow:inset 0px 0px 3px 0px rgba(24,24,24,0.77)}
+#mix_art{position:absolute;left:0;height:75px;width:75px;margin:0;box-shadow:none}
+#text_box{font-size:1em;height:75px;color:#fff;padding:0 5% 0 0;background:none;text-align:right;text-transform:uppercase;width:95%;border:none;font-family:"Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;font-weight:700;text-shadow:0px 0px 2px rgba(0,0,0,1);} 
+
+/* center box with tags n stuff */
+#guts{margin:90px 0 0 0}
+
+/* details header */
+#below_header{overflow:auto;text-align:center;font-size:1.1em;padding:20px 5%;width:90%;line-height:1.1em}
+#s_status{float:left;background-color:#3B7E9B;color:#fff;padding:5px 10px;border-radius:0.3em}
+#loader{float:right;padding:7px 0 0 15px;margin:0;}
+#prefer{float:none;margin-bottom:20px}
+#prefer input{margin:0 0 0 5px}
+#prefer label{color:#9F3B45;margin:0 10px;display:inline-block}
+
+/* current mix info */
+#mix_info{}
+
+/* about site */
+#what_this_is{max-width:800px;margin:0 auto;padding:40px 10%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;}
+#what_this_is a{text-decoration:underline;}
+
+/* all dem tags */
+#tag_cloud{width:100%;margin:0 auto 20px auto;}
+#tag_cloud a{width:44%;padding:10px 3%;font-size:0.9em;border-radius:0;color:#2D2D2D;display:inline-block;margin:0;font-weight:300;white-space:nowrap;overflow:hidden}
+#tag_cloud a:nth-child(2n+1){text-align:right}
+#tag_cloud a:nth-child(2n+2){text-align:left}
+.no_touch #tag_cloud a:hover{color:#fff}
+#more_tags{font-size:1.1em;border-radius:0.3em;max-width:180px;margin:0 auto;display:block;text-align:center;padding:15px 20px;border:solid 2px #000}
+.no_touch #more_tags:hover{color:#3C9E94;border-color:#3C9E94}
+
+/* signature and stuff */
+#signature{text-align:center;font-size:0.6em;padding:50px 0;}
+#signature a{color:#000;}
+
+/* footer container */
+#footer{text-align:center;padding:0 10%;position:fixed;bottom:0;width:80%;background-color:rgba(255,255,255,0.9);height:100px;
+-webkit-box-shadow: 0px -18px 30px 13px rgba(255,255,255,0.9);;
+-moz-box-shadow:    0px -18px 30px 13px rgba(255,255,255,0.9);;
+box-shadow:         0px -18px 30px 13px rgba(255,255,255,0.9);}
+#footer_blank{height:100px;width:100%;display:block;}
+
+/* current song info */
+#song_info{height:15px}
+#song_info h4{font-size:0.8em}
+
+/* music player controls */
+.controls{margin:0 5px;display:inline-block;padding:17px 15px 13px 15px}
+.controls:hover{cursor:pointer}
+
+/* global classes */
+.no_break{white-space:nowrap;}
+.no_highlight{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+.no_touch .drop-click:active{transform:scale(0.95);-ms-transform:scale(0.95);-moz-transform:scale(0.95);-webkit-transform:scale(0.95);-o-transform:scale(0.95)}
+.no_touch .zoom-hover:hover{transform:scale(1.05);-ms-transform:scale(1.05);-moz-transform:scale(1.05);-webkit-transform:scale(1.05);-o-transform:scale(1.05)}
+
+/* css animations from http://ianlunn.github.io */
+.border-fade{display:inline-block;-webkit-transition-duration:0.3s;transition-duration:0.3s;-webkit-transition-property:box-shadow;transition-property:box-shadow;-webkit-transform:translateZ(0);transform:translateZ(0)}
+.no_touch .border-fade:hover{box-shadow:inset 0 0 0 30px #AC555E,0 0 1px rgba(0,0,0,0)}
+
+@media only screen and (min-width: 450px) {
+	/* header */
+	#text_box{font-size:1.5em}
+
+	/* all dem tags */
+	#tag_cloud{width:90%}
+	#tag_cloud a{border-radius:1em;font-size:1.2em;width:40%;padding:10px 5%;}
+	#more_tags{font-size:1.3em}
+
+	/* music player controls */
+	.controls{}
+}
+
+@media only screen and (min-width: 900px) {
+	/* header */
+	#header{position:fixed}
+	#text_box_container{height:80px;padding:10px 0 10px 90px;background-color:rgba(30,30,30,0.9)}
+	#mix_art{width:80px;height:80px;margin:0 10px;-webkit-box-shadow:0px 0px 4px 0px rgba(0,0,0,0.77);-moz-box-shadow:0px 0px 4px 0px rgba(0,0,0,0.77);box-shadow:0px 0px 4px 0px rgba(0,0,0,0.77)}
+	#text_box{height:80px;font-size:2.5em;}
+
+	/* center box with tags n stuff */
+	#guts{margin-top:115px}
+
+	/* details header */
+	#below_header{height:35px;text-align:left;}
+	#prefer{float:right}
+	#loader{float:none}
+
+	/* all dem tags */
+	#tag_cloud a{width:23.33%;text-align:right!important}
+	#tag_cloud a:nth-child(3n+2){text-align:center!important;padding:10px 0;width:33.33%!important}
+	#tag_cloud a:nth-child(3n+3){text-align:left!important}
+}
+
+@media only screen and (min-width: 1200px) {
+	/* all dem tags */
+	#tag_cloud a:nth-child(n){text-align:left!important;padding:10px 5%!important;width:15%!important}
+}
+
+@media only screen and (min-width: 1600px) {
+	/* all dem tags */
+	#tag_cloud a{font-size:1.5em}
+}
+
+@media only screen and (min-width: 2000px) {
+	/* all dem tags */
+	#tag_cloud a{font-size:2em}
+}
