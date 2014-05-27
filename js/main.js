@@ -467,7 +467,7 @@ function getTags($scope, $http)
 	if (page == 1) {
 		var perPage = 60;
 	} else {
-		var perPage = 180;
+		var perPage = 120;
 	}
 
 	$http.get('http://8tracks.com/tags.json?per_page='+perPage+'&page='+page+'&api_version=3&api_key='+$scope.apiKey).success(function(data) {
