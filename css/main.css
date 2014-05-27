@@ -114,7 +114,7 @@ th{padding:0}
 #guts{margin:90px 0 0 0}
 
 /* details header */
-#below_header{overflow:auto;text-align:center;font-size:0.9em;padding:20px 5%;width:90%;line-height:1.1em}
+#below_header{overflow:auto;text-align:center;font-size:1em;padding:20px 5%;width:90%;line-height:1.1em}
 #s_status{float:left;background-color:#012936;color:#fff;padding:6px 10px 4px 10px;border-radius:0.3em}
 #loader{float:right;padding:7px 0 0 15px;margin:0;}
 #prefer{float:none;padding-top:5px;margin-bottom:20px;}
@@ -218,7 +218,7 @@ box-shadow:         0px -18px 30px 13px rgba(255,255,255,0.9)}
 	#guts{margin-top:115px}
 
 	/* details header */
-	#below_header{height:35px;text-align:left;font-size:1em}
+	#below_header{height:35px;text-align:left}
 	#prefer{float:right;margin-bottom:0;}
 	#loader{float:none}
 
