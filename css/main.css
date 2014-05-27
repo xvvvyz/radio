@@ -107,7 +107,7 @@ th{padding:0}
 #text_box_container{padding:0 5% 0 75px;height:75px;background-color:#262626;-webkit-box-shadow:inset 0px 0px 3px 0px rgba(24,24,24,0.77);-moz-box-shadow:inset 0px 0px 3px 0px rgba(24,24,24,0.77);box-shadow:inset 0px 0px 3px 0px rgba(24,24,24,0.77)}
 #mix_art,#logo{position:absolute;left:0;height:75px;width:75px;margin:0;box-shadow:none}
 #logo{height:30px;margin-top:23px}
-#text_box{font-size:1em;height:75px;color:#fff;padding:0 5% 0 0;text-align:right;text-transform:uppercase;width:95%;border:none;font-family:"archive",Helvetica,Arial,sans-serif;font-weight:700;text-shadow:0px 0px 2px rgba(0,0,0,1);background:url(/img/search.svg) no-repeat right 10px center;background-size:30px 30px} 
+#text_box{font-size:1em;height:75px;color:#fff;padding:0 5% 0 0;text-align:right;text-transform:uppercase;width:95%;border:none;font-family:"archive",Helvetica,Arial,sans-serif;font-weight:700;text-shadow:0px 0px 2px rgba(0,0,0,1);background:url(../img/search.svg) no-repeat right 10px center;background-size:30px 30px} 
 #text_box:focus,.no_background{background:none!important}
 
 /* center box with tags n stuff */
@@ -212,7 +212,7 @@ box-shadow:         0px -18px 30px 13px rgba(255,255,255,0.9)}
 	#text_box_container{height:80px;padding:10px 0 10px 90px;background-color:rgba(0,0,0,0.85)}
 	#mix_art,#logo{width:80px;height:80px;margin:0 10px;-webkit-box-shadow:0px 0px 4px 0px rgba(0,0,0,0.77);-moz-box-shadow:0px 0px 4px 0px rgba(0,0,0,0.77);box-shadow:0px 0px 4px 0px rgba(0,0,0,0.77)}
 	#logo{height:32px;margin-top:24px}
-	#text_box{height:80px;font-size:2.5em;background:url(/img/search.svg) no-repeat right 40px center;background-size:50px 50px}
+	#text_box{height:80px;font-size:2.5em;background:url(../img/search.svg) no-repeat right 40px center;background-size:50px 50px}
 
 	/* center box with tags n stuff */
 	#guts{margin-top:115px}

@@ -428,7 +428,7 @@ function initApp($scope, $http)
 	/* setup logo */
 	$scope.mixName = "Line Radio";
 	$scope.mixPath = "/";
-	$scope.mixArt = "/img/logo.png";
+	$scope.mixArt = "img/logo.png";
 
 	soundManager.setup({
 		url: '/vendor/soundmanager/swf/',
