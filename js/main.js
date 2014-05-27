@@ -431,7 +431,7 @@ function initApp($scope, $http)
 	$scope.mixArt = "img/logo.png";
 
 	soundManager.setup({
-		url: '/vendor/soundmanager/swf/',
+		url: 'vendor/soundmanager/swf/',
 		flashVersion: 9,
 		preferFlash: true,
 		debugMode: false,
