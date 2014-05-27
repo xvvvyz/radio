@@ -17,7 +17,7 @@
 	<meta name="twitter:url" content="http://linerad.io">
 	<meta name="twitter:image" content="http://linerad.io/img/line_radio.jpg">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="shortcut icon" type="image/png" href="/favicon.png">
+	<link rel="shortcut icon" type="image/png" href="favicon.png">
 	<meta name="google-site-verification" content="xzRIm1tGJtIfECcDnYZOtXO3UouRa6_OyAiiS6kllJU">
 <body id="body" class="no_touch">
 	<div id="init_load" ng-hide="true">
@@ -33,7 +33,7 @@
 			</div>
 
 			<div id="text_box_container">
-				<a ng-show="!track.name" href="/"><img id="logo" width="80" height="32" ng-src="/img/logo.svg" alt="Line Radio"></a>
+				<a ng-show="!track.name" href="/"><img id="logo" width="80" height="32" ng-src="img/logo.svg" alt="Line Radio"></a>
 				<a ng-show="track.name" target="_blank" ng-href="{{mixPath}}"><img id="mix_art" width="80" height="80" ng-src="{{mixArt}}" alt="{{mixName}}"></a>
 				<input id="text_box" maxlength="40" ng-class="{'no_background':oldLen||query}" ng-model="query" ng-change="queryApi($scope, $http)">
 			</div>
@@ -41,7 +41,7 @@
 
 		<div id="guts">
 			<!--<div id="what_this_is" ng-show="!sStatus">
-				<p>Line Radio streamlines the process of sorting through bad mixes on <a href="http://8tracks.com">8tracks</a> by automatically playing songs that are related to what you type. Find a bad mix? Press <img width="15" height="15" alt="refresh" src='/img/refresh.svg'> for a fresh playlist or <img width="15" height="15" alt="skip" src='/img/skip.svg'> to skip a track. Whether you're trying to get <a ng-click="query='workout';loadTag($scope)">pumped up</a>, take it back to the <a ng-click="query='the beatles';loadArtist($scope)">1960's</a> and <a ng-click="query='led zeppelin';loadArtist($scope)">1970's</a>, or <a ng-click="query='adderall';loadTag($scope)">study for finals</a>, Line Radio can get you there faster.</p>
+				<p>Line Radio streamlines the process of sorting through bad mixes on <a href="http://8tracks.com">8tracks</a> by automatically playing songs that are related to what you type. Find a bad mix? Press <img width="15" height="15" alt="refresh" src='img/refresh.svg'> for a fresh playlist or <img width="15" height="15" alt="skip" src='img/skip.svg'> to skip a track. Whether you're trying to get <a ng-click="query='workout';loadTag($scope)">pumped up</a>, take it back to the <a ng-click="query='the beatles';loadArtist($scope)">1960's</a> and <a ng-click="query='led zeppelin';loadArtist($scope)">1970's</a>, or <a ng-click="query='adderall';loadTag($scope)">study for finals</a>, Line Radio can get you there faster.</p>
 			</div>-->
 
 			<div id="mix_info">
@@ -54,7 +54,7 @@
 					<label>tags<input type="checkbox" ng-model="preferTag" ng-click="preferArtist=0"></label>
 				</div>
 				<span id="s_status" ng-show="sStatus">{{sStatus}}</span>
-				<img id='loader' width="16" height="16" src="/img/loader.gif" alt="loading..." ng-show="loader">
+				<img id='loader' width="16" height="16" src="img/loader.gif" alt="loading..." ng-show="loader">
 			</div>
 
 			<div id="tag_cloud" class="no_highlight">
@@ -71,17 +71,17 @@
 			</div>
 			<div id="controls">
 				<a class="controls border-fade-control" ng-click="findTheMix($scope, $http)">
-					<img width="25" height="25" alt="refresh" src='/img/refresh.svg'>
+					<img width="25" height="25" alt="refresh" src='img/refresh.svg'>
 				</a>
 				<a class="controls border-fade-control" ng-click="togglePlay()">
-					<img ng-show="playToggle" width="25" height="25" alt="pause" src='/img/pause.svg'>
-					<img ng-show="!playToggle" width="25" height="25" alt="play" src='/img/play.svg'>
+					<img ng-show="playToggle" width="25" height="25" alt="pause" src='img/pause.svg'>
+					<img ng-show="!playToggle" width="25" height="25" alt="play" src='img/play.svg'>
 				</a>
 				<a class="controls border-fade-control" ng-click="nextSong($scope, $http)">
-					<img width="25" height="25" alt="skip" src='/img/skip.svg'>
+					<img width="25" height="25" alt="skip" src='img/skip.svg'>
 				</a>
 				<!--<a class="controls border-fade-control" ng-click="">
-					<img width="25" height="25" alt="volume" src='/img/volume.svg'>
+					<img width="25" height="25" alt="volume" src='img/volume.svg'>
 				</a>-->
 			</div>
 		</div>
