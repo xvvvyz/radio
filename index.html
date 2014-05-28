@@ -25,7 +25,7 @@
 		<span id="init_load_small">If nothing loads, try <a href="http://browsehappy.com/">updating your browser</a>.</span>
 	</div>
 	<div id="main" ng-controller="HomeController" ng-init="initApp($scope, $http)" class="ng-cloak" ng-cloak>
-		<div id="header">
+		<header id="header">
 			<div id="progress_container">
 				<div id="track_downloaded">
 					<div id="track_position"></div>
@@ -37,7 +37,7 @@
 				<a ng-show="track.name" target="_blank" ng-href="{{mixPath}}"><img id="mix_art" width="80" height="80" ng-src="{{mixArt}}" alt="{{mixName}}"></a>
 				<input id="text_box" maxlength="40" ng-class="{'no_background':oldLen||query}" ng-model="query" ng-change="queryApi($scope, $http)">
 			</div>
-		</div>
+		</header>
 
 		<div id="guts">
 			<!--<div id="what_this_is" ng-show="!sStatus">
