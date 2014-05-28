@@ -33,7 +33,7 @@
 			</div>
 
 			<div id="text_box_container">
-				<a ng-show="!track.name" href="/"><img id="logo" width="80" height="32" ng-src="img/logo.svg" alt="Line Radio"></a>
+				<a ng-show="!track.name" href="."><img id="logo" width="80" height="32" ng-src="img/logo.svg" alt="Line Radio"></a>
 				<a ng-show="track.name" target="_blank" ng-href="{{mixPath}}"><img id="mix_art" width="80" height="80" ng-src="{{mixArt}}" alt="{{mixName}}"></a>
 				<input id="text_box" maxlength="40" ng-class="{'no_background':oldLen||query}" ng-model="query" ng-change="queryApi($scope, $http)">
 			</div>
