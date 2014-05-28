@@ -423,11 +423,6 @@ function initApp($scope, $http)
 		$scope.playToggle = 1;
 	}
 
-	/* setup logo */
-	$scope.mixName = "Line Radio";
-	$scope.mixPath = "/";
-	$scope.mixArt = "img/logo.png";
-
 	soundManager.setup({
 		url: 'vendor/soundmanager/swf/',
 		flashVersion: 9,
