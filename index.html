@@ -9,13 +9,13 @@
 	<meta property="og:description" content="Music related to the artist or tag that you are typing in starts playing in real-time as you type. No browsing, no sign-in, no hassle. Just relevant tunes.">
 	<meta property="og:url" content="http://linerad.io">
 	<meta property="og:type" content="website">
-	<meta property="og:image" content="http://linerad.io/img/logo.png">
+	<meta property="og:image" content="http://linerad.io/img/line_radio.png">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="Line Radio">
 	<meta name="twitter:creator" content="@thirdletterdev">
 	<meta name="twitter:description" content="Music related to the artist or tag that you are typing in starts playing in real-time as you type. No browsing, no sign-in, no hassle. Just relevant tunes.">
 	<meta name="twitter:url" content="http://linerad.io">
-	<meta name="twitter:image" content="http://linerad.io/img/logo.png">
+	<meta name="twitter:image" content="http://linerad.io/img/line_radio.png">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="shortcut icon" type="image/png" href="favicon.png">
 	<meta name="google-site-verification" content="xzRIm1tGJtIfECcDnYZOtXO3UouRa6_OyAiiS6kllJU">
@@ -33,7 +33,7 @@
 			</div>
 
 			<div id="text_box_container">
-				<a ng-show="!track.name" href="."><img id="logo" width="80" height="32" ng-src="img/logo.svg" alt="Line Radio"></a>
+				<a ng-show="!track.name" href="."><img id="logo" width="80" height="32" ng-src="img/line_radio.svg" alt="Line Radio"></a>
 				<a ng-show="track.name" target="_blank" ng-href="{{mixPath}}"><img id="mix_art" width="80" height="80" ng-src="{{mixArt}}" alt="{{mixName}}"></a>
 				<input id="text_box" maxlength="40" ng-class="{'no_background':oldLen||query}" ng-model="query" ng-change="queryApi($scope, $http)">
 			</div>
