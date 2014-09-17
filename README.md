@@ -15,5 +15,5 @@ bower install
 
 then watch for changes with
 ```bash
-grunt
+grunt watch
 ```
