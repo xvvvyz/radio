@@ -6,7 +6,7 @@ A minimal website for finding new music.
 Setup
 -----
 
-Install the global stuff.
+Install the global stuff (NPM & RubyGems are required, don't be silly).
 ```bash
 gem install sass
 npm install -g bower
