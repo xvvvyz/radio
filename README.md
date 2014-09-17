@@ -8,6 +8,7 @@ Setup
 
 ```bash
 gem install sass
+npm install -g bower
 npm install -g grunt-cli
 npm install
 bower install
