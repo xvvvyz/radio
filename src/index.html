@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>Line Radio</title>
+  <meta name="description" content="Music related to what genre, artist, activity or thing you type in starts playing as you type. No unnecessary browsing. No ads. Just relevant tunes.">
+  
+  <meta property="og:title" content="Line Radio">
+  <meta property="og:description" content="Music related to what genre, artist, activity or thing you type in starts playing as you type. No unnecessary browsing. No ads. Just relevant tunes.">
+  <meta property="og:url" content="http://linerad.io">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="http://linerad.io/assets/line_radio.png">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Line Radio">
+  <meta name="twitter:creator" content="@thirdletterdev">
+  <meta name="twitter:description" content="Music related to what genre, artist, activity or thing you type in starts playing as you type. No unnecessary browsing. No ads. Just relevant tunes.">
+  <meta name="twitter:url" content="http://linerad.io">
+  <meta name="twitter:image" content="http://linerad.io/assets/line_radio.png">
+
+  <style type="text/css">
+    html {font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif}
+
+    body {margin: 0}
+
+    a {color: inherit}
+
+    a:hover {cursor: pointer}
+
+    #init {
+      position: fixed;
+      width: 350px;
+      top: 50%;
+      left: 50%;
+      margin-top: -45px;
+      margin-left: -175px;
+      padding: 10px 0;
+      background-color: #1E1E1E;
+      text-align: center;
+      font-size: 0.9em;
+      color: #02C68E
+    }
+
+    h1,
+    #init p {
+      margin: 0;
+      line-height: 35px
+    }
+
+    #init p {
+      color: #fff
+    }
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Squada+One">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Slab">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+
+  <meta name="google-site-verification" content="xzRIm1tGJtIfECcDnYZOtXO3UouRa6_OyAiiS6kllJU">
+
+<body ng-app="app" id="body" class="no_touch">
+
+  <div id="init" ng-hide="true">
+    <h1>loading ...</h1>
+    <p>If nothing loads, try <a href="//browsehappy.com/">upgrading your browser</a>.</p>
+  </div>
+
+  <div ng-controller="HomeController" ng-init="initApp($scope, $http)" class="ng-cloak" ng-cloak>
+    <header>
+      <div id="progress">
+        <div id="track_downloaded">
+          <div id="track_position"></div>
+        </div>
+      </div>
+
+      <div id="top_box">
+        <a ng-show="!track.name" href="."><img id="logo" width="80" height="80" ng-src="assets/line.svg" alt="Line Radio"></a>
+        <a ng-show="track.name" target="_blank" ng-href="{{mixPath}}"><img id="mix_art" width="80" height="80" ng-src="{{mixArt}}" alt="{{mixName}}"></a>
+        <input id="text_box" maxlength="40" ng-class="{'no_background':oldLen||query}" ng-model="query" ng-change="queryApi($scope, $http)">
+      </div>
+    </header>
+
+    <main>
+      <div id="expanded" ng-show="!sStatus">
+        <div id="what" ng-show="!sStatus">
+          <p>Line Radio streamlines the process of sorting through bad mixes on <a href="//8tracks.com">8tracks</a> by automatically playing songs that are related to what you select or type. Whether you&apos;re trying to get <a ng-click="query='workout';loadTag($scope)">pumped up</a>, take it back to the <a ng-click="query='the beatles';loadArtist($scope)">1960&apos;s</a> and <a ng-click="query='led zeppelin';loadArtist($scope)">1970&apos;s</a>, or <a ng-click="query='adderall';loadTag($scope)">study for finals</a>, Line Radio can get you there faster. Find a bad mix? Press <img width="15" height="15" alt="refresh" src='assets/refresh.svg'> for a fresh playlist or <img width="15" height="15" alt="skip" src='assets/skip.svg'> to skip a track.</p>
+        </div>
+      </div>
+
+      <div id="below_header">
+        <div id="prefer">
+          <span>prefer: </span>
+          <label>artists<input type="checkbox" ng-model="preferArtist" ng-click="preferTag=0"></label>
+          <label>tags<input type="checkbox" ng-model="preferTag" ng-click="preferArtist=0"></label>
+        </div>
+        <span id="s_status" ng-show="sStatus">{{sStatus}}</span>
+      </div>
+
+      <div id="cloud">
+        <div class="cloud_tag">
+          <div ng-show="artistCloud.length"><span>Artists</span></div>
+          <a class="border-fade drop-click" ng-class="'ng-animate'" ng-show="artistCloud.length" ng-click="$parent.query=tag.name;loadArtist($scope)" ng-repeat="tag in artistCloud">{{tag.name}}</a>
+        </div>
+        <div class="cloud_artist">
+          <div ng-show="tagCloud.length"><span>Tags</span></div>
+          <a class="border-fade drop-click" ng-class="'ng-animate'" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;loadTag($scope)" ng-repeat="tag in tagCloud">{{tag.name}}</a>
+        </div>
+        <div class="cloud_generic">
+          <div><span>Popular</span></div>
+          <a class="border-fade drop-click" ng-class="'ng-animate'" ng-click="$parent.query=tag.name;loadTag($scope, $http)" ng-repeat="tag in genericCloud">{{tag.name}}</a>
+        </div>
+      </div>
+
+      <a id="more_tags" class="drop-click" ng-click="getTags()">more stuff. plz</a>
+
+      <p id="signature">Created with <span>&lt;3</span> by <a href="//cadejs.com">Cade</a>.</p>
+
+      <div id="bottom" ng-show="sStatus">
+        <div id="song_info">
+          <img id='loader' width="16" height="16" src="assets/loader.gif" alt="loading..." ng-show="loader">
+          <span ng-hide="loader"><b>{{track.name}}</b> {{track.performer}}</span>
+        </div>
+        <div id="controls">
+          <a ng-click="findTheMix($scope, $http)">
+            <img width="25" height="25" alt="refresh" src="assets/refresh.svg">
+          </a>
+          <a ng-click="togglePlay()">
+            <img ng-show="playToggle" width="25" height="25" alt="pause" src="assets/pause.svg">
+            <img ng-show="!playToggle" width="25" height="25" alt="play" src="assets/play.svg">
+          </a>
+          <a ng-click="nextSong($scope, $http)">
+            <img width="25" height="25" alt="skip" src="assets/skip.svg">
+          </a>
+        </div>
+      </div>
+
+      <div id="footer_blank" ng-show="sStatus"></div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+
+</body>
+</html>

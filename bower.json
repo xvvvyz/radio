@@ -1,0 +1,26 @@
+{
+  "name": "line-radio",
+  "version": "1.0.0",
+  "homepage": "https://github.com/cadejscroggins/line-radio",
+  "authors": [
+    "Cade Scroggins <scroggins.cade@gmail.com>"
+  ],
+  "description": "A minimal website for finding new music.",
+  "keywords": [
+    "music",
+    "radio",
+    "angular",
+    "8tracks"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.2.25",
+    "angular-animate": "~1.2.25",
+    "angular-soundmanager2": "~0.2.3"
+  }
+}
