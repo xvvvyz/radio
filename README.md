@@ -13,7 +13,7 @@ npm install -g bower
 npm install -g grunt-cli
 ```
 
-Install package specific stuff.
+Install the package specific stuff.
 ```bash
 npm install
 bower install
