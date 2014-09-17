@@ -23,3 +23,5 @@ Watch for changes.
 ```bash
 grunt watch
 ```
+
+Things will be spit out in the _site/ directory. Enjoy!
