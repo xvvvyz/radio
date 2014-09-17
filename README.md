@@ -1,4 +1,4 @@
-line-radio
+Line Radio
 ==========
 
 A minimal website for finding new music.
