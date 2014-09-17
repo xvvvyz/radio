@@ -24,4 +24,4 @@ Watch for changes.
 grunt watch
 ```
 
-Things will be spit out in the _site/ directory. Enjoy!
+Things will be spit out in the `_site/` directory. Enjoy!
