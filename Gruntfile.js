@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         }
       },
 
-      main: {
+      copy: {
         files: ['src/*', 'src/assets/**'],
         tasks: ['copy'],
         options: {
