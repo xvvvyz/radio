@@ -144,7 +144,6 @@ main {margin: 90px 0 0 0}
   overflow: auto;
   padding: 40px 5% 5px 5%;
   text-align: center;
-  -khtml-user-select: none;
   user-select: none
 }
 
@@ -155,13 +154,6 @@ main {margin: 90px 0 0 0}
   background-color: #76C1ED;
   color: #fff;
   border-radius: 5px
-}
-
-#prefer input {margin: 0 0 0 5px}
-
-#prefer label {
-  color: #9F3B45;
-  margin-left: 10px
 }
 
 /* ---------------------------------------------------- tag cloud  */
@@ -347,8 +339,6 @@ main {margin: 90px 0 0 0}
   }
 
   #s_status {display: inline}
-
-  #prefer {float: right}
 
   /* -------------------------------------------------- tag cloud  */
 
