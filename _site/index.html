@@ -23,8 +23,6 @@
   <style type="text/css">
     html {font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif}
 
-    body {margin: 0}
-
     a {color: inherit}
 
     a:hover {cursor: pointer}
@@ -58,16 +56,24 @@
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
 
-  <meta name="google-site-verification" content="xzRIm1tGJtIfECcDnYZOtXO3UouRa6_OyAiiS6kllJU">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<body ng-app="app" id="body" class="no_touch">
+    ga('create', 'UA-36603722-4', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+<body ng-app="lineRadio" class="no_touch">
 
   <div id="init" ng-hide="true">
     <h1>loading ...</h1>
     <p>If nothing loads, try <a href="http://browsehappy.com/">upgrading your browser</a>.</p>
   </div>
 
-  <div ng-controller="HomeController" ng-init="initApp($scope, $http)" class="ng-cloak" ng-cloak>
+  <div ng-controller="MainController" ng-init="initApp($scope, $http)" class="ng-cloak" ng-cloak>
     <header>
       <div id="progress">
         <div id="track_downloaded">
@@ -96,15 +102,15 @@
       <div id="cloud">
         <div class="cloud_tag">
           <div ng-show="artistCloud.length"><span>Artists</span></div>
-          <a class="border-fade drop-click" ng-class="'ng-animate'" ng-show="artistCloud.length" ng-click="$parent.query=tag.name;loadArtist($scope)" ng-repeat="tag in artistCloud">{{tag.name}}</a>
+          <a class="border-fade drop-click" ng-show="artistCloud.length" ng-click="$parent.query=tag.name;loadArtist($scope)" ng-repeat="tag in artistCloud">{{tag.name}}</a>
         </div>
         <div class="cloud_artist">
           <div ng-show="tagCloud.length"><span>Tags</span></div>
-          <a class="border-fade drop-click" ng-class="'ng-animate'" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;loadTag($scope)" ng-repeat="tag in tagCloud">{{tag.name}}</a>
+          <a class="border-fade drop-click" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;loadTag($scope)" ng-repeat="tag in tagCloud">{{tag.name}}</a>
         </div>
-        <div class="cloud_generic">
-          <div><span>Popular</span></div>
-          <a class="border-fade drop-click" ng-class="'ng-animate'" ng-click="$parent.query=tag.name;loadTag($scope, $http)" ng-repeat="tag in genericCloud">{{tag.name}}</a>
+        <div class="cloud_popular">
+          <div><span>Popular Tags</span></div>
+          <a class="border-fade drop-click" ng-click="$parent.query=tag.name;loadTag($scope, $http)" ng-repeat="tag in popularCloud">{{tag.name}}</a>
         </div>
       </div>
 
