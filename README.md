@@ -21,6 +21,11 @@ npm install
 bower install
 ```
 
+* Generate site (goes to _site/).
+```bash
+grunt
+```
+
 * Watch for changes.
 ```bash
 grunt watch
