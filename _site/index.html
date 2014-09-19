@@ -67,7 +67,6 @@
   </script>
 
 <body ng-app="lineRadio" class="no_touch">
-
   <div id="init" ng-hide="true">
     <h1>loading ...</h1>
     <p>If nothing loads, try <a href="http://browsehappy.com/">upgrading your browser</a>.</p>
@@ -102,15 +101,15 @@
       <div id="cloud">
         <div class="cloud_tag">
           <div ng-show="artistCloud.length"><span>Artists</span></div>
-          <a class="border-fade drop-click" ng-show="artistCloud.length" ng-click="$parent.query=tag.name;loadArtist($scope)" ng-repeat="tag in artistCloud">{{tag.name}}</a>
+          <a class="border-fade drop-click" ng-show="artistCloud.length" ng-click="$parent.query=tag.name;loadArtist()" ng-repeat="tag in artistCloud">{{tag.name}}</a>
         </div>
         <div class="cloud_artist">
           <div ng-show="tagCloud.length"><span>Tags</span></div>
-          <a class="border-fade drop-click" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;loadTag($scope)" ng-repeat="tag in tagCloud">{{tag.name}}</a>
+          <a class="border-fade drop-click" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;loadTag()" ng-repeat="tag in tagCloud">{{tag.name}}</a>
         </div>
         <div class="cloud_popular">
           <div><span>Popular Tags</span></div>
-          <a class="border-fade drop-click" ng-click="$parent.query=tag.name;loadTag($scope, $http)" ng-repeat="tag in popularCloud">{{tag.name}}</a>
+          <a class="border-fade drop-click" ng-click="$parent.query=tag.name;loadTag()" ng-repeat="tag in popularCloud">{{tag.name}}</a>
         </div>
       </div>
 

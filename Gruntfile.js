@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['src/js/**/*.js'],
-        tasks: ['concat', 'uglify'],
+        tasks: ['concat'],
         options: {
           spawn: false,
         },
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         src: [
           'bower_components/angular/angular.js',
           'bower_components/angular-animate/angular-animate.js',
-          'bower_components/angular-soundmanager2/dist/angular-soundmanager2.js',
+          'bower_components/soundmanager2/script/soundmanager2-jsmin.js',
           'src/js/**/*.js'
         ],
         dest: '_site/js/main.js'
@@ -67,7 +67,8 @@ module.exports = function(grunt) {
       main: {
         files: [
           {expand: true, cwd: 'src/', src: '*', dest: '_site/', filter: 'isFile'},
-          {expand: true, flatten: true, cwd: 'src/assets', src: "**", dest: '_site/assets/', filter: 'isFile'}
+          {expand: true, flatten: true, cwd: 'src/assets', src: "**", dest: '_site/assets/', filter: 'isFile'},
+          {expand: true, cwd: 'bower_components/soundmanager2', src: "swf/*swf", dest: '_site/assets/'}
         ]
       }
     }
