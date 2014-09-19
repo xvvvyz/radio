@@ -21,6 +21,6 @@
   "dependencies": {
     "angular": "~1.2.25",
     "angular-animate": "~1.2.25",
-    "angular-soundmanager2": "~0.2.3"
+    "soundmanager2": "*"
   }
 }

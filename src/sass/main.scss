@@ -3,6 +3,10 @@
 *:focus {outline: 0}
 *::selection {background: #C8C8C8}
 
+body{
+  margin:0;
+}
+
 /* ---------------------------------------------------- animations */
 
 .border-fade {
@@ -18,24 +22,21 @@
 
 /* ---------------------------------------------------- ng-animations  */
 
-.ng-animate.ng-move,
-.ng-animate.ng-enter,
-.ng-animate.ng-leave {
-  transition: all linear 0.5s
+.ng-enter,
+.ng-leave {
+  transition: all linear 0.5s;
 }
 
-.ng-animate.ng-leave.ng-leave-active,
-.ng-animate.ng-move,
-.ng-animate.ng-enter {
+.ng-leave.ng-leave-active,
+.ng-enter {
   max-height: 0;
-  opacity: 0
+  opacity: 0;
 }
 
-.ng-animate.ng-leave,
-.ng-animate.ng-move.ng-move-active,
-.ng-animate.ng-enter.ng-enter-active {
+.ng-leave,
+.ng-enter.ng-enter-active {
+  opacity: 1;
   max-height: 100px;
-  opacity: 1
 }
 
 /* ---------------------------------------------------- classes  */
@@ -142,7 +143,7 @@ main {margin: 90px 0 0 0}
 
 #below_header {
   overflow: auto;
-  padding: 40px 5% 5px 5%;
+  padding: 25px 5% 5px 5%;
   text-align: center;
   user-select: none
 }
@@ -162,7 +163,7 @@ main {margin: 90px 0 0 0}
 
 .cloud_artist a:nth-child(n),
 .cloud_tag a:nth-child(n),
-.cloud_generic a:nth-child(n) {
+.cloud_popular a:nth-child(n) {
   display: inline-block;
   box-sizing: border-box;
   overflow: hidden;
@@ -177,7 +178,7 @@ main {margin: 90px 0 0 0}
 
 .cloud_artist a:nth-child(2n),
 .cloud_tag a:nth-child(2n),
-.cloud_generic a:nth-child(2n) {text-align: right}
+.cloud_popular a:nth-child(2n) {text-align: right}
 
 .no_touch #cloud a:hover {color: #fff}
 
@@ -201,15 +202,14 @@ main {margin: 90px 0 0 0}
 }
 
 #more_tags {
-  font-size: 0.9em;
+  display: block;
   max-width: 180px;
   margin: 35px auto;
-  display: block;
-  text-align: center;
   padding: 15px;
   border: solid 1px #02C68E;
-  color: #02C68E;
   border-radius: 5px;
+  text-align: center;
+  color: #02C68E;
   transition: background ease 0.5s
 }
 
@@ -344,7 +344,7 @@ main {margin: 90px 0 0 0}
 
   .cloud_artist a:nth-child(n),
   .cloud_tag a:nth-child(n),
-  .cloud_generic a:nth-child(n) {
+  .cloud_popular a:nth-child(n) {
     padding-left: 5%;
     padding-right: 5%;
     width: 33.33%;
@@ -356,11 +356,11 @@ main {margin: 90px 0 0 0}
 
   .cloud_artist a:nth-child(3n-1),
   .cloud_tag a:nth-child(3n-1),
-  .cloud_generic a:nth-child(3n-1) {text-align: right}
+  .cloud_popular a:nth-child(3n-1) {text-align: right}
 
   .cloud_artist a:nth-child(3n),
   .cloud_tag a:nth-child(3n),
-  .cloud_generic a:nth-child(3n) {text-align: center}
+  .cloud_popular a:nth-child(3n) {text-align: center}
 }
 
 /* ####################################################################### 1200px */
@@ -371,7 +371,7 @@ main {margin: 90px 0 0 0}
 
   .cloud_artist a:nth-child(n),
   .cloud_tag a:nth-child(n),
-  .cloud_generic a:nth-child(n) {
+  .cloud_popular a:nth-child(n) {
     width: 25%;
     text-align: left
   }
