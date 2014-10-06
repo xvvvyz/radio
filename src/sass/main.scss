@@ -9,14 +9,14 @@ body{
 
 /* ---------------------------------------------------- animations */
 
-.border-fade {
+.no_touch .border-fade {
   transition: box-shadow 0.3s ease;
   transform: translateZ()
 }
 
 .no_touch .border-fade:hover {box-shadow: inset 0 0 0 30px #262626, 0 0 1px rgba(0,0,0,0)}
 
-.drop-click:active {
+.no_touch .drop-click:active {
   transform: scale(0.95);
 }
 
