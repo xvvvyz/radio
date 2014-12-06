@@ -19,8 +19,8 @@
     "bower_components"
   ],
   "dependencies": {
-    "angular": "~1.2.25",
-    "angular-animate": "~1.2.25",
+    "angular": "~1.2.27",
+    "angular-animate": "~1.2.27",
     "soundmanager2": "*"
   }
 }
