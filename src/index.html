@@ -92,32 +92,24 @@
     <main>
       <div id="expanded" ng-show="!status">
         <div id="what" ng-show="!status">
-          <p>Line Radio streamlines the process of sorting through bad mixes on <a href="http://8tracks.com">8tracks</a> by automatically playing songs that are related to what you select or type. Whether you&apos;re trying to get <a ng-click="query='workout';loadTag($scope)">pumped up</a>, take it back to the <a ng-click="query='the beatles';loadArtist($scope)">1960&apos;s</a> and <a ng-click="query='led zeppelin';loadArtist($scope)">1970&apos;s</a>, or <a ng-click="query='adderall';loadTag($scope)">study for finals</a>, Line Radio can get you there faster. Find a bad mix? Press <img width="15" height="15" alt="refresh" src='assets/refresh.svg'> for a fresh playlist or <img width="15" height="15" alt="skip" src='assets/skip.svg'> to skip a track.</p>
+          <p>Line Radio streamlines the process of sorting through bad mixes on <a href="http://8tracks.com">8tracks</a> by automatically playing songs that are related to what you select or type. Whether you&apos;re trying to get <a ng-click="query='workout';queryEncode='tags:workout';loadTag()">pumped up</a>, take it back to the <a ng-click="query='the beatles';queryEncode='artist:the_beatles';loadArtist()">1960&apos;s</a> and <a ng-click="query='led zeppelin';queryEncode='artist:led_zeppelin';loadArtist()">1970&apos;s</a>, or <a ng-click="query='adderall';queryEncode='tags:adderall';loadTag()">study for finals</a>, Line Radio can get you there faster. Find a bad mix? Press <img width="15" height="15" alt="refresh" src='assets/refresh.svg'> for a fresh playlist or <img width="15" height="15" alt="skip" src='assets/skip.svg'> to skip a track.</p>
         </div>
-      </div>
-
-      <div id="below_header">
-        <span id="status" ng-show="status">{{status}}</span>
       </div>
 
       <div id="cloud">
         <div class="cloud_tag">
-          <div ng-show="artistCloud.length"><span>Artists</span></div>
-          <a class="border-fade drop-click" ng-show="artistCloud.length" ng-click="$parent.query=tag.name;loadArtist()" ng-repeat="tag in artistCloud">{{tag.name}}</a>
-        </div>
-        <div class="cloud_artist">
-          <div ng-show="tagCloud.length"><span>Tags</span></div>
-          <a class="border-fade drop-click" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;loadTag()" ng-repeat="tag in tagCloud">{{tag.name}}</a>
+          <div ng-show="tagCloud.length"><span>{{status}}</span></div>
+          <a class="border-fade drop-click" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;$parent.queryEncode=tag.mix_set.smart_id;loadTag()" ng-repeat="tag in tagCloud">{{tag.name}}</a>
         </div>
         <div class="cloud_popular">
           <div><span>Popular Tags</span></div>
-          <a class="border-fade drop-click" ng-click="$parent.query=tag.name;loadTag()" ng-repeat="tag in popularCloud">{{tag.name}}</a>
+          <a class="border-fade drop-click" ng-click="$parent.query=tag.name;$parent.queryEncode='tags:'+tag.name;loadTag()" ng-repeat="tag in popularCloud">{{tag.name}}</a>
         </div>
       </div>
 
-      <a id="more_tags" class="drop-click" ng-click="getTags()">more stuff. plz</a>
+      <a id="more_tags" class="drop-click" ng-click="getTags()">more</a>
 
-      <p id="signature">Fork me on <a href="http://github.com/cadejscroggins/line-radio">Github</a>. <span>&lt;3</span></p>
+      <p id="signature">Fork me on <a href="http://github.com/cadejscroggins/line-radio">GitHub</a>. <span>&lt;3</span></p>
 
       <div id="bottom" ng-show="status">
         <div id="song_info">

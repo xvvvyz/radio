@@ -10,14 +10,38 @@ body{
 /* ---------------------------------------------------- animations */
 
 .no_touch .border-fade {
-  transition: box-shadow 0.3s ease;
   transform: translateZ()
 }
 
-.no_touch .border-fade:hover {box-shadow: inset 0 0 0 30px #262626, 0 0 1px rgba(0,0,0,0)}
+.no_touch .border-fade:hover {
+  transition: box-shadow 0.3s ease;
+  box-shadow: inset 0 0 0 30px #262626, 0 0 1px rgba(0,0,0,0)
+}
 
 .no_touch .drop-click:active {
   transform: scale(0.95);
+}
+
+
+.animate-enter, 
+.animate-leave {
+    transition: 0.2s cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+    position: relative;
+    display: block;
+} 
+
+.animate-enter.animate-enter-active, 
+.animate-leave {
+    opacity: 1;
+    bottom: 0;
+    height: 30px;
+}
+
+.animate-leave.animate-leave-active,
+.animate-enter {
+    opacity: 0;
+    bottom: -50px;
+    height: 0px;
 }
 
 /* ---------------------------------------------------- ng-animations  */
@@ -115,7 +139,9 @@ header {
 
 /* ---------------------------------------------------- main  */
 
-main {margin: 90px 0 0 0}
+main {
+  margin: 90px 0 0 0;
+}
 
 /* ---------------------------------------------------- expanded  */
 
@@ -139,29 +165,14 @@ main {margin: 90px 0 0 0}
 
 #what a {text-decoration: underline}
 
-/* ---------------------------------------------------- details header  */
-
-#below_header {
-  overflow: auto;
-  padding: 25px 5% 5px 5%;
-  text-align: center;
-  user-select: none
-}
-
-#status {
-  margin-top: 15px;
-  display: block;
-  padding: 5px 10px;
-  background-color: #76C1ED;
-  color: #fff;
-  border-radius: 5px
-}
-
 /* ---------------------------------------------------- tag cloud  */
 
 #cloud {margin: 0}
 
-.cloud_artist a:nth-child(n),
+.cloud_tag {
+  padding-top: 1em;
+}
+
 .cloud_tag a:nth-child(n),
 .cloud_popular a:nth-child(n) {
   display: inline-block;
@@ -176,7 +187,6 @@ main {margin: 90px 0 0 0}
   white-space: nowrap
 }
 
-.cloud_artist a:nth-child(2n),
 .cloud_tag a:nth-child(2n),
 .cloud_popular a:nth-child(2n) {text-align: right}
 
@@ -342,7 +352,6 @@ main {margin: 90px 0 0 0}
 
   /* -------------------------------------------------- tag cloud  */
 
-  .cloud_artist a:nth-child(n),
   .cloud_tag a:nth-child(n),
   .cloud_popular a:nth-child(n) {
     padding-left: 5%;
@@ -354,11 +363,9 @@ main {margin: 90px 0 0 0}
     border-radius: 5px
   }
 
-  .cloud_artist a:nth-child(3n-1),
   .cloud_tag a:nth-child(3n-1),
   .cloud_popular a:nth-child(3n-1) {text-align: right}
 
-  .cloud_artist a:nth-child(3n),
   .cloud_tag a:nth-child(3n),
   .cloud_popular a:nth-child(3n) {text-align: center}
 }
@@ -369,7 +376,6 @@ main {margin: 90px 0 0 0}
 
   /* -------------------------------------------------- tag cloud  */
 
-  .cloud_artist a:nth-child(n),
   .cloud_tag a:nth-child(n),
   .cloud_popular a:nth-child(n) {
     width: 25%;
