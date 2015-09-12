@@ -6,10 +6,10 @@ A minimal website for finding new music.
 
 **Prerequisites**:
 
-* [Ruby](//www.ruby-lang.org/en/)
-* [Node.js](//nodejs.org/en/)
+* [Ruby](https://www.ruby-lang.org/en/)
+* [Node.js](https://nodejs.org/en/)
 
-**Install [Grunt](//gruntjs.com/), [Bower](//bower.io/) and [Sass](//sass-lang.com/)**:
+**Install [Grunt](http://gruntjs.com/), [Bower](http://bower.io/) and [Sass](http://sass-lang.com/)**:
 
 ```bash
 npm install -g grunt-cli bower
@@ -19,7 +19,7 @@ gem install sass
 **Clone the repo**:
 
 ```bash
-git clone https://github.com/cadejscroggins/line-radio
+git clone https://github.com/cadejscroggins/lineradio
 cd line-radio
 ```
 
