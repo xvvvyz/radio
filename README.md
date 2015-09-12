@@ -30,4 +30,4 @@ bower install
 
 **That's it!**
 
-You can run `grunt watch` for livereloading and such or just `grunt` to build the site into `_site/`.
+You can run `grunt serve` for livereloading and such or `grunt build` to build the site into `_site/`.
