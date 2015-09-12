@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+
   // define task specific options
   grunt.initConfig({
     watch: {
@@ -145,4 +146,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['concat:dist', 'autoprefixer:dist', 'uglify', 'cssmin', 'copy:dist']);
   grunt.registerTask('serve', ['concat:server', 'autoprefixer:server', 'copy:server', 'connect:livereload', 'watch']);
   grunt.registerTask('default', ['build']);
+
 };

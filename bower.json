@@ -1,10 +1,5 @@
 {
   "name": "lineradio",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components"
-  ],
   "dependencies": {
     "angular": "~1.2.27",
     "angular-animate": "~1.2.27",
