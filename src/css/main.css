@@ -9,28 +9,28 @@ body{
 
 /* ---------------------------------------------------- animations */
 
-.no_touch .border-fade {
+.no-touch .border-fade {
   transform: translateZ()
 }
 
-.no_touch .border-fade:hover {
+.no-touch .border-fade:hover {
   transition: box-shadow 0.3s ease;
   box-shadow: inset 0 0 0 30px #262626, 0 0 1px rgba(0,0,0,0)
 }
 
-.no_touch .drop-click:active {
+.no-touch .drop-click:active {
   transform: scale(0.95);
 }
 
 
-.animate-enter, 
+.animate-enter,
 .animate-leave {
     transition: 0.2s cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
     position: relative;
     display: block;
-} 
+}
 
-.animate-enter.animate-enter-active, 
+.animate-enter.animate-enter-active,
 .animate-leave {
     opacity: 1;
     bottom: 0;
@@ -190,7 +190,7 @@ main {
 .cloud_tag a:nth-child(2n),
 .cloud_popular a:nth-child(2n) {text-align: right}
 
-.no_touch #cloud a:hover {color: #fff}
+.no-touch #cloud a:hover {color: #fff}
 
 #cloud>div>div {
   height: 1px;
@@ -223,7 +223,7 @@ main {
   transition: background ease 0.5s
 }
 
-.no_touch #more_tags:hover {
+.no-touch #more_tags:hover {
   background-color: #02C68E;
   color: #fff
 }
@@ -319,7 +319,7 @@ main {
     height: 80px;
     margin-left: 10px;
     margin-right: 10px;
-   
+
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.77)
   }
 
@@ -359,7 +359,7 @@ main {
     width: 33.33%;
     width: calc(100%/3);
     text-align: left;
-   
+
     border-radius: 5px
   }
 

@@ -6,14 +6,12 @@ A minimal website for finding new music.
 
 **Prerequisites**:
 
-* [Ruby](https://www.ruby-lang.org/en/)
 * [Node.js](https://nodejs.org/en/)
 
-**Install [Grunt](http://gruntjs.com/), [Bower](http://bower.io/) and [Sass](http://sass-lang.com/)**:
+**Install [Grunt](http://gruntjs.com/) & [Bower](http://bower.io/)**:
 
 ```bash
 npm install -g grunt-cli bower
-gem install sass
 ```
 
 **Clone the repo**:

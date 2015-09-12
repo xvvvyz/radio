@@ -1,4 +1,4 @@
-angular.module('lineRadio', ['ngAnimate'])
+angular.module('lineradio', ['ngAnimate'])
   .controller('MainController', ['$scope', '$http', function($scope, $http) {
     $scope.initApp = function() {
       initApp($scope, $http);
@@ -299,7 +299,7 @@ function findTheMix($scope, $http, section, recursionCount) {
 
   if ($scope.query.length > 1) {
     recursionCount++;
-  
+
     if (section == 0) {
       if ($scope.preferArtist) {
         section = 1;

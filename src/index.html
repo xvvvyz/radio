@@ -1,31 +1,42 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html>
 
-  <meta charset="UTF-8">
+  <!-- website settings -->
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
-  <title>Line Radio</title>
-  <meta name="description" content="Music related to what genre, artist, activity or thing you type in starts playing as you type. No unnecessary browsing. No ads. Just relevant tunes.">
 
+  <title>Line Radio</title>
+  <meta name="description" content="The fastest, most streamlined way to find relavant music.">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+
+  <!-- facebook sharing -->
   <meta property="og:title" content="Line Radio">
-  <meta property="og:description" content="Music related to what genre, artist, activity or thing you type in starts playing as you type. No unnecessary browsing. No ads. Just relevant tunes.">
+  <meta property="og:description" content="The fastest, most streamlined way to find relavant music.">
   <meta property="og:url" content="http://linerad.io">
   <meta property="og:type" content="website">
   <meta property="og:image" content="http://linerad.io/assets/line_radio.png">
 
+  <!-- twitter sharing -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Line Radio">
   <meta name="twitter:creator" content="@cadejscroggins">
-  <meta name="twitter:description" content="Music related to what genre, artist, activity or thing you type in starts playing as you type. No unnecessary browsing. No ads. Just relevant tunes.">
+  <meta name="twitter:description" content="The fastest, most streamlined way to find relavant music.">
   <meta name="twitter:url" content="http://linerad.io">
   <meta name="twitter:image" content="http://linerad.io/assets/line_radio.png">
 
+  <!-- splash screen styles -->
   <style type="text/css">
-    html {font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif}
+    html {
+      font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
 
-    a {color: inherit}
+    a {
+      color: inherit;
+    }
 
-    a:hover {cursor: pointer}
+    a:hover {
+      cursor: pointer;
+    }
 
     #init {
       position: fixed;
@@ -38,25 +49,22 @@
       background-color: #1E1E1E;
       text-align: center;
       font-size: 0.9em;
-      color: #02C68E
+      color: #02C68E;
     }
 
     h1,
     #init p {
       margin: 0;
-      line-height: 35px
+      line-height: 35px;
     }
 
     #init p {
-      color: #fff
+      color: #fff;
     }
   </style>
 
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Slab|Squada+One">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+<body ng-app="lineradio" class="no-touch">
 
-<body ng-app="lineRadio" class="no_touch">
   <div id="init" ng-hide="true">
     <h1>loading ...</h1>
     <p>If nothing loads, try <a href="//browsehappy.com/">upgrading your browser</a>.</p>
@@ -122,7 +130,11 @@
     </main>
   </div>
 
+  <!-- load styles -->
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Slab|Squada+One">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <!-- load scripts -->
   <script src="js/main.js"></script>
 
-</body>
 </html>

@@ -4,4 +4,5 @@ npm-debug.log
 .sass-cache/
 node_modules/
 bower_components/
+.tmp/
 _site/
