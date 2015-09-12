@@ -1,36 +1,35 @@
-Line Radio
-==========
+# lineradio
 
 A minimal website for finding new music.
 
-Setup
------
+### Developer Setup
 
-* Install the global stuff (NPM & RubyGems are required; don't be silly).
+**Prerequisites**:
+
+* [Ruby](//www.ruby-lang.org/en/)
+* [Node.js](//nodejs.org/en/)
+
+**Install [Grunt](//gruntjs.com/), [Bower](//bower.io/) and [Sass](//sass-lang.com/)**:
+
 ```bash
+npm install -g grunt-cli bower
 gem install sass
-npm install -g bower
-npm install -g grunt-cli
 ```
 
-* Install the package specific stuff.
+**Clone the repo**:
+
 ```bash
 git clone https://github.com/cadejscroggins/line-radio
 cd line-radio
+```
+
+**Install dependancies**:
+
+```bash
 npm install
 bower install
 ```
 
-* Generate site (goes to _site/).
-```bash
-grunt
-```
+**That's it!**
 
-* Watch for changes.
-```bash
-grunt watch
-```
-
-* Fix everything that doesn't work.
-
-* Dance.
+You can run `grunt watch` for livereloading and such or just `grunt` to build the site into `_site/`.
