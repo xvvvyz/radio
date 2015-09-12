@@ -1,7 +1,8 @@
 {
+  "name": "lineradio",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cadejscroggins/line-radio"
+    "url": "https://github.com/cadejscroggins/lineradio"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -11,5 +12,7 @@
     "grunt-contrib-sass": "^0.8.1",
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1"
-  }
+  },
+  "private": true,
+  "license": "MIT"
 }
