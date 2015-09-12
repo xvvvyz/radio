@@ -2,7 +2,7 @@
 
 A minimal website for finding new music.
 
-### Developer Setup
+## Developer Setup
 
 **Prerequisites**:
 
