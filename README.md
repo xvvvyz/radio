@@ -18,7 +18,7 @@ npm install -g grunt-cli bower
 
 ```bash
 git clone https://github.com/cadejscroggins/lineradio
-cd line-radio
+cd lineradio
 ```
 
 **Install dependancies**:
