@@ -4,5 +4,8 @@
     "angular": "~1.2.27",
     "angular-animate": "^1.5.5",
     "SoundManager2": "soundmanager2#*"
+  },
+  "resolutions": {
+    "angular": "~1.2.27"
   }
 }
