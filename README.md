@@ -1,4 +1,4 @@
-# [linerad.io](http://linerad.io)
+# [linerad.io](https://cadejscroggins.github.io/lineradio/)
 
 A minimal website for finding new music.
 
