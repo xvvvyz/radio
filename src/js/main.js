@@ -104,7 +104,7 @@ function prefer($scope, type) {
 }
 
 function getPlayToken($scope, $http) {
-  $http.get('http://8tracks.com/sets/new.json?api_version=3&api_key='+$scope.apiKey).success(function(data) {
+  $http.get('https://8tracks.com/sets/new.json?api_version=3&api_key='+$scope.apiKey).success(function(data) {
     $scope.playToken = data['play_token'];
   }).error(function(data, status, headers, config) {
     eightError($scope, data['status']);
@@ -115,7 +115,7 @@ function getTags($scope, $http) {
   var page = $scope.tagPage;
   var perPage = 60;
 
-  $http.get('http://8tracks.com/tags.json?per_page='+perPage+'&page='+page+'&api_version=3&api_key='+$scope.apiKey).success(function(data) {
+  $http.get('https://8tracks.com/tags.json?per_page='+perPage+'&page='+page+'&api_version=3&api_key='+$scope.apiKey).success(function(data) {
     if (page == 1) {
       $scope.popularCloud = data['tag_cloud']['tags'];
     } else {
@@ -190,7 +190,7 @@ function loadArtist($scope, $http, name) {
   loading($scope);
   $scope.status = name;
 
-  $http.get('http://8tracks.com/mix_sets/artist:'+encodeURIComponent(name.replace(/ /g, '_'))+'.json?api_version=3&include=mixes&sort=popular&per_page=100&api_key='+$scope.apiKey).success(function(data) {
+  $http.get('https://8tracks.com/mix_sets/artist:'+encodeURIComponent(name.replace(/ /g, '_'))+'.json?api_version=3&include=mixes&sort=popular&per_page=100&api_key='+$scope.apiKey).success(function(data) {
     if (getRandomMix($scope, data['mix_set'])) {
       nextSong($scope, $http, $scope.mixId);
       prefer($scope, "artist");
@@ -206,7 +206,7 @@ function loadTag($scope, $http, query, queryEncode, recursionCount) {
   loading($scope);
   $scope.status = query;
 
-  $http.get('http://8tracks.com/mix_sets/'+queryEncode+'.json?api_version=3&include=mixes&sort=popular&per_page=100&api_key='+$scope.apiKey).success(function(data) {
+  $http.get('https://8tracks.com/mix_sets/'+queryEncode+'.json?api_version=3&include=mixes&sort=popular&per_page=100&api_key='+$scope.apiKey).success(function(data) {
     if (getRandomMix($scope, data['mix_set'])) {
       nextSong($scope, $http, $scope.mixId);
       prefer($scope, "tag");
@@ -226,7 +226,7 @@ function loadMix($scope, $http, name, recursionCount) {
   loading($scope);
   $scope.status = 'mix: '+name;
 
-  $http.get('http://8tracks.com/mix_sets/mixes:'+encodeURIComponent(name.replace(/ /g, '+'))+'.json?api_version=3&include=mixes&sort=popular&per_page=100&api_key='+$scope.apiKey).success(function(data) {
+  $http.get('https://8tracks.com/mix_sets/mixes:'+encodeURIComponent(name.replace(/ /g, '+'))+'.json?api_version=3&include=mixes&sort=popular&per_page=100&api_key='+$scope.apiKey).success(function(data) {
     if (getRandomMix($scope, data['mix_set'])) {
       nextSong($scope, $http, $scope.mixId);
     } else {
@@ -242,7 +242,7 @@ function loadMix($scope, $http, name, recursionCount) {
 }
 
 function loadSimilar($scope, $http, mixId) {
-  $http.get('http://8tracks.com/mix_sets/similar:'+mixId+'.json?api_version=3&include=mixes&per_page=10&api_key='+$scope.apiKey).success(function(data) {
+  $http.get('https://8tracks.com/mix_sets/similar:'+mixId+'.json?api_version=3&include=mixes&per_page=10&api_key='+$scope.apiKey).success(function(data) {
     if (getRandomMix($scope, data['mix_set'])) {
       nextSong($scope, $http, $scope.mixId);
     } else {
@@ -278,7 +278,7 @@ function uniqName(origArr) {
 
 function autocomplete($scope, $http, noMix) {
   if ($scope.query.length > 1) {
-    $http.get('http://8tracks.com/search/autocomplete.json?q='+$scope.query+'&types%5B%5D=mtags&types%5B%5D=artists&api_key='+$scope.apiKey).success(function(data) {
+    $http.get('https://8tracks.com/search/autocomplete.json?q='+$scope.query+'&types%5B%5D=mtags&types%5B%5D=artists&api_key='+$scope.apiKey).success(function(data) {
 
       if (data['mtags']) {
         $scope.tagCloud = uniqName(data['mtags']);
@@ -356,7 +356,7 @@ function nextSong($scope, $http, mixId) {
     delete $scope.skipAllowed;
     loadSimilar($scope, $http, mixId);
   } else {
-    $http.get('http://8tracks.com/sets/'+$scope.playToken+'/next.json?api_version=3&mix_id='+mixId+'&api_key='+$scope.apiKey).success(function(data) {
+    $http.get('https://8tracks.com/sets/'+$scope.playToken+'/next.json?api_version=3&mix_id='+mixId+'&api_key='+$scope.apiKey).success(function(data) {
       $scope.track = data['set']['track'];
       $scope.atLastTrack = data['set']['at_last_track'];
       $scope.skipAllowed = data['set']['skip_allowed'];
@@ -383,7 +383,7 @@ function nextSong($scope, $http, mixId) {
       var track = soundManager.getSoundById('track');
 
       track.onPosition(30000, function() {
-        $http.get('http://8tracks.com/sets/'+$scope.playToken+'/report.json?track_id='+data['set']['track']['id']+'&mix_id='+mixId+'&api_key='+$scope.apiKey);
+        $http.get('https://8tracks.com/sets/'+$scope.playToken+'/report.json?track_id='+data['set']['track']['id']+'&mix_id='+mixId+'&api_key='+$scope.apiKey);
       });
 
       /* if not good to go don't go */
@@ -418,7 +418,7 @@ function getRandomMix($scope, data, fromAC) {
 
   $scope.mixId = data['mixes'][i]['id'];
   $scope.mixName = data['mixes'][i]['name'];
-  $scope.mixPath = 'http://8tracks.com'+data['mixes'][i]['path'];
+  $scope.mixPath = 'https://8tracks.com'+data['mixes'][i]['path'];
 
   if (fromAC == 1) {
     $scope.mixArt = data['mixes'][i]['data']['original_imgix_url']+'&w=100&h=100';
