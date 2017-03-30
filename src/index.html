@@ -1,137 +1,18 @@
 <!doctype html>
 <html>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-
-  <title>Line Radio</title>
-  <meta name="description" content="The fastest, most streamlined way to find relavant music.">
-  <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
-
-  <meta property="og:title" content="Line Radio">
-  <meta property="og:description" content="The fastest, most streamlined way to find relavant music.">
-  <meta property="og:url" content="https://cadejscroggins.github.io/linradio/">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://cadejscroggins.github.io/linradio/assets/line_radio.png">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Line Radio">
-  <meta name="twitter:creator" content="@cadejscroggins">
-  <meta name="twitter:description" content="The fastest, most streamlined way to find relavant music.">
-  <meta name="twitter:url" content="https://cadejscroggins.github.io/linradio/">
-  <meta name="twitter:image" content="https://cadejscroggins.github.io/linradio/assets/line_radio.png">
-
-  <!-- splash screen styles -->
-  <style type="text/css">
-    html {
-      font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    a:hover {
-      cursor: pointer;
-    }
-
-    #init {
-      position: fixed;
-      width: 350px;
-      top: 50%;
-      left: 50%;
-      margin-top: -45px;
-      margin-left: -175px;
-      padding: 10px 0;
-      background-color: #1E1E1E;
-      text-align: center;
-      font-size: 0.9em;
-      color: #02C68E;
-    }
-
-    h1,
-    #init p {
-      margin: 0;
-      line-height: 35px;
-    }
-
-    #init p {
-      color: #fff;
-    }
-  </style>
-
-<body ng-app="lineradio" class="no-touch">
-
-  <div id="init" ng-hide="true">
-    <h1>loading ...</h1>
-    <p>If nothing loads, try <a href="//browsehappy.com/">upgrading your browser</a>.</p>
-  </div>
-
-  <div ng-controller="MainController" ng-init="initApp($scope, $http)" class="ng-cloak" ng-cloak>
-    <header>
-      <div id="progress">
-        <div id="track_downloaded">
-          <div id="track_position"></div>
-        </div>
-      </div>
-
-      <div id="top_box">
-        <a ng-show="!track.name" href="."><img id="logo" width="80" height="80" ng-src="assets/line.svg" alt="Line Radio"></a>
-        <a ng-show="track.name" target="_blank" ng-href="{{mixPath}}"><img id="mix_art" width="80" height="80" ng-src="{{mixArt}}" alt="{{mixName}}"></a>
-        <input id="text_box" maxlength="40" ng-class="{'no_background':oldLen||query}" ng-model="query" ng-change="queryApi($scope, $http)">
-      </div>
-    </header>
-
-    <main>
-      <div id="expanded" ng-show="!status">
-        <div id="what" ng-show="!status">
-          <p>Line Radio streamlines the process of sorting through bad mixes on <a href="http://8tracks.com">8tracks</a> by automatically playing songs that are related to what you select or type. Whether you&apos;re trying to get <a ng-click="query='workout';queryEncode='tags:workout';loadTag()">pumped up</a>, take it back to the <a ng-click="query='the beatles';queryEncode='artist:the_beatles';loadArtist()">1960&apos;s</a> and <a ng-click="query='led zeppelin';queryEncode='artist:led_zeppelin';loadArtist()">1970&apos;s</a>, or <a ng-click="query='adderall';queryEncode='tags:adderall';loadTag()">study for finals</a>, Line Radio can get you there faster. Find a bad mix? Press <img width="15" height="15" alt="refresh" src='assets/refresh.svg'> for a fresh playlist or <img width="15" height="15" alt="skip" src='assets/skip.svg'> to skip a track.</p>
-        </div>
-      </div>
-
-      <div id="cloud">
-        <div class="cloud_tag">
-          <div ng-show="tagCloud.length"><span>{{status}}</span></div>
-          <a class="border-fade drop-click" ng-show="tagCloud.length" ng-click="$parent.query=tag.name;$parent.queryEncode=tag.mix_set.smart_id;loadTag()" ng-repeat="tag in tagCloud">{{tag.name}}</a>
-        </div>
-        <div class="cloud_popular">
-          <div><span>Popular Tags</span></div>
-          <a class="border-fade drop-click" ng-click="$parent.query=tag.name;$parent.queryEncode='tags:'+tag.name;loadTag()" ng-repeat="tag in popularCloud">{{tag.name}}</a>
-        </div>
-      </div>
-
-      <a id="more_tags" class="drop-click" ng-click="getTags()">more</a>
-
-      <p id="signature">Fork me on <a href="//github.com/cadejscroggins/lineradio">GitHub</a>. <span>&lt;3</span></p>
-
-      <div id="bottom" ng-show="status">
-        <div id="song_info">
-          <img id='loader' width="16" height="16" src="assets/loader.gif" alt="loading..." ng-show="loader">
-          <span ng-hide="loader"><b>{{track.name}}</b> {{track.performer}}</span>
-        </div>
-        <div id="controls">
-          <a ng-click="findTheMix($scope, $http)">
-            <img width="25" height="25" alt="refresh" src="assets/refresh.svg">
-          </a>
-          <a ng-click="togglePlay()">
-            <img ng-show="playToggle" width="25" height="25" alt="pause" src="assets/pause.svg">
-            <img ng-show="!playToggle" width="25" height="25" alt="play" src="assets/play.svg">
-          </a>
-          <a ng-click="nextSong($scope, $http)">
-            <img width="25" height="25" alt="skip" src="assets/skip.svg">
-          </a>
-        </div>
-      </div>
-
-      <div id="footer_blank" ng-show="status"></div>
-    </main>
-  </div>
-
-  <!-- load styles -->
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Slab|Squada+One">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-
-  <!-- load scripts -->
-  <script src="js/main.js"></script>
-
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<style>*{padding:0;margin:0}body{color:#555}.splash{position:absolute;display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;height:100%;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}@-webkit-keyframes rotate-loader{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotate-loader{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.loader{-webkit-animation-name:rotate-loader;animation-name:rotate-loader;-webkit-animation-duration:.6s;animation-duration:.6s;-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-timing-function:linear;animation-timing-function:linear}</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="splash">
+				<svg xmlns="http://www.w3.org/2000/svg" class="loader" width="50" height="50" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+					<rect width="100" height="100" class="bk" fill="none"/>
+					<circle cx="50" cy="50" r="40" style="fill:none;stroke-dasharray:90;stroke-width:10;stroke:#000" />
+				</svg>
+			</div>
+		</div>
+	</body>
 </html>
