@@ -1,0 +1,20 @@
+.Controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  svg {
+    width: 2vw;
+    height: 2vw;
+    margin: 0 10px;
+    padding: .5vw;
+    border: solid 1px transparent;
+    border-radius: 5px;
+    fill: inherit;
+
+    &:hover {
+      border-color: inherit;
+      cursor: pointer;
+    }
+  }
+}

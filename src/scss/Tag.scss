@@ -1,0 +1,33 @@
+.Tag {
+  margin: 1vw 1vw 0 0;
+  transition: opacity .2s;
+  opacity: .8;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  button {
+    border-radius: 2vw;
+    font-size: 1.2em;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  span {
+    display: block;
+    padding: 0 1vw;
+    background-color: #000;
+    color: #fff;
+    line-height: 3vw;
+
+    &.has-image {
+      background-color: rgba(0, 0, 0, .4);
+    }
+  }
+}

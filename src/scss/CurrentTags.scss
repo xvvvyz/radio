@@ -1,0 +1,13 @@
+.CurrentTags {
+  display: flex;
+  align-items: center;
+
+  .Tag,
+  .divider {
+    margin: 0 0 0 1vw;
+  }
+
+  .divider {
+    font-size: 1.2em;
+  }
+}

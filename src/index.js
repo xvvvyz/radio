@@ -1,4 +1,5 @@
 import Inferno from 'inferno';
-import App from './App.jsx';
+import App from './jsx/App.jsx';
 
-Inferno.render(<App />, document.getElementById('app'));
+document.getElementById('loading').remove();
+Inferno.render(<App />, document.getElementById('inferno-app'));

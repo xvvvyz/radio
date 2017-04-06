@@ -1,0 +1,10 @@
+.Player {
+  display: flex;
+  flex-direction: column;
+  padding: 4vw;
+  transition: background-color 1s;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  fill: #fff;
+}

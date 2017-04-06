@@ -1,0 +1,17 @@
+.List {
+  width: 100%;
+
+  h3 {
+    margin: 2.7vw 0 .3vw;
+    font-size: .8em;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: calc(2 * 4vw);
+    overflow: hidden;
+  }
+}
