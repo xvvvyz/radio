@@ -44,4 +44,8 @@ export default {
     params.player = 'sm';
     return json(`${API_HOST}/sets/366228187/next?${toQuery(params)}`);
   },
+
+  search: params => {
+    return json(`${API_HOST}/tags.json?${toQuery(params)}`);
+  }
 };

@@ -51,12 +51,12 @@ export default class App extends Component {
       per_page: limit,
     }
 
-    eight.playlists(tags, params).then(json => {
-      const playlist = this.selectPlaylist(json.mix_set.mixes);
+    eight.playlists(tags, params).then(res => {
+      const playlist = this.selectPlaylist(res.mix_set.mixes);
 
       this.setState({
         playlist: playlist || this.state.playlist,
-        relatedTags: json.filters ? json.filters : this.state.relatedTags,
+        relatedTags: res.filters ? res.filters : this.state.relatedTags,
         artistTags: playlist ? playlist.artist_list : this.state.artists,
       });
 
@@ -68,8 +68,8 @@ export default class App extends Component {
   }
 
   fetchTopTags({ page = 1, limit = 30 } = {}) {
-    eight.explore({ page: page, per_page: limit }).then(json => {
-      this.setState({ topTags: [...this.state.topTags, ...json.filters] });
+    eight.explore({ page: page, per_page: limit }).then(res => {
+      this.setState({ topTags: [...this.state.topTags, ...res.filters] });
     });
   }
 

@@ -24,7 +24,9 @@ export default class Dashboard extends Component {
           currentTags={ this.props.currentTags }
           removeTag={ this.props.removeTag }
         />
-        <Search />
+        <Search
+          addTag={ this.props.addTag }
+        />
         <Lists>{ lists }</Lists>
       </main>
     );
