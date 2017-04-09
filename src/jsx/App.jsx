@@ -3,6 +3,7 @@ import Component from 'inferno-component';
 import Dashboard from './Dashboard.jsx';
 import Player from './Player.jsx';
 import eight from './utilities/eighttracks.js';
+import { knuthShuffle } from 'knuth-shuffle';
 import '../scss/App.scss';
 
 export default class App extends Component {
@@ -12,11 +13,16 @@ export default class App extends Component {
     this.state = {
       currentTags: [],
       playlist: false,
+      playlistLoading: false,
       track: false,
       topTags: [],
       relatedTags: [],
-      artistTags: [],
     };
+
+    this.playlists = {};
+    this.pages = {};
+    this.indexes = {};
+    this.played = [];
 
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
@@ -37,34 +43,54 @@ export default class App extends Component {
     const index = this.state.currentTags.indexOf(tag);
     this.state.currentTags.splice(index, 1);
     this.setState({ currentTags: this.state.currentTags });
+    return this.state.currentTags;
   }
 
-  selectPlaylist(playlists) {
-    if (!playlists.length) return false;
-    return playlists[0];
-  }
+  selectPlaylist(tags) {
+    if (!this.playlists[tags].length) return false;
+    const playlist = this.playlists[tags][this.indexes[tags]];
 
-  fetchPlaylist({ tags = tags, page = 1, limit = 1 }) {
-    const params = {
-      include: 'mixes[artist_list[artist_avatar]]+explore_filters+pagination',
-      page: page,
-      per_page: limit,
+    if (this.played.indexOf(playlist.id) >= 0) {
+      this.fetchPlaylist({ tags: tags });
+      return false;
     }
 
-    eight.playlists(tags, params).then(res => {
-      const playlist = this.selectPlaylist(res.mix_set.mixes);
+    this.played.push(playlist.id);
+    return playlist;
+  }
 
-      this.setState({
-        playlist: playlist || this.state.playlist,
-        relatedTags: res.filters ? res.filters : this.state.relatedTags,
-        artistTags: playlist ? playlist.artist_list : this.state.artists,
-      });
+  fetchPlaylist({ tags = [], page = 1, limit = 10 }) {
+    this.setState({ playlistLoading: true });
+    tags = tags.concat().sort();
 
-      if (!playlist && tags.length === 2) {
-        this.removeTag(1);
-        this.fetchPlaylist({ tags: tags });
+    if (this.playlists[tags] && this.playlists[tags].length && ++this.indexes[tags] < limit) {
+      const playlist = this.selectPlaylist(tags);
+      if (playlist) this.setState({ playlist: playlist });
+    } else {
+      this.indexes[tags] = 0;
+      this.pages[tags] = this.pages[tags] ? this.pages[tags] + 1 : page;
+
+      const params = {
+        include: 'mixes+explore_filters+pagination',
+        page: this.pages[tags],
+        per_page: limit,
       }
-    })
+
+      eight.playlists(tags, params).then(res => {
+        this.playlists[tags] = knuthShuffle(res.mix_set.mixes);
+        const playlist = this.selectPlaylist(tags);
+
+        this.setState({
+          playlist: playlist || this.state.playlist,
+          relatedTags: res.filters ? res.filters : this.state.relatedTags,
+          playlistLoading: false,
+        });
+
+        if (!playlist && tags.length === 2) {
+          this.fetchPlaylist({ tags: this.removeTag(1) });
+        }
+      });
+    }
   }
 
   fetchTopTags({ page = 1, limit = 30 } = {}) {
@@ -77,7 +103,6 @@ export default class App extends Component {
     const lists = [
       { name: 'Related', tags: this.state.relatedTags },
       { name: 'Popular', tags: this.state.topTags },
-      { name: 'In This Playlist', tags: this.state.artistTags },
     ];
 
     return <Dashboard
@@ -91,6 +116,7 @@ export default class App extends Component {
   renderPlayer() {
     if (this.state.playlist) {
       return <Player
+        playlistLoading={ this.state.playlistLoading }
         currentTags={ this.state.currentTags }
         playlist={ this.state.playlist }
         track={ this.state.track }
