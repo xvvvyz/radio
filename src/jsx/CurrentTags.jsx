@@ -5,22 +5,10 @@ import '../scss/CurrentTags.scss';
 
 export default class CurrentTags extends Component {
   render() {
-    const tags = this.props.currentTags;
+    const tags = this.props.currentTags.map(tag => {
+      return <Tag onClick={ this.props.removeTag } value={ tag } />;
+    });
 
-    return (
-      <ul className="CurrentTags">
-        { tags[0] && <Tag
-          onClick={ this.props.removeTag }
-          value={ tags[0] }
-        /> }
-
-        { tags[1] && <li className="divider">+</li> }
-
-        { tags[1] && <Tag
-          onClick={ this.props.removeTag }
-          value={ tags[1] }
-        /> }
-      </ul>
-    );
+    return <ul className="CurrentTags">{ tags }</ul>;
   }
 }

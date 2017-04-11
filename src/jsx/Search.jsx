@@ -1,7 +1,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
-import eight from './utilities/eighttracks.js';
 import List from './List.jsx';
+import api from './utilities/api.js';
 import '../scss/Search.scss';
 
 export default class Search extends Component {
@@ -12,7 +12,7 @@ export default class Search extends Component {
   }
 
   search({ target }) {
-    eight.search({ q: target.value, per_page: 10 }).then(res => {
+    api.search({ q: target.value, per_page: 10 }).then(res => {
       this.setState({ tags: res.tag_cloud.tags });
     });
   }

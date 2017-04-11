@@ -10,7 +10,7 @@ export default class List extends Component {
 
       return <Tag
         value={ isObj ? item.name : item }
-        image={ isObj ? item.artist_avatar : null }
+        image={ isObj ? item.image : null }
         onClick={ this.props.addTag }
       />;
     });

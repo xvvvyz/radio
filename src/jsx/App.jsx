@@ -1,42 +1,59 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
+import { knuthShuffle } from 'knuth-shuffle';
+import store from 'store';
+import expirePlugin from 'store/plugins/expire';
 import Dashboard from './Dashboard.jsx';
 import Player from './Player.jsx';
-import eight from './utilities/eighttracks.js';
-import { knuthShuffle } from 'knuth-shuffle';
+import api from './utilities/api.js';
+import help from './utilities/helpers.js';
 import '../scss/App.scss';
+
+const STORE_POPULAR = 'popular';
+const STORE_PLAYED = 'played';
+const STORE_POPULAR_EXPIRY = help.daysFromNow(7);
+const STORE_TAGS_EXPIRY = help.daysFromNow(7);
+const STORE_PLAYED_LIMIT = 500; // TODO
+const PLAYLISTS_LIMIT = 10;
 
 export default class App extends Component {
   constructor() {
     super();
+
+    store.addPlugin(expirePlugin);
 
     this.state = {
       currentTags: [],
       playlist: false,
       playlistLoading: false,
       track: false,
-      topTags: [],
+      topTags: store.get(STORE_POPULAR) || [],
       relatedTags: [],
     };
 
-    this.playlists = {};
-    this.pages = {};
-    this.indexes = {};
-    this.played = [];
+    this.played = store.get(STORE_PLAYED) || [];
 
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
+    this.fetchPlaylists = this.fetchPlaylists.bind(this);
+    this.fetchNextSong = this.fetchNextSong.bind(this);
+
+    if (!this.state.topTags.length) this.fetchTopTags();
   }
 
-  componentDidMount() {
-    this.fetchTopTags();
+  fetchTopTags() {
+    api.explore({ page: 1, per_page: 30 }).then(res => {
+      const tags = [...this.state.topTags, ...res.filters];
+      this.setState({ topTags: tags });
+      store.set(STORE_POPULAR, tags, STORE_POPULAR_EXPIRY);
+    });
   }
 
   addTag(tag) {
     const oldTag = this.state.currentTags[0];
     const newTags = !oldTag || tag === oldTag ? [tag] : [tag, oldTag];
     this.setState({ currentTags: newTags });
-    this.fetchPlaylist({ tags: newTags });
+    this.fetchPlaylists({ tags: newTags });
   }
 
   removeTag(tag) {
@@ -46,56 +63,81 @@ export default class App extends Component {
     return this.state.currentTags;
   }
 
-  selectPlaylist(tags) {
-    if (!this.playlists[tags].length) return false;
-    const playlist = this.playlists[tags][this.indexes[tags]];
-
-    if (this.played.indexOf(playlist.id) >= 0) {
-      this.fetchPlaylist({ tags: tags });
-      return false;
-    }
-
-    this.played.push(playlist.id);
-    return playlist;
+  mapPlaylists(playlists) {
+    return knuthShuffle(playlists).map(playlist => {
+      return {
+        id: playlist.id,
+        colors: playlist.color_palette,
+        cover: playlist.cover_urls.sq500,
+      };
+    });
   }
 
-  fetchPlaylist({ tags = [], page = 1, limit = 10 }) {
-    this.setState({ playlistLoading: true });
-    tags = tags.concat().sort();
-
-    if (this.playlists[tags] && this.playlists[tags].length && ++this.indexes[tags] < limit) {
-      const playlist = this.selectPlaylist(tags);
-      if (playlist) this.setState({ playlist: playlist });
-    } else {
-      this.indexes[tags] = 0;
-      this.pages[tags] = this.pages[tags] ? this.pages[tags] + 1 : page;
-
-      const params = {
-        include: 'mixes+explore_filters+pagination',
-        page: this.pages[tags],
-        per_page: limit,
+  mapRelatedTags(tags) {
+    return tags.map(tag => {
+      return {
+        name: tag.name,
+        image: tag.artist_avatar,
       }
+    });
+  }
 
-      eight.playlists(tags, params).then(res => {
-        this.playlists[tags] = knuthShuffle(res.mix_set.mixes);
-        const playlist = this.selectPlaylist(tags);
+  validPlaylist(playlist) {
+    if (playlist) {
+      const alreadyPlayed = this.played.indexOf(playlist.id) >= 0;
+      if (alreadyPlayed) this.fetchPlaylists();
+      else return true;
+    } else {
+      const removableTags = this.state.currentTags.length > 1;
+      if (removableTags) this.fetchPlaylists({ tags: this.removeTag(1) });
+    }
 
-        this.setState({
-          playlist: playlist || this.state.playlist,
-          relatedTags: res.filters ? res.filters : this.state.relatedTags,
-          playlistLoading: false,
-        });
+    return false;
+  }
 
-        if (!playlist && tags.length === 2) {
-          this.fetchPlaylist({ tags: this.removeTag(1) });
-        }
+  loadPlaylist(tagString, data) {
+    const playlist = data.playlists[data.index];
+    if (!this.validPlaylist(playlist)) return false
+    this.setState({ playlist: playlist, relatedTags: data.related });
+    this.fetchNextSong(playlist.id);
+    data.index++;
+    store.set(tagString, data, STORE_TAGS_EXPIRY);
+    this.played.push(playlist.id);
+    store.set(STORE_PLAYED, this.played);
+  }
+
+  fetchPlaylists({ tags = this.state.currentTags } = {}) {
+    const cleanTags = tags.concat().sort().map(tag => tag.toLowerCase());
+    const tagString = cleanTags.toString();
+    const data = store.get(tagString) || { page: 0, index: 0, playlists: [] };
+
+    if (data.index < data.playlists.length) {
+      this.loadPlaylist(tagString, data);
+    } else {
+      data.page += 1;
+      data.index = 0;
+      this.setState({ playlistLoading: true });
+
+      api.playlists(cleanTags, {
+        include: 'mixes+explore_filters',
+        page: data.page,
+        per_page: PLAYLISTS_LIMIT,
+      }).then(res => {
+        data.playlists = this.mapPlaylists(res.mix_set.mixes);
+        data.related = this.mapRelatedTags(res.filters);
+        this.loadPlaylist(tagString, data);
+        this.setState({ playlistLoading: false });
+      }, err => {
+        console.dir(err);
       });
     }
   }
 
-  fetchTopTags({ page = 1, limit = 30 } = {}) {
-    eight.explore({ page: page, per_page: limit }).then(res => {
-      this.setState({ topTags: [...this.state.topTags, ...res.filters] });
+  fetchNextSong(playlistId) {
+    playlistId = playlistId || this.state.playlist.id;
+
+    api.nextSong({ mix_id: playlistId }).then(json => {
+      this.setState({ track: json.set.track });
     });
   }
 
@@ -120,6 +162,8 @@ export default class App extends Component {
         currentTags={ this.state.currentTags }
         playlist={ this.state.playlist }
         track={ this.state.track }
+        refresh={ this.fetchPlaylists }
+        skip={ this.fetchNextSong }
       />;
     }
   }
