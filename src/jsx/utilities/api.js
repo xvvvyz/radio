@@ -18,6 +18,12 @@ export default {
     return getJson(`${API_HOST}/sets/${token}/next?${query}`);
   },
 
+  nextPlaylist: params => {
+    const token = getToken(params.mix_id);
+    const query = toQuery(params);
+    return getJson(`${API_HOST}/sets/${token}/next_mix.json?${query}`);
+  },
+
   search: params => {
     const query = toQuery(params);
     return getJson(`${API_HOST}/tags.json?${query}`);

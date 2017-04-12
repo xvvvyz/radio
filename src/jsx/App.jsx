@@ -64,13 +64,19 @@ export default class App extends Component {
   }
 
   mapPlaylists(playlists) {
-    return knuthShuffle(playlists).map(playlist => {
+    const mapPlaylist = playlist => {
       return {
         id: playlist.id,
         colors: playlist.color_palette,
         cover: playlist.cover_urls.sq500,
       };
-    });
+    };
+
+    if (playlists.constructor === Array) {
+      return knuthShuffle(playlists).map(playlist => mapPlaylist(playlist));
+    } else {
+      return mapPlaylist(playlists);
+    }
   }
 
   mapRelatedTags(tags) {
@@ -133,12 +139,21 @@ export default class App extends Component {
     }
   }
 
+  fetchRelatedPlaylist(playlistId) {
+    api.nextPlaylist({ mix_id: playlistId }).then(res => {
+      const playlist = this.mapPlaylists(res.next_mix);
+      this.setState({ playlist: playlist });
+      this.fetchNextSong(playlist.id);
+    });
+  }
+
   fetchNextSong(playlistId) {
     playlistId = playlistId || this.state.playlist.id;
 
-    api.nextSong({ mix_id: playlistId }).then(json => {
-      this.setState({ track: json.set.track });
-    });
+    api.nextSong({ mix_id: playlistId }).then(
+      res => this.setState({ track: res.set.track }),
+      err => this.fetchRelatedPlaylist(playlistId)
+    );
   }
 
   renderDashboard() {
