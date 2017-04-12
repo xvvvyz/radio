@@ -97,11 +97,11 @@ export default class App extends Component {
 
   loadPlaylist(tagString, data) {
     const playlist = data.playlists[data.index];
-    if (!this.validPlaylist(playlist)) return false
-    this.setState({ playlist: playlist, relatedTags: data.related });
-    this.fetchNextSong(playlist.id);
     data.index++;
     store.set(tagString, data, STORE_TAGS_EXPIRY);
+    if (!this.validPlaylist(playlist)) return false;
+    this.setState({ playlist: playlist, relatedTags: data.related });
+    this.fetchNextSong(playlist.id);
     this.played.push(playlist.id);
     store.set(STORE_PLAYED, this.played);
   }
