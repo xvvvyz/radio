@@ -24,7 +24,7 @@ export default class PlayerControls extends Component {
 
   renderSkipButton() {
     return (
-      <button onClick={ this.props.skip }>
+      <button onClick={ this.props.next }>
         <Svg src={ skipSvg } />
       </button>
     );

@@ -163,7 +163,7 @@ export default class App extends Component {
         playlist={ this.state.playlist }
         track={ this.state.track }
         refresh={ this.fetchPlaylists }
-        skip={ this.fetchNextSong }
+        next={ this.fetchNextSong }
       />;
     }
   }

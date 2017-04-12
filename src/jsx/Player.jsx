@@ -11,7 +11,7 @@ export default class Player extends Component {
     super();
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
-    this.skip = this.skip.bind(this);
+    this.next = this.next.bind(this);
   }
 
   play() {
@@ -22,8 +22,8 @@ export default class Player extends Component {
     this.player.pause();
   }
 
-  skip() {
-    this.props.skip();
+  next() {
+    this.props.next();
   }
 
   renderAudio() {
@@ -50,7 +50,7 @@ export default class Player extends Component {
     return <PlayerControls
       style={ { borderColor: color } }
       refresh={ this.props.refresh }
-      skip={ this.skip }
+      next={ this.next }
       play={ this.play }
       pause={ this.pause }
       playing={ this.state.playing }
@@ -72,6 +72,7 @@ export default class Player extends Component {
     if (this.props.track.id) {
       this.player.onplay = () => this.setState({ playing: true });
       this.player.onpause = () => this.setState({ playing: false });
+      this.player.onended = this.next;
     }
 
     return (
