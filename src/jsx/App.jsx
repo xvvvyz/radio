@@ -13,7 +13,7 @@ const STORE_POPULAR = 'popular';
 const STORE_PLAYED = 'played';
 const STORE_POPULAR_EXPIRY = help.daysFromNow(7);
 const STORE_TAGS_EXPIRY = help.daysFromNow(7);
-const STORE_PLAYED_LIMIT = 500; // TODO
+const STORE_PLAYED_LIMIT = 500;
 const PLAYLISTS_LIMIT = 10;
 
 export default class App extends Component {
@@ -101,6 +101,12 @@ export default class App extends Component {
     return false;
   }
 
+  storePlayed(id) {
+    this.played.push(id);
+    if (this.played.length > STORE_PLAYED_LIMIT) this.played.shift();
+    store.set(STORE_PLAYED, this.played);
+  }
+
   loadPlaylist(tagString, data) {
     const playlist = data.playlists[data.index];
     data.index++;
@@ -108,8 +114,7 @@ export default class App extends Component {
     if (!this.validPlaylist(playlist)) return false;
     this.setState({ playlist: playlist, relatedTags: data.related });
     this.fetchNextSong(playlist.id);
-    this.played.push(playlist.id);
-    store.set(STORE_PLAYED, this.played);
+    this.storePlayed(playlist.id);
   }
 
   fetchPlaylists({ tags = this.state.currentTags } = {}) {
