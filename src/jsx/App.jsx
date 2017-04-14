@@ -111,7 +111,7 @@ export default class App extends Component {
     const playlist = data.playlists[data.index];
     data.index++;
     store.set(tagString, data, STORE_TAGS_EXPIRY);
-    if (!this.validPlaylist(playlist)) return false;
+    if (!this.validPlaylist(playlist)) return;
     this.setState({ playlist: playlist, relatedTags: data.related });
     this.fetchNextSong(playlist.id);
     this.storePlayed(playlist.id);
@@ -147,6 +147,7 @@ export default class App extends Component {
   fetchRelatedPlaylist(playlistId) {
     api.nextPlaylist({ mix_id: playlistId }).then(res => {
       const playlist = this.mapPlaylists(res.next_mix);
+      if (!this.validPlaylist(playlist)) return;
       this.setState({ playlist: playlist });
       this.fetchNextSong(playlist.id);
     });
