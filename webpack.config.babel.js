@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { optimize } from 'webpack';
+import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = env => {
@@ -15,9 +15,12 @@ module.exports = env => {
   ];
 
   const productionPlugins = [
-    new optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       output: { comments: false },
       sourceMap: true,
+    }),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: '"production"' }
     }),
   ];
 
