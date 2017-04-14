@@ -3,12 +3,10 @@ import Component from 'inferno-component';
 import Tag from './Tag.jsx';
 import '../scss/CurrentTags.scss';
 
-export default class CurrentTags extends Component {
-  render() {
-    const tags = this.props.currentTags.map(tag => {
-      return <Tag onClick={ this.props.removeTag } value={ tag } />;
-    });
+export default function CurrentTags(props) {
+  const tags = props.currentTags.map(tag => {
+    return <Tag onClick={ props.removeTag } value={ tag } />;
+  });
 
-    return <ul className="CurrentTags">{ tags }</ul>;
-  }
-}
+  return <ul className="CurrentTags">{ tags }</ul>;
+};

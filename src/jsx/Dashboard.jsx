@@ -6,39 +6,22 @@ import Lists from './Lists.jsx';
 import Search from './Search.jsx';
 import '../scss/Dashboard.scss';
 
-export default class Dashboard extends Component {
-  renderHeader() {
-    return <Header
-      currentTags={ this.props.currentTags }
-      removeTag={ this.props.removeTag }
-    />;
-  }
+export default function Dashboard(props) {
+  const lists = props.lists.map(list => {
+    if (list.tags && list.tags.length) {
+      return <List
+        title={ list.name }
+        items={ list.tags }
+        addTag={ props.addTag }
+      />;
+    }
+  });
 
-  renderSearch() {
-    return <Search addTag={ this.props.addTag } />;
-  }
-
-  renderLists() {
-    const lists = this.props.lists.map(list => {
-      if (list.tags && list.tags.length) {
-        return <List
-          title={ list.name }
-          items={ list.tags }
-          addTag={ this.props.addTag }
-        />;
-      }
-    });
-
-    return <Lists>{ lists }</Lists>;
-  }
-
-  render() {
-    return (
-      <main className="Dashboard">
-        { this.renderHeader() }
-        { this.renderSearch() }
-        { this.renderLists() }
-      </main>
-    );
-  }
-}
+  return (
+    <main className="Dashboard">
+      <Header currentTags={ props.currentTags } removeTag={ props.removeTag } />
+      <Search addTag={ props.addTag } />
+      <Lists>{ lists }</Lists>
+    </main>
+  );
+};

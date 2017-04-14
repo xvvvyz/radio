@@ -7,36 +7,28 @@ import playSvg from '../svg/play.svg';
 import refreshSvg from '../svg/refresh.svg';
 import skipSvg from '../svg/skip.svg';
 
-export default class PlayerControls extends Component {
-  renderRefreshButton() {
-    return (
-      <button onClick={ this.props.refresh }>
-        <Svg src={ refreshSvg } />
-      </button>
-    );
-  }
+export default function PlayerControls(props) {
+  const refreshButton = (
+    <button onClick={ props.refresh }>
+      <Svg src={ refreshSvg } />
+    </button>
+  );
 
-  renderPlayPauseButton() {
-    const onClick = this.props.playing ? this.props.pause : this.props.play;
-    const src = this.props.playing ? pauseSvg : playSvg;
-    return <button onClick={ onClick }><Svg src={ src } /></button>;
-  }
+  const playPauseButton = (
+    <button onClick={ props.playing ? props.pause : props.play }>
+      <Svg src={ props.playing ? pauseSvg : playSvg } />
+    </button>
+  );
 
-  renderSkipButton() {
-    return (
-      <button onClick={ this.props.next }>
-        <Svg src={ skipSvg } />
-      </button>
-    );
-  }
+  const skipButton = (
+    <button onClick={ props.next }>
+      <Svg src={ skipSvg } />
+    </button>
+  );
 
-  render() {
-    return (
-      <div className="PlayerControls" style={ this.props.style }>
-        { this.renderRefreshButton() }
-        { this.renderPlayPauseButton() }
-        { this.renderSkipButton() }
-      </div>
-    );
-  }
-}
+  return (
+    <div className="PlayerControls" style={ props.style }>
+      { refreshButton }{ playPauseButton }{ skipButton }
+    </div>
+  );
+};
