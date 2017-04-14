@@ -15,6 +15,7 @@ const STORE_POPULAR_EXPIRY = help.daysFromNow(7);
 const STORE_TAGS_EXPIRY = help.daysFromNow(7);
 const STORE_PLAYED_LIMIT = 500;
 const PLAYLISTS_LIMIT = 10;
+const SKIP_LIMIT = 3;
 
 export default class App extends Component {
   constructor() {
@@ -32,11 +33,13 @@ export default class App extends Component {
     };
 
     this.played = store.get(STORE_PLAYED) || [];
+    this.skips = 0;
 
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
     this.fetchNextSong = this.fetchNextSong.bind(this);
+    this.skipSong = this.skipSong.bind(this);
 
     if (!this.state.topTags.length) this.fetchTopTags();
   }
@@ -67,7 +70,7 @@ export default class App extends Component {
     const mapPlaylist = playlist => {
       return {
         id: playlist.id,
-        colors: playlist.color_palette,
+        color: playlist.color_palette[0],
         cover: playlist.cover_urls.sq500,
       };
     };
@@ -81,9 +84,10 @@ export default class App extends Component {
 
   mapRelatedTags(tags) {
     return tags.map(tag => {
-      return {
-        name: tag.name,
-        image: tag.artist_avatar,
+      if (tag.artist_avatar) {
+        return { name: tag.name, image: tag.artist_avatar };
+      } else {
+        return tag.name;
       }
     });
   }
@@ -107,25 +111,35 @@ export default class App extends Component {
     store.set(STORE_PLAYED, this.played);
   }
 
-  loadPlaylist(tagString, data) {
-    const playlist = data.playlists[data.index];
-    data.index++;
+  loadPlaylist(playlist, related) {
+    const updatedState = { playlistLoading: false };
+    if (related) updatedState.relatedTags = related;
+
+    if (this.validPlaylist(playlist)) {
+      updatedState.playlist = playlist;
+      this.fetchNextSong(playlist.id);
+      this.storePlayed(playlist.id);
+      this.skips = 0;
+    }
+
+    this.setState(updatedState);
+  }
+
+  updateTagData(tagString, data) {
     store.set(tagString, data, STORE_TAGS_EXPIRY);
-    if (!this.validPlaylist(playlist)) return;
-    this.setState({ playlist: playlist, relatedTags: data.related });
-    this.fetchNextSong(playlist.id);
-    this.storePlayed(playlist.id);
   }
 
   fetchPlaylists({ tags = this.state.currentTags } = {}) {
     const cleanTags = tags.concat().sort().map(tag => tag.toLowerCase());
     const tagString = cleanTags.toString();
-    const data = store.get(tagString) || { page: 0, index: 0, playlists: [] };
+    const data = store.get(tagString) || { page: 0, index: 0 };
 
-    if (data.index < data.playlists.length) {
-      this.loadPlaylist(tagString, data);
+    if (data.playlists && data.index < data.playlists.length - 1) {
+      data.index++;
+      this.updateTagData(tagString, data);
+      this.loadPlaylist(data.playlists[data.index], data.related);
     } else {
-      data.page += 1;
+      data.page++;
       data.index = 0;
       this.setState({ playlistLoading: true });
 
@@ -136,20 +150,15 @@ export default class App extends Component {
       }).then(res => {
         data.playlists = this.mapPlaylists(res.mix_set.mixes);
         data.related = this.mapRelatedTags(res.filters);
-        this.loadPlaylist(tagString, data);
-        this.setState({ playlistLoading: false });
-      }, err => {
-        console.dir(err);
+        this.updateTagData(tagString, data);
+        this.loadPlaylist(data.playlists[data.index], data.related);
       });
     }
   }
 
   fetchRelatedPlaylist(playlistId) {
     api.nextPlaylist({ mix_id: playlistId }).then(res => {
-      const playlist = this.mapPlaylists(res.next_mix);
-      if (!this.validPlaylist(playlist)) return;
-      this.setState({ playlist: playlist });
-      this.fetchNextSong(playlist.id);
+      this.loadPlaylist(this.mapPlaylists(res.next_mix));
     });
   }
 
@@ -160,6 +169,16 @@ export default class App extends Component {
       res => this.setState({ track: res.set.track }),
       err => this.fetchRelatedPlaylist(playlistId)
     );
+  }
+
+  skipSong() {
+    this.skips++;
+
+    if (this.skips > SKIP_LIMIT) {
+      this.fetchRelatedPlaylist(this.state.playlist.id);
+    } else {
+      this.fetchNextSong();
+    }
   }
 
   renderDashboard() {
@@ -185,6 +204,7 @@ export default class App extends Component {
         track={ this.state.track }
         refresh={ this.fetchPlaylists }
         next={ this.fetchNextSong }
+        skip={ this.skipSong }
       />;
     }
   }

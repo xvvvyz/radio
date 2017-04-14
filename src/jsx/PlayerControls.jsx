@@ -21,7 +21,7 @@ export default function PlayerControls(props) {
   );
 
   const skipButton = (
-    <button onClick={ props.next }>
+    <button onClick={ props.skip }>
       <Svg src={ skipSvg } />
     </button>
   );
