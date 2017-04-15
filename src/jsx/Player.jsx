@@ -9,10 +9,19 @@ import '../scss/Player.scss';
 export default class Player extends Component {
   constructor() {
     super();
+    this.state = { playing: false };
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.next = this.next.bind(this);
     this.skip = this.skip.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.track.id) {
+      this.player.onplay = () => this.setState({ playing: true });
+      this.player.onpause = () => this.setState({ playing: false });
+      this.player.onended = this.next;
+    }
   }
 
   play() {
@@ -72,12 +81,6 @@ export default class Player extends Component {
       color: colorLighter,
       fill: colorLighter,
       borderColor: colorLighter,
-    }
-
-    if (this.props.track.id) {
-      this.player.onplay = () => this.setState({ playing: true });
-      this.player.onpause = () => this.setState({ playing: false });
-      this.player.onended = this.next;
     }
 
     return (
