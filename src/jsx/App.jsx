@@ -100,6 +100,7 @@ export default class App extends Component {
     } else {
       const removableTags = this.state.currentTags.length > 1;
       if (removableTags) this.fetchPlaylists({ tags: this.removeTag(1) });
+      // TODO: handle no more playlists
     }
 
     return false;
