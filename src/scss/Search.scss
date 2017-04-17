@@ -1,12 +1,33 @@
+@import './utilities/media';
+
 .Search {
-  padding: 2vw 2vw 0;
+  margin-bottom: 2rem;
 
   input {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 1.5vw;
+    width: calc(100% - 4rem);
+    margin: 0 2rem;
+    padding: 1rem 0;
     border: solid 1px #eee;
-    border-radius: 4em;
-    font-size: 1.5em;
+    border-radius: 3rem;
+    transition: background-color .5s;
+    background-color: #fafafa;
+    font-size: .9em;
+    text-align: center;
+
+    &:hover,
+    &:focus {
+      background-color: #fff;
+    }
+  }
+
+  @media (min-width: $break-medium) {
+    margin-bottom: 4rem;
+
+    input {
+      width: calc(100% - 8rem);
+      margin: 0 4rem;
+      padding: 1.5rem 0;
+      font-size: 1.1em;
+    }
   }
 }

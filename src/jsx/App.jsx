@@ -189,6 +189,7 @@ export default class App extends Component {
     ];
 
     return <Dashboard
+      playerLoaded={ this.state.playlist }
       addTag={ this.addTag }
       removeTag={ this.removeTag }
       currentTags={ this.state.currentTags }

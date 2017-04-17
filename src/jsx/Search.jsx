@@ -7,8 +7,25 @@ import '../scss/Search.scss';
 export default class Search extends Component {
   constructor() {
     super();
-    this.state = { tags: [] };
+
+    this.placeholder = 'Enter an artist, genre, activity or mood...';
+
+    this.state = {
+      tags: [],
+      placeholder: this.placeholder,
+    };
+
     this.search = this.search.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+  }
+
+  onFocus() {
+    this.setState({ placeholder: '' });
+  }
+
+  onBlur() {
+    this.setState({ placeholder: this.placeholder });
   }
 
   search({ target }) {
@@ -22,8 +39,10 @@ export default class Search extends Component {
       <section className="Search">
         <input
           type="text"
-          placeholder="Search for any activity, artist, genre or mood..."
+          placeholder={ this.state.placeholder }
           onKeyup={ this.search }
+          onFocus={ this.onFocus }
+          onBlur={ this.onBlur }
         />
         <List
           items={ this.state.tags }

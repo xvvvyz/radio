@@ -14,10 +14,10 @@ export default function List(props) {
     />;
   });
 
-  return (
-    <div className="List">
-      <h3>{ props.title }</h3>
-      <ul>{ items }</ul>
-    </div>
-  );
+  const list = <div className="List">
+    { props.title ? <h3>{ props.title }</h3> : null }
+    <ul>{ items }</ul>
+  </div>;
+
+  return items.length ? list : null;
 };

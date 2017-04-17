@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 import Header from './Header.jsx';
@@ -17,8 +18,13 @@ export default function Dashboard(props) {
     }
   });
 
+  const className = classNames({
+    Dashboard: true,
+    'player-loaded': props.playerLoaded,
+  })
+
   return (
-    <main className="Dashboard">
+    <main className={ className }>
       <Header currentTags={ props.currentTags } removeTag={ props.removeTag } />
       <Search addTag={ props.addTag } />
       <Lists>{ lists }</Lists>

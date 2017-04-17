@@ -1,9 +1,17 @@
 body {
   margin: 0;
   padding: 0;
-  color: #222;
-  font-family: 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+div,
+main,
+section,
+aside,
+input,
+button,
+img {
+  box-sizing: border-box;
 }
 
 input,
@@ -13,6 +21,12 @@ button {
   background-color: transparent;
   box-shadow: none;
   outline: none;
+  font-size: inherit;
+
+  &::-moz-focus-inner {
+    padding: 0;
+    border: inherit;
+  }
 }
 
 ul,

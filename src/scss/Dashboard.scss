@@ -1,5 +1,19 @@
+@import './utilities/media';
+
 .Dashboard {
-  flex-grow: 1;
-  padding: 2vw;
-  overflow: scroll;
+  overflow-x: hidden;
+
+  &.player-loaded {
+    padding-bottom: 3.5rem;
+  }
+
+  @media (min-width: $break-large) {
+    width: calc(100% - 32vw);
+    margin: 0 auto;
+
+    &.player-loaded {
+      margin: 0;
+      padding-bottom: 0;
+    }
+  }
 }

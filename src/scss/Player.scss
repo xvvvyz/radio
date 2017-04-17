@@ -1,10 +1,66 @@
+@import './utilities/media';
+
 .Player {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform .3s;
+  transform: translateY(-3.5rem);
+  text-align: center;
+  overflow: hidden;
+  z-index: 1000;
+
+  @media (min-width: $break-large) {
+    top: 0;
+    right: 0;
+    left: auto;
+    width: 32vw;
+  }
+}
+
+.Player.toggled {
+  transform: translateY(-100%);
+}
+
+.Player-inner {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  padding: 4vw;
-  transition: background-color 1s;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  fill: #fff;
+  justify-content: space-between;
+  align-items: center;
+  top: -100%;
+  padding: 8vh;
+  width: 100%;
+  height: 100%;
+  transition: background-color .3s, transform .3s;
+  transform: translateY(calc(8vh + 3.44rem));
+  background-color: #fbfbfb;
+  color: inherit;
+  fill: #222;
+
+  @media (min-width: $break-large) {
+    position: relative;
+    top: auto;
+    padding: 4rem;
+    transform: translateY(calc(4rem + 3.44rem));
+    background-color: inherit;
+    fill: inherit;
+  }
+}
+
+.Player.toggled .Player-inner {
+  transform: translateY(100%);
+  background-color: inherit;
+  fill: inherit;
+}
+
+@media (min-width: $break-large) {
+  .Player,
+  .Player.toggled,
+  .Player-inner,
+  .Player.toggled .Player-inner {
+    transform: translate(0);
+  }
 }

@@ -1,3 +1,9 @@
+@import './utilities/media';
+
 .Lists {
-  padding: 0 1vw 2vw 2vw;
+  @media (min-width: $break-xlarge) {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-left: 4rem;
+  }
 }

@@ -7,8 +7,8 @@ export default function PlayerInfo(props) {
 
   return (
     <div className="PlayerInfo">
-      <span className="PlayerInfo-title">{ props.title }</span>
       <span className="PlayerInfo-artist">{ props.artist }</span>
+      <span className="PlayerInfo-title">{ props.title }</span>
     </div>
   );
 };

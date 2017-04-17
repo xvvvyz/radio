@@ -1,17 +1,35 @@
+@import './utilities/media';
+
 .Header {
-  display: flex;
-  align-items: center;
-  padding: 2vw;
+  padding: 2rem;
+  text-align: center;
 
   h1 {
-    flex-grow: 1;
-    font-size: 1.5em;
+    font-size: 1.1em;
+    line-height: 2rem;
     text-transform: uppercase;
-    line-height: 3vw;
+    letter-spacing: .1em;
   }
 
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  &.tags-exist {
+    h1 {
+      visibility: hidden;
+
+      @media (min-width: $break-medium) {
+        visibility: visible;
+      }
+    }
+  }
+
+  @media (min-width: $break-medium) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem;
   }
 }

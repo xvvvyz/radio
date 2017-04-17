@@ -2,15 +2,17 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 import Svg from './svg.jsx';
 import '../scss/PlayerControls.scss';
+import expandSvg from '../svg/expand.svg';
+import minimizeSvg from '../svg/minimize.svg';
+import nextSvg from '../svg/next.svg';
 import pauseSvg from '../svg/pause.svg';
 import playSvg from '../svg/play.svg';
 import refreshSvg from '../svg/refresh.svg';
-import skipSvg from '../svg/skip.svg';
 
 export default function PlayerControls(props) {
-  const refreshButton = (
-    <button onClick={ props.refresh }>
-      <Svg src={ refreshSvg } />
+  const toggleButton = (
+    <button className="PlayerControls-toggle" onClick={ props.toggle }>
+      <Svg src={ props.toggled ? minimizeSvg : expandSvg } />
     </button>
   );
 
@@ -22,13 +24,19 @@ export default function PlayerControls(props) {
 
   const skipButton = (
     <button onClick={ props.skip }>
-      <Svg src={ skipSvg } />
+      <Svg src={ nextSvg } />
+    </button>
+  );
+
+  const refreshButton = (
+    <button className="PlayerControls-refresh" onClick={ props.refresh }>
+      <Svg src={ refreshSvg } />
     </button>
   );
 
   return (
     <div className="PlayerControls" style={ props.style }>
-      { refreshButton }{ playPauseButton }{ skipButton }
+      { refreshButton }{ playPauseButton }{ skipButton }{ toggleButton }
     </div>
   );
 };

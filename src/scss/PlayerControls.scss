@@ -1,15 +1,20 @@
+@import './utilities/media';
+
 .PlayerControls {
+  flex-shrink: 0;
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 
   button {
-    margin: 0 10px;
-    border: solid 1px transparent;
-    border-radius: 5px;
+    flex-grow: 1;
+    padding: .8rem;
+    border-radius: 50%;
 
     &:hover {
-      border-color: inherit;
       cursor: pointer;
     }
 
@@ -19,9 +24,15 @@
   }
 
   svg {
-    width: 2vw;
-    height: 2vw;
-    padding: .5vw;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: fill .3s;
     fill: inherit;
+  }
+}
+
+.PlayerControls-toggle {
+  @media (min-width: $break-large) {
+    display: none;
   }
 }

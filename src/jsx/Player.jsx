@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 import shader from 'shader';
@@ -9,11 +10,12 @@ import '../scss/Player.scss';
 export default class Player extends Component {
   constructor() {
     super();
-    this.state = { playing: false };
+    this.state = { playing: false, toggled: false };
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.next = this.next.bind(this);
     this.skip = this.skip.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   componentDidUpdate() {
@@ -22,6 +24,10 @@ export default class Player extends Component {
       this.player.onpause = () => this.setState({ playing: false });
       this.player.onended = this.next;
     }
+  }
+
+  toggle() {
+    this.setState({ toggled: !this.state.toggled });
   }
 
   play() {
@@ -67,29 +73,38 @@ export default class Player extends Component {
       skip={ this.skip }
       play={ this.play }
       pause={ this.pause }
+      toggle={ this.toggle }
       playing={ this.state.playing }
+      toggled={ this.state.toggled }
     />;
   }
 
   render() {
     const color = this.props.playlist.color;
-    const colorDarker = shader(color, -.3);
-    const colorLighter = shader(color, .8);
+    const colorLighter = shader(shader(color, .85), -.1);
+    const colorDarker = shader(color, -.4);
 
     const style = {
-      backgroundColor: colorDarker,
-      color: colorLighter,
-      fill: colorLighter,
-      borderColor: colorLighter,
-    }
+      backgroundColor: colorLighter,
+      color: colorDarker,
+      fill: colorDarker,
+      borderColor: colorDarker,
+    };
+
+    const className = classNames({
+      Player: true,
+      toggled: this.state.toggled,
+    });
 
     return (
-      <aside className="Player" style={ style }>
-        { this.renderAudio() }
-        { this.renderPlayerArt() }
-        { this.renderPlayerInfo() }
-        { this.renderPlayerControls(colorLighter) }
-      </aside>
+      <div className={ className } style={ style }>
+        <div className="Player-inner">
+          { this.renderAudio() }
+          { this.renderPlayerArt() }
+          { this.renderPlayerInfo() }
+          { this.renderPlayerControls(colorDarker) }
+        </div>
+      </div>
     );
   }
 }

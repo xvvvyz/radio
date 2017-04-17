@@ -1,18 +1,74 @@
+@import './utilities/media';
+
 .List {
   width: 100%;
-  margin-top: 3em;
+  margin-bottom: 2rem;
+  padding: 0 1rem 0 2rem;
+  box-sizing: border-box;
 
   h3 {
-    margin: 0 0 .3vw;
+    margin: 0 1rem 1rem 0;
     font-size: .8em;
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: .2em;
+
+    @media (min-width: $break-medium) {
+      margin: 0;
+      text-align: left;
+    }
   }
 
   ul {
     display: flex;
     flex-wrap: wrap;
-    max-height: calc(2 * 4vw);
+    max-height: calc(3.5rem * 8);
     overflow: hidden;
+
+    @media (min-width: $break-small) {
+      max-height: calc(3.5rem * 6);
+    }
+
+    @media (min-width: $break-medium) {
+      max-height: calc(3.5rem * 4);
+    }
+
+    @media (min-width: $break-large) {
+      max-height: calc(3.5rem * 5);
+    }
+
+    @media (min-width: $break-xlarge) {
+      max-height: calc(3.5rem * 4);
+    }
+  }
+
+  @media (min-width: $break-medium) {
+    margin-bottom: 4rem;
+    padding: 0 3rem 0 4rem;
+  }
+
+  @media (min-width: $break-xlarge) {
+    padding: 0 3rem 0 0;
+  }
+}
+
+.Dashboard.player-loaded .List {
+  ul {
+    @media (min-width: $break-xlarge) {
+      max-height: calc(3.5rem * 9);
+    }
+  }
+}
+
+.Search .List,
+.Dashboard.player-loaded .Search .List {
+  margin-bottom: 0;
+
+  ul {
+    max-height: calc(3.5rem * 2);
+  }
+
+  @media (min-width: $break-xlarge) {
+    padding-left: 4rem;
   }
 }

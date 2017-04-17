@@ -1,7 +1,19 @@
+@import './utilities/media';
+
 .PlayerArt {
-  width: calc(50vh - 2vw);
-  height: calc(50vh - 2vw);
-  max-width: 250px;
-  max-height: 250px;
-  margin: 0 auto;
+  display: none;
+  width: 100%;
+
+  @media (min-height: $break-xsmall) {
+    display: block;
+    max-width: 30vh;
+  }
+
+  @media (min-height: $break-small)  {
+    max-width: 35vh;
+  }
+
+  @media (min-height: $break-medium) {
+    max-width: 40vh;
+  }
 }
