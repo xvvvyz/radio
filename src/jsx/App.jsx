@@ -85,7 +85,8 @@ export default class App extends Component {
   mapRelatedTags(tags) {
     return tags.map(tag => {
       if (tag.artist_avatar) {
-        return { name: tag.name, image: tag.artist_avatar };
+        const image = tag.artist_avatar.replace('http://', 'https://');
+        return { name: tag.name, image: image };
       } else {
         return tag.name;
       }
