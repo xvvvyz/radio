@@ -49,8 +49,9 @@ export default class Player extends Component {
   renderAudio() {
     return <audio
       ref={ player => this.player = player }
-      src={this.props.track.track_file_stream_url}
-      autoplay="true"
+      src={ this.props.track.track_file_stream_url }
+      title={ `${this.props.track.name} by ${this.props.track.performer}` }
+      autoplay
     />;
   }
 
