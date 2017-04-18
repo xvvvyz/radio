@@ -3,5 +3,9 @@ import Component from 'inferno-component';
 import '../scss/PlayerArt.scss';
 
 export default function PlayerArt(props) {
-  return <img className="PlayerArt" src={ props.cover } />;
+  return (
+    <div className="PlayerArt">
+      <img src={ props.cover } />
+    </div>
+  );
 };

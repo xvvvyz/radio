@@ -16,7 +16,7 @@
     top: 0;
     right: 0;
     left: auto;
-    width: 32vw;
+    width: 30vw;
   }
 }
 
@@ -31,11 +31,11 @@
   justify-content: space-between;
   align-items: center;
   top: -100%;
-  padding: 8vh;
+  padding: 1rem;
   width: 100%;
   height: 100%;
   transition: background-color .3s, transform .3s;
-  transform: translateY(calc(8vh + 3.44rem));
+  transform: translateY(4.44rem);
   background-color: #fbfbfb;
   color: inherit;
   fill: #222;
@@ -43,8 +43,8 @@
   @media (min-width: $break-large) {
     position: relative;
     top: auto;
-    padding: 4rem;
-    transform: translateY(calc(4rem + 3.44rem));
+    padding: 3rem;
+    transform: translateY(6.44rem);
     background-color: inherit;
     fill: inherit;
   }

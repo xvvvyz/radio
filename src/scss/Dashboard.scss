@@ -8,7 +8,7 @@
   }
 
   @media (min-width: $break-large) {
-    width: calc(100% - 32vw);
+    width: calc(100% - 30vw);
     margin: 0 auto;
 
     &.player-loaded {

@@ -1,19 +1,43 @@
 @import './utilities/media';
 
 .PlayerArt {
+  flex: 0 0;
   display: none;
   width: 100%;
+  padding: 1rem;
 
-  @media (min-height: $break-xsmall) {
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  @media (min-height: $vertical-break-small) and (max-width: $break-large) {
+    display: block;
+    max-width: 20vh;
+  }
+
+  @media (min-height: $vertical-break-medium) and (max-width: $break-large) {
+    max-width: 30vh;
+  }
+
+  @media (min-height: $vertical-break-large) and (max-width: $break-large) {
+    max-width: 40vh;
+  }
+
+  @media (min-height: $vertical-break-xlarge) and (max-width: $break-large) {
+    max-width: 50vh;
+  }
+
+  @media (min-height: $vertical-break-xlarge) and (min-width: $break-large) {
     display: block;
     max-width: 30vh;
   }
 
-  @media (min-height: $break-small)  {
-    max-width: 35vh;
+  @media (min-height: $vertical-break-xxlarge) and (min-width: $break-large) {
+    max-width: 40vh;
   }
 
-  @media (min-height: $break-medium) {
-    max-width: 40vh;
+  @media (min-height: $vertical-break-xxxlarge) and (min-width: $break-large) {
+    max-width: 50vh;
   }
 }

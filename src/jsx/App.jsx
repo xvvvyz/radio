@@ -70,8 +70,8 @@ export default class App extends Component {
     const mapPlaylist = playlist => {
       return {
         id: playlist.id,
-        color: playlist.color_palette[0],
-        cover: playlist.cover_urls.sq500,
+        color: playlist.color_palette[3],
+        cover: playlist.cover_urls.max1024,
       };
     };
 
