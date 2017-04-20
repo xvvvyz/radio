@@ -13,9 +13,8 @@ const STORE_POPULAR = 'popular';
 const STORE_PLAYED = 'played';
 const STORE_POPULAR_EXPIRY = help.daysFromNow(7);
 const STORE_TAGS_EXPIRY = help.daysFromNow(7);
-const STORE_PLAYED_LIMIT = 500;
+const STORE_PLAYED_LIMIT = 1000;
 const PLAYLISTS_LIMIT = 10;
-const SKIP_LIMIT = 3;
 
 export default class App extends Component {
   constructor() {
@@ -24,22 +23,24 @@ export default class App extends Component {
     store.addPlugin(expirePlugin);
 
     this.state = {
+      playerVisible: false,
+      playlistLoading: false,
+      trackLoading: false,
       currentTags: [],
       playlist: false,
-      playlistLoading: false,
       track: false,
+      skipAllowed: true,
+      atLastTrack: false,
       topTags: store.get(STORE_POPULAR) || [],
       relatedTags: [],
     };
 
     this.played = store.get(STORE_PLAYED) || [];
-    this.skips = 0;
 
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
     this.fetchNextSong = this.fetchNextSong.bind(this);
-    this.skipSong = this.skipSong.bind(this);
 
     if (!this.state.topTags.length) this.fetchTopTags();
   }
@@ -113,15 +114,26 @@ export default class App extends Component {
     store.set(STORE_PLAYED, this.played);
   }
 
+  loadImage(src) {
+    let img = new Image();
+
+    img.onload = () => {
+      this.setState({ playlistLoading: false });
+      img = null;
+    };
+
+    img.src = src;
+  }
+
   loadPlaylist(playlist, related) {
-    const updatedState = { playlistLoading: false };
+    const updatedState = {};
     if (related) updatedState.relatedTags = related;
 
     if (this.validPlaylist(playlist)) {
       updatedState.playlist = playlist;
+      this.loadImage(playlist.cover);
       this.fetchNextSong(playlist.id);
       this.storePlayed(playlist.id);
-      this.skips = 0;
     }
 
     this.setState(updatedState);
@@ -132,6 +144,13 @@ export default class App extends Component {
   }
 
   fetchPlaylists({ tags = this.state.currentTags } = {}) {
+    this.setState({
+      track: false,
+      trackLoading: true,
+      playlistLoading: true,
+      playerVisible: true
+    });
+
     const cleanTags = tags.concat().sort().map(tag => tag.toLowerCase());
     const tagString = cleanTags.toString();
     const data = store.get(tagString) || { page: 0, index: 0 };
@@ -143,7 +162,6 @@ export default class App extends Component {
     } else {
       data.page++;
       data.index = 0;
-      this.setState({ playlistLoading: true });
 
       api.playlists(cleanTags, {
         include: 'mixes+explore_filters',
@@ -159,6 +177,8 @@ export default class App extends Component {
   }
 
   fetchRelatedPlaylist(playlistId) {
+    this.setState({ track: false, playlistLoading: true, trackLoading: true });
+
     api.nextPlaylist({ mix_id: playlistId }).then(res => {
       this.loadPlaylist(this.mapPlaylists(res.next_mix));
     });
@@ -167,20 +187,20 @@ export default class App extends Component {
   fetchNextSong(playlistId) {
     playlistId = playlistId || this.state.playlist.id;
 
-    api.nextSong({ mix_id: playlistId }).then(
-      res => this.setState({ track: res.set.track }),
-      err => this.fetchRelatedPlaylist(playlistId)
-    );
-  }
-
-  skipSong() {
-    this.skips++;
-
-    if (this.skips > SKIP_LIMIT) {
-      this.fetchRelatedPlaylist(this.state.playlist.id);
+    if (!this.state.track || this.state.skipAllowed && !this.state.atLastTrack) {
+      api.nextSong({ mix_id: playlistId }).then(res => {
+        this.setState({
+          track: res.set.track,
+          trackLoading: false,
+          skipAllowed: res.set.skip_allowed,
+          atLastTrack: res.set.at_last_track
+        });
+      });
     } else {
-      this.fetchNextSong();
+      this.fetchRelatedPlaylist(playlistId);
     }
+
+    this.setState({ track: false, trackLoading: true });
   }
 
   renderDashboard() {
@@ -190,7 +210,7 @@ export default class App extends Component {
     ];
 
     return <Dashboard
-      playerLoaded={ this.state.playlist }
+      playerVisible={ this.state.playerVisible }
       addTag={ this.addTag }
       removeTag={ this.removeTag }
       currentTags={ this.state.currentTags }
@@ -199,17 +219,16 @@ export default class App extends Component {
   }
 
   renderPlayer() {
-    if (this.state.playlist) {
-      return <Player
-        playlistLoading={ this.state.playlistLoading }
-        currentTags={ this.state.currentTags }
-        playlist={ this.state.playlist }
-        track={ this.state.track }
-        refresh={ this.fetchPlaylists }
-        next={ this.fetchNextSong }
-        skip={ this.skipSong }
-      />;
-    }
+    return <Player
+      visible={ this.state.playerVisible }
+      currentTags={ this.state.currentTags }
+      playlist={ this.state.playlist }
+      playlistLoading={ this.state.playlistLoading }
+      track={ this.state.track }
+      trackLoading={ this.state.trackLoading }
+      refresh={ this.fetchPlaylists }
+      next={ this.fetchNextSong }
+    />;
   }
 
   render() {

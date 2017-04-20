@@ -5,6 +5,7 @@
   display: none;
   width: 100%;
   padding: 1rem;
+  transition: opacity .2s, filter .2s;
 
   img {
     display: block;
@@ -40,4 +41,9 @@
   @media (min-height: $vertical-break-xxxlarge) and (min-width: $break-large) {
     max-width: 50vh;
   }
+}
+
+.PlayerArt.loading {
+  opacity: .2;
+  filter: grayscale(100%);
 }

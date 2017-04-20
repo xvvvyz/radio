@@ -7,7 +7,6 @@
   width: 100%;
   height: 100%;
   transition: transform .3s;
-  transform: translateY(-3.5rem);
   text-align: center;
   overflow: hidden;
   z-index: 1000;
@@ -17,11 +16,24 @@
     right: 0;
     left: auto;
     width: 30vw;
+    transform: translateX(30vw);
   }
 }
 
-.Player.toggled {
+.Player.visible {
+  transform: translateY(-3.5rem);
+
+  @media (min-width: $break-large) {
+    transform: translateX(0);
+  }
+}
+
+.Player.fullscreen {
   transform: translateY(-100%);
+
+  @media (min-width: $break-large) {
+    transform: translateY(0);
+  }
 }
 
 .Player-inner {
@@ -40,27 +52,30 @@
   color: inherit;
   fill: #222;
 
+  .track-loading {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: solid 5px inherit;
+    border-radius: 50%;
+    stroke: inherit;
+  }
+
   @media (min-width: $break-large) {
     position: relative;
     top: auto;
     padding: 3rem;
-    transform: translateY(6.44rem);
+    transform: translateY(0);
     background-color: inherit;
     fill: inherit;
   }
 }
 
-.Player.toggled .Player-inner {
+.Player.fullscreen .Player-inner {
   transform: translateY(100%);
   background-color: inherit;
   fill: inherit;
-}
 
-@media (min-width: $break-large) {
-  .Player,
-  .Player.toggled,
-  .Player-inner,
-  .Player.toggled .Player-inner {
-    transform: translate(0);
+  @media (min-width: $break-large) {
+    transform: translateY(0);
   }
 }

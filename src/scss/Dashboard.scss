@@ -3,17 +3,17 @@
 .Dashboard {
   overflow-x: hidden;
 
-  &.player-loaded {
+  &.player-visible {
     padding-bottom: 3.5rem;
   }
 
   @media (min-width: $break-large) {
     width: calc(100% - 30vw);
-    margin: 0 auto;
+    transition: transform .3s;
+    transform: translateX(calc(30vw / 2));
 
-    &.player-loaded {
-      margin: 0;
-      padding-bottom: 0;
+    &.player-visible {
+      transform: translateX(0);
     }
   }
 }

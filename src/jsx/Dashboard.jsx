@@ -20,7 +20,7 @@ export default function Dashboard(props) {
 
   const className = classNames({
     Dashboard: true,
-    'player-loaded': props.playerLoaded,
+    'player-visible': props.playerVisible,
   })
 
   return (

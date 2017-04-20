@@ -52,7 +52,7 @@
   }
 }
 
-.Dashboard.player-loaded .List {
+.Dashboard.player-visible .List {
   ul {
     @media (min-width: $break-xlarge) {
       max-height: calc(3.5rem * 10);
@@ -61,7 +61,7 @@
 }
 
 .Search .List,
-.Dashboard.player-loaded .Search .List {
+.Dashboard.player-visible .Search .List {
   margin-bottom: 0;
 
   ul {

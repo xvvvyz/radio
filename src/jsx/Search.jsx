@@ -7,15 +7,9 @@ import '../scss/Search.scss';
 export default class Search extends Component {
   constructor() {
     super();
-
     this.placeholder = 'Enter an artist, genre, activity or mood...';
-
-    this.state = {
-      tags: [],
-      placeholder: this.placeholder,
-    };
-
-    this.search = this.search.bind(this);
+    this.state = { tags: [], value: '', placeholder: this.placeholder };
+    this.onKeyup = this.onKeyup.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
   }
@@ -28,10 +22,17 @@ export default class Search extends Component {
     this.setState({ placeholder: this.placeholder });
   }
 
-  search({ target }) {
-    api.search({ q: target.value, per_page: 10 }).then(res => {
-      this.setState({ tags: res.tag_cloud.tags });
-    });
+  onKeyup({ target }) {
+    if (target.value === this.state.value) return false;
+    this.setState({ value: target.value });
+
+    if (target.value) {
+      api.search({ q: target.value, per_page: 10 }).then(res => {
+        this.setState({ tags: res.tag_cloud.tags });
+      });
+    } else {
+      this.setState({ tags: [] });
+    }
   }
 
   render() {
@@ -39,8 +40,9 @@ export default class Search extends Component {
       <section className="Search">
         <input
           type="text"
+          value={ this.state.value }
           placeholder={ this.state.placeholder }
-          onKeyup={ this.search }
+          onKeyup={ this.onKeyup }
           onFocus={ this.onFocus }
           onBlur={ this.onBlur }
         />

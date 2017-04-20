@@ -5,105 +5,117 @@ import shader from 'shader';
 import PlayerArt from './PlayerArt.jsx';
 import PlayerControls from './PlayerControls.jsx';
 import PlayerInfo from './PlayerInfo.jsx';
+import Svg from './svg.jsx';
+import loadingSvg from '../svg/loading.svg';
 import '../scss/Player.scss';
 
 export default class Player extends Component {
   constructor() {
     super();
-    this.state = { playing: false, toggled: false };
+    this.state = { playing: false, fullscreen: false };
+    this.player = {};
+    this.refresh = this.refresh.bind(this);
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.next = this.next.bind(this);
-    this.skip = this.skip.bind(this);
     this.toggle = this.toggle.bind(this);
   }
 
-  componentDidUpdate() {
-    if (this.props.track.id) {
-      this.player.onplay = () => this.setState({ playing: true });
-      this.player.onpause = () => this.setState({ playing: false });
-      this.player.onended = this.next;
-    }
+  componentDidMount() {
+    this.player.onplay = () => this.setState({ playing: true });
+    this.player.onended = this.next;
   }
 
   toggle() {
-    this.setState({ toggled: !this.state.toggled });
+    this.setState({ fullscreen: !this.state.fullscreen });
+  }
+
+  refresh() {
+    this.player.pause();
+    this.props.refresh();
   }
 
   play() {
+    this.setState({ playing: true });
     this.player.play();
   }
 
   pause() {
+    this.setState({ playing: false });
     this.player.pause();
   }
 
   next() {
+    this.player.pause();
     this.props.next();
   }
 
-  skip() {
-    this.props.skip();
+  renderPlayerArt() {
+    return <PlayerArt
+      loading={ this.props.playlistLoading }
+      cover={ this.props.playlist.cover }
+    />;
   }
 
   renderAudio() {
     return <audio
       ref={ player => this.player = player }
-      src={ this.props.track.track_file_stream_url }
-      title={ `${this.props.track.name} by ${this.props.track.performer}` }
+      src={ this.props.track.track_file_stream_url || null }
+      title={ `${this.props.track.name || null} by ${this.props.track.performer || null}` }
       autoplay
     />;
   }
 
-  renderPlayerArt() {
-    const playlist = this.props.playlist;
-    const cover = playlist ? playlist.cover : '';
-    return <PlayerArt cover={ cover } />;
-  }
-
   renderPlayerInfo() {
-    const title = this.props.track ? this.props.track.name : '';
-    const artist = this.props.track ? this.props.track.performer : '';
-    return <PlayerInfo title={ title } artist={ artist } />;
+    if (this.props.trackLoading) {
+      return <Svg className="track-loading" src={ loadingSvg } />;
+    } else {
+      return <PlayerInfo
+        title={ this.props.track.name }
+        artist={ this.props.track.performer }
+      />;
+    }
   }
 
-  renderPlayerControls(color) {
+  renderPlayerControls() {
     return <PlayerControls
-      style={ { borderColor: color } }
-      refresh={ this.props.refresh }
-      skip={ this.skip }
+      refresh={ this.refresh }
+      skip={ this.next }
       play={ this.play }
       pause={ this.pause }
       toggle={ this.toggle }
       playing={ this.state.playing }
-      toggled={ this.state.toggled }
     />;
   }
 
-  render() {
-    const color = this.props.playlist.color;
+  renderStyle() {
+    const color = this.props.playlist.color || '#fff';
     const colorLighter = shader(shader(color, .9), -.1);
     const colorDarker = shader(color, -.4);
 
-    const style = {
+    return {
       backgroundColor: colorLighter,
       color: colorDarker,
       fill: colorDarker,
+      stroke: colorDarker,
       borderColor: colorDarker,
     };
+  }
 
+  render() {
     const className = classNames({
       Player: true,
-      toggled: this.state.toggled,
+      fullscreen: this.state.fullscreen,
+      visible: this.props.visible,
     });
 
     return (
-      <div className={ className } style={ style }>
+      <div className={ className } style={ this.renderStyle() }>
         <div className="Player-inner">
-          { this.renderAudio() }
           { this.renderPlayerArt() }
+          { this.renderAudio() }
           { this.renderPlayerInfo() }
-          { this.renderPlayerControls(colorDarker) }
+          { this.renderPlayerControls() }
         </div>
       </div>
     );
