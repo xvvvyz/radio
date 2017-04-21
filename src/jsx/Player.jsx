@@ -27,6 +27,10 @@ export default class Player extends Component {
     this.player.onended = this.next;
   }
 
+  componentDidUpdate() {
+    this.player.muted = this.props.trackLoading;
+  }
+
   toggleFullscreen() {
     this.setState({ isFullscreen: !this.state.isFullscreen });
   }
