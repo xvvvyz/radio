@@ -18,12 +18,14 @@ export default class Player extends Component {
     this.pause = this.pause.bind(this);
     this.next = this.next.bind(this);
     this.toggleFullscreen = this.toggleFullscreen.bind(this);
+    this.updateMediaSession = this.updateMediaSession.bind(this);
   }
 
   componentDidMount() {
+    this.player.onplay = this.updateMediaSession;
     this.player.onplaying = () => this.setState({ isPlaying: true });
+    this.player.onwaiting = () => this.setState({ isPlaying: true });
     this.player.onpause = () => this.setState({ isPlaying: false });
-    this.player.onwaiting = this.player.onplaying;
     this.player.onended = this.next;
   }
 
@@ -51,10 +53,36 @@ export default class Player extends Component {
     this.props.next();
   }
 
+  updateMediaSession() {
+    if ('mediaSession' in navigator) {
+      const ms = navigator.mediaSession;
+
+      const getCoverSizes = sizes => {
+        return sizes.map(size => {
+          return {
+            src: this.props.getCover(size),
+            sizes: `${size}x${size}`,
+            type: 'image/jpeg',
+          };
+        })
+      }
+
+      ms.metadata = new MediaMetadata({
+        title: this.props.track.name,
+        artist: this.props.track.performer,
+        album: this.props.track.release_name,
+        artwork: getCoverSizes([96, 128, 192, 256, 384, 512]),
+      });
+
+      ms.setActionHandler('previoustrack', this.props.refresh);
+      ms.setActionHandler('nexttrack', this.props.next);
+    }
+  }
+
   renderPlayerArt() {
     return <PlayerArt
       loading={ this.props.playlistLoading }
-      cover={ this.props.playlist.cover }
+      cover={ this.props.getCover() }
     />;
   }
 

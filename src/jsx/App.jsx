@@ -41,6 +41,7 @@ export default class App extends Component {
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
     this.fetchNextSong = this.fetchNextSong.bind(this);
+    this.getCover = this.getCover.bind(this);
 
     if (!this.state.topTags.length) this.fetchTopTags();
   }
@@ -67,12 +68,18 @@ export default class App extends Component {
     return this.state.currentTags;
   }
 
+  getCover(size = 512) {
+    if (this.state.playlist) {
+      return this.state.playlist.cover + `&w=${size}&h=${size}`;
+    }
+  }
+
   mapPlaylists(playlists) {
     const mapPlaylist = playlist => {
       return {
         id: playlist.id,
         color: playlist.color_palette[3],
-        cover: playlist.cover_urls.max1024,
+        cover: playlist.cover_urls.original,
       };
     };
 
@@ -130,15 +137,16 @@ export default class App extends Component {
   loadPlaylist(playlist, related) {
     const updatedState = {};
     if (related) updatedState.relatedTags = related;
+    const valid = this.validPlaylist(playlist);
 
-    if (this.validPlaylist(playlist)) {
+    if (valid) {
       updatedState.playlist = playlist;
-      this.loadImage(playlist.cover);
       this.fetchNextSong(playlist.id);
       this.storePlayed(playlist.id);
     }
 
     this.setState(updatedState);
+    if (valid) this.loadImage(this.getCover());
   }
 
   updateTagData(tagString, data) {
@@ -233,6 +241,7 @@ export default class App extends Component {
       trackLoading={ this.state.trackLoading }
       refresh={ this.fetchPlaylists }
       next={ this.fetchNextSong }
+      getCover={ this.getCover }
     />;
   }
 
