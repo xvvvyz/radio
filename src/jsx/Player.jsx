@@ -11,7 +11,7 @@ import '../scss/Player.scss';
 export default class Player extends Component {
   constructor() {
     super();
-    this.state = { isPlaying: true, isFullscreen: false };
+    this.state = { isPlaying: false, isFullscreen: false };
     this.player = {};
     this.refresh = this.refresh.bind(this);
     this.play = this.play.bind(this);
