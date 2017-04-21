@@ -6,47 +6,44 @@ import PlayerArt from './PlayerArt.jsx';
 import PlayerControls from './PlayerControls.jsx';
 import PlayerInfo from './PlayerInfo.jsx';
 import Svg from './svg.jsx';
-import loadingSvg from '../svg/loading.svg';
 import '../scss/Player.scss';
 
 export default class Player extends Component {
   constructor() {
     super();
-    this.state = { playing: false, fullscreen: false };
+    this.state = { isPlaying: true, isFullscreen: false };
     this.player = {};
     this.refresh = this.refresh.bind(this);
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.next = this.next.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.toggleFullscreen = this.toggleFullscreen.bind(this);
   }
 
   componentDidMount() {
-    this.player.onplay = () => this.setState({ playing: true });
+    this.player.onplaying = () => this.setState({ isPlaying: true });
+    this.player.onpause = () => this.setState({ isPlaying: false });
+    this.player.onwaiting = this.player.onplaying;
     this.player.onended = this.next;
   }
 
-  toggle() {
-    this.setState({ fullscreen: !this.state.fullscreen });
+  toggleFullscreen() {
+    this.setState({ isFullscreen: !this.state.isFullscreen });
   }
 
   refresh() {
-    this.player.pause();
     this.props.refresh();
   }
 
   play() {
-    this.setState({ playing: true });
     this.player.play();
   }
 
   pause() {
-    this.setState({ playing: false });
     this.player.pause();
   }
 
   next() {
-    this.player.pause();
     this.props.next();
   }
 
@@ -60,15 +57,15 @@ export default class Player extends Component {
   renderAudio() {
     return <audio
       ref={ player => this.player = player }
-      src={ this.props.track.track_file_stream_url || null }
-      title={ `${this.props.track.name || null} by ${this.props.track.performer || null}` }
+      src={ this.props.track.track_file_stream_url }
+      title={ `${this.props.track.name} by ${this.props.track.performer}` }
       autoplay
     />;
   }
 
   renderPlayerInfo() {
     if (this.props.trackLoading) {
-      return <Svg className="track-loading" src={ loadingSvg } />;
+      return <div className="spinner" />;
     } else {
       return <PlayerInfo
         title={ this.props.track.name }
@@ -80,11 +77,12 @@ export default class Player extends Component {
   renderPlayerControls() {
     return <PlayerControls
       refresh={ this.refresh }
-      skip={ this.next }
       play={ this.play }
+      skip={ this.next }
       pause={ this.pause }
-      toggle={ this.toggle }
-      playing={ this.state.playing }
+      toggleFullscreen={ this.toggleFullscreen }
+      isFullscreen={ this.state.isFullscreen }
+      isPlaying={ this.state.isPlaying }
     />;
   }
 
@@ -105,7 +103,7 @@ export default class Player extends Component {
   render() {
     const className = classNames({
       Player: true,
-      fullscreen: this.state.fullscreen,
+      fullscreen: this.state.isFullscreen,
       visible: this.props.visible,
     });
 

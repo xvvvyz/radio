@@ -52,14 +52,6 @@
   color: inherit;
   fill: #222;
 
-  .track-loading {
-    width: 1.5rem;
-    height: 1.5rem;
-    border: solid 5px inherit;
-    border-radius: 50%;
-    stroke: inherit;
-  }
-
   @media (min-width: $break-large) {
     position: relative;
     top: auto;

@@ -6,7 +6,7 @@ export default function PlayerInfo(props) {
   document.title = `${props.title} by ${props.artist}`;
 
   return (
-    <div className="PlayerInfo">
+    <div className="PlayerInfo fade-in">
       <span className="PlayerInfo-artist">{ props.artist }</span>
       <span className="PlayerInfo-title">{ props.title }</span>
     </div>

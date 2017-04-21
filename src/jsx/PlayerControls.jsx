@@ -10,15 +10,15 @@ import playSvg from '../svg/play.svg';
 import refreshSvg from '../svg/refresh.svg';
 
 export default function PlayerControls(props) {
-  const toggleButton = (
-    <button className="PlayerControls-toggle" onClick={ props.toggle }>
-      <Svg src={ props.toggled ? minimizeSvg : expandSvg } />
+  const refreshButton = (
+    <button className="PlayerControls-refresh" onClick={ props.refresh }>
+      <Svg src={ refreshSvg } />
     </button>
   );
 
   const playPauseButton = (
-    <button onClick={ props.playing ? props.pause : props.play }>
-      <Svg src={ props.playing ? pauseSvg : playSvg } />
+    <button onClick={ props.isPlaying ? props.pause : props.play }>
+      <Svg src={ props.isPlaying ? pauseSvg : playSvg } />
     </button>
   );
 
@@ -28,9 +28,9 @@ export default function PlayerControls(props) {
     </button>
   );
 
-  const refreshButton = (
-    <button className="PlayerControls-refresh" onClick={ props.refresh }>
-      <Svg src={ refreshSvg } />
+  const toggleButton = (
+    <button className="PlayerControls-toggle" onClick={ props.toggleFullscreen }>
+      <Svg src={ props.isFullscreen ? minimizeSvg : expandSvg } />
     </button>
   );
 

@@ -1,5 +1,6 @@
 @import './utilities/reset';
 @import './utilities/media';
+@import './utilities/helpers';
 
 html {
   font-size: 4vw;
@@ -23,9 +24,4 @@ html {
   @media (min-width: $break-xxlarge) {
     font-size: 1.1vw;
   }
-}
-
-.App {
-  color: #222;
-  font-family: 'Helvetica Neue', sans-serif;
 }

@@ -13,6 +13,7 @@
     transform: translateX(calc(30vw / 2));
 
     &.player-visible {
+      padding-bottom: 0;
       transform: translateX(0);
     }
   }

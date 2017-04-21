@@ -9,11 +9,11 @@ import api from './utilities/api.js';
 import help from './utilities/helpers.js';
 import '../scss/App.scss';
 
-const STORE_POPULAR = 'popular';
-const STORE_PLAYED = 'played';
+const STORE_POPULAR = '_toptags_';
+const STORE_PLAYED = '_played_';
 const STORE_POPULAR_EXPIRY = help.daysFromNow(7);
 const STORE_TAGS_EXPIRY = help.daysFromNow(7);
-const STORE_PLAYED_LIMIT = 1000;
+const STORE_PLAYED_LIMIT = 2000;
 const PLAYLISTS_LIMIT = 10;
 
 export default class App extends Component {
@@ -24,8 +24,8 @@ export default class App extends Component {
 
     this.state = {
       playerVisible: false,
-      playlistLoading: false,
-      trackLoading: false,
+      playlistLoading: true,
+      trackLoading: true,
       currentTags: [],
       playlist: false,
       track: false,
@@ -47,7 +47,7 @@ export default class App extends Component {
 
   fetchTopTags() {
     api.explore({ page: 1, per_page: 30 }).then(res => {
-      const tags = [...this.state.topTags, ...res.filters];
+      const tags = [...this.state.topTags, ...this.mapTags(res.filters)];
       this.setState({ topTags: tags });
       store.set(STORE_POPULAR, tags, STORE_POPULAR_EXPIRY);
     });
@@ -83,26 +83,28 @@ export default class App extends Component {
     }
   }
 
-  mapRelatedTags(tags) {
-    return tags.map(tag => {
-      if (tag.artist_avatar) {
-        const image = tag.artist_avatar.replace('http://', 'https://');
-        return { name: tag.name, image: image };
-      } else {
-        return tag.name;
-      }
-    });
+  mapTags(tags) {
+    return tags
+      .filter(tag => tag.name.length < 40)
+      .map(tag => {
+        if (tag.artist_avatar) {
+          const image = tag.artist_avatar.replace('http://', 'https://');
+          return { name: tag.name, image: image };
+        } else {
+          return tag.name;
+        }
+      });
   }
 
   validPlaylist(playlist) {
     if (playlist) {
-      const alreadyPlayed = this.played.indexOf(playlist.id) >= 0;
+      const alreadyPlayed = this.played.includes(playlist.id);
       if (alreadyPlayed) this.fetchPlaylists();
       else return true;
     } else {
       const removableTags = this.state.currentTags.length > 1;
       if (removableTags) this.fetchPlaylists({ tags: this.removeTag(1) });
-      // TODO: handle no more playlists
+      else this.setState({ trackLoading: false });
     }
 
     return false;
@@ -169,7 +171,7 @@ export default class App extends Component {
         per_page: PLAYLISTS_LIMIT,
       }).then(res => {
         data.playlists = this.mapPlaylists(res.mix_set.mixes);
-        data.related = this.mapRelatedTags(res.filters);
+        data.related = this.mapTags(res.filters);
         this.updateTagData(tagString, data);
         this.loadPlaylist(data.playlists[data.index], data.related);
       });
@@ -186,8 +188,9 @@ export default class App extends Component {
 
   fetchNextSong(playlistId) {
     playlistId = playlistId || this.state.playlist.id;
+    const canSkip = this.state.skipAllowed && !this.state.atLastTrack;
 
-    if (!this.state.track || this.state.skipAllowed && !this.state.atLastTrack) {
+    if (!this.state.track || canSkip) {
       api.nextSong({ mix_id: playlistId }).then(res => {
         this.setState({
           track: res.set.track,
@@ -195,6 +198,8 @@ export default class App extends Component {
           skipAllowed: res.set.skip_allowed,
           atLastTrack: res.set.at_last_track
         });
+      }, err => {
+        this.fetchRelatedPlaylist(playlistId);
       });
     } else {
       this.fetchRelatedPlaylist(playlistId);

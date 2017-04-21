@@ -55,7 +55,7 @@
 .Dashboard.player-visible .List {
   ul {
     @media (min-width: $break-xlarge) {
-      max-height: calc(3.5rem * 10);
+      max-height: calc(3.5rem * 9);
     }
   }
 }

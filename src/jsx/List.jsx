@@ -14,7 +14,7 @@ export default function List(props) {
     />;
   });
 
-  const list = <div className="List">
+  const list = <div className="List fade-in">
     { props.title ? <h3>{ props.title }</h3> : null }
     <ul>{ items }</ul>
   </div>;

@@ -8,7 +8,7 @@ export default class Search extends Component {
   constructor() {
     super();
     this.placeholder = 'Enter an artist, genre, activity or mood...';
-    this.state = { tags: [], value: '', placeholder: this.placeholder };
+    this.state = { tags: [], placeholder: this.placeholder };
     this.onKeyup = this.onKeyup.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -23,8 +23,8 @@ export default class Search extends Component {
   }
 
   onKeyup({ target }) {
-    if (target.value === this.state.value) return false;
-    this.setState({ value: target.value });
+    if (target.value === this.oldValue) return false;
+    this.oldValue = target.value;
 
     if (target.value) {
       api.search({ q: target.value, per_page: 10 }).then(res => {
@@ -40,7 +40,6 @@ export default class Search extends Component {
       <section className="Search">
         <input
           type="text"
-          value={ this.state.value }
           placeholder={ this.state.placeholder }
           onKeyup={ this.onKeyup }
           onFocus={ this.onFocus }
