@@ -74,7 +74,7 @@ export default class Player extends Component {
         artwork: getCoverSizes([96, 128, 192, 256, 384, 512]),
       });
 
-      ms.setActionHandler('previoustrack', this.props.refresh);
+      ms.setActionHandler('seekbackward', this.props.refresh);
       ms.setActionHandler('nexttrack', this.props.next);
     }
   }
