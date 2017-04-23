@@ -1,12 +1,20 @@
+@import './utilities/boxes';
 @import './utilities/media';
 
 .Header {
-  padding: 2rem;
+  padding: $padding-medium;
   text-align: center;
+
+  @media (min-width: $break-medium) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $padding-large;
+  }
 
   h1 {
     font-size: 1.1em;
-    line-height: 2rem;
+    line-height: $padding-medium;
     text-transform: uppercase;
     letter-spacing: .1em;
   }
@@ -15,21 +23,14 @@
     color: inherit;
     text-decoration: none;
   }
+}
 
-  &.tags-exist {
-    h1 {
-      visibility: hidden;
+.Header.tags_exist {
+  h1 {
+    visibility: hidden;
 
-      @media (min-width: $break-medium) {
-        visibility: visible;
-      }
+    @media (min-width: $break-medium) {
+      visibility: visible;
     }
-  }
-
-  @media (min-width: $break-medium) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4rem;
   }
 }

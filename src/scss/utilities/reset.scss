@@ -17,7 +17,11 @@ section,
 aside,
 input,
 button,
-img {
+img,
+svg,
+ul,
+li {
+  display: block;
   box-sizing: border-box;
 }
 

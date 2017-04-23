@@ -29,20 +29,22 @@ export default class App extends Component {
       currentTags: [],
       playlist: false,
       track: false,
-      skipAllowed: true,
-      atLastTrack: false,
       topTags: store.get(STORE_POPULAR) || [],
       relatedTags: [],
     };
 
     this.played = store.get(STORE_PLAYED) || [];
+    this.skipAllowed = true;
+    this.atLastTrack = false;
 
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
     this.fetchNextSong = this.fetchNextSong.bind(this);
-    this.getCover = this.getCover.bind(this);
+    this.getCoverSize = this.getCoverSize.bind(this);
+  }
 
+  componentDidMount() {
     if (!this.state.topTags.length) this.fetchTopTags();
   }
 
@@ -68,7 +70,7 @@ export default class App extends Component {
     return this.state.currentTags;
   }
 
-  getCover(size = 512) {
+  getCoverSize(size = 512) {
     if (this.state.playlist) {
       return this.state.playlist.cover + `&w=${size}&h=${size}`;
     }
@@ -101,6 +103,15 @@ export default class App extends Component {
           return tag.name;
         }
       });
+  }
+
+  mapTrack(track) {
+    return {
+      title: track.name.trim(),
+      artist: track.performer.trim(),
+      album: track.release_name.trim(),
+      stream: track.track_file_stream_url,
+    };
   }
 
   validPlaylist(playlist) {
@@ -146,7 +157,7 @@ export default class App extends Component {
     }
 
     this.setState(updatedState);
-    if (valid) this.loadImage(this.getCover());
+    if (valid) this.loadImage(this.getCoverSize());
   }
 
   updateTagData(tagString, data) {
@@ -196,16 +207,13 @@ export default class App extends Component {
 
   fetchNextSong(playlistId) {
     playlistId = playlistId || this.state.playlist.id;
-    const canSkip = this.state.skipAllowed && !this.state.atLastTrack;
 
-    if (!this.state.track || canSkip) {
+    if (!this.state.track || this.skipAllowed && !this.atLastTrack) {
       api.nextSong({ mix_id: playlistId }).then(res => {
-        this.setState({
-          track: res.set.track,
-          trackLoading: false,
-          skipAllowed: res.set.skip_allowed,
-          atLastTrack: res.set.at_last_track
-        });
+        const track = this.mapTrack(res.set.track);
+        this.setState({ track: track, trackLoading: false });
+        this.skipAllowed = res.set.skip_allowed;
+        this.atLastTrack = res.set.at_last_track;
       }, err => {
         this.fetchRelatedPlaylist(playlistId);
       });
@@ -241,7 +249,7 @@ export default class App extends Component {
       trackLoading={ this.state.trackLoading }
       refresh={ this.fetchPlaylists }
       next={ this.fetchNextSong }
-      getCover={ this.getCover }
+      getCoverSize={ this.getCoverSize }
     />;
   }
 

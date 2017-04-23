@@ -1,3 +1,5 @@
+@import './utilities/animations';
+@import './utilities/boxes';
 @import './utilities/media';
 
 .PlayerControls {
@@ -5,12 +7,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 300px;
+  max-width: 18rem;
   margin: 0 auto;
 
   button {
     flex-grow: 1;
-    padding: .8rem;
+    padding: $padding-xxsmall;
     border-radius: 50%;
 
     &:hover {
@@ -23,14 +25,15 @@
   }
 
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    transition: fill .3s;
+    width: $control-button-size;
+    height: $control-button-size;
+    margin: 0 auto;
+    transition: fill $speed-normal;
     fill: inherit;
   }
 }
 
-.PlayerControls-toggle {
+.PlayerControls_toggle {
   @media (min-width: $break-large) {
     display: none;
   }

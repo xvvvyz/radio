@@ -22,7 +22,7 @@ export default class Tag extends Component {
     return (
       <li className="Tag">
         <button onClick={ this.onClick } style={ this.renderButtonStyle() }>
-          <span className={ this.props.image && 'has-image' }>
+          <span className={ this.props.image && 'has_image' }>
             { this.props.value }
           </span>
         </button>

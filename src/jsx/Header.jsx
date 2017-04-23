@@ -7,7 +7,7 @@ import '../scss/Header.scss'
 export default function Header(props) {
   const className = classNames({
     Header: true,
-    'tags-exist': props.currentTags.length > 0,
+    tags_exist: props.currentTags.length > 0,
   });
 
   return (

@@ -1,35 +1,5 @@
 import 'whatwg-fetch';
 
-export default {
-  explore: params => {
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/explore_filters?${query}`);
-  },
-
-  playlists: (tags, params, mode = 'hot') => {
-    const tagQuery = tagsToQuery(tags);
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/explore/${tagQuery}/${mode}?${query}`);
-  },
-
-  nextSong: params => {
-    const token = getToken(params.mix_id);
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/sets/${token}/next?${query}`);
-  },
-
-  nextPlaylist: params => {
-    const token = getToken(params.mix_id);
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/sets/${token}/next_mix.json?${query}`);
-  },
-
-  search: params => {
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/tags.json?${query}`);
-  }
-};
-
 const API_HOST = 'https://8tracks.com';
 const TOKEN_MULTIPLIER = 100000000000000;
 const tokens = {};
@@ -67,4 +37,34 @@ const tagsToQuery = tags => {
   };
 
   return tags.map(mapFunc).join('+');
+};
+
+export default {
+  explore: params => {
+    const query = toQuery(params);
+    return getJson(`${API_HOST}/explore_filters?${query}`);
+  },
+
+  playlists: (tags, params, mode = 'hot') => {
+    const tagQuery = tagsToQuery(tags);
+    const query = toQuery(params);
+    return getJson(`${API_HOST}/explore/${tagQuery}/${mode}?${query}`);
+  },
+
+  nextSong: params => {
+    const token = getToken(params.mix_id);
+    const query = toQuery(params);
+    return getJson(`${API_HOST}/sets/${token}/next?${query}`);
+  },
+
+  nextPlaylist: params => {
+    const token = getToken(params.mix_id);
+    const query = toQuery(params);
+    return getJson(`${API_HOST}/sets/${token}/next_mix.json?${query}`);
+  },
+
+  search: params => {
+    const query = toQuery(params);
+    return getJson(`${API_HOST}/tags.json?${query}`);
+  }
 };

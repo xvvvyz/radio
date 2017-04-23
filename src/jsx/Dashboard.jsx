@@ -20,7 +20,7 @@ export default function Dashboard(props) {
 
   const className = classNames({
     Dashboard: true,
-    'player-visible': props.playerVisible,
+    player_visible: props.playerVisible,
   })
 
   return (

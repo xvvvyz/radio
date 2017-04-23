@@ -1,10 +1,12 @@
+@import './utilities/boxes';
+
 .PlayerInfo {
   flex: 1 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem 0;
+  padding: $padding-medium 0;
 
   span {
     display: block;
@@ -12,7 +14,7 @@
   }
 }
 
-.PlayerInfo-artist {
+.PlayerInfo_artist {
   margin-bottom: .7em;
   opacity: .8;
   text-transform: uppercase;

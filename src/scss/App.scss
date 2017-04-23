@@ -1,9 +1,13 @@
-@import './utilities/reset';
-@import './utilities/media';
 @import './utilities/helpers';
+@import './utilities/media';
+@import './utilities/reset';
 
 html {
   font-size: 4vw;
+
+  @media (min-width: $break-xsmall) {
+    font-size: 1rem;
+  }
 
   @media (min-width: $break-small) {
     font-size: 2.7vw;

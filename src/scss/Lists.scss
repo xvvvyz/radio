@@ -1,9 +1,10 @@
+@import './utilities/boxes';
 @import './utilities/media';
 
 .Lists {
   @media (min-width: $break-xlarge) {
     display: flex;
     flex-direction: row-reverse;
-    padding-left: 4rem;
+    padding-left: $padding-large;
   }
 }

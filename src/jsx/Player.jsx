@@ -60,7 +60,7 @@ export default class Player extends Component {
       const getCoverSizes = sizes => {
         return sizes.map(size => {
           return {
-            src: this.props.getCover(size),
+            src: this.props.getCoverSize(size),
             sizes: `${size}x${size}`,
             type: 'image/jpeg',
           };
@@ -68,9 +68,9 @@ export default class Player extends Component {
       }
 
       ms.metadata = new MediaMetadata({
-        title: this.props.track.name,
-        artist: this.props.track.performer,
-        album: this.props.track.release_name,
+        title: this.props.track.title,
+        artist: this.props.track.artist,
+        album: this.props.track.album,
         artwork: getCoverSizes([96, 128, 192, 256, 384, 512]),
       });
 
@@ -82,15 +82,15 @@ export default class Player extends Component {
   renderPlayerArt() {
     return <PlayerArt
       loading={ this.props.playlistLoading }
-      cover={ this.props.getCover() }
+      cover={ this.props.getCoverSize() }
     />;
   }
 
   renderAudio() {
     return <audio
       ref={ player => this.player = player }
-      src={ this.props.track.track_file_stream_url }
-      title={ `${this.props.track.name} by ${this.props.track.performer}` }
+      src={ this.props.track.stream }
+      title={ `${this.props.track.title} by ${this.props.track.artist}` }
       autoplay
     />;
   }
@@ -100,8 +100,8 @@ export default class Player extends Component {
       return <div className="spinner" />;
     } else {
       return <PlayerInfo
-        title={ this.props.track.name }
-        artist={ this.props.track.performer }
+        title={ this.props.track.title }
+        artist={ this.props.track.artist }
       />;
     }
   }
@@ -120,7 +120,7 @@ export default class Player extends Component {
 
   renderStyle() {
     const color = this.props.playlist.color || '#fff';
-    const colorLighter = shader(shader(color, .9), -.1);
+    const colorLighter = shader(shader(color, .8), -.1);
     const colorDarker = shader(color, -.4);
 
     return {
@@ -141,7 +141,7 @@ export default class Player extends Component {
 
     return (
       <div className={ className } style={ this.renderStyle() }>
-        <div className="Player-inner">
+        <div className="Player_inner">
           { this.renderPlayerArt() }
           { this.renderAudio() }
           { this.renderPlayerInfo() }

@@ -1,3 +1,6 @@
+@import './utilities/animations';
+@import './utilities/boxes';
+@import './utilities/colors';
 @import './utilities/media';
 
 .Player {
@@ -6,22 +9,24 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform .3s;
-  text-align: center;
+  transition: transform $speed-normal;
+  opacity: 0;
   overflow: hidden;
-  z-index: 1000;
+  text-align: center;
+  z-index: $z-2;
 
   @media (min-width: $break-large) {
     top: 0;
     right: 0;
     left: auto;
-    width: 30vw;
-    transform: translateX(30vw);
+    width: $player-width;
+    transform: translateX($player-width);
   }
 }
 
 .Player.visible {
-  transform: translateY(-3.5rem);
+  transform: translateY(-$player-height-small);
+  opacity: 1;
 
   @media (min-width: $break-large) {
     transform: translateX(0);
@@ -36,33 +41,33 @@
   }
 }
 
-.Player-inner {
+.Player_inner {
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   top: -100%;
-  padding: 1rem;
   width: 100%;
   height: 100%;
-  transition: background-color .3s, transform .3s;
-  transform: translateY(4.44rem);
-  background-color: #fbfbfb;
+  padding: $padding-medium $padding-medium $padding-medium - $padding-xsmall;
+  transition: background-color $speed-normal, transform $speed-normal;
+  transform: translateY($player-height-small + $padding-medium / 2);
+  background-color: $off-white;
   color: inherit;
-  fill: #222;
+  fill: $off-black;
 
   @media (min-width: $break-large) {
     position: relative;
     top: auto;
-    padding: 3rem;
+    padding: $padding-large $padding-large $padding-large - $padding-xsmall;
     transform: translateY(0);
     background-color: inherit;
     fill: inherit;
   }
 }
 
-.Player.fullscreen .Player-inner {
+.Player.fullscreen .Player_inner {
   transform: translateY(100%);
   background-color: inherit;
   fill: inherit;

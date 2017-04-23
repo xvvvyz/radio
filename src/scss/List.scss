@@ -1,13 +1,26 @@
+@import './utilities/boxes';
 @import './utilities/media';
+
+$total-tag-height: $tag-height + $padding-xsmall;
 
 .List {
   width: 100%;
-  margin-bottom: 2rem;
-  padding: 0 1rem 0 2rem;
+  margin-bottom: $padding-medium;
+  padding: 0 $padding-xsmall 0 $padding-medium;
   box-sizing: border-box;
+  overflow: auto;
+
+  @media (min-width: $break-medium) {
+    margin-bottom: $padding-large;
+    padding: 0 $padding-large - $padding-xsmall 0 $padding-large;
+  }
+
+  @media (min-width: $break-xlarge) {
+    padding: 0 $padding-large - $padding-xsmall 0 0;
+  }
 
   h3 {
-    margin: 0 1rem 1rem 0;
+    margin: 0 $padding-xsmall $padding-xsmall 0;
     font-size: .8em;
     text-align: center;
     text-transform: uppercase;
@@ -22,53 +35,40 @@
   ul {
     display: flex;
     flex-wrap: wrap;
-    max-height: calc(3.5rem * 8);
+    max-height: calc(#{$total-tag-height} * 8);
     overflow: hidden;
 
-    @media (min-width: $break-small) {
-      max-height: calc(3.5rem * 6);
+    @media (min-width: $break-xsmall) {
+      max-height: calc(#{$total-tag-height} * 6);
     }
 
     @media (min-width: $break-medium) {
-      max-height: calc(3.5rem * 4);
-    }
-
-    @media (min-width: $break-large) {
-      max-height: calc(3.5rem * 5);
+      max-height: calc(#{$total-tag-height} * 5);
     }
 
     @media (min-width: $break-xlarge) {
-      max-height: calc(3.5rem * 4);
+      max-height: calc(#{$total-tag-height} * 4);
     }
-  }
-
-  @media (min-width: $break-medium) {
-    margin-bottom: 4rem;
-    padding: 0 3rem 0 4rem;
-  }
-
-  @media (min-width: $break-xlarge) {
-    padding: 0 3rem 0 0;
   }
 }
 
-.Dashboard.player-visible .List {
+.Dashboard.player_visible .List {
   ul {
     @media (min-width: $break-xlarge) {
-      max-height: calc(3.5rem * 9);
+      max-height: calc(#{$total-tag-height} * 9);
     }
   }
 }
 
 .Search .List,
-.Dashboard.player-visible .Search .List {
+.Dashboard.player_visible .Search .List {
   margin-bottom: 0;
 
-  ul {
-    max-height: calc(3.5rem * 2);
+  @media (min-width: $break-xlarge) {
+    padding-left: $padding-large;
   }
 
-  @media (min-width: $break-xlarge) {
-    padding-left: 4rem;
+  ul {
+    max-height: calc(#{$total-tag-height} * 2);
   }
 }

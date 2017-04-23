@@ -29,7 +29,10 @@ export default function PlayerControls(props) {
   );
 
   const toggleButton = (
-    <button className="PlayerControls-toggle" onClick={ props.toggleFullscreen }>
+    <button
+      className="PlayerControls_toggle"
+      onClick={ props.toggleFullscreen }
+    >
       <Svg src={ props.isFullscreen ? minimizeSvg : expandSvg } />
     </button>
   );

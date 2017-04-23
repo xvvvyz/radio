@@ -1,20 +1,22 @@
+@import './utilities/animations';
+@import './utilities/boxes';
 @import './utilities/media';
 
 .Dashboard {
   overflow-x: hidden;
 
-  &.player-visible {
-    padding-bottom: 3.5rem;
+  @media (min-width: $break-large) {
+    width: calc(100% - #{$player-width});
+    transition: transform $speed-normal;
+    transform: translateX($player-width / 2);
   }
+}
+
+.Dashboard.player_visible {
+  padding-bottom: $player-height-small;
 
   @media (min-width: $break-large) {
-    width: calc(100% - 30vw);
-    transition: transform .3s;
-    transform: translateX(calc(30vw / 2));
-
-    &.player-visible {
-      padding-bottom: 0;
-      transform: translateX(0);
-    }
+    padding-bottom: 0;
+    transform: translateX(0);
   }
 }

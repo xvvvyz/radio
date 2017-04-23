@@ -1,12 +1,13 @@
+@import './utilities/boxes';
+@import './utilities/colors';
 @import './utilities/media';
 
 .CurrentTags .Tag {
-  font-size: 1.1em;
   white-space: nowrap;
 
   &::before {
     content: '+';
-    margin: 0 .8rem;
+    margin: 0 $padding-xxsmall;
   }
 
   &:first-of-type::before {
@@ -15,11 +16,12 @@
   }
 
   button {
-    padding: 0 1rem;
+    display: inline-block;
+    padding: 0 $padding-xsmall;
     border-radius: 2rem;
-    background-color: #fbfbfb;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    line-height: 2rem;
+    background-color: $off-white;
+    box-shadow: 0 1px 3px rgba($black, 0.12), 0 1px 2px rgba($black, 0.24);
+    line-height: $padding-medium;
 
     &:hover {
       text-decoration: line-through;
@@ -35,10 +37,9 @@
   }
 }
 
-
 .List .Tag {
   flex-grow: 1;
-  margin: 1em 1em 0 0;
+  margin: $padding-xsmall $padding-xsmall 0 0;
 
   button {
     width: 100%;
@@ -58,13 +59,13 @@
 
   span {
     display: block;
-    padding: 0 2rem;
-    background-color: #222;
-    color: #fff;
-    line-height: 2.5rem;
+    padding: 0 $padding-medium;
+    background-color: $off-black;
+    color: $white;
+    line-height: $tag-height;
 
-    &.has-image {
-      background-color: rgba(0, 0, 0, .4);
+    &.has_image {
+      background-color: rgba($black, .4);
     }
   }
 }

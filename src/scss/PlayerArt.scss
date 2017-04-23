@@ -1,45 +1,47 @@
+@import './utilities/animations';
+@import './utilities/boxes';
 @import './utilities/media';
 
 .PlayerArt {
   flex: 0 0;
   display: none;
   width: 100%;
-  padding: 1rem;
-  transition: opacity .2s, filter .2s;
+  margin-bottom: $padding-xsmall;
+  transition: opacity $speed-fast, filter $speed-fast;
 
-  img {
-    display: block;
-    width: 100%;
-  }
-
-  @media (min-height: $vertical-break-small) and (max-width: $break-large) {
+  @media (min-height: $vertical-break-small) and (max-width: $break-small) {
     display: block;
     max-width: 20vh;
   }
 
-  @media (min-height: $vertical-break-medium) and (max-width: $break-large) {
+  @media (min-height: $vertical-break-medium) and (max-width: $break-small) {
     max-width: 30vh;
   }
 
-  @media (min-height: $vertical-break-large) and (max-width: $break-large) {
+  @media (min-height: $vertical-break-large) and (max-width: $break-small) {
     max-width: 40vh;
   }
 
-  @media (min-height: $vertical-break-xlarge) and (max-width: $break-large) {
+  @media (min-height: $vertical-break-xlarge) and (max-width: $break-small) {
     max-width: 50vh;
   }
 
-  @media (min-height: $vertical-break-xlarge) and (min-width: $break-large) {
+  @media (min-height: $vertical-break-xlarge) and (min-width: $break-small) {
     display: block;
     max-width: 30vh;
   }
 
-  @media (min-height: $vertical-break-xxlarge) and (min-width: $break-large) {
+  @media (min-height: $vertical-break-xxlarge) and (min-width: $break-small) {
     max-width: 40vh;
   }
 
-  @media (min-height: $vertical-break-xxxlarge) and (min-width: $break-large) {
+  @media (min-height: $vertical-break-xxxlarge) and (min-width: $break-small) {
     max-width: 50vh;
+  }
+
+  img {
+    display: block;
+    width: 100%;
   }
 }
 

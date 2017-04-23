@@ -1,3 +1,4 @@
+@import './utilities/boxes';
 @import './utilities/media';
 
 .CurrentTags {
@@ -5,10 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 2rem;
+  top: $padding-medium;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: $z-1;
 
   @media (min-width: $break-medium) {
     position: relative;

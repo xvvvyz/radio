@@ -1,32 +1,35 @@
+@import './utilities/animations';
+@import './utilities/boxes';
+@import './utilities/colors';
 @import './utilities/media';
 
 .Search {
-  margin-bottom: 2rem;
+  margin-bottom: $padding-medium;
+
+  @media (min-width: $break-medium) {
+    margin-bottom: $padding-large;
+  }
 
   input {
-    width: calc(100% - 4rem);
-    margin: 0 2rem;
-    padding: 1rem 0;
-    border: solid 1px #eee;
+    width: calc(100% - #{$padding-medium} * 2);
+    margin: 0 $padding-medium;
+    padding: $padding-xsmall 0;
+    border: solid 1px darken($off-white, 10%);
     border-radius: 3rem;
-    transition: background-color .5s;
-    background-color: #fafafa;
+    transition: background-color $speed-slow;
+    background-color: $off-white;
     font-size: .9em;
     text-align: center;
 
     &:hover,
     &:focus {
-      background-color: #fff;
+      background-color: $white;
     }
-  }
 
-  @media (min-width: $break-medium) {
-    margin-bottom: 4rem;
-
-    input {
-      width: calc(100% - 8rem);
-      margin: 0 4rem;
-      padding: 1.5rem 0;
+    @media (min-width: $break-medium) {
+      width: calc(100% - #{$padding-large} * 2);
+      margin: 0 $padding-large;
+      padding: $padding-small 0;
       font-size: 1.1em;
     }
   }
