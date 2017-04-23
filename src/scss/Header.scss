@@ -14,19 +14,27 @@
   }
 
   h1 {
-    font-size: 1.1em;
+    font-size: 1.3em;
     line-height: $padding-medium;
     text-transform: uppercase;
     letter-spacing: .1em;
+
+    @media (min-width: $break-medium) {
+      font-size: 1.1em;
+    }
   }
 
   h2 {
     color: $off-black-light;
     font-family: 'Palatino', serif;
-    font-size: 1.1em;
+    font-size: .9em;
     font-weight: normal;
     font-style: italic;
     line-height: $padding-medium;
+
+    @media (min-width: $break-medium) {
+      font-size: 1.1em;
+    }
   }
 
   a {
