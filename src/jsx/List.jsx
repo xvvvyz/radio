@@ -19,5 +19,5 @@ export default function List(props) {
     <ul>{ items }</ul>
   </div>;
 
-  return items.length ? list : null;
+  return items && list;
 };

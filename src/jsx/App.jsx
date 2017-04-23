@@ -29,7 +29,7 @@ export default class App extends Component {
       currentTags: [],
       playlist: false,
       track: false,
-      topTags: store.get(STORE_POPULAR) || [],
+      topTags: knuthShuffle(store.get(STORE_POPULAR) || []),
       relatedTags: [],
     };
 
@@ -49,8 +49,8 @@ export default class App extends Component {
   }
 
   fetchTopTags() {
-    api.explore({ page: 1, per_page: 30 }).then(res => {
-      const tags = [...this.state.topTags, ...this.mapTags(res.filters)];
+    api.explore({ page: 1, per_page: 50 }).then(res => {
+      const tags = this.state.topTags.concat(this.mapTags(res.filters));
       this.setState({ topTags: tags });
       store.set(STORE_POPULAR, tags, STORE_POPULAR_EXPIRY);
     });
@@ -242,7 +242,6 @@ export default class App extends Component {
   renderPlayer() {
     return <Player
       visible={ this.state.playerVisible }
-      currentTags={ this.state.currentTags }
       playlist={ this.state.playlist }
       playlistLoading={ this.state.playlistLoading }
       track={ this.state.track }
