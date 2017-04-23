@@ -50,7 +50,6 @@ export default class App extends Component {
 
   componentDidMount() {
     if (!this.state.topArtists.length) this.fetchTopArtists();
-    if (!this.state.topTags.length) this.fetchTopTags();
   }
 
   fetchTopArtists() {
@@ -58,6 +57,7 @@ export default class App extends Component {
       const artists = this.mapTopArtists(res.artists.artist);
       this.setState({ topArtists: artists });
       store.set(STORE_TOP_ARTISTS, artists, STORE_TOP_ARTISTS_EXPIRY);
+      if (!this.state.topTags.length) this.fetchTopTags();
     });
   }
 
