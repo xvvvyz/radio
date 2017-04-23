@@ -3,6 +3,7 @@
 @import './utilities/media';
 
 .CurrentTags .Tag {
+  padding: $padding-medium / 2 0;
   white-space: nowrap;
 
   &::before {
@@ -13,6 +14,10 @@
   &:first-of-type::before {
     content: '';
     margin: 0;
+  }
+
+  @media (min-width: $break-medium) {
+    padding: 0;
   }
 
   button {
@@ -29,6 +34,7 @@
     }
 
     @media (min-width: $break-medium) {
+      margin: 0;
       padding: 0;
       background-color: transparent;
       box-shadow: none;
@@ -59,13 +65,13 @@
 
   span {
     display: block;
-    padding: 0 $padding-medium;
+    padding: 0 $padding-small;
     background-color: $off-black;
     color: $white;
     line-height: $tag-height;
 
     &.has_image {
-      background-color: rgba($black, .4);
+      background-color: rgba($black, .6);
     }
   }
 }

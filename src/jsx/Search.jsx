@@ -48,6 +48,7 @@ export default class Search extends Component {
         <List
           items={ this.state.tags }
           addTag={ this.props.addTag }
+          fullWidth
         />
       </section>
     );

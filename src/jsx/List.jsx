@@ -1,9 +1,12 @@
+import classNames from 'classnames';
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 import Tag from './Tag.jsx';
 import '../scss/List.scss';
 
 export default function List(props) {
+  if (!props.items.length) return;
+
   const items = props.items.map(item => {
     const isObj = typeof item === 'object';
 
@@ -14,10 +17,16 @@ export default function List(props) {
     />;
   });
 
-  const list = <div className="List fade_in">
-    { props.title ? <h3>{ props.title }</h3> : null }
-    <ul>{ items }</ul>
-  </div>;
+  const className = classNames({
+    List: true,
+    fade_in: true,
+    full_width: props.fullWidth,
+  });
 
-  return items && list;
+  return (
+    <div className={ className }>
+      { props.title && <h3>{ props.title }</h3> }
+      <ul>{ items }</ul>
+    </div>
+  );
 };

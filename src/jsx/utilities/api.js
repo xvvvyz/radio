@@ -40,9 +40,12 @@ const tagsToQuery = tags => {
 };
 
 export default {
-  explore: params => {
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/explore_filters?${query}`);
+  topArtists: () => {
+    return getJson(`https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=4404bce8f9357c0c788326cf72515d50&format=json`);
+  },
+
+  topTags: () => {
+    return getJson(`https://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=4404bce8f9357c0c788326cf72515d50&format=json`);
   },
 
   playlists: (tags, params, mode = 'hot') => {

@@ -9,12 +9,15 @@ import api from './utilities/api.js';
 import help from './utilities/helpers.js';
 import '../scss/App.scss';
 
-const STORE_POPULAR = '_toptags_';
-const STORE_PLAYED = '_played_';
-const STORE_POPULAR_EXPIRY = help.daysFromNow(7);
+const STORE_TOP_ARTISTS = '___top_artists';
+const STORE_TOP_TAGS = '___top_tags';
+const STORE_PLAYED = '___played';
+const STORE_TOP_ARTISTS_EXPIRY = help.daysFromNow(7);
+const STORE_TOP_TAGS_EXPIRY = help.daysFromNow(7);
 const STORE_TAGS_EXPIRY = help.daysFromNow(7);
 const STORE_PLAYED_LIMIT = 2000;
 const PLAYLISTS_LIMIT = 10;
+const BLACKLIST = ['seen live'];
 
 export default class App extends Component {
   constructor() {
@@ -29,8 +32,9 @@ export default class App extends Component {
       currentTags: [],
       playlist: false,
       track: false,
-      topTags: knuthShuffle(store.get(STORE_POPULAR) || []),
-      relatedTags: [],
+      topArtists: store.get(STORE_TOP_ARTISTS) || [],
+      topTags: store.get(STORE_TOP_TAGS) || [],
+      related: [],
     };
 
     this.played = store.get(STORE_PLAYED) || [];
@@ -45,15 +49,36 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    if (!this.state.topArtists.length) this.fetchTopArtists();
     if (!this.state.topTags.length) this.fetchTopTags();
   }
 
-  fetchTopTags() {
-    api.explore({ page: 1, per_page: 50 }).then(res => {
-      const tags = this.state.topTags.concat(this.mapTags(res.filters));
-      this.setState({ topTags: tags });
-      store.set(STORE_POPULAR, tags, STORE_POPULAR_EXPIRY);
+  fetchTopArtists() {
+    api.topArtists().then(res => {
+      const artists = this.mapTopArtists(res.artists.artist);
+      this.setState({ topArtists: artists });
+      store.set(STORE_TOP_ARTISTS, artists, STORE_TOP_ARTISTS_EXPIRY);
     });
+  }
+
+  mapTopArtists(artists) {
+    return artists.map(a => {
+      return { name: a.name, image: a.image[2]['#text'] };
+    });
+  }
+
+  fetchTopTags() {
+    api.topTags().then(res => {
+      const tags = this.mapTopTags(res.tags.tag);
+      this.setState({ topTags: tags });
+      store.set(STORE_TOP_TAGS, tags, STORE_TOP_TAGS_EXPIRY);
+    });
+  }
+
+  mapTopTags(tags) {
+    return tags
+      .map(t => t.name)
+      .filter(t => BLACKLIST.indexOf(t) === -1);
   }
 
   addTag(tag) {
@@ -80,7 +105,7 @@ export default class App extends Component {
     const mapPlaylist = playlist => {
       return {
         id: playlist.id,
-        color: playlist.color_palette[3],
+        color: playlist.color_palette ? playlist.color_palette[3] : '#fff',
         cover: playlist.cover_urls.original,
       };
     };
@@ -147,7 +172,7 @@ export default class App extends Component {
 
   loadPlaylist(playlist, related) {
     const updatedState = {};
-    if (related) updatedState.relatedTags = related;
+    if (related) updatedState.related = related;
     const valid = this.validPlaylist(playlist);
 
     if (valid) {
@@ -225,17 +250,14 @@ export default class App extends Component {
   }
 
   renderDashboard() {
-    const lists = [
-      { name: 'Related', tags: this.state.relatedTags },
-      { name: 'Popular', tags: this.state.topTags },
-    ];
-
     return <Dashboard
       playerVisible={ this.state.playerVisible }
       addTag={ this.addTag }
       removeTag={ this.removeTag }
       currentTags={ this.state.currentTags }
-      lists={ lists }
+      related={ this.state.related }
+      topArtists={ this.state.topArtists }
+      topTags={ this.state.topTags }
     />;
   }
 

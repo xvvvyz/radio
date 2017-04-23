@@ -6,19 +6,19 @@ html {
   font-size: 4vw;
 
   @media (min-width: $break-xsmall) {
-    font-size: 1rem;
+    font-size: 3.4vw;
   }
 
   @media (min-width: $break-small) {
-    font-size: 2.7vw;
+    font-size: 2.6vw;
   }
 
   @media (min-width: $break-medium) {
-    font-size: 2vw;
+    font-size: 1.8vw;
   }
 
   @media (min-width: $break-large) {
-    font-size: 1.5vw;
+    font-size: 1.4vw;
   }
 
   @media (min-width: $break-xlarge) {
@@ -26,6 +26,6 @@ html {
   }
 
   @media (min-width: $break-xxlarge) {
-    font-size: 1.1vw;
+    font-size: 1vw;
   }
 }

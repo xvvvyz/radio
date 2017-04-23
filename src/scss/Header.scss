@@ -1,4 +1,5 @@
 @import './utilities/boxes';
+@import './utilities/colors';
 @import './utilities/media';
 
 .Header {
@@ -19,6 +20,15 @@
     letter-spacing: .1em;
   }
 
+  h2 {
+    color: $off-black-light;
+    font-family: 'Palatino', serif;
+    font-size: 1.1em;
+    font-weight: normal;
+    font-style: italic;
+    line-height: $padding-medium;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -26,9 +36,12 @@
 }
 
 .Header.tags_exist {
-  h1 {
+  h1,
+  h2 {
     visibility: hidden;
+  }
 
+  h1 {
     @media (min-width: $break-medium) {
       visibility: visible;
     }
