@@ -6,7 +6,7 @@
   flex: 0 0;
   display: none;
   width: 100%;
-  margin-bottom: $padding-xsmall;
+  padding-bottom: $padding-xsmall;
   transition: opacity $speed-fast, filter $speed-fast;
 
   @media (min-height: $vertical-break-small) and (max-width: $break-small) {
