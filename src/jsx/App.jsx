@@ -27,7 +27,6 @@ export default class App extends Component {
 
     this.state = {
       playerVisible: false,
-      playlistLoading: true,
       trackLoading: true,
       currentTags: [],
       playlist: false,
@@ -104,11 +103,7 @@ export default class App extends Component {
 
   mapPlaylists(playlists) {
     const mapPlaylist = playlist => {
-      return {
-        id: playlist.id,
-        color: playlist.color_palette ? playlist.color_palette[3] : '#fff',
-        cover: playlist.cover_urls.original,
-      };
+      return { id: playlist.id, cover: playlist.cover_urls.original };
     };
 
     if (playlists.constructor === Array) {
@@ -162,17 +157,6 @@ export default class App extends Component {
     store.set(STORE_PLAYED, this.played);
   }
 
-  loadImage(src) {
-    let img = new Image();
-
-    img.onload = () => {
-      this.setState({ playlistLoading: false });
-      img = null;
-    };
-
-    img.src = src;
-  }
-
   loadPlaylist(playlist, related) {
     const updatedState = {};
     if (related) updatedState.related = related;
@@ -185,15 +169,13 @@ export default class App extends Component {
     }
 
     this.setState(updatedState);
-    if (valid) this.loadImage(this.getCoverSize());
   }
 
   fetchPlaylists({ tags = this.state.currentTags } = {}) {
     this.setState({
       track: false,
       trackLoading: true,
-      playlistLoading: true,
-      playerVisible: true
+      playerVisible: true,
     });
 
     const cleanTags = tags.concat().sort().map(tag => tag.toLowerCase());
@@ -222,7 +204,7 @@ export default class App extends Component {
   }
 
   fetchRelatedPlaylist(playlistId) {
-    this.setState({ track: false, playlistLoading: true, trackLoading: true });
+    this.setState({ track: false, trackLoading: true });
 
     api.nextPlaylist({ mix_id: playlistId }).then(res => {
       this.loadPlaylist(this.mapPlaylists(res.next_mix));
@@ -263,7 +245,6 @@ export default class App extends Component {
         <Player
           visible={ this.state.playerVisible }
           playlist={ this.state.playlist }
-          playlistLoading={ this.state.playlistLoading }
           track={ this.state.track }
           trackLoading={ this.state.trackLoading }
           refresh={ this.fetchPlaylists }

@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import Inferno from 'inferno';
 import Component from 'inferno-component';
-import shader from 'shader';
 import PlayerArt from './PlayerArt.jsx';
 import PlayerControls from './PlayerControls.jsx';
 import PlayerInfo from './PlayerInfo.jsx';
@@ -79,20 +78,6 @@ export default class Player extends Component {
     }
   }
 
-  renderStyle() {
-    const color = this.props.playlist.color || '#fff';
-    const colorLighter = shader(shader(color, .7), -.1);
-    const colorDarker = shader(color, -.6);
-
-    return {
-      backgroundColor: colorLighter,
-      color: colorDarker,
-      fill: colorDarker,
-      stroke: colorDarker,
-      borderColor: colorDarker,
-    };
-  }
-
   render() {
     const className = classNames({
       Player: true,
@@ -101,10 +86,9 @@ export default class Player extends Component {
     });
 
     return (
-      <div className={ className } style={ this.renderStyle() }>
+      <div className={ className }>
         <div className="Player_inner">
           <PlayerArt
-            loading={ this.props.playlistLoading }
             cover={ this.props.getCoverSize() }
           />
           <audio

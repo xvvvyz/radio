@@ -1,5 +1,6 @@
 @import './utilities/animations';
 @import './utilities/boxes';
+@import './utilities/colors';
 @import './utilities/media';
 
 .PlayerControls {
@@ -34,7 +35,6 @@
     width: $control-button-size;
     height: $control-button-size;
     margin: 0 auto;
-    transition: fill $speed-normal;
-    fill: inherit;
+    fill: $off-black;
   }
 }

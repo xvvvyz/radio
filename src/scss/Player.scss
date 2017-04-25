@@ -50,27 +50,21 @@
   top: -100%;
   width: 100%;
   height: 100%;
-  padding: $padding-medium $padding-medium $padding-medium - $padding-xsmall;
+  padding: 0 0 $padding-medium - $padding-xsmall;
   transition: background-color $speed-normal, transform $speed-normal;
   transform: translateY($player-height-small + $padding-medium / 2);
   background-color: $off-white;
-  color: inherit;
-  fill: $off-black;
 
   @media (min-width: $break-large) {
     position: relative;
     top: auto;
-    padding: $padding-large $padding-large $padding-large - $padding-xsmall;
+    padding: 0 0 $padding-large - $padding-xsmall;
     transform: translateY(0);
-    background-color: inherit;
-    fill: inherit;
   }
 }
 
 .Player.fullscreen .Player_inner {
   transform: translateY(100%);
-  background-color: inherit;
-  fill: inherit;
 
   @media (min-width: $break-large) {
     transform: translateY(0);
