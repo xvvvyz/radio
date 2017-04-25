@@ -22,6 +22,12 @@
     &:active {
       transform: scale(.97);
     }
+
+    &:last-of-type {
+      @media (min-width: $break-large) {
+        display: none;
+      }
+    }
   }
 
   svg {
@@ -30,11 +36,5 @@
     margin: 0 auto;
     transition: fill $speed-normal;
     fill: inherit;
-  }
-}
-
-.PlayerControls_toggle {
-  @media (min-width: $break-large) {
-    display: none;
   }
 }

@@ -17,11 +17,7 @@ export default function List(props) {
     />;
   });
 
-  const className = classNames({
-    List: true,
-    fade_in: true,
-    full_width: props.fullWidth,
-  });
+  const className = classNames({ List: true, full_width: props.fullWidth });
 
   return (
     <div className={ className }>

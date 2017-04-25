@@ -79,45 +79,6 @@ export default class Player extends Component {
     }
   }
 
-  renderPlayerArt() {
-    return <PlayerArt
-      loading={ this.props.playlistLoading }
-      cover={ this.props.getCoverSize() }
-    />;
-  }
-
-  renderAudio() {
-    return <audio
-      ref={ player => this.player = player }
-      src={ this.props.track.stream }
-      title={ `${this.props.track.title} by ${this.props.track.artist}` }
-      autoplay
-    />;
-  }
-
-  renderPlayerInfo() {
-    if (this.props.trackLoading) {
-      return <div className="spinner" />;
-    } else {
-      return <PlayerInfo
-        title={ this.props.track.title }
-        artist={ this.props.track.artist }
-      />;
-    }
-  }
-
-  renderPlayerControls() {
-    return <PlayerControls
-      refresh={ this.refresh }
-      play={ this.play }
-      skip={ this.next }
-      pause={ this.pause }
-      toggleFullscreen={ this.toggleFullscreen }
-      isFullscreen={ this.state.isFullscreen }
-      isPlaying={ this.state.isPlaying }
-    />;
-  }
-
   renderStyle() {
     const color = this.props.playlist.color || '#fff';
     const colorLighter = shader(shader(color, .8), -.1);
@@ -142,10 +103,30 @@ export default class Player extends Component {
     return (
       <div className={ className } style={ this.renderStyle() }>
         <div className="Player_inner">
-          { this.renderPlayerArt() }
-          { this.renderAudio() }
-          { this.renderPlayerInfo() }
-          { this.renderPlayerControls() }
+          <PlayerArt
+            loading={ this.props.playlistLoading }
+            cover={ this.props.getCoverSize() }
+          />
+          <audio
+            ref={ player => this.player = player }
+            src={ this.props.track.stream }
+            title={ `${this.props.track.title} by ${this.props.track.artist}` }
+            autoplay
+          />
+          <PlayerInfo
+            title={ this.props.track.title }
+            artist={ this.props.track.artist }
+            loading={ this.props.trackLoading }
+          />
+          <PlayerControls
+            refresh={ this.refresh }
+            play={ this.play }
+            skip={ this.next }
+            pause={ this.pause }
+            toggleFullscreen={ this.toggleFullscreen }
+            isFullscreen={ this.state.isFullscreen }
+            isPlaying={ this.state.isPlaying }
+          />
         </div>
       </div>
     );

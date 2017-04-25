@@ -1,6 +1,8 @@
 @import './utilities/boxes';
+@import './utilities/helpers';
 
 .PlayerInfo {
+  @extend .fade_in;
   flex: 1 1;
   display: flex;
   flex-direction: column;

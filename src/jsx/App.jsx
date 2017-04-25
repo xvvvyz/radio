@@ -23,7 +23,6 @@ const TAG_BLACKLIST = ['seen live'];
 export default class App extends Component {
   constructor() {
     super();
-
     store.addPlugin(expirePlugin);
 
     this.state = {
@@ -41,7 +40,6 @@ export default class App extends Component {
     this.played = store.get(STORE_PLAYED) || [];
     this.skipAllowed = true;
     this.atLastTrack = false;
-
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
@@ -190,10 +188,6 @@ export default class App extends Component {
     if (valid) this.loadImage(this.getCoverSize());
   }
 
-  updateTagData(tagString, data) {
-    store.set(tagString, data, STORE_TAG_DATA_EXPIRY);
-  }
-
   fetchPlaylists({ tags = this.state.currentTags } = {}) {
     this.setState({
       track: false,
@@ -208,7 +202,7 @@ export default class App extends Component {
 
     if (data.playlists && data.index < data.playlists.length - 1) {
       data.index++;
-      this.updateTagData(tagString, data);
+      store.set(tagString, data, STORE_TAG_DATA_EXPIRY);
       this.loadPlaylist(data.playlists[data.index], data.related);
     } else {
       data.page++;
@@ -221,7 +215,7 @@ export default class App extends Component {
       }).then(res => {
         data.playlists = this.mapPlaylists(res.mix_set.mixes);
         data.related = this.mapTags(res.filters);
-        this.updateTagData(tagString, data);
+        store.set(tagString, data, STORE_TAG_DATA_EXPIRY);
         this.loadPlaylist(data.playlists[data.index], data.related);
       });
     }

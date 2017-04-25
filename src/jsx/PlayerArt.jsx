@@ -14,7 +14,7 @@ export default function PlayerArt(props) {
 
   return (
     <div className={ className }>
-      <img src={ props.cover || pixel } />
+      <img src={ props.cover ? props.cover : pixel } />
     </div>
   );
 };

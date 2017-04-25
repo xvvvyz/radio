@@ -1,9 +1,11 @@
 @import './utilities/boxes';
+@import './utilities/helpers';
 @import './utilities/media';
 
 $total-tag-height: $tag-height + $padding-xsmall;
 
 .List {
+  @extend .fade_in;
   margin-bottom: $padding-medium;
   padding: 0 $padding-xsmall 0 $padding-medium;
   box-sizing: border-box;
