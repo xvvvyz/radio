@@ -81,8 +81,8 @@ export default class Player extends Component {
 
   renderStyle() {
     const color = this.props.playlist.color || '#fff';
-    const colorLighter = shader(shader(color, .8), -.1);
-    const colorDarker = shader(color, -.4);
+    const colorLighter = shader(shader(color, .7), -.1);
+    const colorDarker = shader(color, -.6);
 
     return {
       backgroundColor: colorLighter,
