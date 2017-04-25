@@ -10,23 +10,19 @@ import playSvg from '../svg/play.svg';
 import refreshSvg from '../svg/refresh.svg';
 
 export default function PlayerControls(props) {
-  const playMethod = props.isPlaying ? props.pause : props.play;
-  const playSvg = props.isPlaying ? pauseSvg : playSvg;
-  const fullscreenSvg = props.isFullscreen ? minimizeSvg : expandSvg;
-
   return (
     <div className="PlayerControls" style={ props.style }>
       <button onClick={ props.refresh }>
         <Svg src={ refreshSvg } />
       </button>
-      <button onClick={ playMethod }>
-        <Svg src={ playSvg } />
+      <button onClick={ props.isPlaying ? props.pause : props.play }>
+        <Svg src={ props.isPlaying ? pauseSvg : playSvg } />
       </button>
       <button onClick={ props.skip }>
         <Svg src={ nextSvg } />
       </button>
       <button onClick={ props.toggleFullscreen }>
-        <Svg src={ fullscreenSvg } />
+        <Svg src={ props.isFullscreen ? minimizeSvg : expandSvg } />
       </button>
     </div>
   );
