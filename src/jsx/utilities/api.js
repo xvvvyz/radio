@@ -1,73 +1,81 @@
 import 'whatwg-fetch';
 
-const API_HOST = 'https://8tracks.com';
-const TOKEN_MULTIPLIER = 100000000000000;
-const tokens = {};
+const euc = encodeURIComponent;
 
-const getJson = url => {
-  return fetch(url).then(res => res.json());
-};
-
-const getToken = id => {
-  if (!tokens[id]) {
-    tokens[id] = Math.floor(Math.random() * TOKEN_MULTIPLIER);
-  }
-
-  return tokens[id];
-};
-
-const toQuery = obj => {
-  obj.format = 'json';
-  obj.api_version = 3;
-  obj.api_key = '1dce5b8108f82a99ac4cb482fbd6fa96b9cfbec2';
-  const euc = encodeURIComponent;
+const o2q = obj => {
   return Object.keys(obj).map(key => `${euc(key)}=${euc(obj[key])}`).join('&');
 };
 
-const tagsToQuery = tags => {
+const t2q = tags => {
   const mapFunc = tag => {
-    tag = tag.replace(/_/g, '__')
+    let q = tag.replace(/_/g, '__')
       .replace(/\+/g, '&&')
       .replace(/ /g, '_');
 
-    tag = encodeURIComponent(tag);
-    tag = tag.replace(/\./g, '%5E');
+    q = euc(tag);
+    q = q.replace(/\./g, '%5E');
 
-    return tag;
+    return q;
   };
 
   return tags.map(mapFunc).join('+');
 };
 
+const getJson = url => {
+  return fetch(url).then(res => res.json());
+};
+
+const lastApi = params => {
+  const base = 'https://ws.audioscrobbler.com/2.0';
+  params.format = 'json';
+  params.api_key = '4404bce8f9357c0c788326cf72515d50';
+  return getJson(`${base}/?${o2q(params)}`);
+};
+
+const eightToken = id => {
+  if (!eightToken[id]) {
+    eightToken[id] = Math.floor(Math.random() * 100000000000000);
+  }
+
+  return eightToken[id];
+};
+
+const eightApi = path => {
+  const base = 'https://8tracks.com';
+
+  const params = {
+    format: 'json',
+    api_version: 3,
+    api_key: '1dce5b8108f82a99ac4cb482fbd6fa96b9cfbec2',
+  };
+
+  return getJson(`${base}/${path}&${o2q(params)}`);
+};
+
 export default {
-  topArtists: () => {
-    return getJson(`https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=4404bce8f9357c0c788326cf72515d50&format=json`);
+  topArtists: (limit = 50, page = 1) => {
+    return lastApi({ method: 'chart.gettopartists', limit: limit, page: page });
   },
 
-  topTags: () => {
-    return getJson(`https://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=4404bce8f9357c0c788326cf72515d50&format=json`);
+  topTags: (limit = 50, page = 1) => {
+    return lastApi({ method: 'chart.gettoptags', limit: limit, page: page });
   },
 
-  playlists: (tags, params, mode = 'hot') => {
-    const tagQuery = tagsToQuery(tags);
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/explore/${tagQuery}/${mode}?${query}`);
+  playlists: (tags, mode, params) => {
+    return eightApi(`explore/${t2q(tags)}/${mode}?${o2q(params)}`);
   },
 
   nextSong: params => {
-    const token = getToken(params.mix_id);
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/sets/${token}/next?${query}`);
+    const token = eightToken(params.mix_id);
+    return eightApi(`sets/${token}/next?${o2q(params)}`);
   },
 
   nextPlaylist: params => {
-    const token = getToken(params.mix_id);
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/sets/${token}/next_mix.json?${query}`);
+    const token = eightToken(params.mix_id);
+    return eightApi(`sets/${token}/next_mix.json?${o2q(params)}`);
   },
 
   search: params => {
-    const query = toQuery(params);
-    return getJson(`${API_HOST}/tags.json?${query}`);
-  }
+    return eightApi(`tags.json?${o2q(params)}`);
+  },
 };

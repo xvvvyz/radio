@@ -209,7 +209,7 @@ export default class App extends Component {
       data.page++;
       data.index = 0;
 
-      api.playlists(cleanTags, {
+      api.playlists(cleanTags, 'hot', {
         include: 'mixes+explore_filters',
         page: data.page,
         per_page: PLAYLISTS_LIMIT,
