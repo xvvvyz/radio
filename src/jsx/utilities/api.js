@@ -8,12 +8,13 @@ const o2q = obj => {
 
 const t2q = tags => {
   const mapFunc = tag => {
-    let q = tag.replace(/_/g, '__')
+    let q = tag
+      .replace(/_/g, '__')
       .replace(/\+/g, '&&')
       .replace(/ /g, '_');
 
-    q = euc(tag);
-    q = q.replace(/\./g, '%5E');
+    q = euc(q)
+      .replace(/\./g, '%5E');
 
     return q;
   };
@@ -40,16 +41,12 @@ const eightToken = id => {
   return eightToken[id];
 };
 
-const eightApi = path => {
+const eightApi = (path, params) => {
   const base = 'https://8tracks.com';
-
-  const params = {
-    format: 'json',
-    api_version: 3,
-    api_key: '1dce5b8108f82a99ac4cb482fbd6fa96b9cfbec2',
-  };
-
-  return getJson(`${base}/${path}&${o2q(params)}`);
+  params.format = 'json';
+  params.api_version = 3;
+  params.api_key = '1dce5b8108f82a99ac4cb482fbd6fa96b9cfbec2';
+  return getJson(`${base}/${path}?${o2q(params)}`);
 };
 
 export default {
@@ -62,20 +59,20 @@ export default {
   },
 
   playlists: (tags, mode, params) => {
-    return eightApi(`explore/${t2q(tags)}/${mode}?${o2q(params)}`);
+    return eightApi(`explore/${t2q(tags)}/${mode}`, params);
   },
 
   nextSong: params => {
     const token = eightToken(params.mix_id);
-    return eightApi(`sets/${token}/next?${o2q(params)}`);
+    return eightApi(`sets/${token}/next`, params);
   },
 
   nextPlaylist: params => {
     const token = eightToken(params.mix_id);
-    return eightApi(`sets/${token}/next_mix.json?${o2q(params)}`);
+    return eightApi(`sets/${token}/next_mix.json`, params);
   },
 
   search: params => {
-    return eightApi(`tags.json?${o2q(params)}`);
+    return eightApi(`tags.json?${o2q(params)}`, params);
   },
 };

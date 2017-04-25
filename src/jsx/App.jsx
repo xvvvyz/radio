@@ -10,16 +10,14 @@ import help from './utilities/helpers.js';
 import '../scss/App.scss';
 
 const STORE_TOP_ARTISTS = '___top_artists';
-const STORE_TOP_TAGS = '___top_tags';
-const STORE_PLAYED = '___played';
-
 const STORE_TOP_ARTISTS_EXPIRY = help.daysFromNow(7);
+const STORE_TOP_TAGS = '___top_tags';
 const STORE_TOP_TAGS_EXPIRY = help.daysFromNow(7);
-const STORE_TAGS_EXPIRY = help.daysFromNow(7);
-
+const STORE_PLAYED = '___played';
 const STORE_PLAYED_LIMIT = 2000;
+const STORE_TAG_DATA_EXPIRY = help.daysFromNow(7);
+const CURRENT_TAG_LIMIT = 2;
 const PLAYLISTS_PER_PAGE = 10;
-
 const TAG_BLACKLIST = ['seen live'];
 
 export default class App extends Component {
@@ -79,24 +77,25 @@ export default class App extends Component {
   }
 
   mapTopTags(tags) {
-    return tags
-      .map(t => t.name)
-      .filter(t => TAG_BLACKLIST.indexOf(t) === -1);
+    return tags.map(t => t.name).filter(t => TAG_BLACKLIST.indexOf(t) === -1);
   }
 
-  addTag(tag) {
-    const oldTag = this.state.currentTags[0];
-    const isDupe = () => tag.toLowerCase() === oldTag.toLowerCase();
-    const newTags = !oldTag || isDupe() ? [tag] : [tag, oldTag];
+  addTag(newTag) {
+    const newTags = this.state.currentTags
+      .filter(tag => tag.toLowerCase() !== newTag.toLowerCase())
+      .slice(0, CURRENT_TAG_LIMIT - 1);
+
+    newTags.unshift(newTag);
     this.setState({ currentTags: newTags });
     this.fetchPlaylists({ tags: newTags });
   }
 
   removeTag(tag) {
-    const index = this.state.currentTags.indexOf(tag);
-    this.state.currentTags.splice(index, 1);
-    this.setState({ currentTags: this.state.currentTags });
-    return this.state.currentTags;
+    const tags = this.state.currentTags;
+    const index = tag ? tags.indexOf(tag) : tags.length - 1;
+    tags.splice(index, 1);
+    this.setState({ currentTags: tags });
+    return tags;
   }
 
   getCoverSize(size = 512) {
@@ -135,6 +134,8 @@ export default class App extends Component {
   }
 
   mapTrack(track) {
+    if (!track) return false;
+
     return {
       title: track.name.trim(),
       artist: track.performer.trim(),
@@ -150,7 +151,7 @@ export default class App extends Component {
       else return true;
     } else {
       const removableTags = this.state.currentTags.length > 1;
-      if (removableTags) this.fetchPlaylists({ tags: this.removeTag(1) });
+      if (removableTags) this.fetchPlaylists({ tags: this.removeTag() });
       else this.setState({ trackLoading: false });
     }
 
@@ -190,7 +191,7 @@ export default class App extends Component {
   }
 
   updateTagData(tagString, data) {
-    store.set(tagString, data, STORE_TAGS_EXPIRY);
+    store.set(tagString, data, STORE_TAG_DATA_EXPIRY);
   }
 
   fetchPlaylists({ tags = this.state.currentTags } = {}) {
@@ -253,36 +254,28 @@ export default class App extends Component {
     this.setState({ track: false, trackLoading: true });
   }
 
-  renderDashboard() {
-    return <Dashboard
-      playerVisible={ this.state.playerVisible }
-      addTag={ this.addTag }
-      removeTag={ this.removeTag }
-      currentTags={ this.state.currentTags }
-      related={ this.state.related }
-      topArtists={ this.state.topArtists }
-      topTags={ this.state.topTags }
-    />;
-  }
-
-  renderPlayer() {
-    return <Player
-      visible={ this.state.playerVisible }
-      playlist={ this.state.playlist }
-      playlistLoading={ this.state.playlistLoading }
-      track={ this.state.track }
-      trackLoading={ this.state.trackLoading }
-      refresh={ this.fetchPlaylists }
-      next={ this.fetchNextSong }
-      getCoverSize={ this.getCoverSize }
-    />;
-  }
-
   render() {
     return (
       <div className="App">
-        { this.renderDashboard() }
-        { this.renderPlayer() }
+        <Dashboard
+          playerVisible={ this.state.playerVisible }
+          addTag={ this.addTag }
+          removeTag={ this.removeTag }
+          currentTags={ this.state.currentTags }
+          related={ this.state.related }
+          topArtists={ this.state.topArtists }
+          topTags={ this.state.topTags }
+        />
+        <Player
+          visible={ this.state.playerVisible }
+          playlist={ this.state.playlist }
+          playlistLoading={ this.state.playlistLoading }
+          track={ this.state.track }
+          trackLoading={ this.state.trackLoading }
+          refresh={ this.fetchPlaylists }
+          next={ this.fetchNextSong }
+          getCoverSize={ this.getCoverSize }
+        />
       </div>
     );
   }

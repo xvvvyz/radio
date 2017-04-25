@@ -44,14 +44,19 @@
 }
 
 .Header.tags_exist {
-  h1,
-  h2 {
-    visibility: hidden;
-  }
-
   h1 {
+    visibility: hidden;
+
     @media (min-width: $break-medium) {
       visibility: visible;
+    }
+  }
+
+  h2 {
+    visibility: hidden;
+
+    @media (min-width: $break-medium) {
+      display: none;
     }
   }
 }
