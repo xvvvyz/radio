@@ -12,12 +12,15 @@ import '../scss/App.scss';
 const STORE_TOP_ARTISTS = '___top_artists';
 const STORE_TOP_TAGS = '___top_tags';
 const STORE_PLAYED = '___played';
+
 const STORE_TOP_ARTISTS_EXPIRY = help.daysFromNow(7);
 const STORE_TOP_TAGS_EXPIRY = help.daysFromNow(7);
 const STORE_TAGS_EXPIRY = help.daysFromNow(7);
+
 const STORE_PLAYED_LIMIT = 2000;
-const PLAYLISTS_LIMIT = 10;
-const BLACKLIST = ['seen live'];
+const PLAYLISTS_PER_PAGE = 10;
+
+const TAG_BLACKLIST = ['seen live'];
 
 export default class App extends Component {
   constructor() {
@@ -78,12 +81,13 @@ export default class App extends Component {
   mapTopTags(tags) {
     return tags
       .map(t => t.name)
-      .filter(t => BLACKLIST.indexOf(t) === -1);
+      .filter(t => TAG_BLACKLIST.indexOf(t) === -1);
   }
 
   addTag(tag) {
     const oldTag = this.state.currentTags[0];
-    const newTags = !oldTag || tag === oldTag ? [tag] : [tag, oldTag];
+    const isDupe = () => tag.toLowerCase() === oldTag.toLowerCase();
+    const newTags = !oldTag || isDupe() ? [tag] : [tag, oldTag];
     this.setState({ currentTags: newTags });
     this.fetchPlaylists({ tags: newTags });
   }
@@ -212,7 +216,7 @@ export default class App extends Component {
       api.playlists(cleanTags, 'hot', {
         include: 'mixes+explore_filters',
         page: data.page,
-        per_page: PLAYLISTS_LIMIT,
+        per_page: PLAYLISTS_PER_PAGE,
       }).then(res => {
         data.playlists = this.mapPlaylists(res.mix_set.mixes);
         data.related = this.mapTags(res.filters);
