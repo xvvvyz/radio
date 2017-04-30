@@ -27,4 +27,10 @@
 
 .PlayerInfo_title {
   font-size: .9em;
+
+  svg {
+    display: inline;
+    width: .8em;
+    height: .8em;
+  }
 }
