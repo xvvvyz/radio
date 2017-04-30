@@ -31,14 +31,15 @@ export default class App extends Component {
       currentTags: [],
       playlist: false,
       track: false,
-      topArtists: knuthShuffle(store.get(STORE_TOP_ARTISTS) || []),
-      topTags: knuthShuffle(store.get(STORE_TOP_TAGS) || []),
+      topArtists: store.get(STORE_TOP_ARTISTS) || [],
+      topTags: store.get(STORE_TOP_TAGS) || [],
       related: [],
     };
 
     this.played = store.get(STORE_PLAYED) || [];
     this.skipAllowed = true;
     this.atLastTrack = false;
+    this.topArtistsPage = 0;
     this.shuffleTopArtists = this.shuffleTopArtists.bind(this);
     this.shuffleTopTags = this.shuffleTopTags.bind(this);
     this.shuffleRelated = this.shuffleRelated.bind(this);
@@ -51,14 +52,20 @@ export default class App extends Component {
 
   componentDidMount() {
     if (!this.state.topArtists.length) this.fetchTopArtists();
+    else this.topArtistsPage++;
+    if (!this.state.topTags.length) this.fetchTopTags();
   }
 
   fetchTopArtists() {
-    api.topArtists().then(res => {
+    this.topArtistsPage++;
+
+    api.topArtists(30, this.topArtistsPage).then(res => {
       const artists = this.mapTopArtists(res.artists.artist);
-      this.setState({ topArtists: artists });
-      store.set(STORE_TOP_ARTISTS, artists, STORE_TOP_ARTISTS_EXPIRY);
-      if (!this.state.topTags.length) this.fetchTopTags();
+      this.setState({ topArtists: [...this.state.topArtists, ...artists] });
+
+      if (this.topArtistsPage === 1) {
+        store.set(STORE_TOP_ARTISTS, artists, STORE_TOP_ARTISTS_EXPIRY);
+      }
     });
   }
 
@@ -68,8 +75,8 @@ export default class App extends Component {
     });
   }
 
-  fetchTopTags() {
-    api.topTags().then(res => {
+  fetchTopTags(page) {
+    api.topTags(200).then(res => {
       const tags = this.mapTopTags(res.tags.tag);
       this.setState({ topTags: tags });
       store.set(STORE_TOP_TAGS, tags, STORE_TOP_TAGS_EXPIRY);
@@ -82,6 +89,7 @@ export default class App extends Component {
 
   shuffleTopArtists() {
     this.setState({ topArtists: knuthShuffle(this.state.topArtists) });
+    this.fetchTopArtists();
   }
 
   shuffleTopTags() {
@@ -246,6 +254,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.dir(this.state.topTags);
     return (
       <div className="App">
         <Dashboard
