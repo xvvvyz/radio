@@ -11,7 +11,7 @@ export default function PlayerInfo(props) {
   if (props.loading) return <div className="spinner" />;
   if (!props.title && !props.artist) return;
   document.title = `${props.title} by ${props.artist}`;
-  const searchQuery = encodeURIComponent(`${props.title} ${props.artist}`);
+  const searchQuery = encodeURIComponent(`${props.artist} ${props.title}`);
   const searchLink = `https://soundcloud.com/search/sounds?q=${searchQuery}`;
 
   return (
