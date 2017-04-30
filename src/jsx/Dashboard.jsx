@@ -26,6 +26,8 @@ export default function Dashboard(props) {
         topArtists={ props.topArtists }
         topTags={ props.topTags }
         addTag={ props.addTag }
+        shuffleTopArtists={ props.shuffleTopArtists }
+        shuffleTopTags={ props.shuffleTopTags }
       />
     </main>
   );

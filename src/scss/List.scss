@@ -21,19 +21,6 @@ $total-tag-height: $tag-height + $padding-xsmall;
     padding: 0 $padding-large - $padding-xsmall 0 0;
   }
 
-  h3 {
-    margin: 0 $padding-xsmall $padding-xsmall .2em;
-    font-size: .8em;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: .2em;
-
-    @media (min-width: $break-medium) {
-      margin: 0;
-      text-align: left;
-    }
-  }
-
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -60,5 +47,48 @@ $total-tag-height: $tag-height + $padding-xsmall;
 
   @media (min-width: $break-medium) {
     padding-left: $padding-large;
+  }
+
+  ul {
+    max-height: calc(#{$total-tag-height} * 2);
+  }
+}
+
+.List_header {
+  display: block;
+  width: calc(100% - #{$padding-xsmall});
+  margin-bottom: $padding-xsmall;
+
+  @media (min-width: $break-medium) {
+    margin: 0;
+    text-align: left;
+  }
+
+  h3 {
+    margin: 0 0 0 .2em;
+    font-size: .8em;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+
+    @media (min-width: $break-medium) {
+      margin: 0;
+      text-align: left;
+    }
+  }
+
+  svg {
+    display: inline;
+    width: .8em;
+    height: .8em;
+    margin-left: 1em;
+    vertical-align: baseline;
+
+    @media (min-width: $break-medium) {
+      float: right;
+      width: 1em;
+      height: 1em;
+      margin-top: .1em;
+    }
   }
 }

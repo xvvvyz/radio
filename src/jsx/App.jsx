@@ -39,6 +39,8 @@ export default class App extends Component {
     this.played = store.get(STORE_PLAYED) || [];
     this.skipAllowed = true;
     this.atLastTrack = false;
+    this.shuffleTopArtists = this.shuffleTopArtists.bind(this);
+    this.shuffleTopTags = this.shuffleTopTags.bind(this);
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
@@ -65,6 +67,10 @@ export default class App extends Component {
     });
   }
 
+  shuffleTopArtists() {
+    this.setState({ topArtists: knuthShuffle(this.state.topArtists) });
+  }
+
   fetchTopTags() {
     api.topTags().then(res => {
       const tags = this.mapTopTags(res.tags.tag);
@@ -75,6 +81,10 @@ export default class App extends Component {
 
   mapTopTags(tags) {
     return tags.map(t => t.name).filter(t => TAG_BLACKLIST.indexOf(t) === -1);
+  }
+
+  shuffleTopTags() {
+    this.setState({ topTags: knuthShuffle(this.state.topTags) });
   }
 
   addTag(newTag) {
@@ -240,7 +250,9 @@ export default class App extends Component {
           currentTags={ this.state.currentTags }
           related={ this.state.related }
           topArtists={ this.state.topArtists }
+          shuffleTopArtists={ this.shuffleTopArtists }
           topTags={ this.state.topTags }
+          shuffleTopTags={ this.shuffleTopTags }
         />
         <Player
           visible={ this.state.playerVisible }

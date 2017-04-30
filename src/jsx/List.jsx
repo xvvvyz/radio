@@ -1,11 +1,19 @@
 import classNames from 'classnames';
 import Inferno from 'inferno';
 import Component from 'inferno-component';
+import Svg from './svg.jsx';
 import Tag from './Tag.jsx';
 import '../scss/List.scss';
+import shuffleSvg from '../svg/shuffle.svg';
 
 export default function List(props) {
   if (!props.items.length) return;
+
+  const title = (
+    <button className="List_header" onClick={ props.shuffle }>
+      <h3>{ props.title }{ props.shuffle && <Svg src={ shuffleSvg } /> }</h3>
+    </button>
+  );
 
   const items = props.items.map(item => {
     const isObj = typeof item === 'object';
@@ -21,7 +29,7 @@ export default function List(props) {
 
   return (
     <div className={ className }>
-      { props.title && <h3>{ props.title }</h3> }
+      { props.title && title}
       <ul>{ items }</ul>
     </div>
   );

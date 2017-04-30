@@ -16,11 +16,13 @@ export default function Lists(props) {
         title="Artists"
         items={ props.topArtists }
         addTag={ props.addTag }
+        shuffle={ props.shuffleTopArtists }
       />
       <List
         title="Genres"
         items={ props.topTags }
         addTag={ props.addTag }
+        shuffle={ props.shuffleTopTags }
       />
     </section>
   );
