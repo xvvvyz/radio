@@ -10,6 +10,7 @@ export default function Lists(props) {
         title="Related"
         items={ props.related }
         addTag={ props.addTag }
+        shuffle={ props.shuffleRelated }
         fullWidth
       />
       <List

@@ -38,7 +38,9 @@ $total-tag-height: $tag-height + $padding-xsmall;
   width: 100%;
 
   ul {
-    max-height: calc(#{$total-tag-height} * 3);
+    @media (min-width: $break-medium) {
+      max-height: calc(#{$total-tag-height} * 3);
+    }
   }
 }
 

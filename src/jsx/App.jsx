@@ -31,8 +31,8 @@ export default class App extends Component {
       currentTags: [],
       playlist: false,
       track: false,
-      topArtists: store.get(STORE_TOP_ARTISTS) || [],
-      topTags: store.get(STORE_TOP_TAGS) || [],
+      topArtists: knuthShuffle(store.get(STORE_TOP_ARTISTS) || []),
+      topTags: knuthShuffle(store.get(STORE_TOP_TAGS) || []),
       related: [],
     };
 
@@ -41,6 +41,7 @@ export default class App extends Component {
     this.atLastTrack = false;
     this.shuffleTopArtists = this.shuffleTopArtists.bind(this);
     this.shuffleTopTags = this.shuffleTopTags.bind(this);
+    this.shuffleRelated = this.shuffleRelated.bind(this);
     this.addTag = this.addTag.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
@@ -67,10 +68,6 @@ export default class App extends Component {
     });
   }
 
-  shuffleTopArtists() {
-    this.setState({ topArtists: knuthShuffle(this.state.topArtists) });
-  }
-
   fetchTopTags() {
     api.topTags().then(res => {
       const tags = this.mapTopTags(res.tags.tag);
@@ -83,8 +80,16 @@ export default class App extends Component {
     return tags.map(t => t.name).filter(t => TAG_BLACKLIST.indexOf(t) === -1);
   }
 
+  shuffleTopArtists() {
+    this.setState({ topArtists: knuthShuffle(this.state.topArtists) });
+  }
+
   shuffleTopTags() {
     this.setState({ topTags: knuthShuffle(this.state.topTags) });
+  }
+
+  shuffleRelated() {
+    this.setState({ related: knuthShuffle(this.state.related) });
   }
 
   addTag(newTag) {
@@ -250,9 +255,10 @@ export default class App extends Component {
           currentTags={ this.state.currentTags }
           related={ this.state.related }
           topArtists={ this.state.topArtists }
-          shuffleTopArtists={ this.shuffleTopArtists }
           topTags={ this.state.topTags }
+          shuffleTopArtists={ this.shuffleTopArtists }
           shuffleTopTags={ this.shuffleTopTags }
+          shuffleRelated={ this.shuffleRelated }
         />
         <Player
           visible={ this.state.playerVisible }
