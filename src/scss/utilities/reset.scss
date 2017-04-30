@@ -38,12 +38,15 @@ button {
   outline: none;
   font-size: inherit;
   appearance: none;
-  cursor: pointer;
 
   &::-moz-focus-inner {
     padding: 0;
     border: inherit;
   }
+}
+
+button {
+  cursor: pointer;
 }
 
 ul,
