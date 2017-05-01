@@ -39,6 +39,10 @@ button {
   font-size: inherit;
   appearance: none;
 
+  &:active {
+    color: inherit;
+  }
+
   &::-moz-focus-inner {
     padding: 0;
     border: inherit;

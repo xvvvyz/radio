@@ -7,7 +7,7 @@ export default function Lists(props) {
   return (
     <section className="Lists">
       <List
-        title="Related"
+        title="Suggested"
         items={ props.related }
         addTag={ props.addTag }
         shuffle={ props.shuffleRelated }

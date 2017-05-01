@@ -24,7 +24,7 @@ $total-tag-height: $tag-height + $padding-xsmall;
   ul {
     display: flex;
     flex-wrap: wrap;
-    max-height: calc(#{$total-tag-height} * 6);
+    max-height: calc(#{$total-tag-height} * 5);
     overflow: hidden;
 
     @media (min-width: $break-medium) {

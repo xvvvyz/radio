@@ -10,15 +10,15 @@ import help from './utilities/helpers.js';
 import '../scss/App.scss';
 
 const STORE_TOP_ARTISTS = '___top_artists';
-const STORE_TOP_ARTISTS_EXPIRY = help.daysFromNow(7);
+const STORE_TOP_ARTISTS_EXPIRY = help.daysFromNow(1);
 const STORE_TOP_TAGS = '___top_tags';
-const STORE_TOP_TAGS_EXPIRY = help.daysFromNow(7);
+const STORE_TOP_TAGS_EXPIRY = help.daysFromNow(1);
 const STORE_PLAYED = '___played';
 const STORE_PLAYED_LIMIT = 2000;
 const STORE_TAG_DATA_EXPIRY = help.daysFromNow(7);
 const CURRENT_TAG_LIMIT = 2;
 const PLAYLISTS_PER_PAGE = 10;
-const TAG_BLACKLIST = ['seen live'];
+const TAG_BLACKLIST = ['seen live', 'under 2000 listeners'];
 
 export default class App extends Component {
   constructor() {
@@ -76,7 +76,7 @@ export default class App extends Component {
   }
 
   fetchTopTags(page) {
-    api.topTags(200).then(res => {
+    api.topTags().then(res => {
       const tags = this.mapTopTags(res.tags.tag);
       this.setState({ topTags: tags });
       store.set(STORE_TOP_TAGS, tags, STORE_TOP_TAGS_EXPIRY);
