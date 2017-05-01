@@ -53,6 +53,10 @@ $total-tag-height: $tag-height + $padding-xsmall;
 
   ul {
     max-height: calc(#{$total-tag-height} * 2);
+
+    @media (min-width: $break-medium) {
+      max-height: calc(#{$total-tag-height} * 1);
+    }
   }
 }
 
