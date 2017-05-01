@@ -64,32 +64,21 @@ $total-tag-height: $tag-height + $padding-xsmall;
   display: block;
   width: calc(100% - #{$padding-xsmall});
   margin-bottom: $padding-xsmall;
+  padding: $padding-xxxsmall 0;
 
   @media (min-width: $break-medium) {
     margin: 0;
-    text-align: left;
+    padding: 0;
   }
 
   h3 {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin: 0;
     font-size: .8rem;
     text-transform: uppercase;
     letter-spacing: .2em;
-
-    @media (min-width: $break-medium) {
-      justify-content: space-between;
-    }
-  }
-
-  span {
-    padding-left: .2em;
-
-    @media (min-width: $break-medium) {
-      padding-left: 0;
-    }
   }
 
   svg {
@@ -97,9 +86,5 @@ $total-tag-height: $tag-height + $padding-xsmall;
     width: .8rem;
     height: .8rem;
     margin-left: 1em;
-
-    @media (min-width: $break-medium) {
-      float: right;
-    }
   }
 }
