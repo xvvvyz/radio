@@ -17,7 +17,7 @@ const STORE_PLAYED = '___played';
 const STORE_PLAYED_LIMIT = 2000;
 const STORE_TAG_DATA_EXPIRY = help.daysFromNow(7);
 const CURRENT_TAG_LIMIT = 2;
-const PLAYLISTS_PER_PAGE = 10;
+const PLAYLISTS_PER_PAGE = 5;
 const TAG_BLACKLIST = ['seen live', 'under 2000 listeners'];
 
 export default class App extends Component {
@@ -202,12 +202,12 @@ export default class App extends Component {
     });
 
     const cleanTags = tags.concat().sort().map(tag => tag.toLowerCase());
-    const tagString = cleanTags.toString();
-    const data = store.get(tagString) || { page: 0, index: 0 };
+    const tagHash = help.hash(cleanTags.toString());
+    const data = store.get(tagHash) || { page: 0, index: 0 };
 
     if (data.playlists && data.index < data.playlists.length - 1) {
       data.index++;
-      store.set(tagString, data, STORE_TAG_DATA_EXPIRY);
+      store.set(tagHash, data, STORE_TAG_DATA_EXPIRY);
       this.loadPlaylist(data.playlists[data.index], data.related);
     } else {
       data.page++;
@@ -220,7 +220,7 @@ export default class App extends Component {
       }).then(res => {
         data.playlists = this.mapPlaylists(res.mix_set.mixes);
         data.related = this.mapTags(res.filters);
-        store.set(tagString, data, STORE_TAG_DATA_EXPIRY);
+        store.set(tagHash, data, STORE_TAG_DATA_EXPIRY);
         this.loadPlaylist(data.playlists[data.index], data.related);
       });
     }
@@ -254,7 +254,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.dir(this.state.topTags);
     return (
       <div className="App">
         <Dashboard
