@@ -71,30 +71,35 @@ $total-tag-height: $tag-height + $padding-xsmall;
   }
 
   h3 {
-    margin: 0 0 0 .2em;
-    font-size: .8em;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-size: .8rem;
     text-transform: uppercase;
     letter-spacing: .2em;
 
     @media (min-width: $break-medium) {
-      margin: 0;
-      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  span {
+    padding-left: .2em;
+
+    @media (min-width: $break-medium) {
+      padding-left: 0;
     }
   }
 
   svg {
     display: inline;
-    width: .8em;
-    height: .8em;
+    width: .8rem;
+    height: .8rem;
     margin-left: 1em;
-    vertical-align: baseline;
 
     @media (min-width: $break-medium) {
       float: right;
-      width: 1em;
-      height: 1em;
-      margin-top: .1em;
     }
   }
 }

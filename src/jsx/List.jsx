@@ -11,7 +11,10 @@ export default function List(props) {
 
   const title = (
     <button className="List_header" onClick={ props.shuffle }>
-      <h3>{ props.title }<Svg src={ shuffleSvg } /></h3>
+      <h3>
+        <span>{ props.title }</span>
+        <Svg src={ shuffleSvg } />
+      </h3>
     </button>
   );
 
