@@ -88,19 +88,24 @@ export default class App extends Component {
   }
 
   shuffleTopArtists() {
+    ga('send', 'event', 'tags', 'shuffle', 'artists');
     this.setState({ topArtists: knuthShuffle(this.state.topArtists) });
     this.fetchTopArtists();
   }
 
   shuffleTopTags() {
+    ga('send', 'event', 'tags', 'shuffle', 'genres');
     this.setState({ topTags: knuthShuffle(this.state.topTags) });
   }
 
   shuffleRelated() {
+    ga('send', 'event', 'tags', 'shuffle', 'related');
     this.setState({ related: knuthShuffle(this.state.related) });
   }
 
   addTag(newTag) {
+    ga('send', 'event', 'tags', 'add', newTag);
+
     const newTags = this.state.currentTags
       .filter(tag => tag.toLowerCase() !== newTag.toLowerCase())
       .slice(0, CURRENT_TAG_LIMIT - 1);
@@ -111,6 +116,7 @@ export default class App extends Component {
   }
 
   removeTag(tag) {
+    ga('send', 'event', 'tags', 'remove', tag);
     const tags = this.state.currentTags;
     const index = tag ? tags.indexOf(tag) : tags.length - 1;
     tags.splice(index, 1);

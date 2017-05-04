@@ -27,6 +27,8 @@ export default class Search extends Component {
     this.oldValue = target.value;
 
     if (target.value) {
+      ga('send', 'event', 'search', 'search', target.value);
+
       api.search({ q: target.value, per_page: 10 }).then(res => {
         this.setState({ tags: res.tag_cloud.tags });
       });

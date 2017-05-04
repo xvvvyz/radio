@@ -37,18 +37,22 @@ export default class Player extends Component {
   }
 
   refresh() {
+    ga('send', 'event', 'player', 'refresh');
     this.props.refresh();
   }
 
   play() {
+    ga('send', 'event', 'player', 'play');
     this.player.play();
   }
 
   pause() {
+    ga('send', 'event', 'player', 'pause');
     this.player.pause();
   }
 
   next() {
+    ga('send', 'event', 'player', 'next');
     this.props.next();
   }
 
