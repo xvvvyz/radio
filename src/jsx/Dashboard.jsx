@@ -19,13 +19,13 @@ export default function Dashboard(props) {
         removeTag={ props.removeTag }
       />
       <Search
-        addTag={ props.addTag }
+        addTags={ props.addTags }
       />
       <Lists
         related={ props.related }
         topArtists={ props.topArtists }
         topTags={ props.topTags }
-        addTag={ props.addTag }
+        addTags={ props.addTags }
         shuffleTopArtists={ props.shuffleTopArtists }
         shuffleTopTags={ props.shuffleTopTags }
         shuffleRelated={ props.shuffleRelated }

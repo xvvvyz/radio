@@ -43,7 +43,7 @@ export default class App extends Component {
     this.shuffleTopArtists = this.shuffleTopArtists.bind(this);
     this.shuffleTopTags = this.shuffleTopTags.bind(this);
     this.shuffleRelated = this.shuffleRelated.bind(this);
-    this.addTag = this.addTag.bind(this);
+    this.addTags = this.addTags.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
     this.fetchNextSong = this.fetchNextSong.bind(this);
@@ -54,6 +54,7 @@ export default class App extends Component {
     if (!this.state.topArtists.length) this.fetchTopArtists();
     else this.topArtistsPage++;
     if (!this.state.topTags.length) this.fetchTopTags();
+    this.parseUrl();
   }
 
   fetchTopArtists() {
@@ -103,16 +104,42 @@ export default class App extends Component {
     this.setState({ related: knuthShuffle(this.state.related) });
   }
 
-  addTag(newTag) {
-    ga('send', 'event', 'tags', 'add', newTag);
+  addTags(newTags) {
+    if (newTags.constructor !== Array) {
+      const newTag = newTags;
 
-    const newTags = this.state.currentTags
-      .filter(tag => tag.toLowerCase() !== newTag.toLowerCase())
-      .slice(0, CURRENT_TAG_LIMIT - 1);
+      newTags = this.state.currentTags
+        .filter(tag => tag.toLowerCase() !== newTag.toLowerCase())
+        .slice(0, CURRENT_TAG_LIMIT - 1);
 
-    newTags.unshift(newTag);
+      newTags.unshift(newTag);
+      ga('send', 'event', 'tags', 'add', newTag);
+    }
+
     this.setState({ currentTags: newTags });
     this.fetchPlaylists({ tags: newTags });
+    this.setUrl(newTags);
+  }
+
+  setUrl(tags) {
+    window.location.hash = tags.map(tag => {
+        return tag
+          .replace(/_/g, '[underscore]')
+          .replace(/ /g, '_')
+          .replace(/\+/g, '[plus]');
+      })
+      .join('+');
+  }
+
+  parseUrl() {
+    const tags = window.location.hash
+      .split('#')[1]
+      .replace(/_/g, ' ')
+      .replace(/\[underscore\]/g, '_')
+      .split('+')
+      .map(tag => tag.replace(/\[plus\]/g, '+'));
+
+    this.addTags(tags);
   }
 
   removeTag(tag) {
@@ -121,6 +148,7 @@ export default class App extends Component {
     const index = tag ? tags.indexOf(tag) : tags.length - 1;
     tags.splice(index, 1);
     this.setState({ currentTags: tags });
+    this.setUrl(tags);
     return tags;
   }
 
@@ -264,7 +292,7 @@ export default class App extends Component {
       <div className="App">
         <Dashboard
           playerVisible={ this.state.playerVisible }
-          addTag={ this.addTag }
+          addTags={ this.addTags }
           removeTag={ this.removeTag }
           currentTags={ this.state.currentTags }
           related={ this.state.related }

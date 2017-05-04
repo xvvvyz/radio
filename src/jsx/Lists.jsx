@@ -9,20 +9,20 @@ export default function Lists(props) {
       <List
         title="Suggested"
         items={ props.related }
-        addTag={ props.addTag }
+        addTags={ props.addTags }
         shuffle={ props.shuffleRelated }
         fullWidth
       />
       <List
         title="Artists"
         items={ props.topArtists }
-        addTag={ props.addTag }
+        addTags={ props.addTags }
         shuffle={ props.shuffleTopArtists }
       />
       <List
         title="Genres"
         items={ props.topTags }
-        addTag={ props.addTag }
+        addTags={ props.addTags }
         shuffle={ props.shuffleTopTags }
       />
     </section>

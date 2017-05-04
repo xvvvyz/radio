@@ -24,7 +24,7 @@ export default function List(props) {
     return <Tag
       value={ isObj ? item.name : item }
       image={ isObj ? item.image : null }
-      onClick={ props.addTag }
+      onClick={ props.addTags }
     />;
   });
 
