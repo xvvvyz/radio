@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "copy-webpack-plugin": "^4.0.1",
     "inferno-component": "^3.0.4",
     "knuth-shuffle": "^1.0.1",
     "store": "^2.0.4",

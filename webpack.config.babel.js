@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 module.exports = env => {
   const styleLoader = [
@@ -12,6 +13,7 @@ module.exports = env => {
 
   const plugins = [
     new HtmlWebpackPlugin({ template: 'index.html', hash: true }),
+    new CopyWebpackPlugin([{ from: 'public' }]),
   ];
 
   const productionPlugins = [
