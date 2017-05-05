@@ -1,3 +1,4 @@
+@import './utilities/animations';
 @import './utilities/boxes';
 @import './utilities/colors';
 @import './utilities/media';
@@ -45,33 +46,66 @@
 
 .List .Tag {
   flex-grow: 1;
-  margin: $padding-xsmall $padding-xsmall 0 0;
 
   button {
     width: 100%;
-    border-radius: .3em;
     background-size: cover;
     background-position: center;
-    overflow: hidden;
+
+    &.bg-1 {
+      background: lighten($dark-blue, 1%);
+    }
+
+    &.bg-2 {
+      background: lighten($dark-blue, 2%);
+    }
+
+    &.bg-3 {
+      background: lighten($dark-blue, 3%);
+    }
+
+    &.bg-4 {
+      background: lighten($dark-blue, 4%);
+    }
+
+    &.bg-5 {
+      background: lighten($dark-blue, 5%);
+    }
+
+    &.bg-6 {
+      background: lighten($dark-blue, 6%);
+    }
+
+    &.bg-7 {
+      background: lighten($dark-blue, 7%);
+    }
+
+    &.bg-8 {
+      background: lighten($dark-blue, 8%);
+    }
+
+    &.bg-9 {
+      background: lighten($dark-blue, 9%);
+    }
+
+    &.bg-10 {
+      background: lighten($dark-blue, 10%);
+    }
 
     &:hover {
       cursor: pointer;
-    }
-
-    &:active {
-      transform: scale(.97);
     }
   }
 
   span {
     display: block;
-    padding: 0 $padding-small;
-    background-color: $off-black;
+    padding: 0 $padding-medium;
     color: $off-white;
+    font-size: .9em;
     line-height: $tag-height;
 
     &.has_image {
-      background-color: rgba($black, .6);
+      background-color: rgba($dark-blue, .7);
     }
   }
 }

@@ -21,7 +21,11 @@ export default class Tag extends Component {
   render() {
     return (
       <li className="Tag">
-        <button onClick={ this.onClick } style={ this.renderButtonStyle() }>
+        <button
+          onClick={ this.onClick }
+          style={ this.renderButtonStyle() }
+          className={ 'bg-' + Math.floor(Math.random() * 10 + 1) }
+        >
           <span className={ this.props.image && 'has_image' }>
             { this.props.value }
           </span>

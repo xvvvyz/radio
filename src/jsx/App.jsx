@@ -60,7 +60,7 @@ export default class App extends Component {
   fetchTopArtists() {
     this.topArtistsPage++;
 
-    api.topArtists(30, this.topArtistsPage).then(res => {
+    api.topArtists(20, this.topArtistsPage).then(res => {
       const artists = this.mapTopArtists(res.artists.artist);
       this.setState({ topArtists: [...this.state.topArtists, ...artists] });
 
