@@ -26,7 +26,7 @@
     overflow: hidden;
 
     @media (min-width: $break-medium) {
-      max-height: calc(#{$tag-height} * 5);
+      max-height: calc(#{$tag-height} * 7);
     }
   }
 }
@@ -63,11 +63,10 @@
 .List_header {
   display: block;
   width: 100%;
-  margin-bottom: $padding-medium;
+  margin-bottom: $padding-xsmall;
   padding: $padding-xxxsmall 0;
 
   @media (min-width: $break-medium) {
-    margin-bottom: $padding-xsmall;
     padding: 0;
   }
 

@@ -51,45 +51,46 @@
     width: 100%;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 
     &.bg-1 {
-      background: lighten($dark-blue, 1%);
+      background-color: lighten($dark-blue, 1%);
     }
 
     &.bg-2 {
-      background: lighten($dark-blue, 2%);
+      background-color: lighten($dark-blue, 2%);
     }
 
     &.bg-3 {
-      background: lighten($dark-blue, 3%);
+      background-color: lighten($dark-blue, 3%);
     }
 
     &.bg-4 {
-      background: lighten($dark-blue, 4%);
+      background-color: lighten($dark-blue, 4%);
     }
 
     &.bg-5 {
-      background: lighten($dark-blue, 5%);
+      background-color: lighten($dark-blue, 5%);
     }
 
     &.bg-6 {
-      background: lighten($dark-blue, 6%);
+      background-color: lighten($dark-blue, 6%);
     }
 
     &.bg-7 {
-      background: lighten($dark-blue, 7%);
+      background-color: lighten($dark-blue, 7%);
     }
 
     &.bg-8 {
-      background: lighten($dark-blue, 8%);
+      background-color: lighten($dark-blue, 8%);
     }
 
     &.bg-9 {
-      background: lighten($dark-blue, 9%);
+      background-color: lighten($dark-blue, 9%);
     }
 
     &.bg-10 {
-      background: lighten($dark-blue, 10%);
+      background-color: lighten($dark-blue, 10%);
     }
 
     &:hover {
