@@ -50,9 +50,25 @@
 
   button {
     width: 100%;
+    transition: opacity $speed-fast;
+    border: solid 1px $dark-blue;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    opacity: .85;
+
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+
+  span {
+    display: block;
+    padding: 0 $padding-medium;
+    color: $off-white;
+    font-size: .8em;
+    line-height: $tag-height;
 
     &.bg-1 {
       background-color: lighten($dark-blue, 1%);
@@ -94,21 +110,8 @@
       background-color: lighten($dark-blue, 10%);
     }
 
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  span {
-    display: block;
-    padding: 0 $padding-medium;
-    border: solid 1px $dark-blue;
-    color: $off-white;
-    font-size: .8em;
-    line-height: $tag-height;
-
     &.has_image {
-      background-color: rgba($dark-blue, .7);
+      opacity: .8
     }
   }
 }

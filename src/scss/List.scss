@@ -26,6 +26,7 @@ $tag-height: $tag-height + 2px;
     max-height: calc(#{$tag-height} * 4 + 2px);
     border: solid 1px $dark-blue;
     border-radius: .3rem;
+    background-color: $black;
     overflow: hidden;
 
     @media (min-width: $break-medium) {
