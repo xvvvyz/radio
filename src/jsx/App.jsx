@@ -279,12 +279,12 @@ export default class App extends Component {
 
     if (!this.state.track || this.skipAllowed && !this.atLastTrack) {
       api.nextSong({ mix_id: playlistId }, this.proxy).then(res => {
-        if (!res.errors) {
-          const track = this.mapTrack(res.set.track);
-          this.setState({ track: track, trackLoading: false });
-          this.skipAllowed = res.set.skip_allowed;
-          this.atLastTrack = res.set.at_last_track;
-        } else if (res.notices && res.notices.includes('international streaming')) {
+        const track = this.mapTrack(res.set.track);
+        this.setState({ track: track, trackLoading: false });
+        this.skipAllowed = res.set.skip_allowed;
+        this.atLastTrack = res.set.at_last_track;
+      }).catch(err => {
+        if (!this.proxy) {
           this.proxy = true;
           this.fetchNextSong(playlistId);
         }
