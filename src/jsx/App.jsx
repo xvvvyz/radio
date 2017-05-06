@@ -122,20 +122,25 @@ export default class App extends Component {
   }
 
   setUrl(tags) {
-    window.location.hash = tags.map(tag => {
-        return tag
-          .replace(/_/g, '[underscore]')
-          .replace(/ /g, '_')
-          .replace(/\+/g, '[plus]');
-      })
-      .join('+');
+    const mapTags = tag => {
+      return tag
+        .replace(/_/g, '[underscore]')
+        .replace(/ /g, '_')
+        .replace(/#/g, '[hashtag]')
+        .replace(/\+/g, '[plus]');
+    };
+
+    window.location.hash = tags.map(mapTags).join('+');
   }
 
   parseUrl() {
-    const tags = window.location.hash
-      .split('#')[1]
+    const hash = window.location.hash.split('#')[1];
+    if (!hash) return;
+
+    const tags = hash
       .replace(/_/g, ' ')
       .replace(/\[underscore\]/g, '_')
+      .replace(/\[hashtag\]/g, '#')
       .split('+')
       .map(tag => tag.replace(/\[plus\]/g, '+'));
 
