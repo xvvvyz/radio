@@ -40,6 +40,7 @@ export default class App extends Component {
     this.skipAllowed = true;
     this.atLastTrack = false;
     this.topArtistsPage = 0;
+    this.proxy = false;
     this.shuffleTopArtists = this.shuffleTopArtists.bind(this);
     this.shuffleTopTags = this.shuffleTopTags.bind(this);
     this.shuffleRelated = this.shuffleRelated.bind(this);
@@ -277,13 +278,16 @@ export default class App extends Component {
     playlistId = playlistId || this.state.playlist.id;
 
     if (!this.state.track || this.skipAllowed && !this.atLastTrack) {
-      api.nextSong({ mix_id: playlistId }).then(res => {
-        const track = this.mapTrack(res.set.track);
-        this.setState({ track: track, trackLoading: false });
-        this.skipAllowed = res.set.skip_allowed;
-        this.atLastTrack = res.set.at_last_track;
-      }, err => {
-        this.fetchRelatedPlaylist(playlistId);
+      api.nextSong({ mix_id: playlistId }, this.proxy).then(res => {
+        if (!res.errors) {
+          const track = this.mapTrack(res.set.track);
+          this.setState({ track: track, trackLoading: false });
+          this.skipAllowed = res.set.skip_allowed;
+          this.atLastTrack = res.set.at_last_track;
+        } else if (res.notices && res.notices.includes('international streaming')) {
+          this.proxy = true;
+          this.fetchNextSong(playlistId);
+        }
       });
     } else {
       this.fetchRelatedPlaylist(playlistId);

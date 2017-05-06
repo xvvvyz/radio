@@ -41,8 +41,8 @@ const eightToken = id => {
   return eightToken[id];
 };
 
-const eightApi = (path, params) => {
-  const base = eightApi['proxy'] ? 'https://linerad.io/proxy' : 'https://8tracks.com';
+const eightApi = (path, params, proxy = false) => {
+  const base = proxy ? 'https://linerad.io/proxy' : 'https://8tracks.com';
   params.format = 'json';
   params.api_version = 3;
   params.api_key = '1dce5b8108f82a99ac4cb482fbd6fa96b9cfbec2';
@@ -62,16 +62,9 @@ export default {
     return eightApi(`explore/${t2q(tags)}/${mode}`, params);
   },
 
-  nextSong: params => {
-    const path = `sets/${eightToken(params.mix_id)}/next`;
-    let res = eightApi(path, params);
-
-    if (res.notices && res.notices.includes('international streaming')) {
-      eightApi['proxy'] = true;
-      res = eightApi(path, params);
-    }
-
-    return res;
+  nextSong: (params, proxy = false) => {
+    const token = eightToken(params.mix_id);
+    return eightApi(`sets/${token}/next`, params, proxy);
   },
 
   nextPlaylist: params => {
