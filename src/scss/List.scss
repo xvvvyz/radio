@@ -2,6 +2,8 @@
 @import './utilities/helpers';
 @import './utilities/media';
 
+$tag-height: $tag-height + 2px;
+
 .List {
   @extend .fade_in;
   margin-bottom: $padding-medium;
@@ -21,12 +23,13 @@
   ul {
     display: flex;
     flex-wrap: wrap;
-    max-height: calc(#{$tag-height} * 4);
+    max-height: calc(#{$tag-height} * 4 + 2px);
+    border: solid 1px $dark-blue;
     border-radius: .3rem;
     overflow: hidden;
 
     @media (min-width: $break-medium) {
-      max-height: calc(#{$tag-height} * 7);
+      max-height: calc(#{$tag-height} * 7 + 2px);
     }
   }
 }
@@ -37,7 +40,7 @@
 
   ul {
     @media (min-width: $break-medium) {
-      max-height: calc(#{$tag-height} * 2);
+      max-height: calc(#{$tag-height} * 2 + 2px);
     }
   }
 }
@@ -50,12 +53,12 @@
   }
 
   ul {
-    max-height: calc(#{$tag-height} * 2);
+    max-height: calc(#{$tag-height} * 2 + 2px);
     border-top-right-radius: 0;
     border-top-left-radius: 0;
 
     @media (min-width: $break-medium) {
-      max-height: calc(#{$tag-height} * 1);
+      max-height: calc(#{$tag-height} * 1 + 2px);
     }
   }
 }

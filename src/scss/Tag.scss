@@ -45,6 +45,7 @@
 }
 
 .List .Tag {
+  display: inline-block;
   flex-grow: 1;
 
   button {
@@ -101,8 +102,9 @@
   span {
     display: block;
     padding: 0 $padding-medium;
+    border: solid 1px $dark-blue;
     color: $off-white;
-    font-size: .9em;
+    font-size: .8em;
     line-height: $tag-height;
 
     &.has_image {
