@@ -16,6 +16,7 @@ export default class Player extends Component {
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.next = this.next.bind(this);
+    this.skip = this.skip.bind(this);
     this.toggleFullscreen = this.toggleFullscreen.bind(this);
     this.updateMediaSession = this.updateMediaSession.bind(this);
   }
@@ -56,6 +57,11 @@ export default class Player extends Component {
     this.props.next();
   }
 
+  skip() {
+    ga('send', 'event', 'player', 'skip');
+    this.props.next();
+  }
+
   updateMediaSession() {
     if ('mediaSession' in navigator) {
       const ms = navigator.mediaSession;
@@ -78,7 +84,7 @@ export default class Player extends Component {
       });
 
       ms.setActionHandler('seekbackward', this.props.refresh);
-      ms.setActionHandler('nexttrack', this.props.next);
+      ms.setActionHandler('nexttrack', this.props.skip);
     }
   }
 
@@ -109,7 +115,7 @@ export default class Player extends Component {
           <PlayerControls
             refresh={ this.refresh }
             play={ this.play }
-            skip={ this.next }
+            skip={ this.skip }
             pause={ this.pause }
             toggleFullscreen={ this.toggleFullscreen }
             isFullscreen={ this.state.isFullscreen }
