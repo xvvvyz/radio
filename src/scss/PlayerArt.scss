@@ -12,4 +12,8 @@
   background-color: darken($off-white, 5%);
   background-size: cover;
   background-position: center;
+
+  @media (min-width: $break-large) {
+    max-height: $player-width;
+  }
 }
