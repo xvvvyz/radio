@@ -47,7 +47,9 @@ export default class App extends Component {
     this.addTags = this.addTags.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.fetchPlaylists = this.fetchPlaylists.bind(this);
+    this.loadTrack = this.loadTrack.bind(this);
     this.fetchNextSong = this.fetchNextSong.bind(this);
+    this.skipSong = this.skipSong.bind(this);
     this.getCoverSize = this.getCoverSize.bind(this);
   }
 
@@ -274,15 +276,20 @@ export default class App extends Component {
     });
   }
 
+  loadTrack(res) {
+    const track = this.mapTrack(res.set.track);
+    this.setState({ track: track, trackLoading: false });
+    this.skipAllowed = res.set.skip_allowed;
+    this.atLastTrack = res.set.at_last_track;
+  }
+
   fetchNextSong(playlistId) {
+    this.setState({ track: false, trackLoading: true });
     playlistId = playlistId || this.state.playlist.id;
 
-    if (!this.state.track || this.skipAllowed && !this.atLastTrack) {
+    if (!this.state.track || !this.atLastTrack) {
       api.nextSong({ mix_id: playlistId }, this.proxy).then(res => {
-        const track = this.mapTrack(res.set.track);
-        this.setState({ track: track, trackLoading: false });
-        this.skipAllowed = res.set.skip_allowed;
-        this.atLastTrack = res.set.at_last_track;
+        this.loadTrack(res);
       }).catch(err => {
         if (!this.proxy) {
           this.proxy = true;
@@ -292,8 +299,17 @@ export default class App extends Component {
     } else {
       this.fetchRelatedPlaylist(playlistId);
     }
+  }
 
+  skipSong() {
     this.setState({ track: false, trackLoading: true });
+
+    if (this.skipAllowed) {
+      const options = { mix_id: this.state.playlist.id };
+      api.skipSong(options, this.proxy).then(this.loadTrack);
+    } else {
+      this.fetchRelatedPlaylist(this.state.playlist.id);
+    }
   }
 
   render() {
@@ -318,6 +334,7 @@ export default class App extends Component {
           trackLoading={ this.state.trackLoading }
           refresh={ this.fetchPlaylists }
           next={ this.fetchNextSong }
+          skip={ this.skipSong }
           getCoverSize={ this.getCoverSize }
         />
       </div>

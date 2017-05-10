@@ -67,6 +67,11 @@ export default {
     return eightApi(`sets/${token}/next`, params, proxy);
   },
 
+  skipSong: (params, proxy = false) => {
+    const token = eightToken(params.mix_id);
+    return eightApi(`sets/${token}/skip`, params, proxy);
+  },
+
   nextPlaylist: params => {
     const token = eightToken(params.mix_id);
     return eightApi(`sets/${token}/next_mix.json`, params);

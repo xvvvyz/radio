@@ -59,7 +59,7 @@ export default class Player extends Component {
 
   skip() {
     ga('send', 'event', 'player', 'skip');
-    this.props.next();
+    this.props.skip();
   }
 
   updateMediaSession() {
