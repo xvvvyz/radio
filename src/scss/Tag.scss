@@ -29,9 +29,9 @@
     display: inline-block;
     padding: 0 $padding-xsmall;
     border-radius: 2rem;
-    background-color: $off-black;
+    background-color: $background-secondary;
     box-shadow: 0 1px 3px rgba($background-primary-hella-dark, 0.12), 0 1px 2px rgba($background-primary-hella-dark, 0.24);
-    color: $white;
+    color: $text-secondary;
     line-height: $padding-medium;
 
     &:hover {
@@ -52,18 +52,16 @@
 
 .List .Tag {
   border-bottom: solid 1px $background-primary-darker;
-  transition: box-shadow $speed-fast;
+  transition: background-color $speed-fast;
 
   &:hover {
+    background-color: $background-primary-darker;
     text-decoration: underline;
   }
 
   button {
     width: 100%;
     padding: 0 $padding-xsmall;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     font-size: .8em;
     line-height: $tag-height;
     text-align: left;
