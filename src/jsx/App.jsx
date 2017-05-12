@@ -109,9 +109,10 @@ export default class App extends Component {
     };
 
     if (tags.length) {
-      window.location.hash = tags.map(mapTags).join('+');
+      tags = tags.map(mapTags).join('+');
+      history.replaceState({}, document.title, '#' + tags);
     } else {
-      history.replaceState({}, document.title, '.');
+      history.replaceState({}, document.title, '/');
     }
   }
 
