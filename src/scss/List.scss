@@ -1,87 +1,63 @@
+@import './utilities/animations';
 @import './utilities/boxes';
+@import './utilities/colors';
 @import './utilities/helpers';
 @import './utilities/media';
 
-$tag-height: $tag-height + 2px;
-
 .List {
   @extend .fade_in;
-  margin-bottom: $padding-medium;
-  padding: 0 $padding-medium;
-  box-sizing: border-box;
+  padding: 0 $padding-medium $padding-medium;
 
   @media (min-width: $break-medium) {
-    width: 50%;
-    margin-bottom: $padding-large;
-    padding: 0 $padding-large 0 0;
+    flex-basis: calc(100% / 3);
+    padding: 0 $padding-large $padding-large 0;
   }
 
   @media (min-width: $break-large) {
-    padding: 0 $padding-large 0 0;
+    padding: 0 $padding-xlarge $padding-xlarge 0;
   }
 
   ul {
-    display: flex;
-    flex-wrap: wrap;
-    max-height: calc(#{$tag-height} * 4 + 2px);
-    border: solid 1px $dark-blue;
+    background-color: $background-primary-dark;
     border-radius: .3rem;
-    background-color: $black;
+    box-shadow: 0 1px 3px rgba($background-primary-hella-dark, 0.12), 0 1px 2px rgba($background-primary-hella-dark, 0.24);
     overflow: hidden;
-
-    @media (min-width: $break-medium) {
-      max-height: calc(#{$tag-height} * 7 + 2px);
-    }
-  }
-}
-
-.List.full_width {
-  flex-shrink: 0;
-  width: 100%;
-
-  ul {
-    @media (min-width: $break-medium) {
-      max-height: calc(#{$tag-height} * 2 + 2px);
-    }
   }
 }
 
 .Search .List {
-  margin-bottom: 0;
+  margin: $padding-xsmall 0 0;
 
   @media (min-width: $break-medium) {
     padding: 0 $padding-large;
   }
 
-  ul {
-    max-height: calc(#{$tag-height} * 2 + 2px);
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
+  @media (min-width: $break-large) {
+    padding: 0 $padding-xlarge;
+  }
 
-    @media (min-width: $break-medium) {
-      max-height: calc(#{$tag-height} * 1 + 2px);
-    }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-height: calc(#{$tag-height} * 1);
+    overflow: hidden;
   }
 }
 
 .List_header {
   display: block;
   width: 100%;
-  margin-bottom: $padding-xsmall;
-  padding: $padding-xxxsmall 0;
-
-  @media (min-width: $break-medium) {
-    padding: 0;
-  }
 
   h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    margin: - $padding-xsmall 0 0;
+    padding: $padding-xsmall 0;
     font-size: .8rem;
     text-transform: uppercase;
-    letter-spacing: .2em;
+    letter-spacing: .1em;
   }
 
   svg {
@@ -89,5 +65,6 @@ $tag-height: $tag-height + 2px;
     width: .8rem;
     height: .8rem;
     margin-left: 1em;
+    transition: fill $speed-fast;
   }
 }

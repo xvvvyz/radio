@@ -6,19 +6,17 @@ import expirePlugin from 'store/plugins/expire';
 import Dashboard from './Dashboard.jsx';
 import Player from './Player.jsx';
 import api from './utilities/api.js';
+import data from './utilities/data.js';
 import help from './utilities/helpers.js';
 import '../scss/App.scss';
 
-const STORE_TOP_ARTISTS = '___top_artists';
-const STORE_TOP_ARTISTS_EXPIRY = help.daysFromNow(1);
-const STORE_TOP_TAGS = '___top_tags';
-const STORE_TOP_TAGS_EXPIRY = help.daysFromNow(1);
+const STORE_ARTISTS = '___top_artists';
+const STORE_ARTISTS_EXPIRY = help.daysFromNow(1);
 const STORE_PLAYED = '___played';
 const STORE_PLAYED_LIMIT = 2000;
 const STORE_TAG_DATA_EXPIRY = help.daysFromNow(7);
 const CURRENT_TAG_LIMIT = 2;
 const PLAYLISTS_PER_PAGE = 5;
-const TAG_BLACKLIST = ['seen live', 'under 2000 listeners'];
 
 export default class App extends Component {
   constructor() {
@@ -31,18 +29,18 @@ export default class App extends Component {
       currentTags: [],
       playlist: false,
       track: false,
-      topArtists: store.get(STORE_TOP_ARTISTS) || [],
-      topTags: store.get(STORE_TOP_TAGS) || [],
+      artists: store.get(STORE_ARTISTS) || [],
+      genres: data.genres,
       related: [],
     };
 
     this.played = store.get(STORE_PLAYED) || [];
     this.skipAllowed = true;
     this.atLastTrack = false;
-    this.topArtistsPage = 0;
     this.proxy = false;
-    this.shuffleTopArtists = this.shuffleTopArtists.bind(this);
-    this.shuffleTopTags = this.shuffleTopTags.bind(this);
+
+    this.shuffleArtists = this.shuffleArtists.bind(this);
+    this.shuffleGenres = this.shuffleGenres.bind(this);
     this.shuffleRelated = this.shuffleRelated.bind(this);
     this.addTags = this.addTags.bind(this);
     this.removeTag = this.removeTag.bind(this);
@@ -54,52 +52,29 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    if (!this.state.topArtists.length) this.fetchTopArtists();
-    else this.topArtistsPage++;
-    if (!this.state.topTags.length) this.fetchTopTags();
+    if (!this.state.artists.length) this.fetchartists();
     this.parseUrl();
   }
 
-  fetchTopArtists() {
-    this.topArtistsPage++;
+  fetchartists() {
+    this.artistsPage++;
 
-    api.topArtists(20, this.topArtistsPage).then(res => {
-      const artists = this.mapTopArtists(res.artists.artist);
-      this.setState({ topArtists: [...this.state.topArtists, ...artists] });
-
-      if (this.topArtistsPage === 1) {
-        store.set(STORE_TOP_ARTISTS, artists, STORE_TOP_ARTISTS_EXPIRY);
-      }
+    api.artists().then(res => {
+      const artists = res.artists.artist.map(a => a.name);
+      console.dir(artists);
+      this.setState({ artists: artists });
+      store.set(STORE_ARTISTS, artists, STORE_ARTISTS_EXPIRY);
     });
   }
 
-  mapTopArtists(artists) {
-    return artists.map(a => {
-      return { name: a.name, image: a.image[2]['#text'] };
-    });
-  }
-
-  fetchTopTags(page) {
-    api.topTags().then(res => {
-      const tags = this.mapTopTags(res.tags.tag);
-      this.setState({ topTags: tags });
-      store.set(STORE_TOP_TAGS, tags, STORE_TOP_TAGS_EXPIRY);
-    });
-  }
-
-  mapTopTags(tags) {
-    return tags.map(t => t.name).filter(t => TAG_BLACKLIST.indexOf(t) === -1);
-  }
-
-  shuffleTopArtists() {
+  shuffleArtists() {
     ga('send', 'event', 'tags', 'shuffle', 'artists');
-    this.setState({ topArtists: knuthShuffle(this.state.topArtists) });
-    this.fetchTopArtists();
+    this.setState({ artists: knuthShuffle(this.state.artists) });
   }
 
-  shuffleTopTags() {
+  shuffleGenres() {
     ga('send', 'event', 'tags', 'shuffle', 'genres');
-    this.setState({ topTags: knuthShuffle(this.state.topTags) });
+    this.setState({ genres: knuthShuffle(this.state.genres) });
   }
 
   shuffleRelated() {
@@ -133,7 +108,11 @@ export default class App extends Component {
         .replace(/\+/g, '[plus]');
     };
 
-    window.location.hash = tags.map(mapTags).join('+');
+    if (tags.length) {
+      window.location.hash = tags.map(mapTags).join('+');
+    } else {
+      history.replaceState({}, document.title, '.');
+    }
   }
 
   parseUrl() {
@@ -179,16 +158,7 @@ export default class App extends Component {
   }
 
   mapTags(tags) {
-    return tags
-      .filter(tag => tag.name.length < 40)
-      .map(tag => {
-        if (tag.artist_avatar) {
-          const image = tag.artist_avatar.replace('http://', 'https://');
-          return { name: tag.name, image: image };
-        } else {
-          return tag.name;
-        }
-      });
+    return tags.filter(tag => tag.name.length < 40).map(tag => tag.name);
   }
 
   mapTrack(track) {
@@ -321,10 +291,10 @@ export default class App extends Component {
           removeTag={ this.removeTag }
           currentTags={ this.state.currentTags }
           related={ this.state.related }
-          topArtists={ this.state.topArtists }
-          topTags={ this.state.topTags }
-          shuffleTopArtists={ this.shuffleTopArtists }
-          shuffleTopTags={ this.shuffleTopTags }
+          artists={ this.state.artists }
+          genres={ this.state.genres }
+          shuffleArtists={ this.shuffleArtists }
+          shuffleGenres={ this.shuffleGenres }
           shuffleRelated={ this.shuffleRelated }
         />
         <Player

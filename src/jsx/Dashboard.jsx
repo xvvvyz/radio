@@ -23,11 +23,11 @@ export default function Dashboard(props) {
       />
       <Lists
         related={ props.related }
-        topArtists={ props.topArtists }
-        topTags={ props.topTags }
+        artists={ props.artists }
+        genres={ props.genres }
         addTags={ props.addTags }
-        shuffleTopArtists={ props.shuffleTopArtists }
-        shuffleTopTags={ props.shuffleTopTags }
+        shuffleArtists={ props.shuffleArtists }
+        shuffleGenres={ props.shuffleGenres }
         shuffleRelated={ props.shuffleRelated }
       />
     </main>

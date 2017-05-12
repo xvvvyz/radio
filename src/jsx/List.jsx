@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 import Svg from './svg.jsx';
@@ -28,10 +27,8 @@ export default function List(props) {
     />;
   });
 
-  const className = classNames({ List: true, full_width: props.fullWidth });
-
   return (
-    <div className={ className }>
+    <div className="List">
       { props.title && title}
       <ul>{ items }</ul>
     </div>

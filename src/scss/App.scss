@@ -1,12 +1,14 @@
+@import './utilities/colors';
 @import './utilities/helpers';
 @import './utilities/media';
 @import './utilities/reset';
 
 html {
-  font-size: 4vw;
+  background-color: $background-primary;
+  font-size: 4.2vw;
 
   @media (min-width: $break-small) {
-    font-size: 2.8vw;
+    font-size: 3vw;
   }
 
   @media (min-width: $break-medium) {

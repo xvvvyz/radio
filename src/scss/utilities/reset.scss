@@ -27,6 +27,12 @@ h3,
 h4 {
   display: block;
   box-sizing: border-box;
+  color: $text-primary;
+  fill: $text-primary;
+
+  &::placeholder {
+    color: rgba($text-primary, .5);
+  }
 }
 
 input,

@@ -46,7 +46,6 @@ export default class Search extends Component {
           onKeyup={ this.onKeyup }
           onFocus={ this.onFocus }
           onBlur={ this.onBlur }
-          className={ this.state.tags.length && 'results' }
         />
         <List
           items={ this.state.tags }

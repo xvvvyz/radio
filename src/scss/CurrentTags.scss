@@ -7,13 +7,14 @@
   align-items: center;
   justify-content: center;
   top: $padding-medium;
-  left: 0;
-  width: 100%;
+  right: -50%;
+  left: -50%;
   z-index: $z-1;
 
   @media (min-width: $break-medium) {
     position: relative;
     top: auto;
-    width: auto;
+    right: auto;
+    left: auto;
   }
 }

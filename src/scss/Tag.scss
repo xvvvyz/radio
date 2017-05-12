@@ -3,9 +3,13 @@
 @import './utilities/colors';
 @import './utilities/media';
 
+.Tag {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .CurrentTags .Tag {
   padding: $padding-medium / 2 0;
-  white-space: nowrap;
 
   &::before {
     content: '+';
@@ -25,8 +29,9 @@
     display: inline-block;
     padding: 0 $padding-xsmall;
     border-radius: 2rem;
-    background-color: $off-white;
-    box-shadow: 0 1px 3px rgba($black, 0.12), 0 1px 2px rgba($black, 0.24);
+    background-color: $off-black;
+    box-shadow: 0 1px 3px rgba($background-primary-hella-dark, 0.12), 0 1px 2px rgba($background-primary-hella-dark, 0.24);
+    color: $white;
     line-height: $padding-medium;
 
     &:hover {
@@ -39,79 +44,37 @@
       padding: 0;
       background-color: transparent;
       box-shadow: none;
+      color: inherit;
       font-weight: bold;
     }
   }
 }
 
 .List .Tag {
-  display: inline-block;
-  flex-grow: 1;
+  border-bottom: solid 1px $background-primary-darker;
+  transition: box-shadow $speed-fast;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   button {
     width: 100%;
-    transition: opacity $speed-fast;
-    border: solid 1px $dark-blue;
+    padding: 0 $padding-xsmall;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: .85;
-
-    &:hover {
-      opacity: 1;
-      cursor: pointer;
-    }
-  }
-
-  span {
-    display: block;
-    padding: 0 $padding-medium;
-    color: $off-white;
     font-size: .8em;
     line-height: $tag-height;
+    text-align: left;
+  }
+}
 
-    &.bg-1 {
-      background-color: lighten($dark-blue, 1%);
-    }
+.Search .List .Tag {
+  flex-grow: 1;
 
-    &.bg-2 {
-      background-color: lighten($dark-blue, 2%);
-    }
-
-    &.bg-3 {
-      background-color: lighten($dark-blue, 3%);
-    }
-
-    &.bg-4 {
-      background-color: lighten($dark-blue, 4%);
-    }
-
-    &.bg-5 {
-      background-color: lighten($dark-blue, 5%);
-    }
-
-    &.bg-6 {
-      background-color: lighten($dark-blue, 6%);
-    }
-
-    &.bg-7 {
-      background-color: lighten($dark-blue, 7%);
-    }
-
-    &.bg-8 {
-      background-color: lighten($dark-blue, 8%);
-    }
-
-    &.bg-9 {
-      background-color: lighten($dark-blue, 9%);
-    }
-
-    &.bg-10 {
-      background-color: lighten($dark-blue, 10%);
-    }
-
-    &.has_image {
-      opacity: .8
-    }
+  button {
+    padding: 0 $padding-xsmall;
+    text-align: center;
   }
 }

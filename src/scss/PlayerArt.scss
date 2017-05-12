@@ -3,17 +3,42 @@
 @import './utilities/colors';
 @import './utilities/media';
 
-.PlayerArt {
-  width: 100%;
-  min-width: $player-width;
-  max-width: 50vh;
-  height: 50vh;
-  margin-bottom: $padding-xsmall;
-  background-color: darken($off-white, 5%);
+.PlayerArt_background {
+  display: none;
+  position: absolute;
+  top: - $padding-large;
+  right: - $padding-large;
+  bottom: - $padding-large;
+  left: - $padding-large;
+  transition: opacity $speed-slow;
   background-size: cover;
   background-position: center;
+  z-index: -1;
 
   @media (min-width: $break-large) {
-    max-height: $player-width;
+    display: block;
+    filter: blur(12px);
+    opacity: .3;
+  }
+}
+
+.PlayerArt_image {
+  $width: calc(100% - #{$padding-medium} * 2);
+
+  width: $width;
+  max-height: 55vh;
+  height: $width;
+  max-width: 55vh;
+  margin: $padding-medium auto $padding-xsmall;
+  background-color: rgba($background-secondary, .03);
+
+  @media (min-width: $break-large) {
+    $width: calc(#{$player-width} - #{$padding-large} * 2);
+
+    width: $width;
+    max-height: 40vh;
+    height: $width;
+    max-width: 40vh;
+    margin-top: $padding-large;
   }
 }

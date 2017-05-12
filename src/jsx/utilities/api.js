@@ -50,12 +50,8 @@ const eightApi = (path, params, proxy = false) => {
 };
 
 export default {
-  topArtists: (limit = 50, page = 1) => {
-    return lastApi({ method: 'chart.gettopartists', limit: limit, page: page });
-  },
-
-  topTags: (limit = 50, page = 1) => {
-    return lastApi({ method: 'chart.gettoptags', limit: limit, page: page });
+  artists: (limit = 100, page = 1) => {
+    return lastApi({ method: 'chart.gettopartists', page: page, limit: limit });
   },
 
   playlists: (tags, mode, params) => {

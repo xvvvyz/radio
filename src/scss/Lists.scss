@@ -4,7 +4,12 @@
 .Lists {
   @media (min-width: $break-medium) {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    justify-content: center;
     padding-left: $padding-large;
+  }
+
+  @media (min-width: $break-large) {
+    padding-left: $padding-xlarge;
   }
 }

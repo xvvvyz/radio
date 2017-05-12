@@ -1,7 +1,22 @@
 $white: #fff;
-$off-white: #fcfcfc;
-$off-white-dark: darken($off-white, 20%);
+$off-white: #fafafa;
+$off-white-dark: darken($off-white, 7%);
+$off-white-darker: darken($off-white, 20%);
 $black: #000;
 $off-black: #111;
 $off-black-light: lighten($off-black, 20%);
-$dark-blue: darken(#363F45, 10%);
+
+$background-primary: $white;
+$background-primary-light: lighten($background-primary, 5%);
+$background-primary-lighter: lighten($background-primary, 7%);
+$background-primary-hella-light: lighten($background-primary, 25%);
+$background-primary-dark: darken($background-primary, 2%);
+$background-primary-darker: darken($background-primary, 4%);
+$background-primary-darkest: darken($background-primary, 6%);
+$background-primary-hella-dark: darken($background-primary, 60%);
+
+$background-secondary: $off-black;
+
+$text-primary: $background-primary-hella-dark;
+
+$text-secondary: $off-white;

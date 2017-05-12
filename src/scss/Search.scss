@@ -10,24 +10,24 @@
     margin-bottom: $padding-large;
   }
 
+  @media (min-width: $break-large) {
+    margin-bottom: $padding-xlarge;
+  }
+
   input {
     width: calc(100% - #{$padding-medium} * 2);
     margin: 0 $padding-medium;
     padding: $padding-xsmall 0;
-    border: solid 1px darken($off-white, 10%);
+    background-color: $background-primary-light;
+    border: solid 1px $background-primary-darker;
     border-radius: 3rem;
-    transition: border-bottom-right-radius $speed-slow, border-bottom-left-radius $speed-slow;
+    transition: border-color $speed-fast;
     font-size: .9em;
     text-align: center;
 
     &:hover,
     &:focus {
-      background-color: $off-white;
-    }
-
-    &.results {
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
+      border-color: $background-primary-darkest;
     }
 
     @media (min-width: $break-medium) {
@@ -35,6 +35,11 @@
       margin: 0 $padding-large;
       padding: $padding-small 0;
       font-size: 1.1em;
+    }
+
+    @media (min-width: $break-large) {
+      width: calc(100% - #{$padding-xlarge} * 2);
+      margin: 0 $padding-xlarge;
     }
   }
 }

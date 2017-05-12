@@ -13,6 +13,10 @@
     padding: $padding-large;
   }
 
+  @media (min-width: $break-large) {
+    padding: $padding-xlarge;
+  }
+
   h1 {
     font-size: 1.3em;
     line-height: $padding-medium;
@@ -25,7 +29,6 @@
   }
 
   h2 {
-    color: $off-black-light;
     font-family: 'Palatino', serif;
     font-size: .9em;
     font-weight: normal;
@@ -38,7 +41,6 @@
   }
 
   a {
-    color: inherit;
     text-decoration: none;
   }
 }

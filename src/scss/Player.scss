@@ -22,6 +22,11 @@
     width: $player-width;
     transform: translateX($player-width);
   }
+
+  .spinner {
+    border-color: $text-secondary;
+    border-bottom-color: transparent;
+  }
 }
 
 .Player.visible {
@@ -53,12 +58,12 @@
   padding: 0 0 $padding-medium - $padding-xsmall;
   transition: background-color $speed-normal, transform $speed-normal;
   transform: translateY($player-height-small + $padding-medium / 2);
-  background-color: $off-white;
+  background-color: $background-secondary;
 
   @media (min-width: $break-large) {
     position: relative;
     top: auto;
-    padding: 0 0 $padding-large - $padding-xsmall;
+    padding: 0 0 $padding-large;
     transform: translateY(0);
   }
 }
