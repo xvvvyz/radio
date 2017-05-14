@@ -12,7 +12,6 @@ export default {
 
     // all
     'acoustic',
-    'adult contemporary',
     'african',
     'alt-country',
     'alternative',
@@ -74,7 +73,6 @@ export default {
     'electronica',
     'emo',
     'experimental pop',
-    'family music',
     'field recordings',
     'film music',
     'folk punk',
@@ -133,7 +131,6 @@ export default {
     'new wave',
     'no wave',
     'noise pop',
-    'noise',
     'nu jazz',
     'opera',
     'orchestral',
