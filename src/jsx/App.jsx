@@ -163,8 +163,6 @@ export default class App extends Component {
   }
 
   mapTrack(track) {
-    if (!track) return false;
-
     return {
       title: track.name.trim(),
       artist: track.performer.trim(),
@@ -248,10 +246,12 @@ export default class App extends Component {
   }
 
   loadTrack(res) {
+    if (!(((res || {}).set || {}).track || {}).name) return false;
     const track = this.mapTrack(res.set.track);
     this.setState({ track: track, trackLoading: false });
     this.skipAllowed = res.set.skip_allowed;
     this.atLastTrack = res.set.at_last_track;
+    return true;
   }
 
   fetchNextSong(playlistId) {
@@ -260,7 +260,7 @@ export default class App extends Component {
 
     if (!this.state.track || !this.atLastTrack) {
       api.nextSong({ mix_id: playlistId }, this.proxy).then(res => {
-        this.loadTrack(res);
+        if (!this.loadTrack(res)) this.fetchRelatedPlaylist(playlistId);
       }).catch(err => {
         if (!this.proxy) {
           this.proxy = true;
