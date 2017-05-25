@@ -193,7 +193,7 @@ export default class App extends Component {
 
   loadPlaylist(playlist, related) {
     const updatedState = {};
-    if (related) updatedState.related = related;
+    updatedState.related = related ? related : this.state.related;
     const valid = this.validPlaylist(playlist);
 
     if (valid) {
