@@ -1,6 +1,6 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
-import Svg from './svg.jsx';
+import Svg from './Svg.jsx';
 import Tag from './Tag.jsx';
 import '../scss/List.scss';
 import shuffleSvg from '../svg/shuffle.svg';

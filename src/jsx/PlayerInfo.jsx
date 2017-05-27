@@ -1,6 +1,6 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
-import Svg from './svg.jsx';
+import Svg from './Svg.jsx';
 import '../scss/PlayerInfo.scss';
 import exitUp from '../svg/exit-up.svg';
 

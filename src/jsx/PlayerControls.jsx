@@ -1,6 +1,6 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
-import Svg from './svg.jsx';
+import Svg from './Svg.jsx';
 import '../scss/PlayerControls.scss';
 import expandSvg from '../svg/expand.svg';
 import minimizeSvg from '../svg/minimize.svg';
