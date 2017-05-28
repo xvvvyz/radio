@@ -61,7 +61,6 @@ export default class App extends Component {
 
     api.artists().then(res => {
       const artists = res.artists.artist.map(a => a.name);
-      console.dir(artists);
       this.setState({ artists: artists });
       store.set(STORE_ARTISTS, artists, STORE_ARTISTS_EXPIRY);
     });
