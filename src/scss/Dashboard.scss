@@ -4,8 +4,6 @@
 @import './utilities/media';
 
 .Dashboard {
-  overflow-x: hidden;
-
   @media (min-width: $break-large) {
     width: calc(100% - #{$player-width});
     transition: transform $speed-normal;

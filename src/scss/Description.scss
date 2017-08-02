@@ -1,0 +1,48 @@
+@import './utilities/animations';
+@import './utilities/boxes';
+@import './utilities/colors';
+@import './utilities/helpers';
+@import './utilities/media';
+
+.Description {
+  @extend .fade_in;
+  display: flex;
+  align-items: center;
+  margin: 0 $padding-medium $padding-medium;
+  padding: $padding-small;
+  border-radius: .3rem;
+  background-color: $caaade;
+
+  @media (min-width: $break-medium) {
+    flex-basis: calc(100% / 3);
+    margin: 0 $padding-large $padding-large 0;
+    background-color: $cadeee;
+  }
+
+  @media (min-width: $break-large) {
+    margin: 0 $padding-xlarge $padding-xlarge 0;
+  }
+
+  p {
+    position: relative;
+    color: $white;
+    font-size: 1.1rem;
+    line-height: 2rem;
+    text-align: center;
+
+    @media (min-width: $break-medium) {
+      &::before {
+        content: ' ';
+        position: absolute;
+        right: -3.5rem;
+        left: -3.5rem;
+        height: 100%;
+        margin-top: -2.2rem;
+        padding: 2.2rem 0;
+        border-radius: .3rem;
+        background-color: $caaade;
+        z-index: $z-neg-1;
+      }
+    }
+  }
+}
