@@ -21,6 +21,7 @@ const PLAYLISTS_PER_PAGE = 5;
 export default class App extends Component {
   constructor() {
     super();
+    ga('send', 'pageview');
     store.addPlugin(expirePlugin);
     store.removeExpiredKeys();
 
