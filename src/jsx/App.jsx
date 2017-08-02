@@ -22,6 +22,7 @@ export default class App extends Component {
   constructor() {
     super();
     store.addPlugin(expirePlugin);
+    store.removeExpiredKeys();
 
     this.state = {
       playerVisible: false,
