@@ -10,9 +10,9 @@ $background-primary: $white;
 $background-primary-light: lighten($background-primary, 5%);
 $background-primary-lighter: lighten($background-primary, 7%);
 $background-primary-hella-light: lighten($background-primary, 25%);
-$background-primary-dark: darken($background-primary, 2%);
-$background-primary-darker: darken($background-primary, 4%);
-$background-primary-darkest: darken($background-primary, 6%);
+$background-primary-dark: darken($background-primary, 4%);
+$background-primary-darker: darken($background-primary, 6%);
+$background-primary-darkest: darken($background-primary, 8%);
 $background-primary-hella-dark: darken($background-primary, 60%);
 
 $background-secondary: $off-black;
