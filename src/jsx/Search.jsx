@@ -9,28 +9,28 @@ export default class Search extends Component {
     super();
     this.placeholder = 'Enter an artist, genre, activity or mood...';
     this.state = { tags: [], placeholder: this.placeholder };
-    this.onKeyup = this.onKeyup.bind(this);
     this.onFocus = this.onFocus.bind(this);
+    this.onInput = this.onInput.bind(this);
     this.onBlur = this.onBlur.bind(this);
-  }
-
-  onFocus() {
-    this.setState({ placeholder: '' });
   }
 
   onBlur() {
     this.setState({ placeholder: this.placeholder });
   }
 
-  onKeyup({ target }) {
-    if (target.value === this.oldValue) return false;
-    this.oldValue = target.value;
+  onFocus() {
+    this.setState({ placeholder: '' });
+  }
+
+  onInput({ target }) {
+    if (target.value === this.value) return false;
+    this.value = target.value;
 
     if (target.value) {
       ga('send', 'event', 'search', 'search', target.value);
 
       api.search({ q: target.value, per_page: 10 }).then(res => {
-        this.setState({ tags: res.tag_cloud.tags });
+        if (this.value) this.setState({ tags: res.tag_cloud.tags });
       });
     } else {
       this.setState({ tags: [] });
@@ -43,7 +43,7 @@ export default class Search extends Component {
         <input
           type="text"
           placeholder={ this.state.placeholder }
-          onKeyup={ this.onKeyup }
+          onInput={ this.onInput }
           onFocus={ this.onFocus }
           onBlur={ this.onBlur }
         />

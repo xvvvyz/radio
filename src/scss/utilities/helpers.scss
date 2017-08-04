@@ -3,11 +3,13 @@
 @keyframes fadeIn {
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .fade_in {
   opacity: 0;
+  transform: translateY(-4px);
   animation: fadeIn .6s forwards;
 }
 
