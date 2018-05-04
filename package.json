@@ -2,8 +2,8 @@
   "name": "lineradio",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server  --env.dev --open --content-base build",
-    "build": "webpack --env.prod"
+    "start": "webpack-dev-server  --env.dev --open --content-base dist",
+    "build": "webpack --env.prod --output-path dist"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -16,7 +16,8 @@
     "css-mqpacker": "^6.0.1",
     "cssnano": "^3.10.0",
     "html-webpack-plugin": "^2.30.1",
-    "node-sass": "^4.5.3",
+    "copy-webpack-plugin": "^4.0.1",
+    "node-sass": "^4.9.0",
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
@@ -26,7 +27,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "copy-webpack-plugin": "^4.0.1",
     "inferno-component": "^3.7.1",
     "knuth-shuffle": "^1.0.1",
     "store": "^2.0.12",
