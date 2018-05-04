@@ -42,7 +42,7 @@ const eightToken = id => {
 };
 
 const eightApi = (path, params, proxy = false) => {
-  const base = proxy ? 'https://linerad.io/proxy' : 'https://8tracks.com';
+  const base = proxy ? 'https://proxy.linerad.io' : 'https://8tracks.com';
   params.format = 'json';
   params.api_version = 3;
   params.api_key = '1dce5b8108f82a99ac4cb482fbd6fa96b9cfbec2';
