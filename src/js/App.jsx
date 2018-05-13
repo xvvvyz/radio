@@ -1,89 +1,72 @@
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import preact from 'preact';
 import { knuthShuffle } from 'knuth-shuffle';
 import store from 'store';
 import expirePlugin from 'store/plugins/expire';
-import Dashboard from './Dashboard.jsx';
-import Player from './Player.jsx';
+import Dashboard from './Dashboard';
+import Player from './Player';
 import api from './utilities/api.js';
 import data from './utilities/data.js';
 import help from './utilities/helpers.js';
 import '../scss/App.scss';
 
+const CURRENT_TAG_LIMIT = 2;
+const PLAYLISTS_PER_PAGE = 5;
 const STORE_ARTISTS = '___top_artists';
 const STORE_ARTISTS_EXPIRY = help.daysFromNow(1);
 const STORE_PLAYED = '___played';
 const STORE_PLAYED_LIMIT = 2000;
 const STORE_TAG_DATA_EXPIRY = help.daysFromNow(7);
-const CURRENT_TAG_LIMIT = 2;
-const PLAYLISTS_PER_PAGE = 5;
 
-export default class App extends Component {
-  constructor() {
-    super();
+export default class App extends preact.Component {
+  state = {
+    artists: store.get(STORE_ARTISTS) || [],
+    currentTags: [],
+    genres: data.genres,
+    playerVisible: false,
+    playlist: false,
+    related: [],
+    track: false,
+    trackLoading: true,
+  };
+
+  atLastTrack = false;
+  played = store.get(STORE_PLAYED) || [];
+  proxy = false;
+  skipAllowed = true;
+
+  componentDidMount() {
     ga('send', 'pageview');
     store.addPlugin(expirePlugin);
     store.removeExpiredKeys();
 
-    this.state = {
-      playerVisible: false,
-      trackLoading: true,
-      currentTags: [],
-      playlist: false,
-      track: false,
-      artists: store.get(STORE_ARTISTS) || [],
-      genres: data.genres,
-      related: [],
-    };
-
-    this.played = store.get(STORE_PLAYED) || [];
-    this.skipAllowed = true;
-    this.atLastTrack = false;
-    this.proxy = false;
-
-    this.shuffleArtists = this.shuffleArtists.bind(this);
-    this.shuffleGenres = this.shuffleGenres.bind(this);
-    this.shuffleRelated = this.shuffleRelated.bind(this);
-    this.addTags = this.addTags.bind(this);
-    this.removeTag = this.removeTag.bind(this);
-    this.fetchPlaylists = this.fetchPlaylists.bind(this);
-    this.loadTrack = this.loadTrack.bind(this);
-    this.fetchNextSong = this.fetchNextSong.bind(this);
-    this.skipSong = this.skipSong.bind(this);
-    this.getCoverSize = this.getCoverSize.bind(this);
-  }
-
-  componentDidMount() {
-    if (!this.state.artists.length) this.fetchartists();
+    if (!this.state.artists.length) this.fetchArtists();
     this.parseUrl();
   }
 
-  fetchartists() {
-    this.artistsPage++;
-
+  fetchArtists = () => {
     api.artists().then(res => {
       const artists = res.artists.artist.map(a => a.name);
       this.setState({ artists: artists });
       store.set(STORE_ARTISTS, artists, STORE_ARTISTS_EXPIRY);
     });
-  }
+  };
 
-  shuffleArtists() {
+  shuffleArtists = () => {
     ga('send', 'event', 'tags', 'shuffle', 'artists');
     this.setState({ artists: knuthShuffle(this.state.artists) });
-  }
+  };
 
-  shuffleGenres() {
+  shuffleGenres = () => {
     ga('send', 'event', 'tags', 'shuffle', 'genres');
     this.setState({ genres: knuthShuffle(this.state.genres) });
-  }
+  };
 
-  shuffleRelated() {
+  shuffleRelated = () => {
     ga('send', 'event', 'tags', 'shuffle', 'related');
     this.setState({ related: knuthShuffle(this.state.related) });
-  }
+  };
 
-  addTags(newTags) {
+  addTags = newTags => {
     if (newTags.constructor !== Array) {
       const newTag = newTags;
 
@@ -98,9 +81,9 @@ export default class App extends Component {
     this.setState({ currentTags: newTags });
     this.fetchPlaylists({ tags: newTags });
     this.setUrl(newTags);
-  }
+  };
 
-  setUrl(tags) {
+  setUrl = tags => {
     const mapTags = tag => {
       return tag
         .replace(/_/g, '[underscore]')
@@ -115,9 +98,9 @@ export default class App extends Component {
     } else {
       history.replaceState({}, document.title, '/');
     }
-  }
+  };
 
-  parseUrl() {
+  parseUrl = () => {
     const hash = window.location.hash.split('#')[1];
     if (!hash) return;
 
@@ -129,9 +112,9 @@ export default class App extends Component {
       .map(tag => tag.replace(/\[plus\]/g, '+'));
 
     this.addTags(tags);
-  }
+  };
 
-  removeTag(tag) {
+  removeTag = tag => {
     ga('send', 'event', 'tags', 'remove', tag);
     const tags = this.state.currentTags;
     const index = tag ? tags.indexOf(tag) : tags.length - 1;
@@ -139,15 +122,15 @@ export default class App extends Component {
     this.setState({ currentTags: tags });
     this.setUrl(tags);
     return tags;
-  }
+  };
 
-  getCoverSize(size = 512) {
+  getCoverSize = (size = 512) => {
     if (this.state.playlist) {
       return this.state.playlist.cover + `&w=${size}&h=${size}`;
     }
-  }
+  };
 
-  mapPlaylists(playlists) {
+  mapPlaylists = playlists => {
     const mapPlaylist = playlist => {
       return { id: playlist.id, cover: playlist.cover_urls.original };
     };
@@ -157,22 +140,22 @@ export default class App extends Component {
     } else {
       return mapPlaylist(playlists);
     }
-  }
+  };
 
-  mapTags(tags) {
+  mapTags = tags => {
     return tags.filter(tag => tag.name.length < 40).map(tag => tag.name);
-  }
+  };
 
-  mapTrack(track) {
+  mapTrack = track => {
     return {
       title: track.name.trim(),
       artist: track.performer.trim(),
       album: track.release_name.trim(),
       stream: track.track_file_stream_url,
     };
-  }
+  };
 
-  validPlaylist(playlist) {
+  validPlaylist = playlist => {
     if (playlist) {
       const alreadyPlayed = this.played.includes(playlist.id);
       if (alreadyPlayed) this.fetchPlaylists();
@@ -184,15 +167,15 @@ export default class App extends Component {
     }
 
     return false;
-  }
+  };
 
-  storePlayed(id) {
+  storePlayed = id => {
     this.played.push(id);
     if (this.played.length > STORE_PLAYED_LIMIT) this.played.shift();
     store.set(STORE_PLAYED, this.played);
-  }
+  };
 
-  loadPlaylist(playlist, related) {
+  loadPlaylist = (playlist, related) => {
     const updatedState = {};
     updatedState.related = related ? related : this.state.related;
     const valid = this.validPlaylist(playlist);
@@ -204,9 +187,9 @@ export default class App extends Component {
     }
 
     this.setState(updatedState);
-  }
+  };
 
-  fetchPlaylists({ tags = this.state.currentTags } = {}) {
+  fetchPlaylists = ({ tags = this.state.currentTags } = {}) => {
     this.setState({
       track: false,
       trackLoading: true,
@@ -236,26 +219,26 @@ export default class App extends Component {
         this.loadPlaylist(data.playlists[data.index], data.related);
       });
     }
-  }
+  };
 
-  fetchRelatedPlaylist(playlistId) {
+  fetchRelatedPlaylist = playlistId => {
     this.setState({ track: false, trackLoading: true });
 
     api.nextPlaylist({ mix_id: playlistId }).then(res => {
       this.loadPlaylist(this.mapPlaylists(res.next_mix));
     });
-  }
+  };
 
-  loadTrack(res) {
+  loadTrack = res => {
     if (!(((res || {}).set || {}).track || {}).name) return false;
     const track = this.mapTrack(res.set.track);
     this.setState({ track: track, trackLoading: false });
     this.skipAllowed = res.set.skip_allowed;
     this.atLastTrack = res.set.at_last_track;
     return true;
-  }
+  };
 
-  fetchNextSong(playlistId) {
+  fetchNextSong = playlistId => {
     this.setState({ track: false, trackLoading: true });
     playlistId = playlistId || this.state.playlist.id;
 
@@ -271,9 +254,9 @@ export default class App extends Component {
     } else {
       this.fetchRelatedPlaylist(playlistId);
     }
-  }
+  };
 
-  skipSong() {
+  skipSong = () => {
     this.setState({ track: false, trackLoading: true });
 
     if (this.skipAllowed) {
@@ -282,32 +265,32 @@ export default class App extends Component {
     } else {
       this.fetchRelatedPlaylist(this.state.playlist.id);
     }
-  }
+  };
 
   render() {
     return (
       <div className="App">
         <Dashboard
-          playerVisible={ this.state.playerVisible }
-          addTags={ this.addTags }
-          removeTag={ this.removeTag }
-          currentTags={ this.state.currentTags }
-          related={ this.state.related }
-          artists={ this.state.artists }
-          genres={ this.state.genres }
-          shuffleArtists={ this.shuffleArtists }
-          shuffleGenres={ this.shuffleGenres }
-          shuffleRelated={ this.shuffleRelated }
+          playerVisible={this.state.playerVisible}
+          addTags={this.addTags}
+          removeTag={this.removeTag}
+          currentTags={this.state.currentTags}
+          related={this.state.related}
+          artists={this.state.artists}
+          genres={this.state.genres}
+          shuffleArtists={this.shuffleArtists}
+          shuffleGenres={this.shuffleGenres}
+          shuffleRelated={this.shuffleRelated}
         />
         <Player
-          visible={ this.state.playerVisible }
-          playlist={ this.state.playlist }
-          track={ this.state.track }
-          trackLoading={ this.state.trackLoading }
-          refresh={ this.fetchPlaylists }
-          next={ this.fetchNextSong }
-          skip={ this.skipSong }
-          getCoverSize={ this.getCoverSize }
+          visible={this.state.playerVisible}
+          playlist={this.state.playlist}
+          track={this.state.track}
+          trackLoading={this.state.trackLoading}
+          refresh={this.fetchPlaylists}
+          next={this.fetchNextSong}
+          skip={this.skipSong}
+          getCoverSize={this.getCoverSize}
         />
       </div>
     );

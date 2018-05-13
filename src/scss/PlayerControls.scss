@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 18rem;
+  max-width: 15rem;
   margin: 0 auto;
 
   button {
@@ -31,10 +31,9 @@
     }
   }
 
-  svg {
+  img {
     width: $control-button-size;
     height: $control-button-size;
     margin: 0 auto;
-    fill: $text-secondary;
   }
 }

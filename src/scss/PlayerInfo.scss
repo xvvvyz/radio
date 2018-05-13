@@ -11,27 +11,32 @@
   align-items: center;
   padding: $padding-medium;
   color: $text-secondary;
+}
 
-  span {
-    display: block;
-    line-height: 1.6rem;
-  }
+.PlayerInfo_artist,
+.PlayerInfo_title {
+  display: block;
 }
 
 .PlayerInfo_artist {
-  margin-bottom: .5em;
+  margin-bottom: $padding-xxsmall;
+  color: $off-white-dark;
+  font-size: .65em;
+  line-height: 1.2rem;
+  letter-spacing: .2em;
   text-transform: uppercase;
-  letter-spacing: .25em;
-  font-size: .6em;
 }
 
 .PlayerInfo_title {
   font-size: .9em;
+  line-height: 1.4rem;
 
-  svg {
+  img {
+    position: relative;
     display: inline;
-    width: .8em;
-    height: .8em;
-    fill: $text-secondary;
+    top: 1px;
+    width: 1em;
+    height: 1em;
+    margin-left: $padding-xxxsmall;
   }
 }

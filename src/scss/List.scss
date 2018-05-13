@@ -60,11 +60,10 @@
     letter-spacing: .1em;
   }
 
-  svg {
+  img {
     display: inline;
     width: .8rem;
     height: .8rem;
     margin-left: 1em;
-    transition: fill $speed-fast;
   }
 }

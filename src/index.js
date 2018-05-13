@@ -1,5 +1,5 @@
-import Inferno from 'inferno';
-import App from './jsx/App.jsx';
+import preact from 'preact';
+import App from './js/App.jsx';
 
 document.getElementById('splash').remove();
-Inferno.render(<App />, document.getElementById('inferno-app'));
+preact.render(<App />, document.getElementById('inferno-app'));
