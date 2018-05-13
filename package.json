@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.46",
+    "css-mqpacker": "^6.0.2",
     "node-sass": "^4.9.0",
     "poi": "^10.1.6",
     "sass-loader": "^7.0.1"
