@@ -34,7 +34,7 @@
       background-color: $background-secondary;
       padding: $padding-xxxsmall $padding-xxsmall;
       border-radius: $border-radius;
-      transition: $speed-fast;
+      transition: background-color $speed-fast;
       color: $text-secondary;
 
       &:hover {
