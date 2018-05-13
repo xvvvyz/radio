@@ -58,7 +58,7 @@
   padding: 0 0 $padding-medium - $padding-xsmall;
   transition: background-color $speed-normal, transform $speed-normal;
   transform: translateY($player-height-small + $padding-medium / 2);
-  background-color: $background-secondary;
+  background-color: $off-black;
 
   @media (min-width: $break-large) {
     position: relative;

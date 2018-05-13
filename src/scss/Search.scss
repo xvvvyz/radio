@@ -18,16 +18,15 @@
     width: calc(100% - #{$padding-medium} * 2);
     margin: 0 $padding-medium;
     padding: $padding-xsmall 0;
-    background-color: $white;
-    border: solid 1px $background-primary-darker;
+    background-color: $background-primary-dark;
     border-radius: 3rem;
-    transition: border-color $speed-fast;
-    font-size: .9em;
+    transition: $speed-fast;
+    font-size: .8em;
     text-align: center;
 
     &:hover,
     &:focus {
-      border-color: $background-primary-darkest;
+      background-color: $background-primary-darkest;
     }
 
     @media (min-width: $break-medium) {

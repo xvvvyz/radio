@@ -6,7 +6,8 @@ import '../scss/List.scss';
 export default props => !!props.items.length && (
   <div className="List">
     {props.title && <button className="List_header" onClick={props.shuffle}>
-      <h3><span>{props.title}</span><img src={shuffleSvg} /></h3>
+      <span>{props.title}</span>
+      <span className="List_shuffle"><img src={shuffleSvg} /></span>
     </button>}
     <ul>
       {props.items.map(item => <Tag

@@ -1,9 +1,10 @@
+@import './utilities/animations';
 @import './utilities/boxes';
 @import './utilities/colors';
 @import './utilities/media';
 
 .Header {
-  padding: $padding-medium;
+  padding: $padding-large $padding-medium $padding-medium;
   text-align: center;
 
   @media (min-width: $break-medium) {
@@ -18,13 +19,27 @@
   }
 
   h1 {
-    font-size: 1.3em;
-    line-height: $padding-medium;
+    margin-bottom: $padding-xxxsmall;
+    font-size: 1.35em;
     text-transform: uppercase;
     letter-spacing: .1em;
 
     @media (min-width: $break-medium) {
+      margin-bottom: 0;
       font-size: 1.1em;
+    }
+
+    a {
+      display: inline-block;
+      background-color: $background-secondary;
+      padding: $padding-xxxsmall $padding-xxsmall;
+      border-radius: $border-radius;
+      transition: $speed-fast;
+      color: $text-secondary;
+
+      &:hover {
+        background-color: $background-secondary-light;
+      }
     }
   }
 

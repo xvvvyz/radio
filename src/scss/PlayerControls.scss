@@ -8,8 +8,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 15rem;
+  max-width: 18rem;
   margin: 0 auto;
+
+  @media (min-width: $break-medium) {
+    max-width: 14rem;
+  }
 
   button {
     flex-grow: 1;

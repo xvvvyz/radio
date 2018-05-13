@@ -4,7 +4,6 @@
 @import './utilities/reset';
 
 html {
-  background-color: $background-primary;
   font-size: 4.2vw;
 
   @media (min-width: $break-small) {

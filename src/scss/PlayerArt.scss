@@ -26,9 +26,9 @@
   $width: calc(100% - #{$padding-medium} * 2);
 
   width: $width;
-  max-height: 55vh;
-  height: $width;
   max-width: 55vh;
+  height: $width;
+  max-height: 55vh;
   margin: $padding-medium auto $padding-xsmall;
   background-color: rgba($background-secondary, .03);
   box-shadow: 0 1px 3px rgba($black, 0.12), 0 1px 2px rgba($black, 0.24);
@@ -41,5 +41,9 @@
     height: $width;
     max-width: 40vh;
     margin-top: $padding-large;
+  }
+
+  @media (max-height: $break-small) {
+    margin-top: 0;
   }
 }

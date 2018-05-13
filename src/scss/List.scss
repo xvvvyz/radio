@@ -18,14 +18,16 @@
   }
 
   ul {
-    background: linear-gradient(to top, $background-primary-dark, $background-primary-darker);
-    border-radius: .3rem;
+    background-color: $background-primary-dark;
+    border-radius: 0 0 $border-radius $border-radius;
+    transition: $speed-fast;
     overflow: hidden;
   }
 }
 
 .Search .List {
   margin: $padding-xsmall 0 0;
+  padding-bottom: 0;
 
   @media (min-width: $break-medium) {
     padding: 0 $padding-large;
@@ -40,30 +42,34 @@
     flex-wrap: wrap;
     justify-content: space-between;
     max-height: calc(#{$tag-height} * 1);
-    padding: 0 1.5em;
+    border-radius: $border-radius;
     overflow: hidden;
   }
 }
 
 .List_header {
-  display: block;
+  display: flex;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: $padding-xxsmall $padding-xsmall;
+  background-color: $background-secondary;
+  border-radius: $border-radius $border-radius 0 0;
+  transition: background-color $speed-fast;
+  color: $text-secondary;
+  font-size: .8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .1em;
 
-  h3 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: - $padding-xsmall 0 0;
-    padding: $padding-xsmall 0;
-    font-size: .8rem;
-    text-transform: uppercase;
-    letter-spacing: .1em;
+  &:hover {
+    background-color: $background-secondary-light;
   }
+}
 
+.List_shuffle {
   img {
-    display: inline;
-    width: .8rem;
-    height: .8rem;
-    margin-left: 1em;
+    width: .9rem;
+    height: .9rem;
   }
 }
