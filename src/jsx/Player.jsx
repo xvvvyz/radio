@@ -4,7 +4,6 @@ import Component from 'inferno-component';
 import PlayerArt from './PlayerArt.jsx';
 import PlayerControls from './PlayerControls.jsx';
 import PlayerInfo from './PlayerInfo.jsx';
-import Svg from './Svg.jsx';
 import '../scss/Player.scss';
 
 export default class Player extends Component {
