@@ -1,16 +1,12 @@
 $white: #fff;
-$black: #000;
-$off-black: #111;
 $molten: #2d3436;
 
 $background-primary: $white;
 $background-primary-dark: darken($background-primary, 4%);
-$background-primary-darker: darken($background-primary, 6%);
-$background-primary-darkest: darken($background-primary, 8%);
-$background-primary-hella-dark: darken($background-primary, 15%);
+$background-primary-darker: darken($background-primary, 8%);
 $background-secondary: $molten;
 $background-secondary-light: lighten($background-secondary, 10%);
 
-$text-primary: $off-black;
+$text-primary: $molten;
 $text-secondary: $white;
 $text-secondary-dark: darken($text-secondary, 5%);

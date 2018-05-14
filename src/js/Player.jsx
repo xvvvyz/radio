@@ -69,7 +69,6 @@ export default class Player extends preact.Component {
         title: this.props.track.title,
       });
 
-      ms.setActionHandler('seekbackward', this.props.refresh);
       ms.setActionHandler('nexttrack', this.props.skip);
     }
   };
