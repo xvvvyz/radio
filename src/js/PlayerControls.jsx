@@ -10,30 +10,21 @@ import '../scss/PlayerControls.scss';
 
 export default props => (
   <div className="PlayerControls" style={props.style}>
-    <Tip disabled={!props.isFullscreen} noMargin text="Refresh">
+    <Tip disabled={!props.isFullscreen} noMargin text="Fresh Playlist">
       <button onClick={props.refresh}>
         <img src={refreshSvg} />
       </button>
     </Tip>
-    <Tip disabled={!props.isFullscreen} noMargin text="Play/Pause">
-      <button onClick={props.isPlaying ? props.pause : props.play}>
-        <img src={props.isPlaying ? pauseSvg : playSvg} />
-      </button>
-    </Tip>
-    <Tip disabled={!props.isFullscreen} noMargin text="Skip">
+    <button onClick={props.isPlaying ? props.pause : props.play}>
+      <img src={props.isPlaying ? pauseSvg : playSvg} />
+    </button>
+    <Tip disabled={!props.isFullscreen} noMargin text="Skip Song">
       <button onClick={props.skip}>
         <img src={nextSvg} />
       </button>
     </Tip>
-    <Tip
-      className="hide_on_desktop"
-      disabled={!props.isFullscreen}
-      noMargin
-      text="Minimize"
-    >
-      <button onClick={props.toggleFullscreen}>
-        <img src={props.isFullscreen ? minimizeSvg : expandSvg} />
-      </button>
-    </Tip>
+    <button className="hide_on_desktop" onClick={props.toggleFullscreen}>
+      <img src={props.isFullscreen ? minimizeSvg : expandSvg} />
+    </button>
   </div>
 );

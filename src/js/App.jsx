@@ -17,7 +17,7 @@ import {
 
 export default class App extends preact.Component {
   state = {
-    artists: store.get(STORE.ARTISTS) || [],
+    artists: [],
     currentTags: [],
     genres: data.genres,
     playerVisible: false,
@@ -37,20 +37,22 @@ export default class App extends preact.Component {
     store.addPlugin(expirePlugin);
     store.removeExpiredKeys();
 
-    if (!this.state.artists.length) this.fetchArtists();
+    this.fetchArtists();
     this.parseUrl();
   }
 
-  addArtists = artists => {
-    artists = [...artists, this.state.artists];
-    this.setState({ artists });
-    store.set(STORE.ARTISTS, artists, STORE.ARTISTS_EXPIRY);
-  };
-
   fetchArtists = () => {
     api.artists().then(res => {
-      this.addArtists(res.artists.artist.map(a => a.name));
+      this.setState({ artists: this.mapArtists(res.artists.artist) });
     });
+  };
+
+  mapArtists = artists => {
+    return artists
+      .filter(a => a.streamable)
+      .map(a => ({ name: a.name, image: a.image[1]['#text']}))
+      .filter(a => a.image)
+      .filter(a => a.name.length < 25);
   };
 
   shuffleArtists = () => {
@@ -146,7 +148,7 @@ export default class App extends preact.Component {
   mapTags = tags => {
     return tags
       .filter(tag => tag.name.length < 40)
-      .map(tag => tag.name);
+      .map(tag => ({ name: tag.name, image: tag.artist_avatar }));
   };
 
   mapTrack = track => {
@@ -238,6 +240,16 @@ export default class App extends preact.Component {
     this.setState({ track: track, trackLoading: false });
     this.skipAllowed = res.set.skip_allowed;
     this.atLastTrack = res.set.at_last_track;
+    api.relatedArtists(track.artist).then(res => {
+      const artists = this.mapArtists(res.similarartists.artist);
+      if (artists.length < 6) return;
+      this.setState({ artists });
+    });
+    api.artistTags(track.artist).then(res => {
+      const related = res.toptags.tag.map(t => t.name);
+      if (related.length < 6) return;
+      this.setState({ genres: related })
+    });
     return true;
   };
 

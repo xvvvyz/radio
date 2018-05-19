@@ -54,6 +54,14 @@ export default {
     return lastApi({ method: 'chart.gettopartists', page: page, limit: limit });
   },
 
+  relatedArtists: artist => {
+    return lastApi({ method: 'artist.getsimilar', artist });
+  },
+
+  artistTags: artist => {
+    return lastApi({ method: 'artist.gettoptags', artist });
+  },
+
   playlists: (tags, mode, params) => {
     return eightApi(`explore/${t2q(tags)}/${mode}`, params);
   },

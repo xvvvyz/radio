@@ -2,7 +2,7 @@ import preact from 'preact';
 import List from './List';
 import '../scss/Lists.scss';
 
-const MAX_LIST_ITEMS = 7;
+const MAX_LIST_ITEMS = 6;
 
 export default props => (
   <section className="Lists">
@@ -10,7 +10,7 @@ export default props => (
       addTags={props.addTags}
       items={props.related.slice(0, MAX_LIST_ITEMS)}
       shuffle={props.shuffleRelated}
-      title="Suggestions"
+      title="Suggested"
     />
     <List
       addTags={props.addTags}
