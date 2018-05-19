@@ -148,7 +148,7 @@ export default class App extends preact.Component {
   mapTags = tags => {
     return tags
       .filter(tag => tag.name.length < 40)
-      .map(tag => ({ name: tag.name, image: tag.artist_avatar }));
+      .map(tag => ({ name: tag.name, image: (tag.artist_avatar || '').replace('http:', 'https:') }));
   };
 
   mapTrack = track => {
