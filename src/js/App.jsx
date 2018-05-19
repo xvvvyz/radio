@@ -50,6 +50,7 @@ export default class App extends preact.Component {
   mapArtists = artists => {
     return artists
       .filter(a => a.streamable)
+      .filter(a => !a.name.includes('/'))
       .map(a => ({ name: a.name, image: a.image[1]['#text']}))
       .filter(a => a.image)
       .filter(a => a.name.length < 25);
