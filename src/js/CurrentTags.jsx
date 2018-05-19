@@ -1,6 +1,7 @@
 import preact from 'preact';
-import Tag from './Tag.jsx';
-import '../scss/Tags.scss';
+import Tag from './Tag';
+import Tip from './Tip';
+import '../scss/CurrentTags.scss';
 
 export default props => !!props.currentTags.length && (
   <ul className="CurrentTags">

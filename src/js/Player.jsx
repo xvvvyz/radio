@@ -1,13 +1,13 @@
 import preact from 'preact';
 import cn from 'classnames';
-import PlayerArt from './PlayerArt.jsx';
-import PlayerControls from './PlayerControls.jsx';
-import PlayerInfo from './PlayerInfo.jsx';
+import PlayerArt from './PlayerArt';
+import PlayerControls from './PlayerControls';
+import PlayerInfo from './PlayerInfo';
 import '../scss/Player.scss';
 
 export default class Player extends preact.Component {
   state = {
-    isFullscreen: false,
+    isFullscreen: true,
     isPlaying: false,
   };
 
@@ -80,7 +80,8 @@ export default class Player extends preact.Component {
           Player: true,
           fullscreen: this.state.isFullscreen,
           visible: this.props.visible,
-      })}>
+        })}
+      >
         <div className="Player_inner">
           <PlayerArt
             cover={this.props.getCoverSize()}

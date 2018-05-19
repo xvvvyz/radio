@@ -1,6 +1,5 @@
-@import './utilities/boxes';
-@import './utilities/colors';
 @import './utilities/helpers';
+@import './utilities/variables';
 
 .PlayerInfo {
   @extend .fade_in;

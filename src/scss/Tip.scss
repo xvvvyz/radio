@@ -1,0 +1,55 @@
+@import './utilities/variables';
+
+$background: rgba($accent-primary, .7);
+
+.Tip {
+  position: relative;
+}
+
+.Tip_text {
+  position: absolute;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  bottom: calc(100% + #{$padding-xxsmall});
+  left: 50%;
+  padding: $padding-xxxsmall $padding-xxxsmall + .2rem;
+  border-radius: $border-radius;
+  background-color: $background;
+  transform: translateX(-50%);
+  transition: opacity $speed-fast, visibility $speed-fast;
+  color: $text-secondary;
+  font-size: .7em;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: line-through;
+  }
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    height: 0;
+    margin-left: -5px;
+    border: solid 5px transparent;
+    border-top-color: $background;
+  }
+
+  &.no_margin {
+    bottom: 100%;
+
+    &.bottom {
+      top: 100%;
+      bottom: auto;
+    }
+  }
+
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}

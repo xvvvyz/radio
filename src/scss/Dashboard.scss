@@ -1,7 +1,4 @@
-@import './utilities/animations';
-@import './utilities/boxes';
-@import './utilities/colors';
-@import './utilities/media';
+@import './utilities/variables';
 
 .Dashboard {
   @media (min-width: $break-large) {

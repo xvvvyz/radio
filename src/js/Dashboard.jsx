@@ -1,8 +1,8 @@
 import preact from 'preact';
 import cn from 'classnames';
-import Header from './Header.jsx';
-import Lists from './Lists.jsx';
-import Search from './Search.jsx';
+import Header from './Header';
+import Lists from './Lists';
+import Search from './Search';
 import '../scss/Dashboard.scss';
 
 export default props => (

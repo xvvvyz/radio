@@ -1,0 +1,64 @@
+// colors
+
+$black: #111;
+$molten: #2d3436;
+$white: #fff;
+$purple: #a29bfe;
+
+$background-primary: $white;
+$background-primary-dark: darken($background-primary, 4%);
+$background-primary-darker: darken($background-primary, 8%);
+$background-secondary: $molten;
+$background-secondary-light: lighten($background-secondary, 10%);
+
+$text-primary: $molten;
+$text-secondary: $white;
+$text-secondary-dark: darken($text-secondary, 5%);
+
+$accent-primary: $purple;
+
+// animations
+
+$speed-fast: .2s;
+$speed-normal: .3s;
+$speed-slow: .5s;
+$speed-slower: .7s;
+$speed-slowest: 1s;
+
+// boxes
+
+$padding-xxxsmall: .3rem;
+$padding-xxsmall: .7rem;
+$padding-xsmall: 1rem;
+$padding-small: 1.5rem;
+$padding-medium: 2rem;
+$padding-large: 3rem;
+$padding-xlarge: 5vw;
+
+$tag-height: 3rem;
+$player-width: 28vw;
+$control-button-size: 1.5rem;
+$player-height-small: $control-button-size + $padding-xxsmall * 2;
+
+$border-radius: 3px;
+
+$z-neg-1: -5;
+$z-1: 5;
+$z-2: 10;
+
+// media
+
+$break-xsmall: 400px;
+$break-small: 500px;
+$break-medium: 800px;
+$break-large: 1100px;
+$break-xlarge: 1400px;
+$break-xxlarge: 1700px;
+
+$vertical-break-xsmall: 100px;
+$vertical-break-small: 200px;
+$vertical-break-medium: 300px;
+$vertical-break-large: 400px;
+$vertical-break-xlarge: 500px;
+$vertical-break-xxlarge: 600px;
+$vertical-break-xxxlarge: 700px;

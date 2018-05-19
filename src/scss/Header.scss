@@ -1,7 +1,4 @@
-@import './utilities/animations';
-@import './utilities/boxes';
-@import './utilities/colors';
-@import './utilities/media';
+@import './utilities/variables';
 
 .Header {
   padding: $padding-large $padding-medium $padding-medium;
@@ -32,7 +29,7 @@
     a {
       display: inline-block;
       background-color: $background-secondary;
-      padding: $padding-xxxsmall $padding-xxsmall;
+      padding: $padding-xxsmall $padding-xsmall;
       border-radius: $border-radius;
       transition: background-color $speed-fast;
       color: $text-secondary;

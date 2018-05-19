@@ -1,7 +1,4 @@
-@import './utilities/animations';
-@import './utilities/boxes';
-@import './utilities/colors';
-@import './utilities/media';
+@import './utilities/variables';
 
 .Player {
   position: fixed;
@@ -38,7 +35,7 @@
   }
 }
 
-.Player.fullscreen {
+.Player.visible.fullscreen {
   transform: translateY(-100%);
 
   @media (min-width: $break-large) {
@@ -63,13 +60,14 @@
   @media (min-width: $break-large) {
     position: relative;
     top: auto;
-    padding: 0 0 $padding-large;
+    padding: 0 0 $padding-medium;
     transform: translateY(0);
   }
 }
 
 .Player.fullscreen .Player_inner {
   transform: translateY(100%);
+  background-color: $black;
 
   @media (min-width: $break-large) {
     transform: translateY(0);

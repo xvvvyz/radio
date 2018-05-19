@@ -1,6 +1,6 @@
 import preact from 'preact';
 import cn from 'classnames';
-import CurrentTags from './Tags.jsx';
+import CurrentTags from './CurrentTags';
 import '../scss/Header.scss';
 
 export default props => (

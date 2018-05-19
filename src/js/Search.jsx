@@ -1,9 +1,9 @@
 import preact from 'preact';
-import List from './List.jsx';
-import api from './utilities/api.js';
+import List from './List';
+import api from './utilities/api';
 import '../scss/Search.scss';
 
-const PLACEHOLDER = 'Enter an artist, genre, activity or mood...';
+const PLACEHOLDER = 'Search for an artist, genre, activity or mood';
 
 export default class Search extends preact.Component {
   state = {

@@ -1,37 +1,27 @@
-@import './utilities/animations';
-@import './utilities/boxes';
-@import './utilities/colors';
-@import './utilities/media';
+@import './utilities/variables';
 
 .PlayerControls {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
-  max-width: 18rem;
+  max-width: 20rem;
   margin: 0 auto;
 
-  @media (min-width: $break-medium) {
-    max-width: 14rem;
+  @media (min-width: $break-large) {
+    max-width: 16rem;
+  }
+
+  &>* {
+    flex-grow: 1;
   }
 
   button {
-    flex-grow: 1;
+    margin: 0 auto;
     padding: $padding-xxsmall;
-    border-radius: 50%;
 
     &:hover {
       cursor: pointer;
-    }
-
-    &:active {
-      transform: scale(.97);
-    }
-
-    &:last-of-type {
-      @media (min-width: $break-large) {
-        display: none;
-      }
     }
   }
 
@@ -39,5 +29,11 @@
     width: $control-button-size;
     height: $control-button-size;
     margin: 0 auto;
+  }
+}
+
+.hide_on_desktop {
+  @media (min-width: $break-large) {
+    display: none;
   }
 }

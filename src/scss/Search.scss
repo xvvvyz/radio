@@ -1,14 +1,7 @@
-@import './utilities/animations';
-@import './utilities/boxes';
-@import './utilities/colors';
-@import './utilities/media';
+@import './utilities/variables';
 
 .Search {
-  margin-bottom: $padding-medium;
-
-  @media (min-width: $break-medium) {
-    margin-bottom: $padding-large;
-  }
+  margin-bottom: $padding-large;
 
   @media (min-width: $break-large) {
     margin-bottom: $padding-xlarge;

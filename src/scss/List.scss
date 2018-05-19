@@ -1,12 +1,9 @@
-@import './utilities/animations';
-@import './utilities/boxes';
-@import './utilities/colors';
 @import './utilities/helpers';
-@import './utilities/media';
+@import './utilities/variables';
 
 .List {
   @extend .fade_in;
-  padding: 0 $padding-medium $padding-medium;
+  padding: 0 $padding-medium $padding-large;
 
   @media (min-width: $break-medium) {
     flex-basis: calc(100% / 3);
@@ -52,19 +49,22 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: $padding-xxsmall $padding-xsmall;
+  padding: $padding-xsmall;
   background-color: $background-secondary;
   border-radius: $border-radius $border-radius 0 0;
   transition: background-color $speed-fast;
+
+  &:hover {
+    background-color: $background-secondary-light;
+  }
+}
+
+.List_title {
   color: $text-secondary;
   font-size: .8rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: .1em;
-
-  &:hover {
-    background-color: $background-secondary-light;
-  }
 }
 
 .List_shuffle {

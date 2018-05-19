@@ -1,7 +1,4 @@
-@import './utilities/animations';
-@import './utilities/boxes';
-@import './utilities/colors';
-@import './utilities/media';
+@import './utilities/variables';
 
 .PlayerArt_background {
   display: none;
@@ -23,23 +20,25 @@
 }
 
 .PlayerArt_image {
-  $width: calc(50vh - #{$padding-medium * 2});
+  $width: calc(100% - #{$padding-medium * 2});
+  $max-width: 55vh;
 
   width: $width;
-  max-width: 55vh;
+  max-width: $max-width;
   height: $width;
-  max-height: 55vh;
+  max-height: $max-width;
   margin: $padding-medium auto $padding-xsmall;
   background-color: rgba($background-secondary, .03);
   box-shadow: 0 1px 3px rgba($molten, 0.12), 0 1px 2px rgba($molten, 0.24);
 
   @media (min-width: $break-large) {
     $width: calc(#{$player-width} - #{$padding-large} * 2);
+    $max-width: 40vh;
 
     width: $width;
-    max-height: 40vh;
+    max-height: $max-width;
     height: $width;
-    max-width: 40vh;
+    max-width: $max-width;
     margin-top: $padding-large;
   }
 

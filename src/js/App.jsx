@@ -4,22 +4,20 @@ import store from 'store';
 import expirePlugin from 'store/plugins/expire';
 import Dashboard from './Dashboard';
 import Player from './Player';
-import api from './utilities/api.js';
-import data from './utilities/data.js';
-import help from './utilities/helpers.js';
+import api from './utilities/api';
+import data from './utilities/data';
+import { hash } from './utilities/helpers';
 import '../scss/App.scss';
 
-const CURRENT_TAG_LIMIT = 2;
-const PLAYLISTS_PER_PAGE = 5;
-const STORE_ARTISTS = '___top_artists';
-const STORE_ARTISTS_EXPIRY = help.daysFromNow(1);
-const STORE_PLAYED = '___played';
-const STORE_PLAYED_LIMIT = 2000;
-const STORE_TAG_DATA_EXPIRY = help.daysFromNow(7);
+import {
+  CURRENT_TAG_LIMIT,
+  PLAYLISTS_PER_PAGE,
+  STORE,
+} from './utilities/constants';
 
 export default class App extends preact.Component {
   state = {
-    artists: store.get(STORE_ARTISTS) || [],
+    artists: store.get(STORE.ARTISTS) || [],
     currentTags: [],
     genres: data.genres,
     playerVisible: false,
@@ -30,7 +28,7 @@ export default class App extends preact.Component {
   };
 
   atLastTrack = false;
-  played = store.get(STORE_PLAYED) || [];
+  played = store.get(STORE.PLAYED) || [];
   proxy = false;
   skipAllowed = true;
 
@@ -43,11 +41,15 @@ export default class App extends preact.Component {
     this.parseUrl();
   }
 
+  addArtists = artists => {
+    artists = [...artists, this.state.artists];
+    this.setState({ artists });
+    store.set(STORE.ARTISTS, artists, STORE.ARTISTS_EXPIRY);
+  };
+
   fetchArtists = () => {
     api.artists().then(res => {
-      const artists = res.artists.artist.map(a => a.name);
-      this.setState({ artists: artists });
-      store.set(STORE_ARTISTS, artists, STORE_ARTISTS_EXPIRY);
+      this.addArtists(res.artists.artist.map(a => a.name));
     });
   };
 
@@ -131,19 +133,20 @@ export default class App extends preact.Component {
   };
 
   mapPlaylists = playlists => {
-    const mapPlaylist = playlist => {
-      return { id: playlist.id, cover: playlist.cover_urls.original };
-    };
+    const mapPlaylist = playlist => ({
+      id: playlist.id,
+      cover: playlist.cover_urls.original,
+    });
 
-    if (playlists.constructor === Array) {
-      return knuthShuffle(playlists).map(playlist => mapPlaylist(playlist));
-    } else {
-      return mapPlaylist(playlists);
-    }
+    return Array.isArray(playlists)
+      ? knuthShuffle(playlists).map(playlist => mapPlaylist(playlist))
+      : mapPlaylist(playlists);
   };
 
   mapTags = tags => {
-    return tags.filter(tag => tag.name.length < 40).map(tag => tag.name);
+    return tags
+      .filter(tag => tag.name.length < 40)
+      .map(tag => tag.name);
   };
 
   mapTrack = track => {
@@ -171,8 +174,8 @@ export default class App extends preact.Component {
 
   storePlayed = id => {
     this.played.push(id);
-    if (this.played.length > STORE_PLAYED_LIMIT) this.played.shift();
-    store.set(STORE_PLAYED, this.played);
+    if (this.played.length > STORE.PLAYED_LIMIT) this.played.shift();
+    store.set(STORE.PLAYED, this.played);
   };
 
   loadPlaylist = (playlist, related) => {
@@ -197,25 +200,25 @@ export default class App extends preact.Component {
     });
 
     const cleanTags = tags.concat().sort().map(tag => tag.toLowerCase());
-    const tagHash = help.hash(cleanTags.toString());
+    const tagHash = hash(cleanTags.toString());
     const data = store.get(tagHash) || { page: 0, index: 0 };
 
     if (data.playlists && data.index < data.playlists.length - 1) {
       data.index++;
-      store.set(tagHash, data, STORE_TAG_DATA_EXPIRY);
+      store.set(tagHash, data, STORE.TAG_DATA_EXPIRY);
       this.loadPlaylist(data.playlists[data.index], data.related);
     } else {
       data.page++;
       data.index = 0;
 
-      api.playlists(cleanTags, 'hot', {
+      api.playlists(cleanTags, 'recent', {
         include: 'mixes+explore_filters',
         page: data.page,
         per_page: PLAYLISTS_PER_PAGE,
       }).then(res => {
         data.playlists = this.mapPlaylists(res.mix_set.mixes);
         data.related = this.mapTags(res.filters);
-        store.set(tagHash, data, STORE_TAG_DATA_EXPIRY);
+        store.set(tagHash, data, STORE.TAG_DATA_EXPIRY);
         this.loadPlaylist(data.playlists[data.index], data.related);
       });
     }

@@ -1,13 +1,16 @@
 import preact from 'preact';
-import Tag from './Tag.jsx';
+import Tag from './Tag';
 import shuffleSvg from '../svg/shuffle.svg';
 import '../scss/List.scss';
 
 export default props => !!props.items.length && (
   <div className="List">
-    {props.title && <button className="List_header" onClick={props.shuffle}>
-      <span>{props.title}</span>
-      <span className="List_shuffle"><img src={shuffleSvg} /></span>
+    {props.title && <button
+      className="List_header"
+      onClick={props.shuffle}
+    >
+      <div className="List_title">{props.title}</div>
+      <div className="List_shuffle"><img src={shuffleSvg} /></div>
     </button>}
     <ul>
       {props.items.map(item => <Tag
