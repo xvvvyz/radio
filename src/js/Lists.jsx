@@ -2,7 +2,7 @@ import preact from 'preact';
 import List from './List';
 import '../scss/Lists.scss';
 
-const MAX_LIST_ITEMS = 6;
+const MAX_LIST_ITEMS = 5;
 
 export default props => (
   <section className="Lists">
