@@ -3,7 +3,6 @@
 .Lists {
   @media (min-width: $break-medium) {
     display: flex;
-    flex-direction: row-reverse;
     justify-content: center;
     padding-left: $padding-large;
   }
