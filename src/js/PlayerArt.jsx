@@ -25,15 +25,16 @@ export default class PlayerArt extends preact.Component {
 
     return (
       <div className={cn({ PlayerArt: true, loaded: !isLoading })}>
-        <div
+        {!!cover && <div
           className="PlayerArt_background"
           style={{ backgroundImage: `url(${cover})` }}
-        />
-        {cover && <img
+        />}
+        {!!cover && <img
           className="PlayerArt_image"
           onLoad={this.onLoad}
           src={cover}
-        />}
+          />}
+        }
       </div>
     );
   }
