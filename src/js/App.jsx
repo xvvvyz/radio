@@ -10,7 +10,8 @@ import { hash, parseUrl, setUrl } from './utilities/helpers';
 import '../scss/App.scss';
 
 import {
-  CURRENT_TAG_LIMIT, MAX_LIST_ITEMS,
+  CURRENT_TAG_LIMIT,
+  MAX_LIST_ITEMS,
   STORE_PLAYED,
   STORE_PLAYED_LIMIT,
   STORE_TAG_DATA_EXPIRY,
@@ -57,13 +58,12 @@ export default class App extends preact.Component {
     }
 
     this.setState({ currentTags: newTags });
-    await this.fetchPlaylist({ tags: newTags });
     setUrl(newTags);
+    this.fetchPlaylist({ tags: newTags });
   };
 
   fetchArtists = async () => {
-    const artists = await await api.topArtists();
-    this.setState({ artists });
+    this.setState({ artists: await api.topArtists() });
   };
 
   fetchArtistTags = async artist => {
@@ -74,14 +74,18 @@ export default class App extends preact.Component {
 
   fetchNextSong = async (playlistId = this.state.playlist.id) => {
     this.setState({ trackLoading: true });
-    if (this.atLastTrack) return this.fetchRelatedPlaylist(playlistId);
+
+    if (this.atLastTrack) {
+      this.fetchRelatedPlaylist(playlistId);
+      return;
+    }
 
     try {
       this.loadTrack(await api.nextSong(playlistId, this.proxy));
     } catch (err) {
       if (this.proxy) return;
       this.proxy = true;
-      await this.fetchNextSong(playlistId);
+      this.fetchNextSong(playlistId);
     }
   };
 
@@ -117,12 +121,13 @@ export default class App extends preact.Component {
 
   fetchRelatedPlaylist = async playlistId => {
     this.setState({ trackLoading: true });
-    await this.loadPlaylist(await api.nextPlaylist(playlistId));
+    this.loadPlaylist(await api.nextPlaylist(playlistId));
   };
 
   loadPlaylist = async (playlist, related = this.state.related) => {
     if (!playlist && this.state.currentTags.length > 1) {
-      return this.fetchPlaylist({ tags: this.removeTag() });
+      this.fetchPlaylist({ tags: this.removeTag() });
+      return;
     }
 
     if (!playlist) {
@@ -133,16 +138,17 @@ export default class App extends preact.Component {
         trackLoading: false,
       });
 
-      return Promise.resolve();
+      return;
     }
 
     if (this.played.includes(playlist.id)) {
-      return this.fetchPlaylist();
+      this.fetchPlaylist();
+      return;
     }
 
     this.storePlayed(playlist.id);
     this.setState({ deadEnd: false, playlist, related });
-    await this.fetchNextSong(playlist.id);
+    this.fetchNextSong(playlist.id);
   };
 
   loadTrack = ({ atLastTrack, skipAllowed, track }) => {
@@ -182,7 +188,7 @@ export default class App extends preact.Component {
     this.setState({ trackLoading: true });
 
     if (!this.skipAllowed) {
-      await this.fetchRelatedPlaylist(this.state.playlist.id);
+      this.fetchRelatedPlaylist(this.state.playlist.id);
       return;
     }
 
@@ -190,7 +196,7 @@ export default class App extends preact.Component {
       this.loadTrack(await api.skipSong(this.state.playlist.id, this.proxy));
       this.setState({ trackLoading: false });
     } catch (e) {
-      await this.fetchRelatedPlaylist(this.state.playlist.id);
+      this.fetchRelatedPlaylist(this.state.playlist.id);
     }
   };
 
