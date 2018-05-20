@@ -99,11 +99,7 @@ export default class Player extends preact.Component {
           {!!deadEnd && !trackLoading && <div className="Player_error">
             No "{deadEnd}" playlists found.
           </div>}
-          {track && <PlayerInfo
-            artist={track.artist}
-            loading={trackLoading}
-            title={track.title}
-          />}
+          <PlayerInfo loading={trackLoading} track={track} />
           <PlayerControls
             disabled={!track}
             isFullscreen={isFullscreen}

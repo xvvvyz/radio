@@ -7,19 +7,19 @@ const ORIGINAL_TITLE = document.title;
 export default props => {
   document.title = ORIGINAL_TITLE;
 
-  if (props.loading) return <div className="spinner" />;
-  if (!props.title && !props.artist) return;
+  if (!props.track || props.loading) return <div className="spinner" />;
+  const { title, artist } = props.track;
 
-  document.title = `${props.title} by ${props.artist}`;
-  const searchQuery = encodeURIComponent(`${props.artist} ${props.title}`);
+  document.title = `${title} by ${artist}`;
+  const searchQuery = encodeURIComponent(`${artist} ${title}`);
   const searchLink = `https://soundcloud.com/search/sounds?q=${searchQuery}`;
 
   return (
     <div className="PlayerInfo">
       <a href={searchLink} target="_blank">
-        <span className="PlayerInfo_artist">{props.artist}</span>
+        <span className="PlayerInfo_artist">{artist}</span>
         <span className="PlayerInfo_title">
-          {props.title}&nbsp;<img src={exitUp} />
+          {title}&nbsp;<img src={exitUp} />
         </span>
       </a>
     </div>
