@@ -7,16 +7,16 @@
   }
 }
 
-.fade_in {
-  opacity: 0;
-  transform: translateY(-$translate-distance);
-  animation: fadeIn .6s forwards;
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
+}
+
+.fade_in {
+  opacity: 0;
+  transform: translateY(-$translate-distance);
+  animation: fadeIn .6s forwards;
 }
 
 .spinner {

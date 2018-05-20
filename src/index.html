@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
 <meta name="HandheldFriendly" content="true">
+<meta name="theme-color" content="#040404">
 
 <title>Line Radio</title>
 <meta name="description" content="Listen to playlists curated by humans. This is the fastest way to discover interesting new music.">
@@ -25,8 +26,16 @@
 </script>
 
 <style>
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg)
+    }
+  }
+
   @keyframes spin {
     to {
+      -webkit-transform: rotate(360deg);
       transform: rotate(360deg)
     }
   }
@@ -59,6 +68,7 @@
   h3,
   h4 {
     display: block;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
 
@@ -66,6 +76,7 @@
   button {
     border: none;
     background: transparent none;
+    -webkit-box-shadow: none;
     box-shadow: none;
     outline: none;
     font-size: inherit;
@@ -89,9 +100,22 @@
 
   .splash {
     position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
     align-items: center;
     top: 0;
     left: 0;
@@ -99,33 +123,19 @@
     height: 100%;
   }
 
-  .title {
-    margin: 0 0 5px;
-    font-size: 30px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  .pro-tip {
-    font-size: 16px;
-  }
-
   .loader {
     width: 30px;
     height: 30px;
-    margin-top: 40px;
+    -webkit-border-radius: 50%;
     border-radius: 50%;
     border: 2px solid #222;
     border-left-color: transparent;
+    -webkit-animation: spin .5s linear infinite;
     animation: spin .5s linear infinite;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box
   }
 </style>
 
-<div id="splash" class="splash">
-  <h1 class="title">Line Radio</h1>
-  <p class="pro-tip">Tip: click on everything.</p>
-  <div class="loader"></div>
-</div>
-
+<div id="splash" class="splash"><div class="loader"></div></div>
 <div id="app"></div>

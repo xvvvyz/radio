@@ -64,7 +64,6 @@ export default class App extends preact.Component {
   fetchArtists = async () => {
     const artists = await await api.topArtists();
     this.setState({ artists });
-    document.getElementById('splash').remove();
   };
 
   fetchArtistTags = async artist => {

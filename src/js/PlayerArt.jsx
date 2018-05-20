@@ -4,7 +4,7 @@ import '../scss/PlayerArt.scss';
 
 export default class PlayerArt extends preact.Component {
   state = {
-    isLoading: false,
+    isLoading: true,
   };
 
   componentDidUpdate(prevProps) {
