@@ -11,15 +11,18 @@ import '../scss/PlayerControls.scss';
 export default props => (
   <div className="PlayerControls" style={props.style}>
     <Tip disabled={!props.isFullscreen} noMargin text="Fresh Playlist">
-      <button onClick={props.refresh}>
+      <button disabled={props.disabled} onClick={props.refresh}>
         <img src={refreshSvg} />
       </button>
     </Tip>
-    <button onClick={props.isPlaying ? props.pause : props.play}>
+    <button
+      disabled={props.disabled}
+      onClick={props.isPlaying ? props.pause : props.play}
+    >
       <img src={props.isPlaying ? pauseSvg : playSvg} />
     </button>
     <Tip disabled={!props.isFullscreen} noMargin text="Skip Song">
-      <button onClick={props.skip}>
+      <button disabled={props.disabled} onClick={props.skip}>
         <img src={nextSvg} />
       </button>
     </Tip>

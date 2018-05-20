@@ -1,9 +1,9 @@
 // colors
 
-$black: #111;
+$black: #040404;
 $molten: #2d3436;
-$white: #fff;
 $purple: #a29bfe;
+$white: #fff;
 
 $background-primary: $white;
 $background-primary-dark: darken($background-primary, 4%);
@@ -24,6 +24,7 @@ $speed-normal: .3s;
 $speed-slow: .5s;
 $speed-slower: .7s;
 $speed-slowest: 1s;
+$translate-distance: 5px;
 
 // boxes
 
@@ -33,7 +34,7 @@ $padding-xsmall: 1rem;
 $padding-small: 1.5rem;
 $padding-medium: 2rem;
 $padding-large: 3rem;
-$padding-xlarge: 5vw;
+$padding-xlarge: 4.5vw;
 
 $tag-height: 3.5rem;
 $player-width: 28vw;
@@ -42,7 +43,7 @@ $player-height-small: $control-button-size + $padding-xxsmall * 2;
 
 $border-radius: 3px;
 
-$z-neg-1: -5;
+$z-neg: -5;
 $z-1: 5;
 $z-2: 10;
 

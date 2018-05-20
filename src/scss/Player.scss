@@ -55,7 +55,7 @@
   padding: 0 0 $padding-medium - $padding-xsmall;
   transition: background-color $speed-normal, transform $speed-normal;
   transform: translateY($player-height-small + $padding-medium / 2);
-  background-color: $background-secondary;
+  background-color: $black;
 
   @media (min-width: $break-large) {
     position: relative;
@@ -65,6 +65,14 @@
     padding: 0 0 $padding-medium;
     transform: translateY(0);
   }
+}
+
+.Player_error {
+  width: 100%;
+  padding: $padding-small $padding-medium;
+  background-color: $accent-primary;
+  color: $text-secondary;
+  font-size: .9em;
 }
 
 .Player.fullscreen .Player_inner {

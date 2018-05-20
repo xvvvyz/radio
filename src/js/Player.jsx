@@ -11,7 +11,9 @@ export default class Player extends preact.Component {
     isPlaying: false,
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
+    if (!this.player) return;
+    this.player.muted = this.props.trackLoading;
     this.player.onended = this.next;
     this.player.onpause = () => this.setState({ isPlaying: false });
     this.player.onplay = this.updateMediaSession;
@@ -19,9 +21,10 @@ export default class Player extends preact.Component {
     this.player.onwaiting = () => this.setState({ isPlaying: true });
   }
 
-  componentDidUpdate() {
-    this.player.muted = this.props.trackLoading;
-  }
+  getCoverSize = (size = 512) => {
+    if (!this.props.playlist) return;
+    return this.props.playlist.cover + `&w=${size}&h=${size}`;
+  };
 
   toggleFullscreen = () => {
     this.setState({ isFullscreen: !this.state.isFullscreen });
@@ -58,7 +61,7 @@ export default class Player extends preact.Component {
 
       const getCoverSizes = sizes => sizes.map(size => ({
         sizes: `${size}x${size}`,
-        src: this.props.getCoverSize(size),
+        src: this.getCoverSize(size),
         type: 'image/jpeg',
       }));
 
@@ -74,32 +77,39 @@ export default class Player extends preact.Component {
   };
 
   render() {
+    const { deadEnd, track, trackLoading, visible } = this.props;
+    const { isFullscreen, isPlaying } = this.state;
+
     return (
       <div
         className={cn({
           Player: true,
-          fullscreen: this.state.isFullscreen,
-          visible: this.props.visible,
+          fullscreen: isFullscreen,
+          visible: visible,
         })}
       >
         <div className="Player_inner">
           <PlayerArt
-            cover={this.props.getCoverSize()}
+            cover={this.getCoverSize()}
           />
-          <audio
+          {track && <audio
             autoPlay={true}
             ref={player => this.player = player}
-            src={this.props.track.stream}
-            title={`${this.props.track.title} by ${this.props.track.artist}`}
-          />
-          <PlayerInfo
-            artist={this.props.track.artist}
-            loading={this.props.trackLoading}
-            title={this.props.track.title}
-          />
+            src={track.stream}
+            title={`${track.title} by ${track.artist}`}
+          />}
+          {!!deadEnd && !trackLoading && <div className="Player_error">
+            No "{deadEnd}" playlists found.
+          </div>}
+          {track && <PlayerInfo
+            artist={track.artist}
+            loading={trackLoading}
+            title={track.title}
+          />}
           <PlayerControls
-            isFullscreen={this.state.isFullscreen}
-            isPlaying={this.state.isPlaying}
+            disabled={!track}
+            isFullscreen={isFullscreen}
+            isPlaying={isPlaying}
             pause={this.pause}
             play={this.play}
             refresh={this.refresh}

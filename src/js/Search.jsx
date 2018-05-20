@@ -9,6 +9,7 @@ export default class Search extends preact.Component {
   state = {
     placeholder: PLACEHOLDER,
     tags: [],
+    value: '',
   };
 
   onBlur = () => {
@@ -19,19 +20,21 @@ export default class Search extends preact.Component {
     this.setState({ placeholder: '' });
   };
 
-  onInput = ({ target }) => {
-    if (target.value === this.value) return false;
-    this.value = target.value;
+  onInput = async event => {
+    const value = event.target.value;
+    if (value === this.state.value) return;
+    this.setState({ value });
 
-    if (target.value) {
-      ga('send', 'event', 'search', 'search', target.value);
-
-      api.search({ q: target.value, per_page: 10 }).then(res => {
-        if (this.value) this.setState({ tags: res.tag_cloud.tags });
-      });
-    } else {
+    if (!value) {
       this.setState({ tags: [] });
+      return;
     }
+
+    const tags = await api.search(value);
+    if (!this.state.value) return;
+    ga('send', 'event', 'search', 'search', value);
+
+    this.setState({ tags });
   };
 
   render() {

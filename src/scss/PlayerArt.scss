@@ -1,7 +1,6 @@
 @import './utilities/variables';
 
 .PlayerArt_background {
-  display: none;
   position: absolute;
   top: - $padding-large;
   right: - $padding-large;
@@ -10,13 +9,13 @@
   transition: opacity $speed-slow;
   background-size: cover;
   background-position: center;
-  z-index: -1;
+  z-index: $z-neg;
+  filter: blur(12px);
+  opacity: 0;
+}
 
-  @media (min-width: $break-large) {
-    display: block;
-    filter: blur(12px);
-    opacity: .3;
-  }
+.loaded .PlayerArt_background {
+  opacity: .3;
 }
 
 .PlayerArt_image {
@@ -28,8 +27,11 @@
   height: $width;
   max-height: $max-width;
   margin: $padding-medium auto $padding-xsmall;
-  background-color: rgba($background-secondary, .03);
+  transform: translateY($translate-distance);
+  transition: transform $speed-normal, opacity $speed-normal;
+  background-color: rgba($white, .05);
   box-shadow: 0 1px 3px rgba($molten, 0.12), 0 1px 2px rgba($molten, 0.24);
+  opacity: 0;
 
   @media (min-width: $break-large) {
     $width: calc(#{$player-width} - #{$padding-large} * 2);
@@ -42,4 +44,9 @@
   @media (max-height: $break-small) {
     margin-top: 0;
   }
+}
+
+.loaded .PlayerArt_image {
+  transform: translateY(0);
+  opacity: 1;
 }

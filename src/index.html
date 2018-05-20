@@ -6,14 +6,13 @@
 
 <title>Line Radio</title>
 <meta name="description" content="Listen to playlists curated by humans. This is the fastest way to discover interesting new music.">
-<meta name="theme-color" content="#222">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:description" content="Listen to playlists curated by humans. This is the fastest way to discover interesting new music.">
-<meta name="twitter:image" content="https://linerad.io/social.jpg">
 <meta name="twitter:title" content="Line Radio - Streamlined Music Discovery">
-<meta property="og:description" content="Listen to playlists curated by humans. This is the fastest way to discover interesting new music.">
-<meta property="og:image" content="https://linerad.io/social.jpg">
+<meta name="twitter:description" content="Listen to playlists curated by humans. This is the fastest way to discover interesting new music.">
+<meta name="twitter:image" content="https://linerad.io/SCREENSHOT.png">
 <meta property="og:title" content="Line Radio - Streamlined Music Discovery">
+<meta property="og:description" content="Listen to playlists curated by humans. This is the fastest way to discover interesting new music.">
+<meta property="og:image" content="https://linerad.io/SCREENSHOT.png">
 <meta property="og:url" content="https://linerad.io">
 <link rel="canonical" href="https://linerad.io">
 
@@ -32,30 +31,101 @@
     }
   }
 
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    color: #222;
+    font-family: 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  div,
+  main,
+  section,
+  aside,
+  input,
+  button,
+  img,
+  svg,
+  ul,
+  li,
+  h1,
+  h2,
+  h3,
+  h4 {
+    display: block;
+    box-sizing: border-box;
+  }
+
+  input,
+  button {
+    border: none;
+    background: transparent none;
+    box-shadow: none;
+    outline: none;
+    font-size: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .splash {
     position: absolute;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: center;
+    flex-direction: column;
     justify-content: center;
-    -ms-flex-align: center;
     align-items: center;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%
+    height: 100%;
+  }
+
+  .title {
+    margin: 0 0 5px;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .pro-tip {
+    font-size: 16px;
   }
 
   .loader {
-    width: 2em;
-    height: 2em;
+    width: 30px;
+    height: 30px;
+    margin-top: 40px;
     border-radius: 50%;
-    border: .1em solid #222;
+    border: 2px solid #222;
     border-left-color: transparent;
     animation: spin .5s linear infinite;
     box-sizing: border-box
   }
 </style>
 
-<div id="splash" class="splash"><div class="loader"></div></div>
+<div id="splash" class="splash">
+  <h1 class="title">Line Radio</h1>
+  <p class="pro-tip">Tip: click on everything.</p>
+  <div class="loader"></div>
+</div>
+
 <div id="app"></div>

@@ -1,87 +1,97 @@
-import 'whatwg-fetch';
+import {
+  EIGHT_PAGE_LIMIT,
+  LAST_METHOD_ARTIST_SIMILAR,
+  LAST_METHOD_ARTIST_TAGS,
+  LAST_METHOD_TOP_ARTISTS,
+  LAST_PAGE_LIMIT,
+} from './constants';
 
-const euc = encodeURIComponent;
-
-const o2q = obj => {
-  return Object.keys(obj).map(key => `${euc(key)}=${euc(obj[key])}`).join('&');
-};
-
-const t2q = tags => {
-  const mapFunc = tag => {
-    let q = tag
-      .replace(/_/g, '__')
-      .replace(/\+/g, '&&')
-      .replace(/ /g, '_');
-
-    q = euc(q)
-      .replace(/\./g, '%5E');
-
-    return q;
-  };
-
-  return tags.map(mapFunc).join('+');
-};
-
-const getJson = url => {
-  return fetch(url).then(res => res.json());
-};
-
-const lastApi = params => {
-  const base = 'https://ws.audioscrobbler.com/2.0';
-  params.format = 'json';
-  params.api_key = '4404bce8f9357c0c788326cf72515d50';
-  return getJson(`${base}/?${o2q(params)}`);
-};
-
-const eightToken = id => {
-  if (!eightToken[id]) {
-    eightToken[id] = Math.floor(Math.random() * 100000000000000);
-  }
-
-  return eightToken[id];
-};
-
-const eightApi = (path, params, proxy = false) => {
-  const base = proxy ? 'https://proxy.linerad.io' : 'https://8tracks.com';
-  params.format = 'json';
-  params.api_version = 3;
-  params.api_key = '1dce5b8108f82a99ac4cb482fbd6fa96b9cfbec2';
-  return getJson(`${base}/${path}?${o2q(params)}`);
-};
+import {
+  callEightApi,
+  callLastApi,
+  getToken,
+  selectArtistTags,
+  selectArtists,
+  selectPlaylistTags,
+  selectPlaylists,
+  selectTrack,
+  tagsToQuery,
+} from './helpers';
 
 export default {
-  artists: (limit = 100, page = 1) => {
-    return lastApi({ method: 'chart.gettopartists', page: page, limit: limit });
+  artistTags: async artist => {
+    const res = await callLastApi({
+      artist,
+      limit: LAST_PAGE_LIMIT,
+      method: LAST_METHOD_ARTIST_TAGS,
+    });
+
+    return selectArtistTags(res);
   },
 
-  relatedArtists: artist => {
-    return lastApi({ method: 'artist.getsimilar', artist });
+  nextPlaylist: async id => {
+    const res = await callEightApi(`sets/${getToken(id)}/next_mix.json`, {
+      mix_id: id,
+    });
+
+    return selectPlaylists(res);
   },
 
-  artistTags: artist => {
-    return lastApi({ method: 'artist.gettoptags', artist });
+  nextSong: async (id, proxy = false) => {
+    const res = await callEightApi(
+      `sets/${getToken(id)}/next`,
+      { mix_id: id },
+      proxy,
+    );
+
+    return selectTrack(res);
   },
 
-  playlists: (tags, mode, params) => {
-    return eightApi(`explore/${t2q(tags)}/${mode}`, params);
+  playlists: async ({ page, tags }) => {
+    const res = await callEightApi(`explore/${tagsToQuery(tags)}/recent`, {
+      include: 'mixes+explore_filters',
+      page: page,
+      per_page: EIGHT_PAGE_LIMIT,
+    });
+
+    return {
+      playlists: selectPlaylists(res),
+      related: selectPlaylistTags(res),
+    };
   },
 
-  nextSong: (params, proxy = false) => {
-    const token = eightToken(params.mix_id);
-    return eightApi(`sets/${token}/next`, params, proxy);
+  search: async query => {
+    const res = await callEightApi('tags.json', { q: query, per_page: 10 });
+    return res.tag_cloud.tags;
   },
 
-  skipSong: (params, proxy = false) => {
-    const token = eightToken(params.mix_id);
-    return eightApi(`sets/${token}/skip`, params, proxy);
+  similarArtists: async artist => {
+    const res = await callLastApi({
+      artist,
+      limit: LAST_PAGE_LIMIT,
+      method: LAST_METHOD_ARTIST_SIMILAR,
+    });
+
+    return selectArtists(res);
   },
 
-  nextPlaylist: params => {
-    const token = eightToken(params.mix_id);
-    return eightApi(`sets/${token}/next_mix.json`, params);
+  skipSong: async (id, proxy = false) => {
+    const res = await callEightApi(
+      `sets/${getToken(id)}/skip`,
+      { mix_id: id },
+      proxy,
+    );
+
+    return selectTrack(res);
   },
 
-  search: params => {
-    return eightApi(`tags.json?${o2q(params)}`, params);
+  topArtists: async () => {
+    const res = await callLastApi({
+      limit: LAST_PAGE_LIMIT,
+      method: LAST_METHOD_TOP_ARTISTS,
+      page: 1,
+    });
+
+    return selectArtists(res);
   },
 };
