@@ -1,5 +1,6 @@
 import preact from 'preact';
 import cn from 'classnames';
+import Footer from './Footer';
 import Header from './Header';
 import Lists from './Lists';
 import Search from './Search';
@@ -16,9 +17,7 @@ export default props => (
       currentTags={props.currentTags}
       removeTag={props.removeTag}
     />
-    <Search
-      addTags={props.addTags}
-    />
+    <Search addTags={props.addTags} />
     <Lists
       addTags={props.addTags}
       artists={props.artists}
@@ -28,5 +27,6 @@ export default props => (
       shuffleGenres={props.shuffleGenres}
       shuffleRelated={props.shuffleRelated}
     />
+    <Footer />
   </main>
 );
