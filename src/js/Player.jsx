@@ -22,7 +22,7 @@ export default class Player extends preact.Component {
   }
 
   getCoverSize = (size = 512) => {
-    if (!this.props.playlist) return;
+    if (!this.props.playlist) return null;
     return this.props.playlist.cover + `&w=${size}&h=${size}`;
   };
 
@@ -89,9 +89,7 @@ export default class Player extends preact.Component {
         })}
       >
         <div className="Player_inner">
-          <PlayerArt
-            cover={this.getCoverSize()}
-          />
+          <PlayerArt cover={this.getCoverSize()} />
           {track && <audio
             autoPlay={true}
             ref={player => this.player = player}

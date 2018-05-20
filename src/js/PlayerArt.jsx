@@ -29,7 +29,11 @@ export default class PlayerArt extends preact.Component {
           className="PlayerArt_background"
           style={{ backgroundImage: `url(${cover})` }}
         />
-       <img className="PlayerArt_image" onLoad={this.onLoad} src={cover} />
+        {cover && <img
+          className="PlayerArt_image"
+          onLoad={this.onLoad}
+          src={cover}
+        />}
       </div>
     );
   }
