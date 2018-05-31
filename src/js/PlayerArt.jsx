@@ -33,8 +33,7 @@ export default class PlayerArt extends preact.Component {
           className="PlayerArt_image"
           onLoad={this.onLoad}
           src={cover}
-          />}
-        }
+        />}
       </div>
     );
   }
