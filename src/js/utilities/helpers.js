@@ -1,5 +1,5 @@
-import 'whatwg-fetch';
 import { knuthShuffle } from 'knuth-shuffle';
+import 'whatwg-fetch';
 
 import {
   EIGHT_API_KEY,

@@ -125,6 +125,8 @@ export default class App extends preact.Component {
   };
 
   loadPlaylist = async (playlist, related = this.state.related) => {
+    this.skipAllowed = true;
+
     if (!playlist && this.state.currentTags.length > 1) {
       this.fetchPlaylist({ tags: this.removeTag() });
       return;
