@@ -7,7 +7,8 @@ const ORIGINAL_TITLE = document.title;
 export default props => {
   document.title = ORIGINAL_TITLE;
 
-  if (!props.track || props.loading) return <div className="spinner" />;
+  if (props.loading) return <div className="spinner" />;
+  if (!props.track) return null;
   const { title, artist } = props.track;
 
   document.title = `${title} by ${artist}`;

@@ -110,7 +110,7 @@ export default class App extends preact.Component {
       store.set(tagHash, data, STORE_TAG_DATA_EXPIRY);
     }
 
-    await this.loadPlaylist(data.playlists[data.index], data.related);
+    this.loadPlaylist(data.playlists[data.index], data.related);
   };
 
   fetchSimilarArtists = async artist => {
