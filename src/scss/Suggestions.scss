@@ -2,12 +2,13 @@
 
 .Suggestions {
   padding: 0 $padding-medium $padding-large;
-  font-size: 1.3rem;
-  line-height: 1.6em;
+  font-size: 1.1rem;
+  line-height: 2em;
   text-align: center;
 
   @media (min-width: $break-medium) {
     padding: 0 $padding-large $padding-large;
+    font-size: 1.5rem;
   }
 
   @media (min-width: $break-large) {
@@ -27,7 +28,7 @@
       background-color: $accent-primary-light;
     }
 
-    @media (min-width: $break-medium) {
+    @media (min-width: $break-small) {
       display: inline-block;
     }
   }
