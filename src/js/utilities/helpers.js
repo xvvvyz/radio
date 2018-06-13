@@ -8,7 +8,7 @@ import {
 } from './constants';
 
 export const callEightApi = (path, params, proxy = false) => {
-  const base = proxy ? 'https://proxy.linerad.io' : 'https://8tracks.com';
+  const base = proxy ? 'https://r51c7dwz23.execute-api.us-west-2.amazonaws.com/prod' : 'https://8tracks.com';
 
   const qs = objectToQuery({
     ...params,
