@@ -22,10 +22,11 @@ export default class App extends preact.Component {
     artists: [],
     currentTags: [],
     deadEnd: false,
-    genres: data.genres,
+    genres: [],
     playerVisible: false,
     playlist: null,
     related: [],
+    suggestions: [],
     track: null,
     trackLoading: true,
   };
@@ -34,14 +35,50 @@ export default class App extends preact.Component {
   played = store.get(STORE_PLAYED) || [];
   proxy = false;
   skipAllowed = true;
+  spinDelay = 20;
+  spinMax = 400;
+  timeout = null;
 
   componentDidMount() {
     ga('send', 'pageview');
     store.addPlugin(expirePlugin);
     store.removeExpiredKeys();
     this.addTags(parseUrl());
-    this.fetchArtists();
+    this.getNewSuggestion();
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.suggestions !== this.state.suggestions) {
+      if (this.spinDelay < this.spinMax) {
+        this.timeout = window.setTimeout(this.getNewSuggestion, this.spinDelay);
+      } else {
+        this.spinDelay = 50;
+      }
+    }
+  }
+
+  shuffleSuggestion = () => {
+    this.clearTimeout();
+    this.getNewSuggestion();
+  };
+
+  clearTimeout = () => {
+    if (!this.timeout) return;
+    window.clearTimeout(this.timeout);
+  };
+
+  getNewSuggestion = () => {
+    const artists = this.state.artists.length ? this.state.artists.map(a => a.name) : data.artists;
+    const genres = this.state.genres.length ? this.state.genres : data.genres;
+
+    const suggestions = [
+      knuthShuffle([...artists, ...genres])[0],
+      knuthShuffle([...data.activities])[0]
+    ];
+
+    this.spinDelay = this.spinDelay * 1.2;
+    this.setState({ suggestions: suggestions });
+  };
 
   addTags = async newTags => {
     if (!newTags) return;
@@ -60,10 +97,6 @@ export default class App extends preact.Component {
     this.setState({ currentTags: newTags });
     setUrl(newTags);
     this.fetchPlaylist({ tags: newTags });
-  };
-
-  fetchArtists = async () => {
-    this.setState({ artists: await api.topArtists() });
   };
 
   fetchArtistTags = async artist => {
@@ -141,6 +174,8 @@ export default class App extends preact.Component {
         trackLoading: false,
       });
 
+      this.shuffleSuggestion();
+
       return;
     }
 
@@ -154,12 +189,13 @@ export default class App extends preact.Component {
     this.fetchNextSong(playlist.id);
   };
 
-  loadTrack = ({ atLastTrack, skipAllowed, track }) => {
+  loadTrack = async ({ atLastTrack, skipAllowed, track }) => {
     this.atLastTrack = atLastTrack;
     this.skipAllowed = skipAllowed;
     this.setState({ track, trackLoading: false });
-    this.fetchSimilarArtists(track.artist);
-    this.fetchArtistTags(track.artist);
+    await this.fetchArtistTags(track.artist);
+    await this.fetchSimilarArtists(track.artist);
+    this.shuffleSuggestion();
   };
 
   removeTag = tag => {
@@ -223,6 +259,7 @@ export default class App extends preact.Component {
           shuffleArtists={this.shuffleArtists}
           shuffleGenres={this.shuffleGenres}
           shuffleRelated={this.shuffleRelated}
+          suggestions={this.state.suggestions}
         />
         <Player
           deadEnd={this.state.deadEnd}

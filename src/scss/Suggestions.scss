@@ -1,0 +1,27 @@
+@import './utilities/variables';
+
+.Suggestions {
+  padding: 0 $padding-medium $padding-large;
+  font-size: 1.5rem;
+  line-height: 1.6em;
+  text-align: center;
+
+  @media (min-width: $break-medium) {
+    padding: 0 $padding-large $padding-large;
+  }
+
+  @media (min-width: $break-large) {
+    padding: 0 $padding-xlarge $padding-xlarge;
+  }
+
+  button {
+    display: inline-block;
+    margin: 0 -$padding-xxxsmall;
+    padding: $padding-xxxsmall $padding-xxxsmall;
+    color: $accent-primary;
+
+    &:hover {
+      background-color: rgba($accent-primary, .2);
+    }
+  }
+}

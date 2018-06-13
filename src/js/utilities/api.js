@@ -2,7 +2,6 @@ import {
   EIGHT_PAGE_LIMIT,
   LAST_METHOD_ARTIST_SIMILAR,
   LAST_METHOD_ARTIST_TAGS,
-  LAST_METHOD_TOP_ARTISTS,
   LAST_PAGE_LIMIT,
 } from './constants';
 
@@ -83,15 +82,5 @@ export default {
     );
 
     return selectTrack(res);
-  },
-
-  topArtists: async () => {
-    const res = await callLastApi({
-      limit: LAST_PAGE_LIMIT,
-      method: LAST_METHOD_TOP_ARTISTS,
-      page: 1,
-    });
-
-    return selectArtists(res);
   },
 };

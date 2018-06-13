@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Lists from './Lists';
 import Search from './Search';
+import Suggestions from './Suggestions';
 import '../scss/Dashboard.scss';
 
 export default props => (
@@ -26,6 +27,11 @@ export default props => (
       shuffleArtists={props.shuffleArtists}
       shuffleGenres={props.shuffleGenres}
       shuffleRelated={props.shuffleRelated}
+    />
+    <Suggestions
+      addTags={props.addTags}
+      playerVisible={props.playerVisible}
+      suggestions={props.suggestions}
     />
     <Footer />
   </main>

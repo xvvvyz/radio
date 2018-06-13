@@ -6,7 +6,6 @@ export const EIGHT_PAGE_LIMIT = 5;
 export const LAST_API_KEY = '4404bce8f9357c0c788326cf72515d50';
 export const LAST_METHOD_ARTIST_SIMILAR = 'artist.getsimilar';
 export const LAST_METHOD_ARTIST_TAGS = 'artist.gettoptags';
-export const LAST_METHOD_TOP_ARTISTS = 'chart.gettopartists';
 export const LAST_PAGE_LIMIT = 50;
 export const MAX_LIST_ITEMS = 5;
 export const MAX_TAG_CHARACTER_LENGTH = 20;
