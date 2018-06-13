@@ -17,8 +17,9 @@
   button {
     display: block;
     margin: 0 auto;
-    padding: $padding-xxxsmall $padding-xxxsmall;
+    padding: $padding-xxxsmall $padding-xxsmall;
     transition: background-color $speed-fast;
+    border-radius: $border-radius;
     background-color: $accent-primary-lighter;
     color: $accent-primary;
 

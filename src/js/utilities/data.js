@@ -94,6 +94,7 @@ export default {
     'smoke',
     'soft',
     'study',
+    'studying',
     'summer',
     'summertime',
     'weed',
