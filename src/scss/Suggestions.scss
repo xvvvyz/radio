@@ -2,7 +2,7 @@
 
 .Suggestions {
   padding: 0 $padding-medium $padding-large;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   line-height: 1.6em;
   text-align: center;
 
@@ -15,13 +15,19 @@
   }
 
   button {
-    display: inline-block;
-    margin: 0 -$padding-xxxsmall;
+    display: block;
+    margin: 0 auto;
     padding: $padding-xxxsmall $padding-xxxsmall;
+    transition: background-color $speed-fast;
+    background-color: $accent-primary-lighter;
     color: $accent-primary;
 
     &:hover {
-      background-color: rgba($accent-primary, .2);
+      background-color: $accent-primary-light;
+    }
+
+    @media (min-width: $break-medium) {
+      display: inline-block;
     }
   }
 }

@@ -73,7 +73,7 @@ export default class App extends preact.Component {
 
     const suggestions = [
       knuthShuffle([...artists, ...genres])[0],
-      knuthShuffle([...data.activities])[0]
+      knuthShuffle([...data.modifiers])[0]
     ];
 
     this.spinDelay = this.spinDelay * 1.2;

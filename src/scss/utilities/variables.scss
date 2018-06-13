@@ -16,6 +16,8 @@ $text-secondary: $white;
 $text-secondary-dark: darken($text-secondary, 5%);
 
 $accent-primary: $purple;
+$accent-primary-light: rgba($accent-primary, .3);
+$accent-primary-lighter: rgba($accent-primary, .2);
 
 // animations
 
