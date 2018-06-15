@@ -257,7 +257,7 @@ export default class App extends preact.Component {
   render() {
     return (
       <div>
-        <img onLoad={this.onBackgroundLoad} className={cn({ App_background: true, visible: this.state.backgroundVisible && !this.state.playerVisible })} src="https://images.unsplash.com/photo-1527757728250-565ed17969c8?w=1080" />
+        <img onLoad={this.onBackgroundLoad} className={cn({ App_background: true, visible: this.state.backgroundVisible && !this.state.playerVisible })} src="/bg.jpg" />
         <Dashboard
           addTags={this.addTags}
           artists={this.state.artists}
