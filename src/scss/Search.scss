@@ -1,3 +1,4 @@
+@import './utilities/helpers';
 @import './utilities/variables';
 
 .Search {
@@ -8,19 +9,15 @@
   }
 
   input {
+    @include shadow(1);
     width: calc(100% - #{$padding-medium} * 2);
     margin: 0 $padding-medium;
     padding: $padding-xsmall 0;
-    background-color: $background-primary-dark;
     border-radius: 3rem;
+    background-color: $white;
     transition: $speed-fast;
     font-size: .8em;
     text-align: center;
-
-    &:hover,
-    &:focus {
-      background-color: $background-primary-darker;
-    }
 
     @media (min-width: $break-medium) {
       width: calc(100% - #{$padding-large} * 2);

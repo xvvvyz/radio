@@ -14,7 +14,7 @@ export default class Suggestions extends preact.Component {
 
   render() {
     const { playerVisible } = this.props;
-    const homeText = 'No ideas? Try';
+    const homeText = 'Stumped? Try';
     const playerText = 'No good? Try';
 
     return (

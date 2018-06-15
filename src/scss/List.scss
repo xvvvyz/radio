@@ -15,11 +15,15 @@
   }
 
   ul {
-    background-color: $background-primary-dark;
+    background-color: $white;
     border-radius: 0 0 $border-radius $border-radius;
-    transition: $speed-fast;
     overflow: hidden;
   }
+}
+
+.List_inner {
+  @include shadow(1);
+  border-radius: $border-radius;
 }
 
 .Search .List {
@@ -42,6 +46,10 @@
     border-radius: $border-radius;
     overflow: hidden;
   }
+}
+
+.Lists .List_inner {
+  @extend .card;
 }
 
 .List_header {

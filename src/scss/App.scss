@@ -1,3 +1,4 @@
+@import './utilities/helpers';
 @import './utilities/variables';
 
 html {
@@ -21,5 +22,26 @@ html {
 
   @media (min-width: $break-xxlarge) {
     font-size: 1vw;
+  }
+}
+
+body {
+  background-color: $background-primary;
+}
+
+.App_background {
+  position: fixed;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: $z-neg;
+  transition: opacity $speed-slowest;
+  opacity: 0;
+
+  &.visible {
+    opacity: .3;
   }
 }

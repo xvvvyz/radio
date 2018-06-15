@@ -2,13 +2,12 @@
 
 .Suggestions {
   padding: 0 $padding-medium $padding-large;
-  font-size: 1.1rem;
-  line-height: 2em;
+  font-size: 1.2rem;
+  line-height: 1.6em;
   text-align: center;
 
   @media (min-width: $break-medium) {
     padding: 0 $padding-large $padding-large;
-    font-size: 1.5rem;
   }
 
   @media (min-width: $break-large) {
@@ -17,19 +16,20 @@
 
   button {
     display: block;
-    margin: 0 auto;
+    margin: $padding-xxsmall auto 0;
     padding: $padding-xxxsmall $padding-xxsmall;
     transition: background-color $speed-fast;
     border-radius: $border-radius;
-    background-color: $accent-primary-lighter;
-    color: $accent-primary;
+    background-color: $accent-primary-lightest;
+    color: $text-secondary;
 
     &:hover {
-      background-color: $accent-primary-light;
+      background-color: $accent-primary;
     }
 
     @media (min-width: $break-small) {
       display: inline-block;
+      margin-top: 0;
     }
   }
 }

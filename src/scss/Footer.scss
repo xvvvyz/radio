@@ -1,6 +1,8 @@
+@import './utilities/helpers';
 @import './utilities/variables';
 
 .Footer {
+  @extend .fade_in;
   display: flex;
   justify-content: space-between;
   align-items: center;

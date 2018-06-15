@@ -1,4 +1,5 @@
 import preact from 'preact';
+import cn from 'classnames';
 import { knuthShuffle } from 'knuth-shuffle';
 import store from 'store';
 import expirePlugin from 'store/plugins/expire';
@@ -29,6 +30,8 @@ export default class App extends preact.Component {
     suggestions: [],
     track: null,
     trackLoading: true,
+    backgroundVisible: false,
+    footerVisible: false,
   };
 
   atLastTrack = false;
@@ -196,6 +199,7 @@ export default class App extends preact.Component {
     await this.fetchArtistTags(track.artist);
     await this.fetchSimilarArtists(track.artist);
     this.shuffleSuggestion();
+    this.setState({ footerVisible: true });
   };
 
   removeTag = tag => {
@@ -245,9 +249,15 @@ export default class App extends preact.Component {
     store.set(STORE_PLAYED, this.played);
   };
 
+
+  onBackgroundLoad = () => {
+    this.setState({ backgroundVisible: true });
+  };
+
   render() {
     return (
       <div>
+        <img onLoad={this.onBackgroundLoad} className={cn({ App_background: true, visible: this.state.backgroundVisible && !this.state.playerVisible })} src="https://images.unsplash.com/photo-1527757728250-565ed17969c8?w=1080" />
         <Dashboard
           addTags={this.addTags}
           artists={this.state.artists}
@@ -260,6 +270,7 @@ export default class App extends preact.Component {
           shuffleGenres={this.shuffleGenres}
           shuffleRelated={this.shuffleRelated}
           suggestions={this.state.suggestions}
+          footerVisible={this.state.footerVisible}
         />
         <Player
           deadEnd={this.state.deadEnd}

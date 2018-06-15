@@ -2,12 +2,15 @@
 
 $black: #040404;
 $molten: #2d3436;
+$off-white: #f5f5f5;
+$purple-white: #fafafb;
 $purple: #a29bfe;
+$red: #FE4764;
 $white: #fff;
 
-$background-primary: $white;
-$background-primary-dark: darken($background-primary, 4%);
-$background-primary-darker: darken($background-primary, 8%);
+$background-primary: $purple-white;
+$background-primary-dark: darken($background-primary, 2%);
+$background-primary-darker: darken($background-primary, 4%);
 $background-secondary: $molten;
 $background-secondary-light: lighten($background-secondary, 10%);
 
@@ -16,17 +19,18 @@ $text-secondary: $white;
 $text-secondary-dark: darken($text-secondary, 5%);
 
 $accent-primary: $purple;
-$accent-primary-light: rgba($accent-primary, .3);
-$accent-primary-lighter: rgba($accent-primary, .2);
+$accent-primary-light: rgba($accent-primary, .9);
+$accent-primary-lighter: rgba($accent-primary, .8);
+$accent-primary-lightest: rgba($accent-primary, .6);
 
 // animations
 
 $speed-fast: .2s;
 $speed-normal: .3s;
 $speed-slow: .5s;
-$speed-slower: .7s;
-$speed-slowest: 1s;
-$translate-distance: 5px;
+$speed-slower: 1s;
+$speed-slowest: 1.5s;
+$translate-distance: 2px;
 
 // boxes
 

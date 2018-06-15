@@ -33,6 +33,6 @@ export default props => (
       playerVisible={props.playerVisible}
       suggestions={props.suggestions}
     />
-    <Footer />
+    {props.footerVisible && <Footer />}
   </main>
 );
