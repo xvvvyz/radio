@@ -29,6 +29,10 @@ body {
   background-color: $background-primary;
 }
 
+svg {
+  fill: currentColor;
+}
+
 .App_background {
   position: fixed;
   display: block;

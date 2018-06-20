@@ -1,5 +1,6 @@
 import preact from 'preact';
 import cn from 'classnames';
+import store from 'store';
 import PlayerArt from './PlayerArt';
 import PlayerControls from './PlayerControls';
 import PlayerInfo from './PlayerInfo';
@@ -9,6 +10,8 @@ export default class Player extends preact.Component {
   state = {
     isFullscreen: true,
     isPlaying: false,
+    volume: store.get('volume') || 1,
+    volumeVisible: false,
   };
 
   componentDidUpdate() {
@@ -19,6 +22,7 @@ export default class Player extends preact.Component {
     this.player.onplay = this.updateMediaSession;
     this.player.onplaying = () => this.setState({ isPlaying: true });
     this.player.onwaiting = () => this.setState({ isPlaying: true });
+    this.player.volume = this.state.volume;
   }
 
   getCoverSize = (size = 512) => {
@@ -26,8 +30,24 @@ export default class Player extends preact.Component {
     return this.props.playlist.cover + `&w=${size}&h=${size}`;
   };
 
+  handleVolume = e => {
+    const volume = e.target.value;
+    this.setState({ volume });
+    store.set('volume', volume);
+  };
+
   toggleFullscreen = () => {
-    this.setState({ isFullscreen: !this.state.isFullscreen });
+    this.setState({
+      isFullscreen: !this.state.isFullscreen,
+      volumeVisible: this.state.isFullscreen ? false : this.state.volumeVisible,
+    });
+  };
+
+  toggleVolume = () => {
+    this.setState({
+      isFullscreen: true,
+      volumeVisible: !this.state.volumeVisible,
+    });
   };
 
   refresh = () => {
@@ -102,6 +122,7 @@ export default class Player extends preact.Component {
           <PlayerInfo loading={trackLoading} track={track} />
           <PlayerControls
             disabled={!track}
+            handleVolume={this.handleVolume}
             isFullscreen={isFullscreen}
             isPlaying={isPlaying}
             pause={this.pause}
@@ -109,6 +130,9 @@ export default class Player extends preact.Component {
             refresh={this.refresh}
             skip={this.skip}
             toggleFullscreen={this.toggleFullscreen}
+            toggleVolume={this.toggleVolume}
+            volume={this.state.volume}
+            volumeVisible={this.state.volumeVisible}
           />
         </div>
       </div>

@@ -37,14 +37,21 @@ export default class Search extends preact.Component {
     this.setState({ tags });
   };
 
+  onSubmit = async event => {
+    event.preventDefault();
+    await this.props.addTags(this.state.value);
+    this.setState({ value: '' });
+  };
+
   render() {
     return (
-      <section className="Search">
+      <form className="Search" onSubmit={this.onSubmit}>
         <input
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onInput={this.onInput}
           placeholder={this.state.placeholder}
+          value={this.state.value}
           type="text"
         />
         <List
@@ -52,7 +59,7 @@ export default class Search extends preact.Component {
           fullWidth
           items={this.state.tags}
         />
-      </section>
+      </form>
     );
   }
 }

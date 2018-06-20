@@ -11,6 +11,7 @@ $white: #fff;
 $background-primary: $purple-white;
 $background-primary-dark: darken($background-primary, 2%);
 $background-primary-darker: darken($background-primary, 4%);
+$background-primary-transparent: rgba($white, .2);
 $background-secondary: $molten;
 $background-secondary-light: lighten($background-secondary, 10%);
 

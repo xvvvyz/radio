@@ -76,7 +76,8 @@
     text-align: left;
     transition: background-color $speed-fast;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $off-white;
     }
   }
