@@ -1,0 +1,155 @@
+@import './utilities/variables';
+
+.PlayerControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto;
+
+  @media (min-width: $break-large) {
+    max-width: 16rem;
+  }
+
+  & > * {
+    flex-grow: 1;
+  }
+
+  button {
+    margin: 0 auto;
+    padding: $padding-xxsmall;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  img {
+    width: $control-button-size;
+    height: $control-button-size;
+    margin: 0 auto;
+  }
+}
+
+.PlayerControls_volume {
+  position: relative;
+
+  &.visible input[type=range] {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+input[type=range] {
+  position: absolute;
+  left: 50%;
+  top: -80px;
+  height: 25px;
+  transform: translateX(-60px) rotate(-90deg);
+  -webkit-appearance: none;
+  width: 120px;
+  border-radius: $border-radius;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $speed-fast, visibility $speed-fast;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 7rem;
+  height: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 0 $white;
+  background: $background-primary-transparent;
+  border-radius: 0;
+  border: 0 solid $white;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0 0 0 $white;
+  border: 0 solid $white;
+  height: 30px;
+  width: 30px;
+  border-radius: 0;
+  background: $white;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: 0;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: $background-primary-transparent;
+}
+
+input[type=range]::-moz-range-track {
+  width: 7rem;
+  height: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 0 $white;
+  background: $background-primary-transparent;
+  border-radius: 0;
+  border: 0 solid $white;
+}
+
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0 0 0 $white;
+  border: 0 solid $white;
+  height: 30px;
+  width: 30px;
+  border-radius: 0;
+  background: $white;
+  cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+  width: 10rem;
+  height: 30px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: $background-primary-transparent;
+  border: 0 solid $white;
+  border-radius: 0;
+  box-shadow: 0 0 0 $white;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: $background-primary-transparent;
+  border: 0 solid $white;
+  border-radius: 0;
+  box-shadow: 0 0 0 $white;
+}
+
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0 0 0 $white;
+  border: 0 solid $white;
+  height: 30px;
+  width: 30px;
+  border-radius: 0;
+  background: $accent-primary;
+  cursor: pointer;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: $background-primary-transparent;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: $background-primary-transparent;
+}
+
+.hide_on_desktop {
+  @media (min-width: $break-large) {
+    display: none;
+  }
+}

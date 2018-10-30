@@ -1,0 +1,79 @@
+// colors
+
+$black: #040404;
+$molten: #2d3436;
+$off-white: #f5f5f5;
+$purple-white: #fafafb;
+$purple: #a29bfe;
+$red: #FE4764;
+$white: #fff;
+
+$background-primary: $purple-white;
+$background-primary-dark: darken($background-primary, 2%);
+$background-primary-darker: darken($background-primary, 4%);
+$background-primary-transparent: rgba($white, .2);
+$background-secondary: $molten;
+$background-secondary-light: lighten($background-secondary, 10%);
+
+$text-primary: $molten;
+$text-secondary: $white;
+$text-secondary-dark: darken($text-secondary, 5%);
+
+$accent-primary: $purple;
+$accent-primary-light: rgba($accent-primary, .9);
+$accent-primary-lighter: rgba($accent-primary, .8);
+$accent-primary-lightest: rgba($accent-primary, .6);
+
+// typography
+
+$font-family: 'Lato', sans-serif;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+// animations
+
+$speed-fast: .2s;
+$speed-normal: .3s;
+$speed-slow: .5s;
+$speed-slower: 1s;
+$speed-slowest: 1.5s;
+$translate-distance: 2px;
+
+// boxes
+
+$padding-xxxsmall: .3rem;
+$padding-xxsmall: .7rem;
+$padding-xsmall: 1rem;
+$padding-small: 1.5rem;
+$padding-medium: 2rem;
+$padding-large: 3rem;
+$padding-xlarge: 4.5vw;
+
+$tag-height: 3.5rem;
+$player-width: 28vw;
+$control-button-size: 1.5rem;
+$player-height-small: $control-button-size + $padding-xxsmall * 2;
+
+$border-radius: 5px;
+
+$z-neg: -5;
+$z-1: 5;
+$z-2: 10;
+
+// media
+
+$break-xsmall: 400px;
+$break-small: 500px;
+$break-medium: 800px;
+$break-large: 1100px;
+$break-xlarge: 1400px;
+$break-xxlarge: 1700px;
+
+$vertical-break-xsmall: 100px;
+$vertical-break-small: 200px;
+$vertical-break-medium: 300px;
+$vertical-break-large: 400px;
+$vertical-break-xlarge: 500px;
+$vertical-break-xxlarge: 600px;
+$vertical-break-xxxlarge: 700px;

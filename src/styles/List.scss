@@ -1,0 +1,83 @@
+@import './utilities/helpers';
+@import './utilities/variables';
+
+.List {
+  @extend .fade_in;
+  padding: 0 $padding-medium $padding-large;
+
+  @media (min-width: $break-medium) {
+    flex-basis: calc(100% / 3);
+    padding: 0 $padding-large $padding-large 0;
+  }
+
+  @media (min-width: $break-large) {
+    padding: 0 $padding-xlarge $padding-xlarge 0;
+  }
+
+  ul {
+    background-color: $white;
+    border-radius: 0 0 $border-radius $border-radius;
+    overflow: hidden;
+  }
+}
+
+.List_inner {
+  @include shadow(1);
+  border-radius: $border-radius;
+}
+
+.Search .List {
+  margin: $padding-xsmall 0 0;
+  padding-bottom: 0;
+
+  @media (min-width: $break-medium) {
+    padding: 0 $padding-large;
+  }
+
+  @media (min-width: $break-large) {
+    padding: 0 $padding-xlarge;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-height: calc(#{$tag-height} * 1);
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+}
+
+.Lists .List_inner {
+  @extend .card;
+}
+
+.List_header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: $padding-xsmall;
+  background-color: $background-secondary;
+  border-radius: $border-radius $border-radius 0 0;
+  transition: background-color $speed-fast;
+
+  &:hover {
+    background-color: $background-secondary-light;
+  }
+}
+
+.List_title {
+  color: $text-secondary;
+  font-size: .8rem;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.List_shuffle {
+  img {
+    width: 1rem;
+    height: 1rem;
+  }
+}

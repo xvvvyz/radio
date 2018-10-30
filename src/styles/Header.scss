@@ -1,0 +1,82 @@
+@import './utilities/variables';
+
+.Header {
+  padding: $padding-large $padding-medium;
+  text-align: center;
+
+  @media (min-width: $break-medium) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $padding-large;
+  }
+
+  @media (min-width: $break-large) {
+    padding: $padding-xlarge;
+  }
+
+  h1 {
+    margin-bottom: $padding-xxsmall;
+    font-size: 1.35em;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+
+    @media (min-width: $break-medium) {
+      margin-bottom: 0;
+    }
+
+    a {
+      position: relative;
+      display: inline-block;
+      padding: 0 $padding-xxsmall;
+      transition: background-color $speed-fast;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        left: -.05em;
+        height: .2em;
+        background-color: $accent-primary-lightest;
+        transition: background-color $speed-fast;
+        top: calc(50% - .09em);
+      }
+
+      &:hover::before {
+        background-color: $accent-primary;
+      }
+    }
+  }
+
+  h2 {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+
+    @media (min-width: $break-medium) {
+      font-size: 1rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.tags_exist {
+  h1 {
+    visibility: hidden;
+
+    @media (min-width: $break-medium) {
+      visibility: visible;
+    }
+  }
+
+  h2 {
+    visibility: hidden;
+
+    @media (min-width: $break-medium) {
+      display: none;
+    }
+  }
+}

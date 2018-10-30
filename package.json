@@ -1,22 +1,30 @@
 {
-  "name": "lineradio",
   "private": true,
-  "scripts": {
-    "start": "poi",
-    "build": "poi build"
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "gatsby": "^2.0.19",
+    "knuth-shuffle": "^1.0.8",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-helmet": "^5.2.0",
+    "store": "^2.0.12",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.47",
-    "css-mqpacker": "^6.0.2",
-    "node-sass": "^4.9.0",
-    "poi": "^10.1.8",
-    "sass-loader": "^7.0.1"
+    "gatsby-plugin-google-analytics": "^2.0.7",
+    "gatsby-plugin-google-fonts": "^0.0.4",
+    "gatsby-plugin-manifest": "^2.0.5",
+    "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-sass": "^2.0.2",
+    "node-sass": "^4.9.4",
+    "prettier": "^1.14.2",
+    "webpack": "^4.23.1"
   },
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "knuth-shuffle": "^1.0.1",
-    "preact": "^8.2.9",
-    "store": "^2.0.12",
-    "whatwg-fetch": "^2.0.3"
+  "scripts": {
+    "build": "gatsby build",
+    "format": "prettier --write \"src/**/*.js\"",
+    "start": "gatsby develop"
   }
 }

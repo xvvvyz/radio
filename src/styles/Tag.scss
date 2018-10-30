@@ -1,0 +1,95 @@
+@import './utilities/helpers';
+@import './utilities/variables';
+
+.Tag {
+  white-space: nowrap;
+  overflow: hidden;
+
+  button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: $padding-xsmall;
+    margin-left: -2px;
+    border-radius: 50%;
+  }
+}
+
+.CurrentTags .Tag {
+  padding: $padding-medium / 2 0;
+
+  &::before {
+    content: '+';
+    margin: 0 $padding-xxsmall;
+    font-weight: $font-weight-black;
+  }
+
+  &:first-of-type::before {
+    content: '';
+    margin: 0;
+  }
+
+  @media (min-width: $break-medium) {
+    padding: 0;
+  }
+
+  button {
+    @include shadow(1);
+    display: inline-block;
+    padding: 0 $padding-xsmall;
+    border-radius: 2rem;
+    background-color: $background-secondary;
+    color: $text-secondary;
+    font-size: 1.2rem;
+    font-weight: $font-weight-black;
+    line-height: $padding-medium;
+
+    &:hover {
+      text-decoration: line-through;
+      cursor: pointer;
+    }
+
+    &:active {
+      @include shadow(0);
+    }
+
+    @media (min-width: $break-medium) {
+      @include shadow(0);
+      padding: 0;
+      background-color: transparent;
+      color: inherit;
+    }
+  }
+}
+
+.List .Tag {
+  button {
+    position: relative;
+    width: 100%;
+    padding: 0 $padding-xsmall;
+    font-size: .8rem;
+    line-height: $tag-height;
+    text-align: left;
+    transition: background-color $speed-fast;
+
+    &:hover,
+    &:focus {
+      background-color: $off-white;
+    }
+  }
+}
+
+.Search .List .Tag {
+  flex-grow: 1;
+
+  button {
+    justify-content: center;
+    padding: 0 $padding-xsmall;
+    text-align: center;
+  }
+}

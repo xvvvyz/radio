@@ -1,0 +1,34 @@
+@import './utilities/helpers';
+@import './utilities/variables';
+
+.Footer {
+  @extend .fade_in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $padding-medium $padding-large;
+  font-size: .8rem;
+
+  @media (min-width: $break-medium) {
+    padding: 0 $padding-large $padding-large;
+  }
+
+  @media (min-width: $break-large) {
+    padding: 0 $padding-xlarge $padding-xlarge;
+  }
+
+  a {
+    color: $accent-primary;
+    text-decoration: underline;
+  }
+}
+
+.Footer_line {
+  @media (min-width: $break-medium) {
+    position: relative;
+    top: 1px;
+    height: 1px;
+    width: 30vw;
+    background-color: $background-primary-darker;
+  }
+}
