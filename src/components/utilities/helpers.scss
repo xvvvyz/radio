@@ -1,0 +1,29 @@
+@import 'variables';
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade_in {
+  opacity: 0;
+  transform: translateY(-$translate-distance);
+  animation: fadeIn .6s forwards;
+}
+
+.spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: solid 2px $text-primary;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: spin .5s linear infinite;
+}

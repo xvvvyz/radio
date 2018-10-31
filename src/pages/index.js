@@ -9,9 +9,9 @@ import Dashboard from '../components/Dashboard';
 import Layout from '../components/Layout';
 import Player from '../components/Player';
 import api from '../components/utilities/api';
-import bg from '../images/bg.jpg';
+import bg from '../img/bg.jpg';
 import data from '../components/utilities/data';
-import '../styles/App.scss';
+import './index.scss';
 
 import {
   callGa,
@@ -40,7 +40,6 @@ export default class App extends React.Component {
     suggestions: [],
     track: null,
     trackLoading: true,
-    backgroundVisible: false,
     footerVisible: false,
   };
 
@@ -217,10 +216,6 @@ export default class App extends React.Component {
     this.setState({ footerVisible: true });
   };
 
-  onBackgroundLoad = () => {
-    this.setState({ backgroundVisible: true });
-  };
-
   removeTag = tag => {
     callGa('send', 'event', 'tags', 'remove', tag);
     const tags = this.state.currentTags;
@@ -281,9 +276,8 @@ export default class App extends React.Component {
           alt=""
           className={cn({
             App_background: true,
-            visible: this.state.backgroundVisible && !this.state.playerVisible,
+            hide: this.state.playerVisible
           })}
-          onLoad={this.onBackgroundLoad}
           src={bg}
         />
         <Dashboard

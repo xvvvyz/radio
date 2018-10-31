@@ -3,16 +3,16 @@ import React from 'react';
 import cn from 'classnames';
 import ClickOutside from './ClickOutside';
 import Tip from './Tip';
-import expandSvg from '../icons/expand.svg';
-import minimizeSvg from '../icons/minimize.svg';
-import nextSvg from '../icons/next.svg';
-import pauseSvg from '../icons/pause.svg';
-import playSvg from '../icons/play.svg';
-import refreshSvg from '../icons/refresh.svg';
-import volume0Svg from '../icons/volume-x.svg';
-import volume1Svg from '../icons/volume-1.svg';
-import volume2Svg from '../icons/volume-2.svg';
-import '../styles/PlayerControls.scss';
+import expandSvg from '../img/expand.svg';
+import minimizeSvg from '../img/minimize.svg';
+import nextSvg from '../img/next.svg';
+import pauseSvg from '../img/pause.svg';
+import playSvg from '../img/play.svg';
+import refreshSvg from '../img/refresh.svg';
+import volume0Svg from '../img/volume-x.svg';
+import volume1Svg from '../img/volume-1.svg';
+import volume2Svg from '../img/volume-2.svg';
+import './PlayerControls.scss';
 
 const PlayerControls = props => (
   <div className="PlayerControls">

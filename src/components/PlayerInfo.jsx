@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import exitUp from '../icons/exit-up.svg';
-import '../styles/PlayerInfo.scss';
+import exitUp from '../img/exit-up.svg';
+import './PlayerInfo.scss';
 
 const PlayerInfo = props => {
   if (props.loading) return <div className="spinner" />;

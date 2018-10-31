@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cn from 'classnames';
-import '../styles/PlayerArt.scss';
+import './PlayerArt.scss';
 
 export default class PlayerArt extends React.PureComponent {
   static propTypes = {

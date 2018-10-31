@@ -1,5 +1,5 @@
-@import './utilities/helpers';
-@import './utilities/variables';
+@import 'utilities/helpers';
+@import 'utilities/variables';
 
 .Search {
   margin-bottom: $padding-large;
@@ -9,12 +9,12 @@
   }
 
   input {
-    @include shadow(1);
     width: calc(100% - #{$padding-medium} * 2);
     margin: 0 $padding-medium;
     padding: $padding-xsmall 0;
     border-radius: 3rem;
     background-color: $white;
+    box-shadow: $box-shadow-card;
     transition: $speed-fast;
     font-size: .8rem;
     text-align: center;

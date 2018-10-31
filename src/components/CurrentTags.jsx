@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Tag from './Tag';
-import '../styles/CurrentTags.scss';
+import './CurrentTags.scss';
 
 const CurrentTags = props => !!props.currentTags.length && (
   <ul className="CurrentTags">

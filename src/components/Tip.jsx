@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cn from 'classnames';
 import store from 'store';
-import '../styles/Tip.scss';
+import './Tip.scss';
 
 export default class Tip extends React.PureComponent {
   static propTypes = {

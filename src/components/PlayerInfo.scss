@@ -1,5 +1,5 @@
-@import './utilities/helpers';
-@import './utilities/variables';
+@import 'utilities/helpers';
+@import 'utilities/variables';
 
 .PlayerInfo {
   @extend .fade_in;

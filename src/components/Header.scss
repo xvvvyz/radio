@@ -17,34 +17,15 @@
 
   h1 {
     margin-bottom: $padding-xxsmall;
-    font-size: 1.35em;
-    text-transform: uppercase;
-    letter-spacing: .05em;
 
     @media (min-width: $break-medium) {
       margin-bottom: 0;
     }
 
-    a {
-      position: relative;
-      display: inline-block;
-      padding: 0 $padding-xxsmall;
-      transition: background-color $speed-fast;
-
-      &::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        left: -.05em;
-        height: .2em;
-        background-color: $accent-primary-lightest;
-        transition: background-color $speed-fast;
-        top: calc(50% - .09em);
-      }
-
-      &:hover::before {
-        background-color: $accent-primary;
-      }
+    img {
+      display: block;
+      height: 1.7rem;
+      margin: 0 auto;
     }
   }
 
@@ -54,12 +35,8 @@
     letter-spacing: .05em;
 
     @media (min-width: $break-medium) {
-      font-size: 1rem;
+      font-size: .9rem;
     }
-  }
-
-  a {
-    text-decoration: none;
   }
 }
 

@@ -7,7 +7,7 @@ import PlayerArt from './PlayerArt';
 import PlayerControls from './PlayerControls';
 import PlayerInfo from './PlayerInfo';
 import { callGa } from './utilities/helpers';
-import '../styles/Player.scss';
+import './Player.scss';
 
 export default class Player extends React.PureComponent {
   static propTypes = {

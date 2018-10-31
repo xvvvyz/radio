@@ -50,12 +50,22 @@ $padding-medium: 2rem;
 $padding-large: 3rem;
 $padding-xlarge: 4.5vw;
 
+$border-radius: 5px;
+
 $tag-height: 3.5rem;
 $player-width: 28vw;
 $control-button-size: 1.5rem;
 $player-height-small: $control-button-size + $padding-xxsmall * 2;
 
-$border-radius: 5px;
+// shadows
+
+$box-shadow-button-hover: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+$box-shadow-button: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+$box-shadow-card-hover: 0 18px 35px rgba(50, 50, 93, .1), 0 8px 15px rgba(0, 0, 0, .07);
+$box-shadow-card: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+$box-shadow-image: 0 1px 3px rgba($molten, 0.12), 0 1px 2px rgba($molten, 0.24);
+
+// z indexes
 
 $z-neg: -5;
 $z-1: 5;

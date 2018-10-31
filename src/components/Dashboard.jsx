@@ -6,7 +6,7 @@ import Header from './Header';
 import Lists from './Lists';
 import Search from './Search';
 import Suggestions from './Suggestions';
-import '../styles/Dashboard.scss';
+import './Dashboard.scss';
 
 const Dashboard = props => (
   <main

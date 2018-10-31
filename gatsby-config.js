@@ -30,7 +30,7 @@ module.exports = {
       options: {
         background_color: '#040404',
         display: 'minimal-ui',
-        icon: 'src/images/icon.png',
+        icon: 'src/img/icon.png',
         name: 'Line Radio',
         short_name: 'Line Radio',
         start_url: '/',

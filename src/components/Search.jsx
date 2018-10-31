@@ -3,7 +3,7 @@ import React from 'react';
 import List from './List';
 import api from './utilities/api';
 import { callGa } from './utilities/helpers';
-import '../styles/Search.scss';
+import './Search.scss';
 
 const PLACEHOLDER = 'Search for an artist, genre, activity or mood';
 
@@ -46,7 +46,7 @@ export default class Search extends React.PureComponent {
   onSubmit = async event => {
     event.preventDefault();
     await this.props.addTags(this.state.value);
-    this.setState({ value: '' });
+    this.setState({ tags: [], value: '' });
   };
 
   render() {

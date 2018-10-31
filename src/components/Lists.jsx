@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import List from './List';
 import { MAX_LIST_ITEMS } from './utilities/constants';
-import '../styles/Lists.scss';
+import './Lists.scss';
 
 const Lists = props => (
   <section className="Lists">

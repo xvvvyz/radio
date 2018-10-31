@@ -1,5 +1,5 @@
-@import './utilities/helpers';
-@import './utilities/variables';
+@import 'utilities/helpers';
+@import 'utilities/variables';
 
 * {
   padding: 0;
@@ -69,11 +69,6 @@ button {
   box-shadow: none;
   outline: none;
   font-size: inherit;
-}
-
-input:active,
-button:active {
-  color: inherit;
 }
 
 button {

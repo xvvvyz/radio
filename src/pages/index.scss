@@ -1,5 +1,5 @@
-@import './utilities/helpers';
-@import './utilities/variables';
+@import '../components/utilities/helpers';
+@import '../components/utilities/variables';
 
 .App_background {
   position: fixed;
@@ -11,9 +11,9 @@
   left: 0;
   z-index: $z-neg;
   transition: opacity $speed-slowest;
-  opacity: 0;
+  opacity: .3;
 
-  &.visible {
-    opacity: .3;
+  &.hide {
+    opacity: 0;
   }
 }

@@ -1,5 +1,5 @@
-@import './utilities/helpers';
-@import './utilities/variables';
+@import 'utilities/helpers';
+@import 'utilities/variables';
 
 .Tag {
   white-space: nowrap;
@@ -39,11 +39,11 @@
   }
 
   button {
-    @include shadow(1);
     display: inline-block;
     padding: 0 $padding-xsmall;
     border-radius: 2rem;
     background-color: $background-secondary;
+    box-shadow: $box-shadow-button;
     color: $text-secondary;
     font-size: 1.2rem;
     font-weight: $font-weight-black;
@@ -55,13 +55,13 @@
     }
 
     &:active {
-      @include shadow(0);
+      box-shadow: none;
     }
 
     @media (min-width: $break-medium) {
-      @include shadow(0);
       padding: 0;
       background-color: transparent;
+      box-shadow: none;
       color: inherit;
     }
   }

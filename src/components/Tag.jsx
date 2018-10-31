@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import '../styles/Tag.scss';
+import './Tag.scss';
 
 const Tag = props => (
   <li className="Tag">

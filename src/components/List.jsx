@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import shuffleSvg from '../icons/shuffle.svg';
+import shuffleSvg from '../img/shuffle.svg';
 import Tag from './Tag';
-import '../styles/List.scss';
+import './List.scss';
 
 const List = props => !!props.items.length && (
   <div className="List">
