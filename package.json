@@ -2,7 +2,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "gatsby": "^2.0.19",
+    "gatsby": "^2.0.35",
     "knuth-shuffle": "^1.0.8",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
