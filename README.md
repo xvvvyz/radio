@@ -1,8 +1,6 @@
-# Line Radio
+# ![Line Radio](src/img/logo.svg)
 
 Listen to playlists curated by humans. This is the fastest way to discover interesting new music.
-
-![Sreenshot](static/SCREENSHOT.png)
 
 ## Development Setup
 
@@ -13,4 +11,4 @@ Before you do anything, you&rsquo;ll need to have [Git](https://git-scm.com/) an
 
 ## License
 
-This project is licensed under the MIT License&mdash;see [LICENSE.txt](LICENSE.txt) for details.
+This project is licensed under the MIT License&mdash;see [LICENSE](LICENSE) for details.
