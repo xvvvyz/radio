@@ -1,4 +1,4 @@
-# ![Line Radio](src/img/logo.svg)
+# ![Line Radio](src/img/logo.svg | height=90)
 
 Listen to playlists curated by humans. This is the fastest way to discover interesting new music.
 
