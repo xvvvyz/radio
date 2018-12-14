@@ -1,13 +1,13 @@
-@import './utilities/variables';
+@import '../utilities/variables';
 
 .Lists {
-  @media (min-width: $break-medium) {
+  @media (min-width: $break-md) {
     display: flex;
     justify-content: center;
-    padding-left: $padding-large;
+    padding-left: $padding-lg;
   }
 
-  @media (min-width: $break-large) {
-    padding-left: $padding-xlarge;
+  @media (min-width: $break-lg) {
+    padding-left: $padding-xl;
   }
 }

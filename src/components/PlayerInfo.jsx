@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import exitUp from '../img/exit-up.svg';
+import exitUp from '../images/exit-up.svg';
 import './PlayerInfo.scss';
 
 const PlayerInfo = props => {
@@ -16,7 +16,8 @@ const PlayerInfo = props => {
       <a href={searchLink} rel="noopener noreferrer" target="_blank">
         <span className="PlayerInfo_artist">{artist}</span>
         <span className="PlayerInfo_title">
-          {title}&nbsp;<img alt="external link" src={exitUp} />
+          {title}&nbsp;
+          <img alt="external link" src={exitUp} />
         </span>
       </a>
     </div>

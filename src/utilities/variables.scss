@@ -1,0 +1,97 @@
+// colors
+
+$black: #040404;
+$molten: #2d3436;
+$off-white: #f5f5f5;
+$purple-white: #fafafb;
+$purple: #a29bfe;
+$red: #fe4764;
+$white: #fff;
+
+$background-primary: $purple-white;
+$background-primary-dark: darken($background-primary, 2%);
+$background-primary-darker: darken($background-primary, 4%);
+$background-primary-transparent: rgba($white, 0.2);
+$background-secondary: $molten;
+$background-secondary-light: lighten($background-secondary, 10%);
+
+$text-primary: $molten;
+$text-secondary: $white;
+$text-secondary-dark: darken($text-secondary, 5%);
+
+$accent-primary: $purple;
+$accent-primary-light: rgba($accent-primary, 0.9);
+$accent-primary-lighter: rgba($accent-primary, 0.8);
+$accent-primary-lightest: rgba($accent-primary, 0.6);
+
+// typography
+
+$font-family: 'Lato', sans-serif;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+// animations
+
+$speed-fast: 0.2s;
+$speed-normal: 0.3s;
+$speed-slow: 0.5s;
+$speed-slower: 1s;
+$speed-slowest: 1.5s;
+$translate-distance: 2px;
+
+// boxes
+
+$padding-xxxs: 0.3rem;
+$padding-xxs: 0.7rem;
+$padding-xs: 1rem;
+$padding-sm: 1.5rem;
+$padding-md: 2rem;
+$padding-lg: 3rem;
+$padding-xl: 4.5vw;
+
+$border-radius: 5px;
+
+$tag-height: 3.5rem;
+$player-width: 28vw;
+$control-button-size: 1.5rem;
+$player-height-small: $control-button-size + $padding-xxs * 2;
+
+// shadows
+
+$box-shadow-button-hover: 0 7px 14px rgba(50, 50, 93, 0.1),
+  0 3px 6px rgba(0, 0, 0, 0.08);
+
+$box-shadow-button: 0 4px 6px rgba(50, 50, 93, 0.11),
+  0 1px 3px rgba(0, 0, 0, 0.08);
+
+$box-shadow-card-hover: 0 18px 35px rgba(50, 50, 93, 0.1),
+  0 8px 15px rgba(0, 0, 0, 0.07);
+
+$box-shadow-card: 0 15px 35px rgba(50, 50, 93, 0.1),
+  0 5px 15px rgba(0, 0, 0, 0.07);
+
+$box-shadow-image: 0 1px 3px rgba($molten, 0.12), 0 1px 2px rgba($molten, 0.24);
+
+// z indexes
+
+$z-neg: -5;
+$z-1: 5;
+$z-2: 10;
+
+// media
+
+$break-xs: 400px;
+$break-sm: 500px;
+$break-md: 800px;
+$break-lg: 1100px;
+$break-xl: 1400px;
+$break-xxl: 1700px;
+
+$vertical-break-xs: 100px;
+$vertical-break-sm: 200px;
+$vertical-break-md: 300px;
+$vertical-break-lg: 400px;
+$vertical-break-xl: 500px;
+$vertical-break-xxl: 600px;
+$vertical-break-xxxl: 700px;

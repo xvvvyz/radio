@@ -1,5 +1,4 @@
 import { knuthShuffle } from 'knuth-shuffle';
-import 'whatwg-fetch';
 
 import {
   EIGHT_API_KEY,
@@ -10,7 +9,9 @@ import {
 const tokenMap = {};
 
 export const callEightApi = (path, params, proxy = false) => {
-  const base = proxy ? 'https://r51c7dwz23.execute-api.us-west-2.amazonaws.com/prod' : 'https://8tracks.com';
+  const base = proxy
+    ? 'https://r51c7dwz23.execute-api.us-west-2.amazonaws.com/prod'
+    : 'https://8tracks.com';
 
   const qs = objectToQuery({
     ...params,
@@ -24,7 +25,6 @@ export const callEightApi = (path, params, proxy = false) => {
 
 export const callGa = (...params) => {
   if (process.env.NODE_ENV === `production` && typeof ga === `function`) {
-
     // eslint-disable-next-line no-undef
     ga(...params);
   }
@@ -56,14 +56,17 @@ export const getToken = key => {
 
 export const hash = str => {
   return str.split('').reduce((prevHash, currVal) => {
-    return Math.abs(((prevHash << 5) - prevHash) + currVal.charCodeAt(0));
+    return Math.abs((prevHash << 5) - prevHash + currVal.charCodeAt(0));
   }, 0);
 };
 
 export const objectToQuery = obj => {
-  return '?' + Object.keys(obj)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`)
-    .join('&');
+  return (
+    '?' +
+    Object.keys(obj)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`)
+      .join('&')
+  );
 };
 
 export const parseUrl = () => {
@@ -79,8 +82,8 @@ export const parseUrl = () => {
 };
 
 export const selectArtists = data => {
-  const artists = (data.artists || {}).artist ||
-    (data.similarartists || {}).artist || [];
+  const artists =
+    (data.artists || {}).artist || (data.similarartists || {}).artist || [];
 
   return artists
     .filter(a => a.streamable)
@@ -112,9 +115,14 @@ export const selectPlaylists = data => {
 export const selectPlaylistTags = data => {
   return data.filters
     .filter(tag => tag.name.length < MAX_TAG_CHARACTER_LENGTH)
-    .map(tag => tag.artist_avatar
-      ? { name: tag.name, image: tag.artist_avatar.replace('http:', 'https:') }
-      : tag.name);
+    .map(tag =>
+      tag.artist_avatar
+        ? {
+            name: tag.name,
+            image: tag.artist_avatar.replace('http:', 'https:'),
+          }
+        : tag.name
+    );
 };
 
 export const selectTrack = data => {
@@ -145,7 +153,6 @@ export const setUrl = tags => {
     // eslint-disable-next-line no-restricted-globals
     history.replaceState({}, document.title, '#' + tags);
   } else {
-
     // eslint-disable-next-line no-restricted-globals
     history.replaceState({}, document.title, '/');
   }
@@ -153,7 +160,11 @@ export const setUrl = tags => {
 
 export const tagsToQuery = tags => {
   tags = tags.map(tag => {
-    tag = tag.replace(/_/g, '__').replace(/\+/g, '&&').replace(/ /g, '_');
+    tag = tag
+      .replace(/_/g, '__')
+      .replace(/\+/g, '&&')
+      .replace(/ /g, '_');
+
     return encodeURIComponent(tag).replace(/\./g, '%5E');
   });
 

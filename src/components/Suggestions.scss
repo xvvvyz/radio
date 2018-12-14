@@ -1,31 +1,31 @@
-@import 'utilities/variables';
+@import '../utilities/variables';
 
 .Suggestions {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: -$padding-small;
-  padding: 0 $padding-medium $padding-large;
+  margin-bottom: -$padding-sm;
+  padding: 0 $padding-md $padding-lg;
   text-align: center;
 
-  @media (min-width: $break-medium) {
-    padding: 0 $padding-large $padding-large;
+  @media (min-width: $break-md) {
+    padding: 0 $padding-lg $padding-lg;
   }
 
-  @media (min-width: $break-large) {
-    padding: 0 $padding-xlarge $padding-xlarge;
+  @media (min-width: $break-lg) {
+    padding: 0 $padding-xl $padding-xl;
   }
 
   button {
     display: block;
-    margin: 0 $padding-xxsmall $padding-small;
-    padding: $padding-xxsmall $padding-xsmall;
+    margin: 0 $padding-xxs $padding-sm;
+    padding: $padding-xxs $padding-xs;
     transition: background-color $speed-fast, transform $speed-fast;
     border-radius: $border-radius;
     background-color: $accent-primary-lightest;
     box-shadow: $box-shadow-button;
     color: $text-secondary;
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: $font-weight-bold;
 
     &:hover {

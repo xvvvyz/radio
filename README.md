@@ -1,14 +1,12 @@
-# ![Line Radio](src/img/logo.svg)
+# Line Radio
 
-Listen to playlists curated by humans. This is the fastest way to discover interesting new music.
+> Streamlined music discovery.
+
+![line radio screenshot](https://linerad.io/screenshot.png)
 
 ## Development Setup
 
-Before you do anything, you&rsquo;ll need to have [Git](https://git-scm.com/) and [Node](https://nodejs.org/en/) installed. Then...
-
-- install `npm i -g yarn && yarn`
-- serve `yarn start`
-
-## License
-
-This project is licensed under the MIT License&mdash;see [LICENSE](LICENSE) for details.
+1. install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/download)
+   & [Yarn](https://yarnpkg.com/lang/en/docs/install)
+2. install project dependencies: `yarn`
+3. start the development server: `yarn start`

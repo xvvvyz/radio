@@ -1,24 +1,24 @@
-@import './utilities/variables';
+@import '../utilities/variables';
 
 .Header {
-  padding: $padding-large $padding-medium;
+  padding: $padding-lg $padding-md;
   text-align: center;
 
-  @media (min-width: $break-medium) {
+  @media (min-width: $break-md) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $padding-large;
+    padding: $padding-lg;
   }
 
-  @media (min-width: $break-large) {
-    padding: $padding-xlarge;
+  @media (min-width: $break-lg) {
+    padding: $padding-xl;
   }
 
   h1 {
-    margin-bottom: $padding-xxsmall;
+    margin-bottom: $padding-xxs;
 
-    @media (min-width: $break-medium) {
+    @media (min-width: $break-md) {
       margin-bottom: 0;
     }
 
@@ -30,12 +30,12 @@
   }
 
   h2 {
-    font-size: .8rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: .05em;
+    letter-spacing: 0.05em;
 
-    @media (min-width: $break-medium) {
-      font-size: .9rem;
+    @media (min-width: $break-md) {
+      font-size: 0.9rem;
     }
   }
 }
@@ -44,7 +44,7 @@
   h1 {
     visibility: hidden;
 
-    @media (min-width: $break-medium) {
+    @media (min-width: $break-md) {
       visibility: visible;
     }
   }
@@ -52,7 +52,7 @@
   h2 {
     visibility: hidden;
 
-    @media (min-width: $break-medium) {
+    @media (min-width: $break-md) {
       display: none;
     }
   }

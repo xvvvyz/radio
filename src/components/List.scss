@@ -1,17 +1,17 @@
-@import 'utilities/helpers';
-@import 'utilities/variables';
+@import '../utilities/helpers';
+@import '../utilities/variables';
 
 .List {
   @extend .fade_in;
-  padding: 0 $padding-medium $padding-large;
+  padding: 0 $padding-md $padding-lg;
 
-  @media (min-width: $break-medium) {
+  @media (min-width: $break-md) {
     flex-basis: calc(100% / 3);
-    padding: 0 $padding-large $padding-large 0;
+    padding: 0 $padding-lg $padding-lg 0;
   }
 
-  @media (min-width: $break-large) {
-    padding: 0 $padding-xlarge $padding-xlarge 0;
+  @media (min-width: $break-lg) {
+    padding: 0 $padding-xl $padding-xl 0;
   }
 
   ul {
@@ -27,15 +27,15 @@
 }
 
 .Search .List {
-  margin: $padding-xsmall 0 0;
+  margin: $padding-xs 0 0;
   padding-bottom: 0;
 
-  @media (min-width: $break-medium) {
-    padding: 0 $padding-large;
+  @media (min-width: $break-md) {
+    padding: 0 $padding-lg;
   }
 
-  @media (min-width: $break-large) {
-    padding: 0 $padding-xlarge;
+  @media (min-width: $break-lg) {
+    padding: 0 $padding-xl;
   }
 
   ul {
@@ -63,7 +63,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: $padding-xsmall;
+  padding: $padding-xs;
   background-color: $background-secondary;
   border-radius: $border-radius $border-radius 0 0;
   transition: background-color $speed-fast;
@@ -75,10 +75,10 @@
 
 .List_title {
   color: $text-secondary;
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: $font-weight-bold;
   text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
 }
 
 .List_shuffle {

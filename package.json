@@ -2,29 +2,29 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "gatsby": "^2.0.38",
+    "gatsby": "^2.0.67",
     "knuth-shuffle": "^1.0.8",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
-    "store": "^2.0.12",
-    "whatwg-fetch": "^3.0.0"
+    "store": "^2.0.12"
   },
   "devDependencies": {
-    "gatsby-plugin-google-analytics": "^2.0.7",
+    "gatsby-plugin-google-analytics": "^2.0.8",
     "gatsby-plugin-google-fonts": "^0.0.4",
-    "gatsby-plugin-manifest": "^2.0.5",
-    "gatsby-plugin-react-helmet": "^3.0.0",
-    "gatsby-plugin-sass": "^2.0.3",
-    "node-sass": "^4.10.0",
-    "prettier": "^1.14.2",
-    "webpack": "^4.24.0"
+    "gatsby-plugin-manifest": "^2.0.12",
+    "gatsby-plugin-react-helmet": "^3.0.4",
+    "gatsby-plugin-sass": "^2.0.7",
+    "node-sass": "^4.11.0",
+    "prettier": "^1.15.3",
+    "webpack": "^4.27.1"
   },
   "scripts": {
     "build": "gatsby build",
-    "format": "prettier --write \"src/**/*.js\"",
+    "clean": "rm -rf .cache node_modules public",
+    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,json,css,scss,md,yml}\"",
     "start": "gatsby develop"
   }
 }

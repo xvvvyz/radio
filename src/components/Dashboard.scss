@@ -1,7 +1,7 @@
-@import 'utilities/variables';
+@import '../utilities/variables';
 
 .Dashboard {
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     width: calc(100% - #{$player-width});
     transition: transform $speed-normal;
     transform: translateX($player-width / 2);
@@ -11,7 +11,7 @@
 .Dashboard.player_visible {
   padding-bottom: $player-height-small;
 
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     padding-bottom: 0;
     transform: translateX(0);
   }

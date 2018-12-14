@@ -1,11 +1,11 @@
-@import 'utilities/variables';
+@import '../utilities/variables';
 
 .PlayerArt_background {
   position: absolute;
-  top: - $padding-large;
-  right: - $padding-large;
-  bottom: - $padding-large;
-  left: - $padding-large;
+  top: -$padding-lg;
+  right: -$padding-lg;
+  bottom: -$padding-lg;
+  left: -$padding-lg;
   transition: opacity $speed-slow;
   background-size: cover;
   background-position: center;
@@ -15,34 +15,34 @@
 }
 
 .loaded .PlayerArt_background {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .PlayerArt_image {
-  $width: calc(100vw - #{$padding-medium * 2});
+  $width: calc(100vw - #{$padding-md * 2});
   $max-width: 40vh;
 
   width: $width;
   height: $width;
   max-width: $max-width;
   max-height: $max-width;
-  margin: $padding-medium auto $padding-xsmall;
+  margin: $padding-md auto $padding-xs;
   transform: translateY($translate-distance);
   transition: transform $speed-normal, opacity $speed-normal;
   border-radius: $border-radius;
-  background-color: rgba($white, .05);
+  background-color: rgba($white, 0.05);
   box-shadow: $box-shadow-image;
   opacity: 0;
 
-  @media (min-width: $break-large) {
-    $width: calc(#{$player-width} - #{$padding-large} * 2);
+  @media (min-width: $break-lg) {
+    $width: calc(#{$player-width} - #{$padding-lg} * 2);
 
     width: $width;
     height: $width;
-    margin-top: $padding-large;
+    margin-top: $padding-lg;
   }
 
-  @media (max-height: $break-small) {
+  @media (max-height: $break-sm) {
     margin-top: 0;
   }
 }

@@ -30,16 +30,20 @@ export default class PlayerArt extends React.PureComponent {
 
     return (
       <div className={cn({ PlayerArt: true, loaded: !isLoading })}>
-        {!!cover && <div
-          className="PlayerArt_background"
-          style={{ backgroundImage: `url(${cover})` }}
-        />}
-        {!!cover && <img
-          alt=""
-          className="PlayerArt_image"
-          onLoad={this.onLoad}
-          src={cover}
-        />}
+        {!!cover && (
+          <div
+            className="PlayerArt_background"
+            style={{ backgroundImage: `url(${cover})` }}
+          />
+        )}
+        {!!cover && (
+          <img
+            alt=""
+            className="PlayerArt_image"
+            onLoad={this.onLoad}
+            src={cover}
+          />
+        )}
       </div>
     );
   }

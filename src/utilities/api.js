@@ -40,7 +40,7 @@ export default {
     const res = await callEightApi(
       `sets/${getToken(id)}/next`,
       { mix_id: id },
-      proxy,
+      proxy
     );
 
     return selectTrack(res);
@@ -78,7 +78,7 @@ export default {
     const res = await callEightApi(
       `sets/${getToken(id)}/skip`,
       { mix_id: id },
-      proxy,
+      proxy
     );
 
     return selectTrack(res);

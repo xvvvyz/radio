@@ -1,5 +1,5 @@
-@import 'utilities/helpers';
-@import 'utilities/variables';
+@import '../utilities/helpers';
+@import '../utilities/variables';
 
 * {
   padding: 0;
@@ -9,23 +9,23 @@
 html {
   font-size: 4.2vw;
 
-  @media (min-width: $break-small) {
+  @media (min-width: $break-sm) {
     font-size: 3vw;
   }
 
-  @media (min-width: $break-medium) {
+  @media (min-width: $break-md) {
     font-size: 2vw;
   }
 
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     font-size: 1.4vw;
   }
 
-  @media (min-width: $break-xlarge) {
+  @media (min-width: $break-xl) {
     font-size: 1.2vw;
   }
 
-  @media (min-width: $break-xxlarge) {
+  @media (min-width: $break-xxl) {
     font-size: 1vw;
   }
 }

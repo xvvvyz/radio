@@ -11,11 +11,14 @@ export default class Suggestions extends React.PureComponent {
   render() {
     const { suggestions, ...rest } = this.props;
 
-    return !!suggestions.length && (
-      <div className="Suggestions">
-        {suggestions.slice(0, 3).map((suggestion, i) =>
-          <Suggestion {...rest} key={i} suggestion={suggestion} />)}
-      </div>
+    return (
+      !!suggestions.length && (
+        <div className="Suggestions">
+          {suggestions.slice(0, 3).map((suggestion, i) => (
+            <Suggestion {...rest} key={i} suggestion={suggestion} />
+          ))}
+        </div>
+      )
     );
   }
 }

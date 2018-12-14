@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import List from './List';
-import api from './utilities/api';
-import { callGa } from './utilities/helpers';
+import api from '../utilities/api';
+import { callGa } from '../utilities/helpers';
 import './Search.scss';
 
 const PLACEHOLDER = 'Search for an artist, genre, activity or mood';
@@ -60,11 +60,7 @@ export default class Search extends React.PureComponent {
           type="text"
           value={this.state.value}
         />
-        <List
-          addTags={this.props.addTags}
-          fullWidth
-          items={this.state.tags}
-        />
+        <List addTags={this.props.addTags} fullWidth items={this.state.tags} />
       </form>
     );
   }

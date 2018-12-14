@@ -68,6 +68,6 @@ export default class Tip extends React.PureComponent {
         </span>
         {children}
       </div>
-    )
+    );
   }
 }

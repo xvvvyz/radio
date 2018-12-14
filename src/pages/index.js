@@ -1,24 +1,17 @@
 import React from 'react';
-import cn from 'classnames';
 import expirePlugin from 'store/plugins/expire';
 import min from 'lodash/min';
 import noop from 'lodash/noop';
 import store from 'store';
 import { knuthShuffle } from 'knuth-shuffle';
+import Background from '../components/Background';
 import Dashboard from '../components/Dashboard';
 import Layout from '../components/Layout';
 import Player from '../components/Player';
-import api from '../components/utilities/api';
-import bg from '../img/bg.jpg';
-import data from '../components/utilities/data';
-import './index.scss';
+import api from '../utilities/api';
+import data from '../utilities/data';
 
-import {
-  callGa,
-  hash,
-  parseUrl,
-  setUrl,
-} from '../components/utilities/helpers';
+import { callGa, hash, parseUrl, setUrl } from '../utilities/helpers';
 
 import {
   CURRENT_TAG_LIMIT,
@@ -26,10 +19,11 @@ import {
   STORE_PLAYED,
   STORE_PLAYED_LIMIT,
   STORE_TAG_DATA_EXPIRY,
-} from '../components/utilities/constants';
+} from '../utilities/constants';
 
-export default class App extends React.Component {
+export default class Index extends React.Component {
   state = {
+    apiError: false,
     artists: [],
     currentTags: [],
     deadEnd: false,
@@ -59,11 +53,13 @@ export default class App extends React.Component {
     this.getNewSuggestions();
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.suggestions !== this.state.suggestions) {
       if (this.spinDelay < this.spinMax) {
         this.timeout = window.setTimeout(
-          this.getNewSuggestions, this.spinDelay);
+          this.getNewSuggestions,
+          this.spinDelay
+        );
       } else {
         this.spinDelay = 50;
       }
@@ -111,16 +107,23 @@ export default class App extends React.Component {
     try {
       this.loadTrack(await api.nextSong(playlistId, this.proxy)).then(noop);
     } catch (err) {
-      if (this.proxy) return;
-      this.proxy = true;
-      this.fetchNextSong(playlistId).then(noop);
+      if (this.proxy) {
+        this.setState({ apiError: true });
+      } else {
+        this.proxy = true;
+        this.fetchNextSong(playlistId).then(noop);
+      }
     }
   };
 
   fetchPlaylist = async ({ tags = this.state.currentTags } = {}) => {
     this.setState({ trackLoading: true, playerVisible: true });
 
-    const cleanTags = tags.concat().sort().map(tag => tag.toLowerCase());
+    const cleanTags = tags
+      .concat()
+      .sort()
+      .map(tag => tag.toLowerCase());
+
     const tagHash = hash(cleanTags.toString());
     const data = store.get(tagHash) || { page: 0, index: 0 };
 
@@ -161,8 +164,10 @@ export default class App extends React.Component {
     const shuffledArtistsAndGenres = knuthShuffle([...artists, ...genres]);
     const shuffledModifiers = knuthShuffle([...data.modifiers]);
 
-    const maxSuggestions = min(
-      [shuffledArtistsAndGenres.length, shuffledModifiers.length]);
+    const maxSuggestions = min([
+      shuffledArtistsAndGenres.length,
+      shuffledModifiers.length,
+    ]);
 
     let suggestions = [];
 
@@ -270,39 +275,48 @@ export default class App extends React.Component {
   };
 
   render() {
+    const {
+      apiError,
+      artists,
+      currentTags,
+      deadEnd,
+      footerVisible,
+      genres,
+      playerVisible,
+      playlist,
+      related,
+      suggestions,
+      track,
+      trackLoading,
+    } = this.state;
+
     return (
-      <Layout>
-        <img
-          alt=""
-          className={cn({
-            App_background: true,
-            hide: this.state.playerVisible
-          })}
-          src={bg}
-        />
+      <Layout title={track ? `${track.title} by ${track.artist}` : null}>
+        <Background hide={playerVisible} />
         <Dashboard
           addTags={this.addTags}
-          artists={this.state.artists}
-          currentTags={this.state.currentTags}
-          footerVisible={this.state.footerVisible}
-          genres={this.state.genres}
-          playerVisible={this.state.playerVisible}
-          related={this.state.related}
+          artists={artists}
+          currentTags={currentTags}
+          footerVisible={footerVisible}
+          genres={genres}
+          playerVisible={playerVisible}
+          related={related}
           removeTag={this.removeTag}
           shuffleArtists={this.shuffleArtists}
           shuffleGenres={this.shuffleGenres}
           shuffleRelated={this.shuffleRelated}
-          suggestions={this.state.suggestions}
+          suggestions={suggestions}
         />
         <Player
-          deadEnd={this.state.deadEnd}
+          apiError={apiError}
+          deadEnd={deadEnd}
           next={this.fetchNextSong}
-          playlist={this.state.playlist}
+          playlist={playlist}
           refresh={this.fetchPlaylist}
           skip={this.skipSong}
-          track={this.state.track}
-          trackLoading={this.state.trackLoading}
-          visible={this.state.playerVisible}
+          track={track}
+          trackLoading={trackLoading}
+          visible={playerVisible}
         />
       </Layout>
     );

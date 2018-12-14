@@ -3,15 +3,15 @@ import React from 'react';
 import cn from 'classnames';
 import ClickOutside from './ClickOutside';
 import Tip from './Tip';
-import expandSvg from '../img/expand.svg';
-import minimizeSvg from '../img/minimize.svg';
-import nextSvg from '../img/next.svg';
-import pauseSvg from '../img/pause.svg';
-import playSvg from '../img/play.svg';
-import refreshSvg from '../img/refresh.svg';
-import volume0Svg from '../img/volume-x.svg';
-import volume1Svg from '../img/volume-1.svg';
-import volume2Svg from '../img/volume-2.svg';
+import expandSvg from '../images/expand.svg';
+import minimizeSvg from '../images/minimize.svg';
+import nextSvg from '../images/next.svg';
+import pauseSvg from '../images/pause.svg';
+import playSvg from '../images/play.svg';
+import refreshSvg from '../images/refresh.svg';
+import volume0Svg from '../images/volume-x.svg';
+import volume1Svg from '../images/volume-1.svg';
+import volume2Svg from '../images/volume-2.svg';
 import './PlayerControls.scss';
 
 const PlayerControls = props => (
@@ -30,18 +30,20 @@ const PlayerControls = props => (
           min={0}
           onChange={e => props.handleVolume(e.target.value)}
           onInput={e => props.handleVolume(e.target.value)}
-          step={.01}
+          step={0.01}
           type="range"
           value={props.volume}
         />
         <button onClick={props.toggleVolume}>
           <img
             alt={`volume ${props.volume * 100}%`}
-            src={props.volume < .01 ?
-              volume0Svg
-              : (props.volume < .50
+            src={
+              props.volume < 0.01
+                ? volume0Svg
+                : props.volume < 0.5
                 ? volume1Svg
-                : volume2Svg)}
+                : volume2Svg
+            }
           />
         </button>
       </ClickOutside>

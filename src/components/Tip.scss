@@ -1,6 +1,6 @@
-@import 'utilities/variables';
+@import '../utilities/variables';
 
-$background: rgba($accent-primary, .7);
+$background: rgba($accent-primary, 0.7);
 
 .Tip {
   position: relative;
@@ -11,15 +11,15 @@ $background: rgba($accent-primary, .7);
   display: block;
   visibility: hidden;
   opacity: 0;
-  bottom: calc(100% + #{$padding-xxsmall});
+  bottom: calc(100% + #{$padding-xxs});
   left: 50%;
-  padding: $padding-xxxsmall $padding-xxxsmall + .2rem;
+  padding: $padding-xxxs $padding-xxxs + 0.2rem;
   border-radius: $border-radius;
   background-color: $background-primary;
   transform: translateX(-50%);
   transition: opacity $speed-fast, visibility $speed-fast;
   color: $text-primary;
-  font-size: .7rem;
+  font-size: 0.7rem;
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
@@ -29,7 +29,7 @@ $background: rgba($accent-primary, .7);
   }
 
   &:after {
-    content: " ";
+    content: ' ';
     position: absolute;
     top: 100%;
     left: 50%;

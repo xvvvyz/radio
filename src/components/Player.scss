@@ -1,4 +1,4 @@
-@import './utilities/variables';
+@import '../utilities/variables';
 
 .Player {
   position: fixed;
@@ -12,7 +12,7 @@
   text-align: center;
   z-index: $z-2;
 
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     top: 0;
     right: 0;
     left: auto;
@@ -30,7 +30,7 @@
   transform: translateY(-$player-height-small);
   opacity: 1;
 
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     transform: translateX(0);
   }
 }
@@ -38,7 +38,7 @@
 .Player.visible.fullscreen {
   transform: translateY(-100%);
 
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     transform: translateY(0);
   }
 }
@@ -52,34 +52,34 @@
   top: -100vh;
   width: 100vw;
   height: 100vh;
-  padding: 0 0 $padding-medium - $padding-xsmall;
+  padding: 0 0 $padding-md - $padding-xs;
   transition: background-color $speed-normal, transform $speed-normal;
-  transform: translateY($player-height-small + $padding-medium / 2);
+  transform: translateY($player-height-small + $padding-md / 2);
   background-color: $black;
 
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     position: relative;
     top: auto;
     width: 100%;
     height: 100%;
-    padding: 0 0 $padding-medium;
+    padding: 0 0 $padding-md;
     transform: translateY(0);
   }
 }
 
 .Player_error {
   width: 100%;
-  padding: $padding-small $padding-medium;
+  padding: $padding-sm $padding-md;
   background-color: $accent-primary;
   color: $text-secondary;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .Player.fullscreen .Player_inner {
   transform: translateY(100%);
   background-color: $black;
 
-  @media (min-width: $break-large) {
+  @media (min-width: $break-lg) {
     transform: translateY(0);
   }
 }

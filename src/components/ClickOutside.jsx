@@ -21,10 +21,6 @@ export default class ClickOutside extends React.PureComponent {
   };
 
   render() {
-    return (
-      <div ref={node => this.wrapper = node}>
-        {this.props.children}
-      </div>
-    );
+    return <div ref={node => (this.wrapper = node)}>{this.props.children}</div>;
   }
 }

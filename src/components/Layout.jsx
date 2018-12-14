@@ -4,18 +4,18 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import './Layout.scss';
 
-const Layout = ({ children }) => (
+const Layout = ({ children, title: titleOverride }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
         site {
           siteMetadata {
-            description,
-            keywords,
-            shareImagePath,
-            title,
-            titleShort,
-            url,
+            description
+            keywords
+            shareImagePath
+            title
+            titleShort
+            url
           }
         }
       }
@@ -35,7 +35,7 @@ const Layout = ({ children }) => (
       <>
         <Helmet>
           <html lang="en" />
-          <title>{titleShort}</title>
+          <title>{titleOverride || title}</title>
           <meta name="description" content={description} />
           <meta name="keywords" content={keywords} />
           <meta name="twitter:card" content="summary_large_image" />
@@ -57,6 +57,7 @@ const Layout = ({ children }) => (
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  title: PropTypes.string,
 };
 
 export default Layout;

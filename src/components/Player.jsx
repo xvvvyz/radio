@@ -6,11 +6,12 @@ import store from 'store';
 import PlayerArt from './PlayerArt';
 import PlayerControls from './PlayerControls';
 import PlayerInfo from './PlayerInfo';
-import { callGa } from './utilities/helpers';
+import { callGa } from '../utilities/helpers';
 import './Player.scss';
 
 export default class Player extends React.PureComponent {
   static propTypes = {
+    apiError: PropTypes.bool.isRequired,
     deadEnd: PropTypes.bool.isRequired,
     track: PropTypes.object,
     trackLoading: PropTypes.bool.isRequired,
@@ -42,7 +43,7 @@ export default class Player extends React.PureComponent {
 
   handleVolume = volume => {
     this.setState({ volume });
-    debounce((() => store.set('volume', volume)), 2000);
+    debounce(() => store.set('volume', volume), 2000);
   };
 
   toggleFullscreen = () => {
@@ -88,11 +89,12 @@ export default class Player extends React.PureComponent {
     if ('mediaSession' in navigator) {
       const ms = navigator.mediaSession;
 
-      const getCoverSizes = sizes => sizes.map(size => ({
-        sizes: `${size}x${size}`,
-        src: this.getCoverSize(size),
-        type: 'image/jpeg',
-      }));
+      const getCoverSizes = sizes =>
+        sizes.map(size => ({
+          sizes: `${size}x${size}`,
+          src: this.getCoverSize(size),
+          type: 'image/jpeg',
+        }));
 
       // eslint-disable-next-line no-undef
       ms.metadata = new MediaMetadata({
@@ -107,7 +109,7 @@ export default class Player extends React.PureComponent {
   };
 
   render() {
-    const { deadEnd, track, trackLoading, visible } = this.props;
+    const { apiError, deadEnd, track, trackLoading, visible } = this.props;
     const { isFullscreen, isPlaying } = this.state;
 
     return (
@@ -120,15 +122,20 @@ export default class Player extends React.PureComponent {
       >
         <div className="Player_inner">
           <PlayerArt cover={this.getCoverSize()} />
-          {track && <audio
-            autoPlay={true}
-            ref={player => this.player = player}
-            src={track.stream}
-            title={`${track.title} by ${track.artist}`}
-          />}
-          {!!deadEnd && !trackLoading && <div className="Player_error">
-            No "{deadEnd}" playlists found.
-          </div>}
+          {track && (
+            <audio
+              autoPlay={true}
+              ref={player => (this.player = player)}
+              src={track.stream}
+              title={`${track.title} by ${track.artist}`}
+            />
+          )}
+          {deadEnd && !trackLoading && (
+            <div className="Player_error">No "{deadEnd}" playlists found.</div>
+          )}
+          {apiError && !trackLoading && (
+            <div className="Player_error">Something broke. Try refreshing?</div>
+          )}
           <PlayerInfo loading={trackLoading} track={track} />
           <PlayerControls
             disabled={!track}

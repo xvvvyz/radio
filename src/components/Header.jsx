@@ -2,7 +2,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import CurrentTags from './CurrentTags';
-import logo from '../img/logo.svg';
+import logo from '../images/logo.svg';
 import './Header.scss';
 
 const Header = props => (
@@ -12,7 +12,11 @@ const Header = props => (
       tags_exist: !!props.currentTags.length,
     })}
   >
-    <h1><a href="/"><img alt="Line Radio" src={logo} /></a></h1>
+    <h1>
+      <a href="/">
+        <img alt="Line Radio" src={logo} />
+      </a>
+    </h1>
     <h2>Streamlined Music Discovery</h2>
     <CurrentTags currentTags={props.currentTags} removeTag={props.removeTag} />
   </header>

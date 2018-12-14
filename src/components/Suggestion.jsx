@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { callGa } from './utilities/helpers';
+import { callGa } from '../utilities/helpers';
 
 export default class Suggestion extends React.PureComponent {
   static propTypes = {
@@ -22,10 +22,12 @@ export default class Suggestion extends React.PureComponent {
   render() {
     const { suggestion } = this.props;
 
-    return !!suggestion.length && (
-      <button onClick={this.handleSuggestionClick}>
-        {this.getSuggestionText()}
-      </button>
+    return (
+      !!suggestion.length && (
+        <button onClick={this.handleSuggestionClick}>
+          {this.getSuggestionText()}
+        </button>
+      )
     );
   }
 }

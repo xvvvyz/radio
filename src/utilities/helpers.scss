@@ -16,7 +16,7 @@
 .fade_in {
   opacity: 0;
   transform: translateY(-$translate-distance);
-  animation: fadeIn .6s forwards;
+  animation: fadeIn 0.6s forwards;
 }
 
 .spinner {
@@ -25,5 +25,5 @@
   border: solid 2px $text-primary;
   border-bottom-color: transparent;
   border-radius: 50%;
-  animation: spin .5s linear infinite;
+  animation: spin 0.5s linear infinite;
 }

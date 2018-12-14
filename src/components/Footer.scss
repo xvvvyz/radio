@@ -1,20 +1,20 @@
-@import 'utilities/helpers';
-@import 'utilities/variables';
+@import '../utilities/helpers';
+@import '../utilities/variables';
 
 .Footer {
   @extend .fade_in;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 $padding-medium $padding-large;
-  font-size: .8rem;
+  padding: 0 $padding-md $padding-lg;
+  font-size: 0.8rem;
 
-  @media (min-width: $break-medium) {
-    padding: 0 $padding-large $padding-large;
+  @media (min-width: $break-md) {
+    padding: 0 $padding-lg $padding-lg;
   }
 
-  @media (min-width: $break-large) {
-    padding: 0 $padding-xlarge $padding-xlarge;
+  @media (min-width: $break-lg) {
+    padding: 0 $padding-xl $padding-xl;
   }
 
   a {
@@ -24,7 +24,7 @@
 }
 
 .Footer_line {
-  @media (min-width: $break-medium) {
+  @media (min-width: $break-md) {
     position: relative;
     top: 1px;
     height: 1px;

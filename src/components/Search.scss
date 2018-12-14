@@ -1,34 +1,34 @@
-@import 'utilities/helpers';
-@import 'utilities/variables';
+@import '../utilities/helpers';
+@import '../utilities/variables';
 
 .Search {
-  margin-bottom: $padding-large;
+  margin-bottom: $padding-lg;
 
-  @media (min-width: $break-large) {
-    margin-bottom: $padding-xlarge;
+  @media (min-width: $break-lg) {
+    margin-bottom: $padding-xl;
   }
 
   input {
-    width: calc(100% - #{$padding-medium} * 2);
-    margin: 0 $padding-medium;
-    padding: $padding-xsmall 0;
+    width: calc(100% - #{$padding-md} * 2);
+    margin: 0 $padding-md;
+    padding: $padding-xs 0;
     border-radius: 3rem;
     background-color: $white;
     box-shadow: $box-shadow-card;
     transition: $speed-fast;
-    font-size: .8rem;
+    font-size: 0.8rem;
     text-align: center;
 
-    @media (min-width: $break-medium) {
-      width: calc(100% - #{$padding-large} * 2);
-      margin: 0 $padding-large;
-      padding: $padding-small 0;
+    @media (min-width: $break-md) {
+      width: calc(100% - #{$padding-lg} * 2);
+      margin: 0 $padding-lg;
+      padding: $padding-sm 0;
       font-size: 1.2rem;
     }
 
-    @media (min-width: $break-large) {
-      width: calc(100% - #{$padding-xlarge} * 2);
-      margin: 0 $padding-xlarge;
+    @media (min-width: $break-lg) {
+      width: calc(100% - #{$padding-xl} * 2);
+      margin: 0 $padding-xl;
     }
   }
 }

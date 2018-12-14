@@ -1,5 +1,5 @@
-@import 'utilities/helpers';
-@import 'utilities/variables';
+@import '../utilities/helpers';
+@import '../utilities/variables';
 
 .PlayerInfo {
   @extend .fade_in;
@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: $padding-medium;
+  padding: $padding-md;
   color: $text-secondary;
 }
 
@@ -18,16 +18,16 @@
 }
 
 .PlayerInfo_artist {
-  margin-bottom: $padding-xxsmall;
+  margin-bottom: $padding-xxs;
   color: $text-secondary-dark;
-  font-size: .7rem;
+  font-size: 0.7rem;
   line-height: 1.2rem;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .PlayerInfo_title {
-  font-size: .9em;
+  font-size: 0.9em;
   font-weight: $font-weight-bold;
   line-height: 1.4rem;
 
@@ -35,8 +35,8 @@
     position: relative;
     display: inline;
     top: 1px;
-    width: .8em;
-    height: .8em;
-    margin-left: $padding-xxxsmall;
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: $padding-xxxs;
   }
 }
