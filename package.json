@@ -1,5 +1,12 @@
 {
   "private": true,
+  "scripts": {
+    "build": "gatsby build",
+    "clean": "rm -rf .cache node_modules public",
+    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,json,css,scss,md,yml}\"",
+    "serve": "gatsby serve",
+    "start": "gatsby develop"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "gatsby": "^2.0.67",
@@ -20,11 +27,5 @@
     "node-sass": "^4.11.0",
     "prettier": "^1.15.3",
     "webpack": "^4.27.1"
-  },
-  "scripts": {
-    "build": "gatsby build",
-    "clean": "rm -rf .cache node_modules public",
-    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,json,css,scss,md,yml}\"",
-    "start": "gatsby develop"
   }
 }

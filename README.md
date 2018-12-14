@@ -2,7 +2,7 @@
 
 > Streamlined music discovery.
 
-![line radio screenshot](https://linerad.io/screenshot.png)
+![Screenshot](static/screenshot.png?raw=true 'Screenshot')
 
 ## Development Setup
 
