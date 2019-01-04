@@ -20,17 +20,16 @@
     display: block;
     margin: 0 $padding-xxs $padding-sm;
     padding: $padding-xxs $padding-xs;
-    transition: background-color $speed-fast, transform $speed-fast;
+    transition: background-color $speed-fast, box-shadow $speed-fast,
+      transform $speed-fast;
     border-radius: $border-radius;
-    background-color: $accent-primary-lightest;
-    box-shadow: $box-shadow-button;
+    background-color: $accent-primary;
     color: $text-secondary;
     font-size: 0.9rem;
     font-weight: $font-weight-bold;
 
     &:hover {
       transform: translateY(-2px);
-      background-color: $accent-primary;
       box-shadow: $box-shadow-button-hover;
     }
 

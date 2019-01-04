@@ -9,23 +9,23 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "gatsby": "^2.0.67",
+    "gatsby": "^2.0.85",
     "knuth-shuffle": "^1.0.8",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "react-helmet": "^5.2.0",
     "store": "^2.0.12"
   },
   "devDependencies": {
     "gatsby-plugin-google-analytics": "^2.0.8",
     "gatsby-plugin-google-fonts": "^0.0.4",
-    "gatsby-plugin-manifest": "^2.0.12",
-    "gatsby-plugin-react-helmet": "^3.0.4",
+    "gatsby-plugin-manifest": "^2.0.13",
+    "gatsby-plugin-react-helmet": "^3.0.5",
     "gatsby-plugin-sass": "^2.0.7",
     "node-sass": "^4.11.0",
     "prettier": "^1.15.3",
-    "webpack": "^4.27.1"
+    "webpack": "^4.28.3"
   }
 }

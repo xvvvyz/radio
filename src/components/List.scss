@@ -49,13 +49,7 @@
 }
 
 .Lists .List_inner {
-  transition: $speed-fast;
   box-shadow: $box-shadow-card;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: $box-shadow-card-hover;
-  }
 }
 
 .List_header {
