@@ -141,7 +141,11 @@ export default class Index extends React.Component {
       store.set(tagHash, data, STORE_TAG_DATA_EXPIRY);
     }
 
-    this.loadPlaylist(data.playlists[data.index], data.related).then(noop);
+    try {
+      this.loadPlaylist(data.playlists[data.index], data.related).then(noop);
+    } catch (err) {
+      this.setState({ apiError: true });
+    }
   };
 
   fetchRelatedPlaylist = async playlistId => {
@@ -207,7 +211,7 @@ export default class Index extends React.Component {
     }
 
     this.storePlayed(playlist.id);
-    this.setState({ deadEnd: false, playlist, related });
+    this.setState({ apiError: false, deadEnd: false, playlist, related });
     this.fetchNextSong(playlist.id).then(noop);
   };
 
@@ -218,7 +222,7 @@ export default class Index extends React.Component {
     await this.fetchArtistTags(track.artist);
     await this.fetchSimilarArtists(track.artist);
     this.shuffleSuggestion();
-    this.setState({ footerVisible: true });
+    this.setState({ apiError: false, footerVisible: true });
   };
 
   removeTag = tag => {

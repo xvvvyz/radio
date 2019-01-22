@@ -2,6 +2,7 @@
 
 .Suggestions {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: -$padding-sm;
@@ -9,6 +10,7 @@
   text-align: center;
 
   @media (min-width: $break-md) {
+    flex-direction: row;
     padding: 0 $padding-lg $padding-lg;
   }
 
@@ -23,13 +25,15 @@
     transition: background-color $speed-fast, box-shadow $speed-fast,
       transform $speed-fast;
     border-radius: $border-radius;
-    background-color: $accent-primary;
+    background-color: $background-secondary-light;
     color: $text-secondary;
     font-size: 0.9rem;
     font-weight: $font-weight-bold;
+    backface-visibility: hidden;
 
     &:hover {
       transform: translateY(-2px);
+      background-color: $background-secondary;
       box-shadow: $box-shadow-button-hover;
     }
 
