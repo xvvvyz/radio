@@ -25,15 +25,16 @@
     transition: background-color $speed-fast, box-shadow $speed-fast,
       transform $speed-fast;
     border-radius: $border-radius;
-    background-color: $background-secondary-light;
+    background-color: $accent-primary;
+    box-shadow: $box-shadow-button;
     color: $text-secondary;
     font-size: 0.9rem;
     font-weight: $font-weight-bold;
     backface-visibility: hidden;
 
     &:hover {
+      background-color: $accent-primary-light;
       transform: translateY(-2px);
-      background-color: $background-secondary;
       box-shadow: $box-shadow-button-hover;
     }
 

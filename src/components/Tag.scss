@@ -76,6 +76,7 @@
     line-height: $tag-height;
     text-align: left;
     transition: background-color $speed-fast;
+    border-top: solid 1px $off-white;
 
     &:hover,
     &:focus {
