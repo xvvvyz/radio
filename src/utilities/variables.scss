@@ -15,7 +15,7 @@ $background-primary-transparent: rgba($white, 0.2);
 $background-secondary: $molten;
 $background-secondary-light: lighten($background-secondary, 10%);
 
-$text-primary: $molten;
+$text-primary: lighten($molten, 10%);
 $text-secondary: $white;
 $text-secondary-dark: darken($text-secondary, 5%);
 

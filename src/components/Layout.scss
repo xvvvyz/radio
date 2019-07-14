@@ -34,7 +34,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: $background-primary;
-  color: #222;
+  color: $text-primary;
   font-family: $font-family;
   font-weight: $font-weight-normal;
   -webkit-font-smoothing: antialiased;
@@ -68,6 +68,7 @@ button {
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: none;
+  color: inherit;
   font-size: inherit;
 }
 

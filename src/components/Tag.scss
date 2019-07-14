@@ -4,20 +4,6 @@
 .Tag {
   white-space: nowrap;
   overflow: hidden;
-
-  button {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  img {
-    width: 2rem;
-    height: 2rem;
-    margin-right: $padding-xs;
-    margin-left: -2px;
-    border-radius: 50%;
-  }
 }
 
 .CurrentTags .Tag {
@@ -59,10 +45,6 @@
     }
 
     @media (min-width: $break-md) {
-      padding: 0;
-      background-color: transparent;
-      box-shadow: none;
-      color: inherit;
     }
   }
 }
@@ -76,7 +58,6 @@
     line-height: $tag-height;
     text-align: left;
     transition: background-color $speed-fast;
-    border-top: solid 1px $off-white;
 
     &:hover,
     &:focus {

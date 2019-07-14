@@ -5,7 +5,6 @@ import './Tag.scss';
 const Tag = props => (
   <li className="Tag">
     <button type="button" onClick={() => props.onClick(props.value)}>
-      {/*{props.image && <img alt="" src={props.image} />}*/}
       {props.value}
     </button>
   </li>
