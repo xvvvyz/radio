@@ -41,5 +41,13 @@
     &:active {
       transform: translateY(0);
     }
+
+    &.playerVisible {
+      background-color: $background-secondary;
+
+      &:hover {
+        background-color: $background-secondary-light;
+      }
+    }
   }
 }

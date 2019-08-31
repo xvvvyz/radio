@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import cn from 'classnames';
 import { callGa } from '../utilities/helpers';
 
 export default class Suggestion extends React.PureComponent {
@@ -20,11 +21,14 @@ export default class Suggestion extends React.PureComponent {
   };
 
   render() {
-    const { suggestion } = this.props;
+    const { playerVisible, suggestion } = this.props;
 
     return (
       !!suggestion.length && (
-        <button onClick={this.handleSuggestionClick}>
+        <button
+          className={cn({ playerVisible })}
+          onClick={this.handleSuggestionClick}
+        >
           {this.getSuggestionText()}
         </button>
       )

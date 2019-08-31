@@ -54,12 +54,12 @@
   justify-content: space-between;
   align-items: center;
   padding: $padding-xs;
-  background-color: $background-secondary-light;
+  background-color: $background-secondary;
   border-radius: $border-radius $border-radius 0 0;
   transition: background-color $speed-fast;
 
   &:hover {
-    background-color: $background-secondary;
+    background-color: $background-secondary-light;
   }
 }
 

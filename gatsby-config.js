@@ -22,9 +22,7 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-google-fonts',
-      options: {
-        fonts: ['Lato:400,700,900'],
-      },
+      options: { fonts: ['Lato:400,700,900'] },
     },
     {
       resolve: 'gatsby-plugin-manifest',

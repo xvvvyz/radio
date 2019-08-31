@@ -4,12 +4,15 @@
 .Footer {
   @extend .fade_in;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 0 $padding-md $padding-lg;
   font-size: 0.8rem;
+  line-height: 1.6rem;
 
   @media (min-width: $break-md) {
+    flex-direction: row;
     padding: 0 $padding-lg $padding-lg;
   }
 
@@ -18,17 +21,6 @@
   }
 
   a {
-    color: $accent-primary;
     text-decoration: underline;
-  }
-}
-
-.Footer_line {
-  @media (min-width: $break-md) {
-    position: relative;
-    top: 1px;
-    height: 1px;
-    width: 30vw;
-    background-color: $background-primary-darker;
   }
 }

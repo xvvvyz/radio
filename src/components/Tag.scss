@@ -30,12 +30,14 @@
     border-radius: 2rem;
     background-color: $background-secondary;
     box-shadow: $box-shadow-button;
+    transition: background-color $speed-fast;
     color: $text-secondary;
     font-size: 1.2rem;
     font-weight: $font-weight-black;
     line-height: $padding-md;
 
     &:hover {
+      background-color: $background-secondary-light;
       text-decoration: line-through;
       cursor: pointer;
     }

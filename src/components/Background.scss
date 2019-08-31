@@ -10,10 +10,14 @@
   top: 0;
   left: 0;
   z-index: $z-neg;
-  transition: opacity $speed-slowest;
+  transition: opacity $speed-slow, transform $speed-normal;
   opacity: 0.3;
 
   &.hide {
     opacity: 0;
+
+    @media (min-width: $break-lg) {
+      transform: translateX($player-width / -2);
+    }
   }
 }

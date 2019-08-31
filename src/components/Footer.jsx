@@ -8,12 +8,19 @@ const Footer = () => (
       <a href="https://8tracks.com" rel="noopener noreferrer" target="_blank">
         8tracks
       </a>
-      &nbsp; &amp; &nbsp;
+      ,{' '}
       <a href="https://www.last.fm" rel="noopener noreferrer" target="_blank">
         Last.fm
+      </a>{' '}
+      &amp;{' '}
+      <a
+        href="https://unsplash.com/collections/8541150/line-radio-background-images"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Unsplash
       </a>
     </span>
-    <span className="Footer_line" />
     <span>
       Source on &nbsp;
       <a
