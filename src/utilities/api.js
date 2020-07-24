@@ -47,7 +47,7 @@ export default {
   },
 
   playlists: async ({ page, tags }) => {
-    const res = await callEightApi(`explore/${tagsToQuery(tags)}/recent`, {
+    const res = await callEightApi(`explore/${tagsToQuery(tags)}/hot`, {
       include: 'mixes+explore_filters',
       page: page,
       per_page: EIGHT_PAGE_LIMIT,
