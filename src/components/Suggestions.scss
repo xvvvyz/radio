@@ -21,21 +21,21 @@
   button {
     display: block;
     margin: 0 $padding-xxs $padding-sm;
-    padding: $padding-xxs $padding-xs;
-    transition: background-color $speed-fast, box-shadow $speed-fast,
-      transform $speed-fast;
+    padding: $padding-xxs $padding-sm;
+    transition: background-color $speed-fast, transform $speed-fast;
     border-radius: $border-radius;
-    background-color: $accent-primary;
-    box-shadow: $box-shadow-button;
+    background-color: $accent-primary-lighter;
     color: $text-secondary;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     font-weight: $font-weight-bold;
+    line-height: 1.2rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     backface-visibility: hidden;
 
     &:hover {
-      background-color: $accent-primary-light;
+      background-color: $accent-primary;
       transform: translateY(-2px);
-      box-shadow: $box-shadow-button-hover;
     }
 
     &:active {

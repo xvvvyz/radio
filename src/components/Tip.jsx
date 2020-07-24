@@ -52,6 +52,9 @@ export default class Tip extends React.PureComponent {
           [className]: !!className,
         })}
         onClick={this.hideTip}
+        role="button"
+        tabIndex={0}
+        onKeyPress={(e) => (e.keyCode === 32 ? this.hideTip() : () => {})}
       >
         <span
           className={cn({

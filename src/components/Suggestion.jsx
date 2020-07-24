@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cn from 'classnames';
-import { callGa } from '../utilities/helpers';
 
 export default class Suggestion extends React.PureComponent {
   static propTypes = {
@@ -16,7 +15,6 @@ export default class Suggestion extends React.PureComponent {
 
   handleSuggestionClick = () => {
     const { addTags, suggestion } = this.props;
-    callGa('send', 'event', 'suggestion', 'click', this.getSuggestionText());
     addTags([...suggestion]);
   };
 

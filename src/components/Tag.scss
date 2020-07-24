@@ -12,7 +12,8 @@
   &::before {
     content: '+';
     margin: 0 $padding-xxs;
-    font-weight: $font-weight-black;
+    color: $accent-primary;
+    font-weight: $font-weight-bold;
   }
 
   &:first-of-type::before {
@@ -28,25 +29,17 @@
     display: inline-block;
     padding: 0 $padding-xs;
     border-radius: 2rem;
-    background-color: $background-secondary;
-    box-shadow: $box-shadow-button;
+    background-color: $accent-primary;
     transition: background-color $speed-fast;
     color: $text-secondary;
-    font-size: 1.2rem;
-    font-weight: $font-weight-black;
-    line-height: $padding-md;
+    font-size: 1rem;
+    font-weight: $font-weight-bold;
+    line-height: 1.6rem;
 
     &:hover {
-      background-color: $background-secondary-light;
+      background-color: $accent-primary-light;
       text-decoration: line-through;
       cursor: pointer;
-    }
-
-    &:active {
-      box-shadow: none;
-    }
-
-    @media (min-width: $break-md) {
     }
   }
 }
@@ -55,15 +48,16 @@
   button {
     position: relative;
     width: 100%;
-    padding: 0 $padding-xs;
-    font-size: 0.9rem;
+    padding: 0.25rem $padding-xs;
+    border-radius: $border-radius;
+    font-weight: $font-weight-bold;
     line-height: $tag-height;
     text-align: left;
     transition: background-color $speed-fast;
 
     &:hover,
     &:focus {
-      background-color: $off-white;
+      text-decoration: underline;
     }
   }
 }
@@ -74,6 +68,7 @@
   button {
     justify-content: center;
     padding: 0 $padding-xs;
+    margin-top: 0;
     text-align: center;
   }
 }

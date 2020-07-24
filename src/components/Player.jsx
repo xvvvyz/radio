@@ -6,7 +6,6 @@ import store from 'store';
 import PlayerArt from './PlayerArt';
 import PlayerControls from './PlayerControls';
 import PlayerInfo from './PlayerInfo';
-import { callGa } from '../utilities/helpers';
 import './Player.scss';
 
 export default class Player extends React.PureComponent {
@@ -41,7 +40,7 @@ export default class Player extends React.PureComponent {
     return this.props.playlist.cover + `&w=${size}&h=${size}`;
   };
 
-  handleVolume = volume => {
+  handleVolume = (volume) => {
     this.setState({ volume });
     debounce(() => store.set('volume', volume), 2000);
   };
@@ -61,27 +60,22 @@ export default class Player extends React.PureComponent {
   };
 
   refresh = () => {
-    callGa('send', 'event', 'player', 'refresh');
     this.props.refresh();
   };
 
   play = () => {
-    callGa('send', 'event', 'player', 'play');
     this.player.play();
   };
 
   pause = () => {
-    callGa('send', 'event', 'player', 'pause');
     this.player.pause();
   };
 
   next = () => {
-    callGa('send', 'event', 'player', 'next');
     this.props.next();
   };
 
   skip = () => {
-    callGa('send', 'event', 'player', 'skip');
     this.props.skip();
   };
 
@@ -89,8 +83,8 @@ export default class Player extends React.PureComponent {
     if ('mediaSession' in navigator) {
       const ms = navigator.mediaSession;
 
-      const getCoverSizes = sizes =>
-        sizes.map(size => ({
+      const getCoverSizes = (sizes) =>
+        sizes.map((size) => ({
           sizes: `${size}x${size}`,
           src: this.getCoverSize(size),
           type: 'image/jpeg',
@@ -123,9 +117,10 @@ export default class Player extends React.PureComponent {
         <div className="Player_inner">
           <PlayerArt cover={this.getCoverSize()} />
           {track && (
+            // eslint-disable-next-line jsx-a11y/media-has-caption
             <audio
               autoPlay={true}
-              ref={player => (this.player = player)}
+              ref={(player) => (this.player = player)}
               src={track.stream}
               title={`${track.title} by ${track.artist}`}
             />

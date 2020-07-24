@@ -8,7 +8,7 @@ import Search from './Search';
 import Suggestions from './Suggestions';
 import './Dashboard.scss';
 
-const Dashboard = props => (
+const Dashboard = (props) => (
   <main
     className={cn({
       Dashboard: true,

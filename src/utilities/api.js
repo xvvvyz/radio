@@ -18,7 +18,7 @@ import {
 } from './helpers';
 
 export default {
-  artistTags: async artist => {
+  artistTags: async (artist) => {
     const res = await callLastApi({
       artist,
       limit: LAST_PAGE_LIMIT,
@@ -28,7 +28,7 @@ export default {
     return selectArtistTags(res);
   },
 
-  nextPlaylist: async id => {
+  nextPlaylist: async (id) => {
     const res = await callEightApi(`sets/${getToken(id)}/next_mix.json`, {
       mix_id: id,
     });
@@ -59,12 +59,12 @@ export default {
     };
   },
 
-  search: async query => {
+  search: async (query) => {
     const res = await callEightApi('tags.json', { q: query, per_page: 10 });
     return res.tag_cloud.tags;
   },
 
-  similarArtists: async artist => {
+  similarArtists: async (artist) => {
     const res = await callLastApi({
       artist,
       limit: LAST_PAGE_LIMIT,

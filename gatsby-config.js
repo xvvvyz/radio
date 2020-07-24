@@ -6,23 +6,14 @@ module.exports = {
     shareImagePath: '/screenshot.png',
     title: 'Line Radio - Streamlined Music Discovery',
     titleShort: 'Line Radio',
-    url: 'https://linerad.io',
+    url: 'https://lineradio.app',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        anonymize: true,
-        head: false,
-        respectDNT: true,
-        trackingId: 'UA-36603722-6',
-      },
-    },
-    {
       resolve: 'gatsby-plugin-google-fonts',
-      options: { fonts: ['Lato:400,700,900'] },
+      options: { fonts: ['Lato:400,900'] },
     },
     {
       resolve: 'gatsby-plugin-manifest',

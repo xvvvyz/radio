@@ -31,7 +31,6 @@
   transition: transform $speed-normal, opacity $speed-normal;
   border-radius: $border-radius;
   background-color: rgba($white, 0.05);
-  box-shadow: $box-shadow-image;
   opacity: 0;
 
   @media (min-width: $break-lg) {

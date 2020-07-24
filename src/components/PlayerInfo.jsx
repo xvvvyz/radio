@@ -3,7 +3,7 @@ import React from 'react';
 import exitUp from '../images/exit-up.svg';
 import './PlayerInfo.scss';
 
-const PlayerInfo = props => {
+const PlayerInfo = (props) => {
   if (props.loading) return <div className="spinner" />;
   if (!props.track) return null;
   const { title, artist } = props.track;

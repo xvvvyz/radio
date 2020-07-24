@@ -32,10 +32,6 @@
   h2 {
     font-size: 0.8rem;
     letter-spacing: 0.05em;
-
-    @media (min-width: $break-md) {
-      font-size: 0.9rem;
-    }
   }
 }
 

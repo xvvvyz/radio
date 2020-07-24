@@ -3,7 +3,7 @@ import React from 'react';
 import Tag from './Tag';
 import './CurrentTags.scss';
 
-const CurrentTags = props =>
+const CurrentTags = (props) =>
   !!props.currentTags.length && (
     <ul className="CurrentTags">
       {props.currentTags.map((tag, i) => (

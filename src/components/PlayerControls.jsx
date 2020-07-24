@@ -14,7 +14,7 @@ import volume1Svg from '../images/volume-1.svg';
 import volume2Svg from '../images/volume-2.svg';
 import './PlayerControls.scss';
 
-const PlayerControls = props => (
+const PlayerControls = (props) => (
   <div className="PlayerControls">
     <div
       className={cn({
@@ -28,8 +28,8 @@ const PlayerControls = props => (
         <input
           max={1}
           min={0}
-          onChange={e => props.handleVolume(e.target.value)}
-          onInput={e => props.handleVolume(e.target.value)}
+          onChange={(e) => props.handleVolume(e.target.value)}
+          onInput={(e) => props.handleVolume(e.target.value)}
           step={0.01}
           type="range"
           value={props.volume}

@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import List from './List';
 import api from '../utilities/api';
-import { callGa } from '../utilities/helpers';
 import './Search.scss';
 
 const PLACEHOLDER = 'Search for an artist, genre, activity or mood';
@@ -26,7 +25,7 @@ export default class Search extends React.PureComponent {
     this.setState({ placeholder: '' });
   };
 
-  onChange = async event => {
+  onChange = async (event) => {
     const value = event.target.value;
     if (value === this.state.value) return;
     this.setState({ value });
@@ -38,12 +37,11 @@ export default class Search extends React.PureComponent {
 
     const tags = await api.search(value);
     if (!this.state.value) return;
-    callGa('send', 'event', 'search', 'search', value);
 
     this.setState({ tags });
   };
 
-  onSubmit = async event => {
+  onSubmit = async (event) => {
     event.preventDefault();
     await this.props.addTags(this.state.value);
     this.setState({ tags: [], value: '' });

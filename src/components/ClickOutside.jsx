@@ -14,13 +14,15 @@ export default class ClickOutside extends React.PureComponent {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  handleClickOutside = event => {
+  handleClickOutside = (event) => {
     if (this.wrapper && !this.wrapper.contains(event.target)) {
       this.props.onClickOutside();
     }
   };
 
   render() {
-    return <div ref={node => (this.wrapper = node)}>{this.props.children}</div>;
+    return (
+      <div ref={(node) => (this.wrapper = node)}>{this.props.children}</div>
+    );
   }
 }

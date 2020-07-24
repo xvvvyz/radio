@@ -5,7 +5,7 @@ import CurrentTags from './CurrentTags';
 import logo from '../images/logo.svg';
 import './Header.scss';
 
-const Header = props => (
+const Header = (props) => (
   <header
     className={cn({
       Header: true,

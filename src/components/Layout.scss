@@ -4,6 +4,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -69,6 +70,7 @@ button {
   box-shadow: none;
   outline: none;
   color: inherit;
+  font-family: $font-family;
   font-size: inherit;
 }
 

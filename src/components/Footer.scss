@@ -3,13 +3,11 @@
 
 .Footer {
   @extend .fade_in;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  margin-top: -2rem;
   padding: 0 $padding-md $padding-lg;
   font-size: 0.8rem;
   line-height: 1.6rem;
+  text-align: center;
 
   @media (min-width: $break-md) {
     flex-direction: row;

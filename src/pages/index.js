@@ -10,8 +10,7 @@ import Layout from '../components/Layout';
 import Player from '../components/Player';
 import api from '../utilities/api';
 import data from '../utilities/data';
-
-import { callGa, hash, parseUrl, setUrl } from '../utilities/helpers';
+import { hash, parseUrl, setUrl } from '../utilities/helpers';
 
 import {
   CURRENT_TAG_LIMIT,
@@ -46,7 +45,6 @@ export default class Index extends React.Component {
   timeout = null;
 
   componentDidMount() {
-    callGa('send', 'pageview');
     store.addPlugin(expirePlugin);
     store.removeExpiredKeys();
     this.addTags(parseUrl()).then(noop);
@@ -66,18 +64,17 @@ export default class Index extends React.Component {
     }
   }
 
-  addTags = async newTags => {
+  addTags = async (newTags) => {
     if (!newTags) return;
 
     if (!Array.isArray(newTags)) {
       const newTag = newTags;
 
       newTags = this.state.currentTags
-        .filter(tag => tag.toLowerCase() !== newTag.toLowerCase())
+        .filter((tag) => tag.toLowerCase() !== newTag.toLowerCase())
         .slice(0, CURRENT_TAG_LIMIT - 1);
 
       newTags.unshift(newTag);
-      callGa('send', 'event', 'tags', 'add', newTag);
     }
 
     this.setState({ currentTags: newTags });
@@ -90,7 +87,7 @@ export default class Index extends React.Component {
     window.clearTimeout(this.timeout);
   };
 
-  fetchArtistTags = async artist => {
+  fetchArtistTags = async (artist) => {
     const tags = await api.artistTags(artist);
     if (tags.length < MAX_LIST_ITEMS) return;
     this.setState({ genres: tags });
@@ -122,7 +119,7 @@ export default class Index extends React.Component {
     const cleanTags = tags
       .concat()
       .sort()
-      .map(tag => tag.toLowerCase());
+      .map((tag) => tag.toLowerCase());
 
     const tagHash = hash(cleanTags.toString());
     const data = store.get(tagHash) || { page: 0, index: 0 };
@@ -148,12 +145,12 @@ export default class Index extends React.Component {
     }
   };
 
-  fetchRelatedPlaylist = async playlistId => {
+  fetchRelatedPlaylist = async (playlistId) => {
     this.setState({ trackLoading: true });
     this.loadPlaylist(await api.nextPlaylist(playlistId)).then(noop);
   };
 
-  fetchSimilarArtists = async artist => {
+  fetchSimilarArtists = async (artist) => {
     const artists = await api.similarArtists(artist);
     if (artists.length < MAX_LIST_ITEMS) return;
     this.setState({ artists: artists });
@@ -161,7 +158,7 @@ export default class Index extends React.Component {
 
   getNewSuggestions = () => {
     const artists = this.state.artists.length
-      ? this.state.artists.map(a => a.name)
+      ? this.state.artists.map((a) => a.name)
       : data.artists;
 
     const genres = this.state.genres.length ? this.state.genres : data.genres;
@@ -194,7 +191,7 @@ export default class Index extends React.Component {
 
     if (!playlist) {
       this.setState({
-        deadEnd: this.state.currentTags[0],
+        deadEnd: !!this.state.currentTags[0],
         playlist: null,
         track: null,
         trackLoading: false,
@@ -225,8 +222,7 @@ export default class Index extends React.Component {
     this.setState({ apiError: false, footerVisible: true });
   };
 
-  removeTag = tag => {
-    callGa('send', 'event', 'tags', 'remove', tag);
+  removeTag = (tag) => {
     const tags = this.state.currentTags;
     const index = tag ? tags.indexOf(tag) : tags.length - 1;
     tags.splice(index, 1);
@@ -236,17 +232,14 @@ export default class Index extends React.Component {
   };
 
   shuffleArtists = () => {
-    callGa('send', 'event', 'tags', 'shuffle', 'artists');
     this.setState({ artists: knuthShuffle(this.state.artists) });
   };
 
   shuffleGenres = () => {
-    callGa('send', 'event', 'tags', 'shuffle', 'genres');
     this.setState({ genres: knuthShuffle(this.state.genres) });
   };
 
   shuffleRelated = () => {
-    callGa('send', 'event', 'tags', 'shuffle', 'related');
     this.setState({ related: knuthShuffle(this.state.related) });
   };
 
@@ -272,7 +265,7 @@ export default class Index extends React.Component {
     }
   };
 
-  storePlayed = id => {
+  storePlayed = (id) => {
     this.played.push(id);
     if (this.played.length > STORE_PLAYED_LIMIT) this.played.shift();
     store.set(STORE_PLAYED, this.played);

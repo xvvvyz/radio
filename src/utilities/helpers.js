@@ -23,14 +23,7 @@ export const callEightApi = (path, params, proxy = false) => {
   return getJson(`${base}/${path}${qs}`);
 };
 
-export const callGa = (...params) => {
-  if (process.env.NODE_ENV === `production` && typeof ga === `function`) {
-    // eslint-disable-next-line no-undef
-    ga(...params);
-  }
-};
-
-export const callLastApi = params => {
+export const callLastApi = (params) => {
   const qs = objectToQuery({
     ...params,
     api_key: LAST_API_KEY,
@@ -40,31 +33,33 @@ export const callLastApi = params => {
   return getJson(`https://ws.audioscrobbler.com/2.0/${qs}`);
 };
 
-export const daysFromNow = days => {
+export const daysFromNow = (days) => {
   return new Date().getTime() + 1000 * 60 * 60 * 24 * days;
 };
 
-export const getJson = url => {
-  return fetch(url).then(res => res.json());
+export const getJson = (url) => {
+  return fetch(url).then((res) => res.json());
 };
 
-export const getToken = key => {
+export const getToken = (key) => {
   if (tokenMap[key]) return tokenMap[key];
   tokenMap[key] = Math.floor(Math.random() * 10000000000000);
   return tokenMap[key];
 };
 
-export const hash = str => {
+export const hash = (str) => {
   return str.split('').reduce((prevHash, currVal) => {
     return Math.abs((prevHash << 5) - prevHash + currVal.charCodeAt(0));
   }, 0);
 };
 
-export const objectToQuery = obj => {
+export const objectToQuery = (obj) => {
   return (
     '?' +
     Object.keys(obj)
-      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`)
+      .map(
+        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`
+      )
       .join('&')
   );
 };
@@ -78,31 +73,31 @@ export const parseUrl = () => {
     .replace(/\[underscore]/g, '_')
     .replace(/\[hashtag]/g, '#')
     .split('+')
-    .map(tag => decodeURIComponent(tag.replace(/\[plus]/g, '+')));
+    .map((tag) => decodeURIComponent(tag.replace(/\[plus]/g, '+')));
 };
 
-export const selectArtists = data => {
+export const selectArtists = (data) => {
   const artists =
     (data.artists || {}).artist || (data.similarartists || {}).artist || [];
 
   return artists
-    .filter(a => a.streamable)
-    .filter(a => a.name.length < MAX_TAG_CHARACTER_LENGTH)
-    .filter(a => !a.name.includes('/'))
-    .map(a => ({ name: a.name, image: a.image[1]['#text'] }))
-    .filter(a => a.image);
+    .filter((a) => a.streamable)
+    .filter((a) => a.name.length < MAX_TAG_CHARACTER_LENGTH)
+    .filter((a) => !a.name.includes('/'))
+    .map((a) => ({ name: a.name, image: a.image[1]['#text'] }))
+    .filter((a) => a.image);
 };
 
-export const selectArtistTags = data => {
+export const selectArtistTags = (data) => {
   return ((data.toptags || {}).tag || [])
-    .filter(t => t.name.length < MAX_TAG_CHARACTER_LENGTH)
-    .map(t => t.name);
+    .filter((t) => t.name.length < MAX_TAG_CHARACTER_LENGTH)
+    .map((t) => t.name);
 };
 
-export const selectPlaylists = data => {
+export const selectPlaylists = (data) => {
   const playlists = data.next_mix || (data.mix_set || {}).mixes || [];
 
-  const mapPlaylist = playlist => ({
+  const mapPlaylist = (playlist) => ({
     id: playlist.id,
     cover: playlist.cover_urls.original,
   });
@@ -112,10 +107,10 @@ export const selectPlaylists = data => {
     : mapPlaylist(playlists);
 };
 
-export const selectPlaylistTags = data => {
+export const selectPlaylistTags = (data) => {
   return data.filters
-    .filter(tag => tag.name.length < MAX_TAG_CHARACTER_LENGTH)
-    .map(tag =>
+    .filter((tag) => tag.name.length < MAX_TAG_CHARACTER_LENGTH)
+    .map((tag) =>
       tag.artist_avatar
         ? {
             name: tag.name,
@@ -125,7 +120,7 @@ export const selectPlaylistTags = data => {
     );
 };
 
-export const selectTrack = data => {
+export const selectTrack = (data) => {
   return {
     atLastTrack: data.set.at_last_track,
     skipAllowed: data.set.skip_allowed,
@@ -138,8 +133,8 @@ export const selectTrack = data => {
   };
 };
 
-export const setUrl = tags => {
-  const mapTags = tag => {
+export const setUrl = (tags) => {
+  const mapTags = (tag) => {
     return tag
       .replace(/_/g, '[underscore]')
       .replace(/ /g, '_')
@@ -158,12 +153,9 @@ export const setUrl = tags => {
   }
 };
 
-export const tagsToQuery = tags => {
-  tags = tags.map(tag => {
-    tag = tag
-      .replace(/_/g, '__')
-      .replace(/\+/g, '&&')
-      .replace(/ /g, '_');
+export const tagsToQuery = (tags) => {
+  tags = tags.map((tag) => {
+    tag = tag.replace(/_/g, '__').replace(/\+/g, '&&').replace(/ /g, '_');
 
     return encodeURIComponent(tag).replace(/\./g, '%5E');
   });

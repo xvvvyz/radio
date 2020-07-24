@@ -4,7 +4,7 @@ import List from './List';
 import { MAX_LIST_ITEMS } from '../utilities/constants';
 import './Lists.scss';
 
-const Lists = props => (
+const Lists = (props) => (
   <section className="Lists">
     <List
       addTags={props.addTags}
