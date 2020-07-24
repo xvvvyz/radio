@@ -1,6 +1,5 @@
 import {
   EIGHT_PAGE_LIMIT,
-  LAST_METHOD_ARTIST_SIMILAR,
   LAST_METHOD_ARTIST_TAGS,
   LAST_PAGE_LIMIT,
 } from './constants';
@@ -8,6 +7,7 @@ import {
 import {
   callEightApi,
   callLastApi,
+  callLastApiv2,
   getToken,
   selectArtistTags,
   selectArtists,
@@ -47,7 +47,7 @@ export default {
   },
 
   playlists: async ({ page, tags }) => {
-    const res = await callEightApi(`explore/${tagsToQuery(tags)}/hot`, {
+    const res = await callEightApi(`explore/${tagsToQuery(tags)}/recent`, {
       include: 'mixes+explore_filters',
       page: page,
       per_page: EIGHT_PAGE_LIMIT,
@@ -60,15 +60,20 @@ export default {
   },
 
   search: async (query) => {
-    const res = await callEightApi('tags.json', { q: query, per_page: 10 });
-    return res.tag_cloud.tags;
+    const res = await callEightApi('algolia/search.json', { q: query });
+
+    return res.results.map((r) => ({
+      image: r.image_url || null,
+      name: r.term,
+    }));
   },
 
   similarArtists: async (artist) => {
-    const res = await callLastApi({
-      artist,
+    const res = await callLastApiv2('similarartists', {
+      artist: artist.replace(/ /g, '+'),
+      autocorrect: 1,
+      image_size: 'medium',
       limit: LAST_PAGE_LIMIT,
-      method: LAST_METHOD_ARTIST_SIMILAR,
     });
 
     return selectArtists(res);
@@ -82,5 +87,25 @@ export default {
     );
 
     return selectTrack(res);
+  },
+
+  topArtists: async () => {
+    const res = await callLastApiv2('charts', {
+      type: 'artist',
+      image_size: 'medium',
+      nr: 200,
+    });
+
+    return selectArtists(res);
+  },
+
+  topTags: async () => {
+    const res = await callLastApiv2('charts', {
+      type: 'tag',
+      image_size: 'medium',
+      nr: 50,
+    });
+
+    return res?.results?.tag || [];
   },
 };

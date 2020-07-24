@@ -32,6 +32,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     max-height: calc(#{$tag-height} * 1);
+    background-color: $white;
     border-radius: $border-radius;
     overflow: hidden;
   }

@@ -5,7 +5,6 @@ import Footer from './Footer';
 import Header from './Header';
 import Lists from './Lists';
 import Search from './Search';
-import Suggestions from './Suggestions';
 import './Dashboard.scss';
 
 const Dashboard = (props) => (
@@ -18,13 +17,11 @@ const Dashboard = (props) => (
     <Header {...props} />
     <Search {...props} />
     <Lists {...props} />
-    <Suggestions {...props} />
-    {props.footerVisible && <Footer />}
+    <Footer />
   </main>
 );
 
 Dashboard.propTypes = {
-  footerVisible: PropTypes.bool.isRequired,
   playerVisible: PropTypes.bool.isRequired,
 };
 

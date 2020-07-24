@@ -11,7 +11,7 @@ import './Player.scss';
 export default class Player extends React.PureComponent {
   static propTypes = {
     apiError: PropTypes.bool.isRequired,
-    deadEnd: PropTypes.bool.isRequired,
+    deadEnd: PropTypes.string.isRequired,
     track: PropTypes.object,
     trackLoading: PropTypes.bool.isRequired,
     visible: PropTypes.bool.isRequired,

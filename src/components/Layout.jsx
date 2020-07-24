@@ -22,14 +22,7 @@ const Layout = ({ children, title: titleOverride }) => (
     `}
     render={({
       site: {
-        siteMetadata: {
-          description,
-          keywords,
-          shareImagePath,
-          title,
-          titleShort,
-          url,
-        },
+        siteMetadata: { description, keywords, shareImagePath, title, url },
       },
     }) => (
       <>

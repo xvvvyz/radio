@@ -33,6 +33,11 @@ export const callLastApi = (params) => {
   return getJson(`https://ws.audioscrobbler.com/2.0/${qs}`);
 };
 
+export const callLastApiv2 = (path, params) => {
+  const qs = objectToQuery({ ...params, format: 'json' }, false);
+  return getJson(`https://kerve.last.fm/kerve/${path}${qs}`);
+};
+
 export const daysFromNow = (days) => {
   return new Date().getTime() + 1000 * 60 * 60 * 24 * days;
 };
@@ -53,12 +58,12 @@ export const hash = (str) => {
   }, 0);
 };
 
-export const objectToQuery = (obj) => {
+export const objectToQuery = (obj, encode = true) => {
   return (
     '?' +
     Object.keys(obj)
       .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`
+        (key) => `${key}=${encode ? encodeURIComponent(obj[key]) : obj[key]}`
       )
       .join('&')
   );
@@ -77,15 +82,11 @@ export const parseUrl = () => {
 };
 
 export const selectArtists = (data) => {
-  const artists =
-    (data.artists || {}).artist || (data.similarartists || {}).artist || [];
+  const artists = data?.results?.artist || [];
 
   return artists
-    .filter((a) => a.streamable)
     .filter((a) => a.name.length < MAX_TAG_CHARACTER_LENGTH)
-    .filter((a) => !a.name.includes('/'))
-    .map((a) => ({ name: a.name, image: a.image[1]['#text'] }))
-    .filter((a) => a.image);
+    .map((a) => ({ name: a.name, image: a.image }));
 };
 
 export const selectArtistTags = (data) => {
@@ -110,14 +111,10 @@ export const selectPlaylists = (data) => {
 export const selectPlaylistTags = (data) => {
   return data.filters
     .filter((tag) => tag.name.length < MAX_TAG_CHARACTER_LENGTH)
-    .map((tag) =>
-      tag.artist_avatar
-        ? {
-            name: tag.name,
-            image: tag.artist_avatar.replace('http:', 'https:'),
-          }
-        : tag.name
-    );
+    .map((tag) => ({
+      name: tag.name,
+      image: tag.artist_avatar?.replace('ar0', '64s') || null,
+    }));
 };
 
 export const selectTrack = (data) => {

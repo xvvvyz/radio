@@ -1,6 +1,5 @@
 import React from 'react';
 import expirePlugin from 'store/plugins/expire';
-import min from 'lodash/min';
 import noop from 'lodash/noop';
 import store from 'store';
 import { knuthShuffle } from 'knuth-shuffle';
@@ -9,7 +8,6 @@ import Dashboard from '../components/Dashboard';
 import Layout from '../components/Layout';
 import Player from '../components/Player';
 import api from '../utilities/api';
-import data from '../utilities/data';
 import { hash, parseUrl, setUrl } from '../utilities/helpers';
 
 import {
@@ -25,15 +23,13 @@ export default class Index extends React.Component {
     apiError: false,
     artists: [],
     currentTags: [],
-    deadEnd: false,
+    deadEnd: '',
     genres: [],
     playerVisible: false,
     playlist: null,
     related: [],
-    suggestions: [],
     track: null,
     trackLoading: true,
-    footerVisible: false,
   };
 
   atLastTrack = false;
@@ -48,20 +44,8 @@ export default class Index extends React.Component {
     store.addPlugin(expirePlugin);
     store.removeExpiredKeys();
     this.addTags(parseUrl()).then(noop);
-    this.getNewSuggestions();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.suggestions !== this.state.suggestions) {
-      if (this.spinDelay < this.spinMax) {
-        this.timeout = window.setTimeout(
-          this.getNewSuggestions,
-          this.spinDelay
-        );
-      } else {
-        this.spinDelay = 50;
-      }
-    }
+    this.fetchTopArtists().then();
+    this.fetchTopTags().then();
   }
 
   addTags = async (newTags) => {
@@ -156,28 +140,12 @@ export default class Index extends React.Component {
     this.setState({ artists: artists });
   };
 
-  getNewSuggestions = () => {
-    const artists = this.state.artists.length
-      ? this.state.artists.map((a) => a.name)
-      : data.artists;
+  fetchTopArtists = async () => {
+    this.setState({ artists: knuthShuffle(await api.topArtists()) });
+  };
 
-    const genres = this.state.genres.length ? this.state.genres : data.genres;
-    const shuffledArtistsAndGenres = knuthShuffle([...artists, ...genres]);
-    const shuffledModifiers = knuthShuffle([...data.modifiers]);
-
-    const maxSuggestions = min([
-      shuffledArtistsAndGenres.length,
-      shuffledModifiers.length,
-    ]);
-
-    let suggestions = [];
-
-    for (let i = 0; i < maxSuggestions; i++) {
-      suggestions.push([shuffledArtistsAndGenres[i], shuffledModifiers[i]]);
-    }
-
-    this.spinDelay = this.spinDelay * 1.25;
-    this.setState({ suggestions });
+  fetchTopTags = async () => {
+    this.setState({ genres: knuthShuffle(await api.topTags()) });
   };
 
   loadPlaylist = async (playlist, related = this.state.related) => {
@@ -191,13 +159,11 @@ export default class Index extends React.Component {
 
     if (!playlist) {
       this.setState({
-        deadEnd: !!this.state.currentTags[0],
+        deadEnd: this.state.currentTags[0],
         playlist: null,
         track: null,
         trackLoading: false,
       });
-
-      this.shuffleSuggestion();
 
       return;
     }
@@ -208,7 +174,7 @@ export default class Index extends React.Component {
     }
 
     this.storePlayed(playlist.id);
-    this.setState({ apiError: false, deadEnd: false, playlist, related });
+    this.setState({ apiError: false, deadEnd: '', playlist, related });
     this.fetchNextSong(playlist.id).then(noop);
   };
 
@@ -218,8 +184,7 @@ export default class Index extends React.Component {
     this.setState({ track, trackLoading: false });
     await this.fetchArtistTags(track.artist);
     await this.fetchSimilarArtists(track.artist);
-    this.shuffleSuggestion();
-    this.setState({ apiError: false, footerVisible: true });
+    this.setState({ apiError: false });
   };
 
   removeTag = (tag) => {
@@ -241,11 +206,6 @@ export default class Index extends React.Component {
 
   shuffleRelated = () => {
     this.setState({ related: knuthShuffle(this.state.related) });
-  };
-
-  shuffleSuggestion = () => {
-    this.clearTimeout();
-    this.getNewSuggestions();
   };
 
   skipSong = async () => {
@@ -277,12 +237,10 @@ export default class Index extends React.Component {
       artists,
       currentTags,
       deadEnd,
-      footerVisible,
       genres,
       playerVisible,
       playlist,
       related,
-      suggestions,
       track,
       trackLoading,
     } = this.state;
@@ -294,7 +252,6 @@ export default class Index extends React.Component {
           addTags={this.addTags}
           artists={artists}
           currentTags={currentTags}
-          footerVisible={footerVisible}
           genres={genres}
           playerVisible={playerVisible}
           related={related}
@@ -302,7 +259,6 @@ export default class Index extends React.Component {
           shuffleArtists={this.shuffleArtists}
           shuffleGenres={this.shuffleGenres}
           shuffleRelated={this.shuffleRelated}
-          suggestions={suggestions}
         />
         <Player
           apiError={apiError}

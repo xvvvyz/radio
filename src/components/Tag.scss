@@ -4,6 +4,18 @@
 .Tag {
   white-space: nowrap;
   overflow: hidden;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.Tag_image {
+  width: 2rem;
+  height: 2rem;
+  margin-right: $padding-xxs;
+  border-radius: 50%;
 }
 
 .CurrentTags .Tag {
@@ -26,7 +38,6 @@
   }
 
   button {
-    display: inline-block;
     padding: 0 $padding-xs;
     border-radius: 2rem;
     background-color: $accent-primary;
@@ -50,7 +61,6 @@
     width: 100%;
     padding: 0.25rem $padding-xs;
     border-radius: $border-radius;
-    font-weight: $font-weight-bold;
     line-height: $tag-height;
     text-align: left;
     transition: background-color $speed-fast;

@@ -3,7 +3,6 @@
 
 .Footer {
   @extend .fade_in;
-  margin-top: -2rem;
   padding: 0 $padding-md $padding-lg;
   font-size: 0.8rem;
   line-height: 1.6rem;
@@ -20,5 +19,12 @@
 
   a {
     text-decoration: underline;
+  }
+
+  pre {
+    display: inline;
+    margin: 0 0.5rem;
+    color: $red;
+    letter-spacing: -4px;
   }
 }
