@@ -111,10 +111,18 @@ export const selectPlaylists = (data) => {
 export const selectPlaylistTags = (data) => {
   return data.filters
     .filter((tag) => tag.name.length < MAX_TAG_CHARACTER_LENGTH)
-    .map((tag) => ({
-      name: tag.name,
-      image: tag.artist_avatar?.replace('ar0', '64s') || null,
-    }));
+    .map((tag) => {
+      const image = tag.artist_avatar
+        ? decodeURI(tag.artist_avatar)
+            .replace('http:', 'https:')
+            .replace('ar0', '64s')
+        : null;
+
+      return {
+        name: tag.name,
+        image,
+      };
+    });
 };
 
 export const selectTrack = (data) => {
