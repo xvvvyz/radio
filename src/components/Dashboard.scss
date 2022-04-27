@@ -4,7 +4,7 @@
   @media (min-width: $break-lg) {
     width: calc(100% - #{$player-width});
     transition: transform $speed-normal;
-    transform: translateX($player-width / 2);
+    transform: translateX(calc(#{$player-width} / 2));
   }
 }
 

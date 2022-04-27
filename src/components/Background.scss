@@ -17,7 +17,7 @@
     opacity: 0;
 
     @media (min-width: $break-lg) {
-      transform: translateX($player-width / -2);
+      transform: translateX(calc(#{$player-width} / -2));
     }
   }
 }

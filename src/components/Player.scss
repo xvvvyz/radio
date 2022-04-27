@@ -54,7 +54,7 @@
   height: 100vh;
   padding: 0 0 $padding-md - $padding-xs;
   transition: background-color $speed-normal, transform $speed-normal;
-  transform: translateY($player-height-small + $padding-md / 2);
+  transform: translateY(calc(#{$player-height-small} + #{$padding-md} / 2));
   background-color: $black;
 
   @media (min-width: $break-lg) {

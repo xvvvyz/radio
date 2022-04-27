@@ -6,7 +6,7 @@ module.exports = {
     shareImagePath: '/screenshot.png',
     title: 'Line Radio - Streamlined Music Discovery',
     titleShort: 'Line Radio',
-    url: 'https://lineradio.app',
+    url: 'https://radio.xvvvyz.xyz',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

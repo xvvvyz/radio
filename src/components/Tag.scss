@@ -19,7 +19,7 @@
 }
 
 .CurrentTags .Tag {
-  padding: $padding-md / 2 0;
+  padding: calc(#{$padding-md} / 2) 0;
 
   &::before {
     content: '+';
