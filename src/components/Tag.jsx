@@ -5,7 +5,13 @@ import './Tag.scss';
 const Tag = (props) => (
   <li className="Tag">
     <button type="button" onClick={() => props.onClick(props.value)}>
-      {!!props.image && <img alt="" className="Tag_image" src={props.image} />}
+      {!!props.image && (
+        <img
+          alt=""
+          className="Tag_image"
+          src={props.image.replace('http:', 'https:')}
+        />
+      )}
       {props.value}
     </button>
   </li>

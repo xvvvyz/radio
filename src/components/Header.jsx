@@ -17,7 +17,7 @@ const Header = (props) => (
         <img alt="Radio" src={logo} />
       </a>
     </h1>
-    <h2>Streamlined music discovery.</h2>
+    <h2>Streamlined music discovery</h2>
     <CurrentTags currentTags={props.currentTags} removeTag={props.removeTag} />
   </header>
 );

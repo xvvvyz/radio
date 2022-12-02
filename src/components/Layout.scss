@@ -8,27 +8,7 @@
 }
 
 html {
-  font-size: 4.2vw;
-
-  @media (min-width: $break-sm) {
-    font-size: 3vw;
-  }
-
-  @media (min-width: $break-md) {
-    font-size: 2vw;
-  }
-
-  @media (min-width: $break-lg) {
-    font-size: 1.4vw;
-  }
-
-  @media (min-width: $break-xl) {
-    font-size: 1.2vw;
-  }
-
-  @media (min-width: $break-xxl) {
-    font-size: 1vw;
-  }
+  font-size: clamp(15px, 1.2vw, 18px);
 }
 
 body {

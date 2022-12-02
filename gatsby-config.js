@@ -4,7 +4,7 @@ module.exports = {
       'Listen to playlists curated by humans. This is the fastest way to discover interesting new music.',
     keywords: 'music, discovery, online, radio, playlists',
     shareImagePath: '/screenshot.png',
-    title: 'Radio - Streamlined Music Discovery',
+    title: 'Radio — streamlined music discovery',
     titleShort: 'Radio',
     url: 'https://radio.xvvvyz.xyz',
   },

@@ -4,8 +4,7 @@
 .Footer {
   @extend .fade_in;
   padding: 0 $padding-md $padding-lg;
-  font-size: 0.8rem;
-  line-height: 1.6rem;
+  line-height: 1.4rem;
   text-align: center;
 
   @media (min-width: $break-md) {
@@ -15,10 +14,6 @@
 
   @media (min-width: $break-lg) {
     padding: 0 $padding-xl $padding-xl;
-  }
-
-  a {
-    text-decoration: underline;
   }
 
   pre {

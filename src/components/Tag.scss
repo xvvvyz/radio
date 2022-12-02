@@ -15,6 +15,7 @@
   width: 2rem;
   height: 2rem;
   margin-right: $padding-xxs;
+  background-color: $background-primary;
   border-radius: 50%;
 }
 
@@ -39,7 +40,7 @@
 
   button {
     padding: 0 $padding-xs;
-    border-radius: 2rem;
+    border-radius: $border-radius;
     background-color: $accent-primary;
     transition: background-color $speed-fast;
     color: $text-secondary;
