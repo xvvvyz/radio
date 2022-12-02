@@ -12,7 +12,7 @@ const Footer = () => (
       Unsplash
     </a>{' '}
     <pre>&lt;3</pre> Source&nbsp;on&nbsp;&nbsp;
-    <a href="https://github.com/xvvvyz/lineradio">GitHub</a>
+    <a href="https://github.com/xvvvyz/radio">GitHub</a>
   </footer>
 );
 

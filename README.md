@@ -1,4 +1,4 @@
-# Line Radio
+# Radio
 
 > Streamlined music discovery.
 

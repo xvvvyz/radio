@@ -14,7 +14,7 @@ const Header = (props) => (
   >
     <h1>
       <a href="/">
-        <img alt="Line Radio" src={logo} />
+        <img alt="Radio" src={logo} />
       </a>
     </h1>
     <h2>Streamlined music discovery.</h2>

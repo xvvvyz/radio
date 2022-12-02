@@ -17,7 +17,7 @@ import {
   tagsToQuery,
 } from './helpers';
 
-export default {
+const api = {
   artistTags: async (artist) => {
     const res = await callLastApi({
       artist,
@@ -109,3 +109,5 @@ export default {
     return res?.results?.tag || [];
   },
 };
+
+export default api;
