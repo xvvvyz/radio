@@ -1,9 +1,0 @@
-@import '../utilities/variables';
-
-.Lists {
-  @media (min-width: $break-md) {
-    display: flex;
-    justify-content: center;
-    padding: 0 $padding-xl;
-  }
-}
